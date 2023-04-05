@@ -90,7 +90,6 @@
     </div>
   </div>
 
-
   <!-- Js Plugins -->
   <script src="${contextPath}/resources/js/jquery-3.3.1.min.js"></script>
   <script src="${contextPath}/resources/js/bootstrap.min.js"></script>

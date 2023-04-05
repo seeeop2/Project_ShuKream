@@ -4,6 +4,24 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
+
+<style>   
+/* //모달에 적용한 css속성값.  */
+.modal-title{
+ font-size: 30px;
+ text-align:left;
+ font-weight: bold;
+}
+.modal_table{
+  width:100%;
+}
+#modal_userFollow{
+/*   margin:10px; */
+/*   text-align: right; */
+}
+</style>
+
+
 <!-- Shop Details Section Begin -->
 <section class="shop-details">
   <div class="product__details__pic">
@@ -89,6 +107,44 @@
             <div class="product__details__option">
               <div class="product__details__option__size">
                 <span>Size</span> 
+                <button class="follower">모달창</button>
+              <%------------- Modal ---------------%>
+                <div class="modal fade" id="followModal" role="dialog">
+              <!--   이곳에 적어준 id 값을 토대로 모달을 호출하게 된다.  -->
+                  <div class="modal-dialog">
+                    <!-- Modal content-->   
+                    <div class="modal-content">
+                      <div class="modal-header">
+              <!--           //모달창의 header 부분에 해당한다.  -->
+                        <h4 class="modal-title"></h4>
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                      </div>
+                      <div class="modal-body">
+              <!--           //모달창의 가운데 내용이 들어가는 곳이다.  -->
+                        <div class="modal_table">
+                          <div>
+                          <ul>
+                            <li><button class="btn btn-outline-primary">220</button></li>
+                            <li><button class="btn btn-outline-primary">220</button></li>
+                            <li><button class="btn btn-outline-primary">220</button></li>
+                            <li><button class="btn btn-outline-primary">220</button></li>
+                            <li><button class="btn btn-outline-primary">220</button></li>
+                            <li><button class="btn btn-outline-primary">220</button></li>
+                            <li><button class="btn btn-outline-primary">220</button></li>
+                            <li><button class="btn btn-outline-primary">220</button></li>
+                            <li><button class="btn btn-outline-primary">220</button></li>
+                            <li><button class="btn btn-outline-primary">220</button></li>
+                            <li><button class="btn btn-outline-primary">220</button></li>
+                            <li><button class="btn btn-outline-primary">220</button></li>
+                          </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="count" value="1"></div>
+                    </div>
+                  </div>
+                </div>
+                
 <%--                <label for="220">220
                   <input type="radio" id="220">
                 </label> 
@@ -479,3 +535,13 @@
   </div>
 </section>
 <!-- Related Section End -->
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+<script>
+    /*팔로우 버튼 클릭*/
+    $('.follower').click(function(){
+        $('#followModal').modal();   //id가 "followModal"인 모달창을 열어준다. 
+        $('.modal-title').text("사이즈");    //modal 의 header 부분에 "팔로우"라는 값을 넣어준다. 
+    });
+</script>
+
