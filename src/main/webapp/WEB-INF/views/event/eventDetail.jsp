@@ -199,7 +199,7 @@ function reply_click(clicked_value){
 		
 		alert("무료 배송권 당첨!! 당첨내역으로 이동합니다!");
 		
-		location.replace("${contextPath}/detailresult.do");
+		location.replace("${contextPath}/event/detailresult.do");
 		
 		
 		
