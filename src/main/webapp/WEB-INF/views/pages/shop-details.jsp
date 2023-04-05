@@ -78,30 +78,70 @@
       <div class="row d-flex justify-content-center">
         <div class="col-lg-8">
           <div class="product__details__text">
-            <h4>Hooded thermal anorak</h4>
+            <h4><b>Jordan</b></h4>
+            <h4> Jordan 1 Retro High OG Chicago 2022 </h4>
             <div class="rating">
-              <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                class="fa fa-star-o"></i> <span> - 5 Reviews</span>
+              <span> 조던 1 레트로 하이 OG 시카고 2022</span>
             </div>
             <h3>
               $270.00 <span>70.00</span>
             </h3>
-            <p>Coat with quilted lining and an adjustable hood.
-              Featuring long sleeves with adjustable cuff tabs,
-              adjustable asymmetric hem with elastic side tabs and a
-              front zip fastening with placket.</p>
             <div class="product__details__option">
               <div class="product__details__option__size">
-                <span>Size:</span> <label for="xxl">xxl <input
-                  type="radio" id="xxl">
-                </label> <label class="active" for="xl">xl <input
-                  type="radio" id="xl">
-                </label> <label for="l">l <input type="radio" id="l">
-                </label> <label for="sm">s <input type="radio" id="sm">
+                <span>Size</span> 
+<%--                <label for="220">220
+                  <input type="radio" id="220">
+                </label> 
+                <label class="active" for="225">225 
+                  <input type="radio" id="225">
+                </label> 
+                <label for="230">230
+                  <input type="radio" id="230">
+                </label> 
+                <label for="235">235
+                  <input type="radio" id="235">
                 </label>
+                <label for="240">240
+                  <input type="radio" id="240">
+                </label>
+                <label for="245">245
+                  <input type="radio" id="245">
+                </label>
+                <label for="250">250
+                  <input type="radio" id="250">
+                </label>
+                <label for="255">255
+                  <input type="radio" id="255">
+                </label>
+                <label for="260">260
+                  <input type="radio" id="260">
+                </label>
+                <label for="265">265
+                  <input type="radio" id="265">
+                </label>
+                <label for="270">270
+                  <input type="radio" id="270">
+                </label>
+                <label for="275">275
+                  <input type="radio" id="275">
+                </label>
+                <label for="280">280
+                  <input type="radio" id="280">
+                </label>
+                <label for="285">285
+                  <input type="radio" id="285">
+                </label>
+                <label for="290">290
+                  <input type="radio" id="290">
+                </label>
+                <label for="295">295
+                  <input type="radio" id="295">
+                </label>
+                <label for="300">300
+                  <input type="radio" id="300">
+                </label>  --%>
               </div>
-              <div class="product__details__option__color">
+<%--              <div class="product__details__option__color">
                 <span>Color:</span> <label class="c-1" for="sp-1">
                   <input type="radio" id="sp-1">
                 </label> <label class="c-2" for="sp-2"> <input
@@ -113,7 +153,7 @@
                 </label> <label class="c-9" for="sp-9"> <input
                   type="radio" id="sp-9">
                 </label>
-              </div>
+              </div> --%>
             </div>
             <div class="product__details__cart__option">
               <div class="quantity">

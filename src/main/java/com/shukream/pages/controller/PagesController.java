@@ -28,19 +28,6 @@ public class PagesController {
     return mav;
   }
 
-  @RequestMapping(value = "/shopDetails.do", method = RequestMethod.GET)
-  public ModelAndView shopDetails(HttpServletRequest request, HttpServletResponse response) {
-
-    ModelAndView mav = new ModelAndView();
-    
-    String viewName = (String) request.getAttribute("viewName");
-    logger.info(viewName);
-    
-    mav.setViewName(viewName);
-
-    return mav;
-  }
-  
 
   @RequestMapping(value = "/shoppingCart.do", method = RequestMethod.GET)
   public ModelAndView shoppingCart(HttpServletRequest request, HttpServletResponse response) {
