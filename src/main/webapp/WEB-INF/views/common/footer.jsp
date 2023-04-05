@@ -13,7 +13,7 @@
         <div class="footer__about">
           <div class="footer__logo">
             <a href="#"><img
-              src="${contextPath}/resources/img/footer_logo.jpg" alt=""></a>
+              src="${contextPath}/resources/img/footer_logo.png" alt=""></a>
           </div>
           <p>슈크림을 이용해주셔서 감사합니다</p>
           <a href="#"><img
@@ -24,8 +24,8 @@
         <div class="footer__widget">
           <h6>Shopping</h6>
           <ul>
-            <li><a href="shop/list.do">신발사러가기</a></li>
-            <li><a href="#">이벤트참여하러가기</a></li>
+            <li><a href="${contextPath}/shop/list.do">신발사러가기</a></li>
+            <li><a href="${contextPath}/event/main.do">이벤트참여하러가기</a></li>
             <li><a href="#">링크3</a></li>
             <li><a href="#">링크4</a></li>
           </ul>
@@ -78,14 +78,4 @@
 </footer>
 <!-- Footer Section End -->
 
-<!-- Search Begin -->
-<div class="search-model">
-  <div class="h-100 d-flex align-items-center justify-content-center">
-    <div class="search-close-switch">+</div>
-    <form class="search-model-form">
-      <input type="text" id="search-input"
-        placeholder="Search here.....">
-    </form>
-  </div>
-</div>
-<!-- Search End -->
+

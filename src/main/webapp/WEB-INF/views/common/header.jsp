@@ -78,7 +78,7 @@
                 <div class="col-lg-6 col-md-6">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            <li class="active"><a href="${contextPath}/main.do">Home</a></li>
+                            <li><a href="${contextPath}/main.do">Home</a></li>
                             <li><a href="${contextPath}/shop/list.do">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
@@ -109,3 +109,15 @@
         </div>
     </header>
     <!-- Header Section End -->
+    
+    <!-- Search Begin -->
+	<div class="search-model">
+	  <div class="h-100 d-flex align-items-top justify-content-center">
+	    <div class="search-close-switch">+</div>
+	    <form class="search-model-form">
+	      <input type="text" id="search-input"
+	        placeholder="Search here....." style="position: relative; top:150px;">
+	    </form>
+	  </div>
+	</div>
+	<!-- Search End -->
