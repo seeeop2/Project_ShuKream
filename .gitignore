@@ -95,6 +95,11 @@ local.properties
 # JDT-specific (Eclipse Java Development Tools)      
 .classpath
 
+# pom파일 및 mf파일 ignore
+target/*
+META-INF/*
+.springBeans
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
