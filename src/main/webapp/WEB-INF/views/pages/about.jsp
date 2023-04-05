@@ -36,25 +36,19 @@
       <div class="col-lg-4 col-md-4 col-sm-6">
         <div class="about__item">
           <h4>Who We Are ?</h4>
-          <p>Contextual advertising programs sometimes have strict
-            policies that need to be adhered too. Let’s take Google as
-            an example.</p>
+          <p>우리의 임무는 세계에서 가장 탐나는 아이템에 가능한 가장 스마트한 방법으로 접근할 수 있도록 하는 것입니다. 가장 인기 있는 운동화를 사고팔 수 있습니다.</p>
         </div>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-6">
         <div class="about__item">
           <h4>Who We Do ?</h4>
-          <p>In this digital generation where information can be
-            easily obtained within seconds, business cards still have
-            retained their importance.</p>
+          <p>판매되는 모든 품목은 당사의 전문 인증자 팀과 함께 독점적인 다단계 검증 프로세스를 거칩니다.</p>
         </div>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-6">
         <div class="about__item">
           <h4>Why Choose Us</h4>
-          <p>A two or three storey house is the ideal way to
-            maximise the piece of earth on which our home sits, but for
-            older or infirm people.</p>
+          <p>시험판, 지역 제한 또는 "품절" 여부에 관계없이 200개 이상의 국가에서 수백만 명의 고객이 찾기 어렵고 탐내는 항목을 쉽게 확보할 수 있습니다.</p>
         </div>
       </div>
     </div>
@@ -69,10 +63,7 @@
       <div class="col-lg-6 p-0">
         <div class="testimonial__text">
           <span class="icon_quotations"></span>
-          <p>“Going out after work? Take your butane curling iron
-            with you to the office, heat it up, style your hair before
-            you leave the office and you won’t have to make a trip back
-            home.”</p>
+          <p>“갑시다 집으로”</p>
           <div class="testimonial__author">
             <div class="testimonial__author__pic">
               <img
@@ -147,41 +138,57 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="section-title">
-          <span>Our Team</span>
-          <h2>Meet Our Team</h2>
+          <span>슈크림팀</span>
+          <h2>우리팀을 만나보세요</h2>
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-3 col-md-6 col-sm-6">
+      <div class="col-lg-2 col-md-6 col-sm-6">
         <div class="team__item">
-          <img src="${contextPath}/resources/img/about/team-1.jpg"
+          <img src="${contextPath}/resources/img/about/team-1.png"
             alt="">
-          <h4>John Smith</h4>
+          <h4>김찬울</h4>
           <span>Fashion Design</span>
         </div>
       </div>
-      <div class="col-lg-3 col-md-6 col-sm-6">
+      <div class="col-lg-2 col-md-6 col-sm-6">
         <div class="team__item">
-          <img src="${contextPath}/resources/img/about/team-2.jpg"
+          <img src="${contextPath}/resources/img/about/team-2.png"
             alt="">
-          <h4>Christine Wise</h4>
+          <h4>박인섭</h4>
           <span>C.E.O</span>
         </div>
       </div>
-      <div class="col-lg-3 col-md-6 col-sm-6">
+      <div class="col-lg-2 col-md-6 col-sm-6">
         <div class="team__item">
-          <img src="${contextPath}/resources/img/about/team-3.jpg"
+          <img src="${contextPath}/resources/img/about/team-3.png"
             alt="">
-          <h4>Sean Robbins</h4>
+          <h4>김정희</h4>
           <span>Manager</span>
         </div>
       </div>
-      <div class="col-lg-3 col-md-6 col-sm-6">
+      <div class="col-lg-2 col-md-6 col-sm-6">
         <div class="team__item">
-          <img src="${contextPath}/resources/img/about/team-4.jpg"
+          <img src="${contextPath}/resources/img/about/team-4.png"
             alt="">
-          <h4>Lucy Myers</h4>
+          <h4>임유정</h4>
+          <span>Delivery</span>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-6 col-sm-6">
+        <div class="team__item">
+          <img src="${contextPath}/resources/img/about/team-5.png"
+            alt="">
+          <h4>이서훈</h4>
+          <span>Delivery</span>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-6 col-sm-6">
+        <div class="team__item">
+          <img src="${contextPath}/resources/img/about/team-6.png"
+            alt="">
+          <h4>김동현</h4>
           <span>Delivery</span>
         </div>
       </div>
@@ -197,7 +204,7 @@
       <div class="col-lg-12">
         <div class="section-title">
           <span>Partner</span>
-          <h2>Happy Clients</h2>
+          <h2>글로벌 파트너사</h2>
         </div>
       </div>
     </div>

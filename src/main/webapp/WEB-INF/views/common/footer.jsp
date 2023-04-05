@@ -13,10 +13,9 @@
         <div class="footer__about">
           <div class="footer__logo">
             <a href="#"><img
-              src="${contextPath}/resources/img/footer-logo.png" alt=""></a>
+              src="${contextPath}/resources/img/footer_logo.png" alt=""></a>
           </div>
-          <p>The customer is at the heart of our unique business
-            model, which includes design.</p>
+          <p>슈크림을 이용해주셔서 감사합니다</p>
           <a href="#"><img
             src="${contextPath}/resources/img/payment.png" alt=""></a>
         </div>
@@ -25,30 +24,29 @@
         <div class="footer__widget">
           <h6>Shopping</h6>
           <ul>
-            <li><a href="#">Clothing Store</a></li>
-            <li><a href="#">Trending Shoes</a></li>
-            <li><a href="#">Accessories</a></li>
-            <li><a href="#">Sale</a></li>
+            <li><a href="shop/list.do">신발사러가기</a></li>
+            <li><a href="#">이벤트참여하러가기</a></li>
+            <li><a href="#">링크3</a></li>
+            <li><a href="#">링크4</a></li>
           </ul>
         </div>
       </div>
       <div class="col-lg-2 col-md-3 col-sm-6">
         <div class="footer__widget">
-          <h6>Shopping</h6>
+          <h6>슈크림지원센터</h6>
           <ul>
-            <li><a href="#">Contact Us</a></li>
-            <li><a href="#">Payment Methods</a></li>
-            <li><a href="#">Delivary</a></li>
-            <li><a href="#">Return & Exchanges</a></li>
+            <li><a href="#">오시는길</a></li>
+            <li><a href="#">결제방법</a></li>
+            <li><a href="#">배송</a></li>
+            <li><a href="#">반품 및 환불</a></li>
           </ul>
         </div>
       </div>
       <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
         <div class="footer__widget">
-          <h6>NewLetter</h6>
+          <h6>새소식</h6>
           <div class="footer__newslatter">
-            <p>Be the first to know about new arrivals, look books,
-              sales & promos!</p>
+            <p>슈크림의 새로운 소식을 누구보다 가장 빠르게 듣고싶다면! &nbsp;아래에 고객님의 이메일 주소를 입력해주세요.</p>
             <form action="#">
               <input type="text" placeholder="Your email">
               <button type="submit">

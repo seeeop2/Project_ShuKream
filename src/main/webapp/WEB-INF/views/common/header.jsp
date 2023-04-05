@@ -72,7 +72,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3">
                     <div class="header__logo">
-                        <a href="${contextPath}/main.do"><img src="${contextPath}/resources/img/logo.png" alt=""></a>
+                        <a href="${contextPath}/main.do"><img src="${contextPath}/resources/img/header_logo.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
