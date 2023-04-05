@@ -106,7 +106,7 @@
 <!-- Banner Section End -->
 
 <!-- Product Section Begin -->
-<section class="product spad" style="padding-top: 50px; background-color: #ddd">
+<section class="product spad" style="padding-top: 50px; background-color: #eee">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
