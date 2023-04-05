@@ -18,4 +18,14 @@
     <put-attribute name="title" value="이벤트 페이지" />
     <put-attribute name="body" value="/WEB-INF/views/event/event.jsp" />
   </definition>
+  
+  <definition name="/event/detail" extends="baseLayout">
+    <put-attribute name="title" value="이벤트 상세 페이지" />
+    <put-attribute name="body" value="/WEB-INF/views/event/eventDetail.jsp" />
+  </definition>
+  
+   <definition name="/event/detailresult" extends="baseLayout">
+    <put-attribute name="title" value="이벤트 당첨내역 페이지" />
+    <put-attribute name="body" value="/WEB-INF/views/event/eventDetailResult.jsp" />
+  </definition>
 </tiles-definitions>

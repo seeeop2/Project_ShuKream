@@ -4,111 +4,10 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <style>
-
-#event_wrapper {
-	
-    position: relative;
-    margin: 0 auto;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 700px;
-}
-
-#event_row {
-
-	
-    margin: 0 auto;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    display: flex;
-    flex-wrap: nowrap;
-    align-content: center;
-    justify-content: center;
-}
-
-#event_container {
-	
-    position: relative;
-    height: 100%;
-    width: 100%;
-    left: 0;
-    top: 0;
-    text-align : center;
-    margin : 0 auto;
-}
-
-#event_item {
-	
-	position: relative;
-    top: 0;
-    left: 0;
-    margin: 0 auto;
-    width: 100%;
-    height: 100%;
-	box-shadow: 0 0 10px 10px gray;
-    border-radius: 40px;
-}
-
-#event_item_pic {
-	
-    height: 60%;
-    width: 100%;
-    border: 1px solid white;
-    border-radius: 40px;
-    margin: 0 auto 20px auto;
-    position: relative;
-    top: 0;
-    left: 0;
-}
-	
-#event_item_text {
-	
-    height: 30%;
-    width: 100%;
-    border: 1px solid white;
-    border-radius: 40px;
-    margin: 0 auto;
-    position: relative;
-    top: 0;
-    left: 0;
-    font-size : 20px;
-    font-weight : bold;
-
-}
-
-#event_calendar {
-	height: 20%;
-	width : 7%;
-
-}
-
-#event_main_text {
-	font-weight : bold;
-	color : red;
-
-}
-
-#event_link {
-	
-	text-decoration : none;
-	color : navy;
-	transition : 0.3s;
-
-}
-#event_link:hover {
-	color : orange;
-	transition : 0.3s;
-
-}
-
 </style>
 
 <!-- Css Styles 적용 -->
-<%-- <link rel="stylesheet" href="${contextPath}/resources/css/event/event.css" type="text/css"> --%>
+<link rel="stylesheet" href="${contextPath}/resources/css/event/event.css" type="text/css">
 
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-blog set-bg"
@@ -138,7 +37,7 @@
               <br>
             <h2 id="event_main_text">행운뽑기 이벤트</h2>
               <br>
-            <a id="event_link" href="#">이벤트 자세히보기</a>
+            <a id="event_link" href="${contextPath}/event/detail.do">이벤트 자세히보기</a>
           </div>
         </div>
       </div>
