@@ -13,7 +13,7 @@
         <div class="footer__about">
           <div class="footer__logo">
             <a href="#"><img
-              src="${contextPath}/resources/img/footer_logo.png" alt=""></a>
+              src="${contextPath}/resources/img/footer_logo.jpg" alt=""></a>
           </div>
           <p>슈크림을 이용해주셔서 감사합니다</p>
           <a href="#"><img

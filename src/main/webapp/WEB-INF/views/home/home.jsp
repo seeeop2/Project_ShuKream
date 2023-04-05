@@ -9,7 +9,7 @@
 <section class="hero">
   <div class="hero__slider owl-carousel">
     <div class="hero__items set-bg"
-      data-setbg="${contextPath}/resources/img/hero/main_slider1.png" onclick="location.href='shop/list.do'" style="cursor: pointer;">
+      data-setbg="${contextPath}/resources/img/hero/main_slider1.jpg" onclick="location.href='shop/list.do'" style="cursor: pointer;">
       <div class="container">
         <div class="row">
           <div class="col-xl-5 col-lg-7 col-md-8">
@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="hero__items set-bg"
-      data-setbg="${contextPath}/resources/img/hero/main_slider2.png" onclick="location.href='shop/list.do'" style="cursor: pointer;">
+      data-setbg="${contextPath}/resources/img/hero/main_slider2.jpg" onclick="location.href='shop/list.do'" style="cursor: pointer;">
       <div class="container">
         <div class="row">
           <div class="col-xl-5 col-lg-7 col-md-8">
@@ -122,7 +122,7 @@
         class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
         <div class="product__item">
           <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/product-1.png">
+            data-setbg="${contextPath}/resources/img/product/product-1.jpg">
 <!--             <span class="label">New</span> -->
             <ul class="product__hover">
               <li><a href="#"><img
@@ -160,7 +160,7 @@
         class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot-sales">
         <div class="product__item">
           <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/product-2.png">
+            data-setbg="${contextPath}/resources/img/product/product-2.jpg">
             <ul class="product__hover">
               <li><a href="#"><img
                   src="${contextPath}/resources/img/icon/heart.png"
@@ -197,7 +197,7 @@
         class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
         <div class="product__item sale">
           <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/product-3.png">
+            data-setbg="${contextPath}/resources/img/product/product-3.jpg">
 <!--             <span class="label">Sale</span> -->
             <ul class="product__hover">
               <li><a href="#"><img
@@ -235,7 +235,7 @@
         class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot-sales">
         <div class="product__item">
           <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/product-4.png">
+            data-setbg="${contextPath}/resources/img/product/product-4.jpg">
             <ul class="product__hover">
               <li><a href="#"><img
                   src="${contextPath}/resources/img/icon/heart.png"
@@ -272,7 +272,7 @@
         class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
         <div class="product__item">
           <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/product-5.png">
+            data-setbg="${contextPath}/resources/img/product/product-5.jpg">
             <ul class="product__hover">
               <li><a href="#"><img
                   src="${contextPath}/resources/img/icon/heart.png"
@@ -309,7 +309,7 @@
         class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot-sales">
         <div class="product__item sale">
           <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/product-6.png">
+            data-setbg="${contextPath}/resources/img/product/product-6.jpg">
 <!--             <span class="label">Sale</span> -->
             <ul class="product__hover">
               <li><a href="#"><img
@@ -347,7 +347,7 @@
         class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
         <div class="product__item">
           <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/product-7.png">
+            data-setbg="${contextPath}/resources/img/product/product-7.jpg">
             <ul class="product__hover">
               <li><a href="#"><img
                   src="${contextPath}/resources/img/icon/heart.png"
@@ -384,7 +384,7 @@
         class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot-sales">
         <div class="product__item">
           <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/product-8.png">
+            data-setbg="${contextPath}/resources/img/product/product-8.jpg">
             <ul class="product__hover">
               <li><a href="#"><img
                   src="${contextPath}/resources/img/icon/heart.png"

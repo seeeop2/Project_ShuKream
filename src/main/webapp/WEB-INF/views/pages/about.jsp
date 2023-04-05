@@ -146,7 +146,7 @@
     <div class="row">
       <div class="col-lg-2 col-md-6 col-sm-6">
         <div class="team__item">
-          <img src="${contextPath}/resources/img/about/team-1.png"
+          <img src="${contextPath}/resources/img/about/team-1.jpg"
             alt="">
           <h4>김찬울</h4>
           <span>Fashion Design</span>
@@ -154,7 +154,7 @@
       </div>
       <div class="col-lg-2 col-md-6 col-sm-6">
         <div class="team__item">
-          <img src="${contextPath}/resources/img/about/team-2.png"
+          <img src="${contextPath}/resources/img/about/team-2.jpg"
             alt="">
           <h4>박인섭</h4>
           <span>C.E.O</span>
@@ -162,7 +162,7 @@
       </div>
       <div class="col-lg-2 col-md-6 col-sm-6">
         <div class="team__item">
-          <img src="${contextPath}/resources/img/about/team-3.png"
+          <img src="${contextPath}/resources/img/about/team-3.jpg"
             alt="">
           <h4>김정희</h4>
           <span>Manager</span>
@@ -170,7 +170,7 @@
       </div>
       <div class="col-lg-2 col-md-6 col-sm-6">
         <div class="team__item">
-          <img src="${contextPath}/resources/img/about/team-4.png"
+          <img src="${contextPath}/resources/img/about/team-4.jpg"
             alt="">
           <h4>임유정</h4>
           <span>Delivery</span>
@@ -178,7 +178,7 @@
       </div>
       <div class="col-lg-2 col-md-6 col-sm-6">
         <div class="team__item">
-          <img src="${contextPath}/resources/img/about/team-5.png"
+          <img src="${contextPath}/resources/img/about/team-5.jpg"
             alt="">
           <h4>이서훈</h4>
           <span>Delivery</span>
@@ -186,7 +186,7 @@
       </div>
       <div class="col-lg-2 col-md-6 col-sm-6">
         <div class="team__item">
-          <img src="${contextPath}/resources/img/about/team-6.png"
+          <img src="${contextPath}/resources/img/about/team-6.jpg"
             alt="">
           <h4>김동현</h4>
           <span>Delivery</span>
