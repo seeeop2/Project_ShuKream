@@ -4,9 +4,39 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
+
+<style>   
+/* //모달에 적용한 css속성값.  */
+.modal-title{
+ font-size: 30px;
+ text-align:left;
+ font-weight: bold;
+}
+.modal_table{
+  width:100%;
+}
+.modal_table>div>ul{
+  list-style: none;
+}
+.modal_table>div>ul>li{
+  float: left;
+}
+#modal_userFollow{
+/*   margin:10px; */
+/*   text-align: right; */
+}
+.btn-outline-primary{
+/*   padding: 30px 55px; */
+  width: 150px;
+  height: 75px;
+}
+</style>
+
+
 <!-- Shop Details Section Begin -->
 <section class="shop-details">
-  <div class="product__details__pic">
+  <div>
+  <div class="product__details__pic" style="width: 45%; float: left; margin-left: 5%">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
@@ -73,75 +103,170 @@
       </div>
     </div>
   </div>
-  <div class="product__details__content">
-    <div class="container">
-      <div class="row d-flex justify-content-center">
+        <div class="row d-flex" style="width: 45%; float: left;height: 200px;padding: 40 0 60 20;">
         <div class="col-lg-8">
           <div class="product__details__text">
-            <h4>Hooded thermal anorak</h4>
+            <h4><b>Jordan</b></h4>
+            <h4> Jordan 1 Retro High OG Chicago 2022 </h4>
             <div class="rating">
-              <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                class="fa fa-star-o"></i> <span> - 5 Reviews</span>
+              <span> 조던 1 레트로 하이 OG 시카고 2022</span>
             </div>
-            <h3>
-              $270.00 <span>70.00</span>
-            </h3>
-            <p>Coat with quilted lining and an adjustable hood.
-              Featuring long sleeves with adjustable cuff tabs,
-              adjustable asymmetric hem with elastic side tabs and a
-              front zip fastening with placket.</p>
+            <h3>495,000원</h3>
             <div class="product__details__option">
               <div class="product__details__option__size">
-                <span>Size:</span> <label for="xxl">xxl <input
-                  type="radio" id="xxl">
-                </label> <label class="active" for="xl">xl <input
-                  type="radio" id="xl">
-                </label> <label for="l">l <input type="radio" id="l">
-                </label> <label for="sm">s <input type="radio" id="sm">
-                </label>
-              </div>
-              <div class="product__details__option__color">
-                <span>Color:</span> <label class="c-1" for="sp-1">
-                  <input type="radio" id="sp-1">
-                </label> <label class="c-2" for="sp-2"> <input
-                  type="radio" id="sp-2">
-                </label> <label class="c-3" for="sp-3"> <input
-                  type="radio" id="sp-3">
-                </label> <label class="c-4" for="sp-4"> <input
-                  type="radio" id="sp-4">
-                </label> <label class="c-9" for="sp-9"> <input
-                  type="radio" id="sp-9">
-                </label>
-              </div>
-            </div>
-            <div class="product__details__cart__option">
-              <div class="quantity">
-                <div class="pro-qty">
-                  <input type="text" value="1">
+                <span>Size</span> 
+                <button class="follower">모든 사이즈</button>
+              <%------------- Modal ---------------%>
+                <div class="modal fade" id="followModal" role="dialog">
+              <!--   이곳에 적어준 id 값을 토대로 모달을 호출하게 된다.  -->
+                  <div class="modal-dialog">
+                    <!-- Modal content-->   
+                    <div class="modal-content">
+                      <div class="modal-header">
+              <!--           //모달창의 header 부분에 해당한다.  -->
+                        <h4 class="modal-title"></h4>
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                      </div>
+                      <div class="modal-body">
+              <!--           //모달창의 가운데 내용이 들어가는 곳이다.  -->
+                        <div class="modal_table">
+                          <div>
+                          <ul>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>모든사이즈</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>220</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>225</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>230</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>235</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>240</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>245</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>250</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>255</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>260</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>265</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>270</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>275</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>280</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>285</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>290</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                          </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="count" value="1"></div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <a href="#" class="primary-btn">add to cart</a>
+            </div>
+          </div>
+            <div class="product__details__cart__option">
+              <a href="#" class="primary-btn">
+                <i class="fa fa-heart"></i> add to wishlist
+              </a>
             </div>
             <div class="product__details__btns__option">
               <a href="#"><i class="fa fa-heart"></i> add to
-                wishlist</a> <a href="#"><i class="fa fa-exchange"></i>
-                Add To Compare</a>
+                wishlist</a>
             </div>
             <div class="product__details__last__option">
-              <h5>
-                <span>Guaranteed Safe Checkout</span>
+              <h5 style="margin-bottom: 5px;">
+                <span>상품 정보</span>
               </h5>
-              <img src="${contextPath}/resources/img/shop-details/details-payment.png" alt="">
-              <ul>
-                <li><span>SKU:</span> 3812912</li>
-                <li><span>Categories:</span> Clothes</li>
-                <li><span>Tag:</span> Clothes, Skin, Body</li>
+              <ul style="padding-top: 5px;">
+                <li><span>모델번호:</span> DZ5485-612</li>
+                <li><span>출시일:</span> 22/12/01</li>
+                <li><span>컬러:</span> VARSITY RED/BLACK/SAIL/MUSLIN</li>
+                <li><span>발매가:</span> 209,000원</li>
+                <li><span>Tag:</span> Nike, Jordan, Chicago</li>
               </ul>
-            </div>
+            </div>            
           </div>
         </div>
       </div>
+      </div>
+      
+  <%-- 컨텐츠 부분 --%>
+  <div class="product__details__content" style="clear:both;width: 100%">
+    <div class="container">
       <div class="row">
         <div class="col-lg-12">
           <div class="product__details__tab">
@@ -439,3 +564,13 @@
   </div>
 </section>
 <!-- Related Section End -->
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+<script>
+    /*팔로우 버튼 클릭*/
+    $('.follower').click(function(){
+        $('#followModal').modal();   //id가 "followModal"인 모달창을 열어준다. 
+        $('.modal-title').text("사이즈");    //modal 의 header 부분에 "팔로우"라는 값을 넣어준다. 
+    });
+</script>
+
