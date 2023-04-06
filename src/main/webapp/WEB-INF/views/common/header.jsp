@@ -134,7 +134,7 @@
 				$("#displayList").hide()
 			} else {
 				$.ajax({
-					url:"${contextPath}home/wordSearch.do",
+					url:"${contextPath}/home/wordSearch.do",
 					type : "get",
 					data : {"searchWord" : $("#search-input").val()},
 					dataType:"json",

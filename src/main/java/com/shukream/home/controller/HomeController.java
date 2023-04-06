@@ -23,9 +23,9 @@ public class HomeController {
 	HomeService homeService;
 
 	@ResponseBody
-	@RequestMapping(value="/wordSearch.do", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8" )
+	@RequestMapping(value="/wordSearch.do", method = RequestMethod.GET, produces = "text/html;charset=UTF-8" )
 	public String wordSearch(@RequestParam("searchWord") String searchWord) {
-		
+		System.out.println("/wordSearch.do 호출");
 		List<String> wordList = homeService.wordSearch(searchWord);
 		JSONArray jsonArr = new JSONArray();
 		if(wordList != null) {
@@ -35,6 +35,7 @@ public class HomeController {
 				jsonArr.add(jsonObj);
 			}
 		}
+		System.out.println("jsonArr tostring값" + jsonArr.toString());
 		
 		return jsonArr.toString();
 		
