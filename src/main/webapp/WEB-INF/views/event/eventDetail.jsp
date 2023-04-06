@@ -15,6 +15,7 @@
     max-width: 1200px;
     width: 100%;
     height: 900px;
+  	
 }
 
 #event_detail_container {
