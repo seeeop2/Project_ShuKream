@@ -125,7 +125,7 @@
             data-setbg="${contextPath}/resources/img/product/product-1.jpg">
 <!--             <span class="label">New</span> -->
             <ul class="product__hover">
-              <li><a href="#"><img
+              <li><a href=""><img
                   src="${contextPath}/resources/img/icon/heart.png"
                   alt=""></a></li>
               <li><a href="#"><img

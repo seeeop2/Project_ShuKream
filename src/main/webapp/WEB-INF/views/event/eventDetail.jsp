@@ -15,6 +15,7 @@
     max-width: 1200px;
     width: 100%;
     height: 900px;
+  	
 }
 
 #event_detail_container {
@@ -45,7 +46,7 @@
 
 #event_detail_table {
 	
-	border : 1px solid red;
+	border : 1px solid palegreen;
 
 	position : relative;
 	margin : 0 auto;
@@ -53,12 +54,13 @@
 	left : 0;
 	width: 100%;
 	height : 100%;
+    box-shadow: 0 0 10px 10px #b7b7b7;
 
 }
 
 #event_detail_title{
 
-	border : 1px solid blue;
+	border : 1px solid green;
 
 	position : relative;
 	margin : 0 auto;
@@ -66,28 +68,32 @@
 	left : 0;
 	width: 100%;
 	height : 100px;
+	background : green;
 
 }
 
-#detail_title_box{
+#detail_title_box {
 
-	border : 1px solid blue;
-
-	position : relative;
-	margin : 0 auto;
-	top : 0;
-	left : 0;
-	width: 100px;
-	height : 100%;
-	float:left;
-	text-align : center;
-
-
+    border: 1px solid green;
+    position: relative;
+    margin: 0 auto;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100%;
+    float: left;
+    background: green;
+    text-align: center;
+    color: greenyellow;
+    font-weight: bold;
+    font-size: 20px;
+    
 }
 
 .detail_title {
 
-    border: 1px solid blue;
+    border: 1px solid green;
+    
     position: relative;
     margin: 0 auto;
     top: 0px;
@@ -97,7 +103,11 @@
     width: 76%;
     height: calc(99%/3);
     float: left;
-    text-align : left;
+    text-align: left;
+    font-size: 15px;
+    background: green;
+    color: white;
+    font-weight: bold;
 }
 
 #event_detail_contents{
@@ -115,7 +125,7 @@
 
 #event_detail_num {
 
-    border: 1px solid navy;
+    border: 1px solid white;
     position: relative;
     margin: 10px;
     top: 10px;
@@ -127,18 +137,22 @@
 
 #event_detail_text {
 
-	border : 1px solid gray;
-
-	position : relative;
-	margin : 0 auto;
-	top : 0;
-	left : 0;
-	width: 100%;
-	height : 100%;
-	text-align : center;
-	font-weight : bold;
-	font-size : 60px;
-
+    border: 1px dotted rgb(0 123 255 / 0%);
+    
+    position: relative;
+    margin: 0 auto;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 0;
+    color: #ffffff00;
+    background: #ffc107;
+	box-shadow: 0 0 5px 2px #ffc107;	
+    border-radius: 30px;
+    
 }
 
 </style>
@@ -167,16 +181,17 @@
 	   <div id="event_detail_table">
 	   	<div id="event_detail_title">
 	   		<input id="detail_title_box" type="text" value="참여 방법" />
-	   		<input class="detail_title" type="text" value="1) 구매 또는 판매가 성사 될 때 마다, 1회의 기회를 얻습니다." />
-	   		<input class="detail_title" type="text" value="2) 10개의 시크릿 박스 중 하나를 선택해주세요" />
-	   		<input class="detail_title" type="text" value="3) 상품 : 무료배송권, 한달무료입고권, 수수료1회무료권 등등 작성중" />
+	   		<input class="detail_title" type="text" value="          1) 구매 또는 판매가 성사 될 때 마다, 1회의 기회를 얻습니다." readonly="readonly" />
+	   		<input class="detail_title" type="text" value="          2) 10개의 금색 응모권 중 하나를 선택해주세요" readonly="readonly" />
+	   		<input class="detail_title" type="text" value="          3) 상품 : 무료배송권, 한달무료입고권, 수수료1회무료권 등등 작성중  [확률 30%] " readonly="readonly" />
 	   	</div>
 	   	<div id="event_detail_contents">
 <!--  1번 : 무료배송권 , 3번 : 한달무료입고권 , 5번 : 수수료1회 무료권 등등 작성중...-->
    		  <c:forEach var="cnt" begin="1" end="10" step="1">
    		  <c:set var="ran"><%=java.lang.Math.floor(java.lang.Math.random() * 10)+1%></c:set>
 		   	  <div id="event_detail_num" class="e${cnt}">
-		   	  	<input type="text" onclick ="reply_click(this.value)" id="event_detail_text" class="t_cnt" value="${ran}" readonly="readonly" />
+
+		   	  	<input style="background-position : center; background-image : url(${contextPath}/resources/img/event/event_question.png); background-size : cover;" type="text" onclick ="reply_click(this.value)" id="event_detail_text" value="${ran}" readonly="readonly" class="t_cnt" />
 		   	  </div>
 	   	  </c:forEach>
 	    </div>
@@ -193,13 +208,14 @@ $( document ).ready(function() {
 
 
 // onclick을 이용한 메소드(클릭한 value값 가져오기)
+// 로그인 기능 구현되었을 때 , id값도 같이 넘길 것
 function reply_click(clicked_value){
 	
 	if(clicked_value == 1.0){
 		
 		alert("무료 배송권 당첨!! 당첨내역으로 이동합니다!");
 		
-		location.replace("${contextPath}/event/detailresult.do");
+		location.replace("${contextPath}/event/detailresult.do?ticket=freeshipping");
 		
 		
 		
@@ -207,13 +223,13 @@ function reply_click(clicked_value){
 		
 		alert("한달 무료입고권 당첨!! 당첨내역으로 이동합니다!");
 		
-		location.replace("${contextPath}/event/detailresult.do");
+		location.replace("${contextPath}/event/detailresult.do?ticket=freestore");
 		
 	}else if(clicked_value == 5.0){
 		
 		alert("수수료 1회 무료권 당첨!! 당첨내역으로 이동합니다!");
 		
-		location.replace("${contextPath}/event/detailresult.do");
+		location.replace("${contextPath}/event/detailresult.do?ticket=freecharge");
 		
 	}else {
 		
