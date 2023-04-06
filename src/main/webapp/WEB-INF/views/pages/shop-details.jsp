@@ -35,8 +35,7 @@
 
 <!-- Shop Details Section Begin -->
 <section class="shop-details">
-  <div>
-  <div class="product__details__pic" style="width: 45%; float: left; margin-left: 5%">
+  <div class="product__details__pic" style="width: 45%; float: left; margin-left: 5%;">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
@@ -103,10 +102,13 @@
       </div>
     </div>
   </div>
-        <div class="row d-flex" style="width: 45%; float: left;height: 200px;padding: 40 0 60 20;">
-        <div class="col-lg-8">
+        <div class="row d-flex" style="float:right; margin-right: 350; margin-left: 0">
           <div class="product__details__text">
-            <h4><b>Jordan</b></h4>
+            <h4>
+              <span style="border-bottom: 1px solid; padding-bottom: 1px;">
+                <b>Jordan</b>
+              </span>
+            </h4>
             <h4> Jordan 1 Retro High OG Chicago 2022 </h4>
             <div class="rating">
               <span> 조던 1 레트로 하이 OG 시카고 2022</span>
@@ -239,14 +241,58 @@
             </div>
           </div>
             <div class="product__details__cart__option">
+              <div style="margin-bottom: 5px;">
+                <button type="button" class="btn btn-danger" style="width: 45%; background-color: #ef6253">
+                  <span style="float: left; font-size:2rem; border-right:1px solid white; padding-right: 10px;">구매</span>
+                  <span style="vertical-align: middle;"><b>342,000</b>원</span><br>
+                  <span style="vertical-align: middle; font-size: 0.8rem;">즉시 구매가</span>
+                </button>
+                <button type="button" class="btn btn-success" style="width: 45%; background-color: #41b979">
+                  <span style="float: left; font-size:2rem; border-right:1px solid white; padding-right: 10px;">판매</span>
+                  <span style="vertical-align: middle;"><b>342,000</b>원</span><br>
+                  <span style="vertical-align: middle; font-size: 0.8rem;">즉시 판매가</span>
+                </button>
+              </div>
               <a href="#" class="primary-btn">
                 <i class="fa fa-heart"></i> add to wishlist
               </a>
             </div>
-            <div class="product__details__btns__option">
-              <a href="#"><i class="fa fa-heart"></i> add to
-                wishlist</a>
-            </div>
+            <div class="product__details__last__option">
+              <h5 style="margin-bottom: 5px;">
+                <span>상품 정보</span>
+              </h5>
+              <ul style="padding-top: 5px;">
+                <li><span>모델번호:</span> DZ5485-612</li>
+                <li><span>출시일:</span> 22/12/01</li>
+                <li><span>컬러:</span> VARSITY RED/BLACK/SAIL/MUSLIN</li>
+                <li><span>발매가:</span> 209,000원</li>
+                <li><span>Tag:</span> Nike, Jordan, Chicago</li>
+              </ul>
+            </div>            
+            <div class="product__details__last__option">
+              <h5 style="margin-bottom: 5px;">
+                <span>상품 정보</span>
+              </h5>
+              <ul style="padding-top: 5px;">
+                <li><span>모델번호:</span> DZ5485-612</li>
+                <li><span>출시일:</span> 22/12/01</li>
+                <li><span>컬러:</span> VARSITY RED/BLACK/SAIL/MUSLIN</li>
+                <li><span>발매가:</span> 209,000원</li>
+                <li><span>Tag:</span> Nike, Jordan, Chicago</li>
+              </ul>
+            </div>            
+            <div class="product__details__last__option">
+              <h5 style="margin-bottom: 5px;">
+                <span>상품 정보</span>
+              </h5>
+              <ul style="padding-top: 5px;">
+                <li><span>모델번호:</span> DZ5485-612</li>
+                <li><span>출시일:</span> 22/12/01</li>
+                <li><span>컬러:</span> VARSITY RED/BLACK/SAIL/MUSLIN</li>
+                <li><span>발매가:</span> 209,000원</li>
+                <li><span>Tag:</span> Nike, Jordan, Chicago</li>
+              </ul>
+            </div>            
             <div class="product__details__last__option">
               <h5 style="margin-bottom: 5px;">
                 <span>상품 정보</span>
@@ -261,11 +307,9 @@
             </div>            
           </div>
         </div>
-      </div>
-      </div>
-      
+      <div style="clear: both;"></div>
   <%-- 컨텐츠 부분 --%>
-  <div class="product__details__content" style="clear:both;width: 100%">
+  <div class="product__details__content" style="width: 100%">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
@@ -416,6 +460,7 @@
   </div>
 </section>
 <!-- Shop Details Section End -->
+
 
 <!-- Related Section Begin -->
 <section class="related spad">
