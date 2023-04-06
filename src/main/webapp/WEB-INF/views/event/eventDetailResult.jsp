@@ -300,7 +300,7 @@
     width: 100%;
     height: 160px;
     background: black;
-    padding: 5px 0;
+    padding: 5px 10px;
     
 }
 
