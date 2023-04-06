@@ -17,13 +17,15 @@
 	
 <select id="wordSearch" parameterType="String" resultType="map">
 	<![CDATA[
-		SELECT ROWNUM, p.* 
+		SELECT *
 		FROM (
-		    SELECT * 
-		    FROM PRODUCTS 
+		    SELECT p.*, i.IMG_PRODUCT_IDX, ROWNUM AS rnum
+		    FROM PRODUCTS p
+		    JOIN IMAGES i ON p.PRODUCT_ID = i.IMG_PRODUCT_IDX
 		    WHERE product_name LIKE '%'|| lower(#{searchWord}) || '%'
-		    AND ROWNUM<6
-		) p;
+		)
+		WHERE rnum <= 5
+		ORDER BY rnum
 	]]>
 	
 </select>	
