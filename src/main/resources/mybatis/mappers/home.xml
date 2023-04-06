@@ -21,9 +21,9 @@
 		FROM (
 		    SELECT * 
 		    FROM PRODUCTS 
-		    WHERE product_name LIKE '%'|| lower(#{searchWord}) || '%'
+		    WHERE product_name LIKE '%'|| #{searchWord} || '%'
 		    AND ROWNUM<6
-		) p;
+		) p
 	]]>
 	
 </select>	
