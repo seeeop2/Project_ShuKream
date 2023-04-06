@@ -36,7 +36,8 @@
 
 <!-- Shop Details Section Begin -->
 <section class="shop-details">
-  <div class="product__details__pic" style="width: 45%; float: left; margin-left: 5%;">
+<div style="display: flex; width: 100%; margin: auto;">
+  <div class="product__details__pic" style="width: 60%; margin-left: 5%;">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
@@ -292,7 +293,7 @@
             </div>            
           </div>
         </div>
-      <div style="clear: both;"></div>
+        </div>
   <%-- 컨텐츠 부분 --%>
   <div class="product__details__content" style="width: 100%">
     <div class="container">
