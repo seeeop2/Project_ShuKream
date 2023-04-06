@@ -150,7 +150,7 @@
     font-size: 0;
     color: #ffffff00;
     background: #ffc107;
-    box-shadow: 0 0 15px 10px #e5e5e5;
+	box-shadow: 0 0 5px 2px #ffc107;	
     border-radius: 30px;
     
 }
