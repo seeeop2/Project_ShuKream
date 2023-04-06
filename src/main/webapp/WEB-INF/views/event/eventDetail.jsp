@@ -233,9 +233,9 @@ function reply_click(clicked_value){
 		
 	}else {
 		
-		alert("꽝입니다....다음 기회에..");
+		alert("꽝입니다.... 당첨내역으로 이동합니다!");
 		
-		location.replace("${contextPath}/event/main.do");
+		location.replace("${contextPath}/event/detailresult.do?ticket=OTL");
 		
 	}
 }
