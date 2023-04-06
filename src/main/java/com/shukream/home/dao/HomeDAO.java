@@ -2,6 +2,7 @@ package com.shukream.home.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,9 @@ public class HomeDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public List<String> selectKeywordSearch(String searchWord) throws DataAccessException {
-		   List<String> list = (ArrayList)sqlSession.selectList("mapper.home.wordSearch",searchWord);
-	   return list;
+	public List<Map<String,Object>> selectKeywordSearch(String searchWord) throws DataAccessException {
+		  
+	   return sqlSession.selectList("mapper.home.wordSearch",searchWord);
 	
 	}
 }
