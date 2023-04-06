@@ -15,16 +15,28 @@
 .modal_table{
   width:100%;
 }
+.modal_table>div>ul{
+  list-style: none;
+}
+.modal_table>div>ul>li{
+  float: left;
+}
 #modal_userFollow{
 /*   margin:10px; */
 /*   text-align: right; */
+}
+.btn-outline-primary{
+/*   padding: 30px 55px; */
+  width: 150px;
+  height: 75px;
 }
 </style>
 
 
 <!-- Shop Details Section Begin -->
 <section class="shop-details">
-  <div class="product__details__pic">
+  <div>
+  <div class="product__details__pic" style="width: 45%; float: left; margin-left: 5%">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
@@ -91,9 +103,7 @@
       </div>
     </div>
   </div>
-  <div class="product__details__content">
-    <div class="container">
-      <div class="row d-flex justify-content-center">
+        <div class="row d-flex" style="width: 45%; float: left;height: 200px;padding: 40 0 60 20;">
         <div class="col-lg-8">
           <div class="product__details__text">
             <h4><b>Jordan</b></h4>
@@ -101,13 +111,11 @@
             <div class="rating">
               <span> 조던 1 레트로 하이 OG 시카고 2022</span>
             </div>
-            <h3>
-              $270.00 <span>70.00</span>
-            </h3>
+            <h3>495,000원</h3>
             <div class="product__details__option">
               <div class="product__details__option__size">
                 <span>Size</span> 
-                <button class="follower">모달창</button>
+                <button class="follower">모든 사이즈</button>
               <%------------- Modal ---------------%>
                 <div class="modal fade" id="followModal" role="dialog">
               <!--   이곳에 적어준 id 값을 토대로 모달을 호출하게 된다.  -->
@@ -124,18 +132,102 @@
                         <div class="modal_table">
                           <div>
                           <ul>
-                            <li><button class="btn btn-outline-primary">220</button></li>
-                            <li><button class="btn btn-outline-primary">220</button></li>
-                            <li><button class="btn btn-outline-primary">220</button></li>
-                            <li><button class="btn btn-outline-primary">220</button></li>
-                            <li><button class="btn btn-outline-primary">220</button></li>
-                            <li><button class="btn btn-outline-primary">220</button></li>
-                            <li><button class="btn btn-outline-primary">220</button></li>
-                            <li><button class="btn btn-outline-primary">220</button></li>
-                            <li><button class="btn btn-outline-primary">220</button></li>
-                            <li><button class="btn btn-outline-primary">220</button></li>
-                            <li><button class="btn btn-outline-primary">220</button></li>
-                            <li><button class="btn btn-outline-primary">220</button></li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>모든사이즈</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>220</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>225</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>230</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>235</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>240</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>245</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>250</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>255</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>260</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>265</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>270</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>275</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>280</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>285</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn btn-outline-primary">
+                                <span>290</span><br>
+                                <span>가격</span>
+                              </button>
+                            </li>
                           </ul>
                           </div>
                         </div>
@@ -144,100 +236,37 @@
                     </div>
                   </div>
                 </div>
-                
-<%--                <label for="220">220
-                  <input type="radio" id="220">
-                </label> 
-                <label class="active" for="225">225 
-                  <input type="radio" id="225">
-                </label> 
-                <label for="230">230
-                  <input type="radio" id="230">
-                </label> 
-                <label for="235">235
-                  <input type="radio" id="235">
-                </label>
-                <label for="240">240
-                  <input type="radio" id="240">
-                </label>
-                <label for="245">245
-                  <input type="radio" id="245">
-                </label>
-                <label for="250">250
-                  <input type="radio" id="250">
-                </label>
-                <label for="255">255
-                  <input type="radio" id="255">
-                </label>
-                <label for="260">260
-                  <input type="radio" id="260">
-                </label>
-                <label for="265">265
-                  <input type="radio" id="265">
-                </label>
-                <label for="270">270
-                  <input type="radio" id="270">
-                </label>
-                <label for="275">275
-                  <input type="radio" id="275">
-                </label>
-                <label for="280">280
-                  <input type="radio" id="280">
-                </label>
-                <label for="285">285
-                  <input type="radio" id="285">
-                </label>
-                <label for="290">290
-                  <input type="radio" id="290">
-                </label>
-                <label for="295">295
-                  <input type="radio" id="295">
-                </label>
-                <label for="300">300
-                  <input type="radio" id="300">
-                </label>  --%>
-              </div>
-<%--              <div class="product__details__option__color">
-                <span>Color:</span> <label class="c-1" for="sp-1">
-                  <input type="radio" id="sp-1">
-                </label> <label class="c-2" for="sp-2"> <input
-                  type="radio" id="sp-2">
-                </label> <label class="c-3" for="sp-3"> <input
-                  type="radio" id="sp-3">
-                </label> <label class="c-4" for="sp-4"> <input
-                  type="radio" id="sp-4">
-                </label> <label class="c-9" for="sp-9"> <input
-                  type="radio" id="sp-9">
-                </label>
-              </div> --%>
             </div>
+          </div>
             <div class="product__details__cart__option">
-              <div class="quantity">
-                <div class="pro-qty">
-                  <input type="text" value="1">
-                </div>
-              </div>
-              <a href="#" class="primary-btn">add to cart</a>
+              <a href="#" class="primary-btn">
+                <i class="fa fa-heart"></i> add to wishlist
+              </a>
             </div>
             <div class="product__details__btns__option">
               <a href="#"><i class="fa fa-heart"></i> add to
-                wishlist</a> <a href="#"><i class="fa fa-exchange"></i>
-                Add To Compare</a>
+                wishlist</a>
             </div>
             <div class="product__details__last__option">
-              <h5>
-                <span>Guaranteed Safe Checkout</span>
+              <h5 style="margin-bottom: 5px;">
+                <span>상품 정보</span>
               </h5>
-              <img src="${contextPath}/resources/img/shop-details/details-payment.png" alt="">
-              <ul>
-                <li><span>SKU:</span> 3812912</li>
-                <li><span>Categories:</span> Clothes</li>
-                <li><span>Tag:</span> Clothes, Skin, Body</li>
+              <ul style="padding-top: 5px;">
+                <li><span>모델번호:</span> DZ5485-612</li>
+                <li><span>출시일:</span> 22/12/01</li>
+                <li><span>컬러:</span> VARSITY RED/BLACK/SAIL/MUSLIN</li>
+                <li><span>발매가:</span> 209,000원</li>
+                <li><span>Tag:</span> Nike, Jordan, Chicago</li>
               </ul>
-            </div>
+            </div>            
           </div>
         </div>
       </div>
+      </div>
+      
+  <%-- 컨텐츠 부분 --%>
+  <div class="product__details__content" style="clear:both;width: 100%">
+    <div class="container">
       <div class="row">
         <div class="col-lg-12">
           <div class="product__details__tab">
