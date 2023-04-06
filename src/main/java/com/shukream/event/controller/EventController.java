@@ -6,17 +6,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.shukream.event.service.EventService;
+
 // 컨트롤러로 사용하기 위한 Bean 생성
 // 1차 주소 : http://localhost:8090/teamproject/event/*.do
 @Controller
 @RequestMapping(value = "/event")
 public class EventController {
+	
+	// Autowired 로 EventService 주입하기
+	@Autowired
+	EventService eventservice;
+	
 
  // log4j 객체 생성
   private static final Logger logger = LoggerFactory.getLogger(EventController.class);

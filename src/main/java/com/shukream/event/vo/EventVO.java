@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.springframework.stereotype.Component;
 
+// 어노테이션 컴포넌트 적용시키기
 @Component("eventVO")
 public class EventVO {
 	
