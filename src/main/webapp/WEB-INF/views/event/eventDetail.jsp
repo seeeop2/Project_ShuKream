@@ -147,7 +147,7 @@
     height: 100%;
     text-align: center;
     font-weight: bold;
-    font-size: 60px;
+    font-size: 0;
     color: #ffffff00;
     background: #ffc107;
     box-shadow: 0 0 15px 10px #e5e5e5;
@@ -190,7 +190,8 @@
    		  <c:forEach var="cnt" begin="1" end="10" step="1">
    		  <c:set var="ran"><%=java.lang.Math.floor(java.lang.Math.random() * 10)+1%></c:set>
 		   	  <div id="event_detail_num" class="e${cnt}">
-		   	  	<input type="text" onclick ="reply_click(this.value)" id="event_detail_text" class="t_cnt" value="${ran}" readonly="readonly" />
+
+		   	  	<input style="background-position : center; background-image : url(${contextPath}/resources/img/event/event_question.png); background-size : cover;" type="text" onclick ="reply_click(this.value)" id="event_detail_text" value="${ran}" readonly="readonly" class="t_cnt" />
 		   	  </div>
 	   	  </c:forEach>
 	    </div>
@@ -222,7 +223,7 @@ function reply_click(clicked_value){
 		
 		alert("한달 무료입고권 당첨!! 당첨내역으로 이동합니다!");
 		
-		location.replace("${contextPath}/event/detailresult.do?ticket=freeimport");
+		location.replace("${contextPath}/event/detailresult.do?ticket=freestore");
 		
 	}else if(clicked_value == 5.0){
 		
