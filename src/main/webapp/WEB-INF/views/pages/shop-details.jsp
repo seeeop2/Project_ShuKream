@@ -25,7 +25,7 @@
 /*   margin:10px; */
 /*   text-align: right; */
 }
-.btn-outline-primary{
+.btn-outline-dark{
 /*   padding: 30px 55px; */
   width: 150px;
   height: 75px;
@@ -139,100 +139,52 @@
                           <div>
                           <ul>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>모든사이즈</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">모든사이즈 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>220</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">220 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>225</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">225 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>230</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">230 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>235</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">235 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>240</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">240 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>245</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">245 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>250</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">250 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>255</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">255 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>260</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">260 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>265</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">265 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>270</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">270 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>275</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">275 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>280</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">280 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>285</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">285 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>290</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">290 <br>가격</button>
                             </li>
                           </ul>
                           </div>
