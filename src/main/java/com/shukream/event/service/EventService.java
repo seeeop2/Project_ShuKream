@@ -13,6 +13,13 @@ public class EventService {
 	// EventDAO 자동 주입시키기
 	@Autowired
 	private EventDAO eventDAO;
+	
+	// checkdcnt로 전달받은 id session 을 매개 변수로 받아 service로 가져온다.
+	public int checkdcnt(String id) {
+		
+		return eventDAO.checkdcnt(id);
+		
+	}
 
 	// freeshipping으로 전달받은 ticket을 매개변수로 받아 service로 가져온다.
 	public ModelAndView freeshipping(String ticket) {
@@ -37,6 +44,7 @@ public class EventService {
 		
 		return  eventDAO.OTL();
 	}
+
 	
 	
 }

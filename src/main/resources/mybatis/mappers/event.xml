@@ -39,6 +39,15 @@
 	
 </insert>
 
+<!-- id 값으로 shukream_event DB에 접근해서 -->
+<!-- (남은 응모횟수)d_cnt의 값을 조회한다. -->
+<select id="checkdcnt"  resultType="int" >
+    <![CDATA[
+	    	select d_cnt from shukream_event 
+	    	where  
+		    member_id=#{id}
+   	]]>
+</select>	
 
 
 <!-- eventdetailResult.jsp에 출력 시킬 SQL 문 -->
