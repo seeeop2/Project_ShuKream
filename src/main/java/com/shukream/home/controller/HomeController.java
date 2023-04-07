@@ -31,12 +31,13 @@ public class HomeController {
 	    JSONArray jsonArray = new JSONArray();
 	    for (Map<String, Object> product : productList) {
 	        JSONObject jsonObject = new JSONObject();
-	        jsonObject.put("model_number", product.get("MODEL_NUMBER"));
-	        jsonObject.put("product_id", product.get("PRODUCT_ID"));
-	        jsonObject.put("product_name", product.get("PRODUCT_NAME"));
-	        jsonObject.put("product_price", product.get("PRODUCT_PRICE"));
-	        jsonObject.put("ticker_number", product.get("TICKER_NUMBER"));
-	        jsonObject.put("img_product_idx", product.get("IMG_PRODUCT_IDX"));
+	        jsonObject.putAll(product);
+//	        jsonObject.put("model_number", product.get("MODEL_NUMBER"));
+//	        jsonObject.put("product_id", product.get("PRODUCT_ID"));
+//	        jsonObject.put("product_name", product.get("PRODUCT_NAME"));
+//	        jsonObject.put("product_price", product.get("PRODUCT_PRICE"));
+//	        jsonObject.put("ticker_number", product.get("TICKER_NUMBER"));
+//	        jsonObject.put("img_product_idx", product.get("IMG_PRODUCT_IDX"));
 	        jsonArray.add(jsonObject);
 	    }
 	    JSONObject result = new JSONObject();
