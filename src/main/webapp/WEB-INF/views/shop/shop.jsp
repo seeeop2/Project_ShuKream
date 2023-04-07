@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 
@@ -201,7 +201,36 @@
           </div>
         </div>
         <div class="row">
+        <%-- 여기서부터 --%>
+		<c:forEach var="productList" items="${productsList}" >
           <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="product__item" style="cursor: pointer;"onclick="location.href='/shuKream/shop/list.do'">
+              <div class="product__item__pic set-bg"
+                data-setbg="${contextPath}/resources/img/product/product-${productList.product_id}.jpg">
+                <ul class="product__hover">
+                  <li><a href="#"><img
+                      src="${contextPath}/resources/img/icon/heart.png"
+                      alt=""></a></li>
+                  <li><a href="#"><img
+                      src="${contextPath}/resources/img/icon/compare.png"
+                      alt=""> <span>Compare</span></a></li>
+                  <li><a href="#"><img
+                      src="${contextPath}/resources/img/icon/search.png"
+                      alt=""></a></li>
+                </ul>
+              </div>
+              <div class="product__item__text">
+                <span style="">${productList.product_name}</span>
+                <fmt:formatNumber value="${productList.product_price}" type="number" var="product_price" />
+                <h5>${product_price}원</h5>
+              </div>
+            </div>
+          </div>
+		</c:forEach>
+          <%-- 여기까지 한줄 --%>
+          
+          <%-- 원본 -- %>
+          <%-- <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="product__item">
               <div class="product__item__pic set-bg"
                 data-setbg="${contextPath}/resources/img/product/product-2.jpg">
@@ -648,7 +677,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> --%>
         </div>
         <div class="row">
           <div class="col-lg-12">
