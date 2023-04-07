@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.event">
+<!-- 리절트 맵 정의 -->
+	<resultMap id="eventResult" type="eventVO">
+	   <result property="member_id" column="member_id" />
+	   <result property="d_idx" column="d_idx" />
+	   <result property="a_cnt" column="a_cnt" />
+	   <result property="u_cnt" column="u_cnt" />
+	   <result property="d_cnt" column="d_cnt" />
+	   <result property="d_ticket" column="d_ticket" />
+	   <result property="d_date" column="d_date" />
+	   <result property="d_contents" column="d_contents" />
+	   <result property="expiry_date" column="expiry_date" />
+	   <result property="d_confirm" column="d_confirm" />
+	   
+	</resultMap>
+<!-- eventdetail.jsp에서 저장 시킬 SQL 문 -->
+<insert id="insertevent" parameterType="String">
+	<![CDATA[
+		   insert into shukream_event (member_id,
+		   							   a_cnt,
+		   							   u_cnt,
+		   							   d_cnt,
+		   							   d_ticket,
+		   							   d_contents,
+		   							   d_confirm)
+		                                     values(#{member_id},
+		                                     		#{a_cnt},
+		                                     		#{u_cnt},
+		                                     		#{d_cnt},
+		                                     		#{d_ticket},
+		                                     		#{d_contents},
+		                                     		#{d_confirm} )
+	]]>
+	
+</insert>
+
+
+
+<!-- eventdetailResult.jsp에 출력 시킬 SQL 문 -->
+<!-- 추가 예졍 - 1)order_status DB 안에 값이 거래 완료 등의 형태로 나타나게 되면, natural join으로 가져와서 d_contents에 입력 할 수 있도록 조치하고 -->
+<!--          2)orders에 있는 체결 idx 값을 가져와서, d_contents에 추가 할 수 있도록 조치 -->
+<!-- 확인 필요 사항 - resultMap 형태를 어떻게 써야 할 것인지 -->
+<select id="selectevent" resultMap="eventResult"   parameterType="java.util.HashMap"  >
+    <![CDATA[
+	    	select * from  shukream_event 
+	    	where  
+		    member_id=#{member_id}
+		    order by d_idx asc
+   	]]>
+</select>		
+	
+
+</mapper>
