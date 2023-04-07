@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+.search_wrap {
+	display: table;
+	border: solid 1px gray;
+	width: 600px;
+	position: absolute;
+	top: 300px;
+	background-color: white;
+	table-layout: fixed;
+	overflow: auto;
+}
+
+#search_wrap_row1 {
+	width:100%;
+	display: table-row;
+	font-size: 24px;
+}
+
+.search_wrap_cell1 {
+	display:table-cell;
+	white-space: nowrap;
+}
+
+#displayList {
+	display : table-row;
+	font-size : 24px;
+	cursor: pointer;
+}
+
+.search_result > span:hover {
+	font-weight: bold;
+}
