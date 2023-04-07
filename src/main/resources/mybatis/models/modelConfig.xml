@@ -5,6 +5,8 @@
 <configuration>
   <typeAliases>
 <!--     <typeAlias type="com.shukream.blog.vo.blogVO" alias="blogVO" /> -->
+ 	<typeAlias type="com.shukream.member.vo.MemberVO" alias="memberVO" />
+ 
   </typeAliases>
 </configuration>
 
