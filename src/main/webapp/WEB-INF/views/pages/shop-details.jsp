@@ -25,7 +25,7 @@
 /*   margin:10px; */
 /*   text-align: right; */
 }
-.btn-outline-primary{
+.btn-outline-dark{
 /*   padding: 30px 55px; */
   width: 150px;
   height: 75px;
@@ -36,7 +36,8 @@
 
 <!-- Shop Details Section Begin -->
 <section class="shop-details">
-  <div class="product__details__pic" style="width: 45%; float: left; margin-left: 5%;">
+<div style="display: flex; width: 100%; margin: auto;">
+  <div class="product__details__pic" style="width: 60%; margin-left: 5%;">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
@@ -138,100 +139,52 @@
                           <div>
                           <ul>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>모든사이즈</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">모든사이즈 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>220</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">220 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>225</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">225 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>230</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">230 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>235</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">235 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>240</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">240 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>245</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">245 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>250</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">250 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>255</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">255 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>260</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">260 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>265</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">265 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>270</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">270 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>275</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">275 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>280</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">280 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>285</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">285 <br>가격</button>
                             </li>
                             <li>
-                              <button class="btn btn-outline-primary">
-                                <span>290</span><br>
-                                <span>가격</span>
-                              </button>
+                              <button class="btn btn-outline-dark">290 <br>가격</button>
                             </li>
                           </ul>
                           </div>
@@ -288,11 +241,11 @@
               <h5 style="margin-bottom: 5px;">
                 <span>시세</span>
               </h5>
-              <div style="background-color: yellow;height: 100px;"></div>
+              <div id="chart_div"></div>
             </div>            
           </div>
         </div>
-      <div style="clear: both;"></div>
+        </div>
   <%-- 컨텐츠 부분 --%>
   <div class="product__details__content" style="width: 100%">
     <div class="container">
@@ -504,8 +457,10 @@
     </div>
   </div>
 </section>
+
 <!-- Related Section End -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <script>
     /*팔로우 버튼 클릭*/
@@ -513,5 +468,36 @@
         $('#followModal').modal();   //id가 "followModal"인 모달창을 열어준다. 
         $('.modal-title').text("사이즈");    //modal 의 header 부분에 "팔로우"라는 값을 넣어준다. 
     });
+    
+    
+    
+    
+
+    google.charts.load('current', {packages: ['corechart', 'line']});
+    google.charts.setOnLoadCallback(drawBackgroundColor);
+
+    function drawBackgroundColor() {
+          var data = new google.visualization.DataTable();
+          data.addColumn('number', '날짜');
+          data.addColumn('number', '체결');
+
+          data.addRows([
+            [0, 100000],   [1, 125000],  [2, 80000],  [3, 90000],  [4, 18],  [5, 9],
+            [6, 11],  [7, 27],  [8, 33],  [9, 40],  [10, 32], [11, 35]
+          ]);
+
+          var options = {
+            hAxis: {
+              title: '날짜'
+            },
+            vAxis: {
+              title: 'ShuKream'
+            },
+            backgroundColor: 'white'
+          };
+
+          var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+          chart.draw(data, options);
+        }
 </script>
 
