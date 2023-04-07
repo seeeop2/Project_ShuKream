@@ -241,7 +241,7 @@
               <h5 style="margin-bottom: 5px;">
                 <span>시세</span>
               </h5>
-              <div style="background-color: yellow;height: 100px;"></div>
+              <div id="chart_div"></div>
             </div>            
           </div>
         </div>
@@ -457,8 +457,10 @@
     </div>
   </div>
 </section>
+
 <!-- Related Section End -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <script>
     /*팔로우 버튼 클릭*/
@@ -466,5 +468,36 @@
         $('#followModal').modal();   //id가 "followModal"인 모달창을 열어준다. 
         $('.modal-title').text("사이즈");    //modal 의 header 부분에 "팔로우"라는 값을 넣어준다. 
     });
+    
+    
+    
+    
+
+    google.charts.load('current', {packages: ['corechart', 'line']});
+    google.charts.setOnLoadCallback(drawBackgroundColor);
+
+    function drawBackgroundColor() {
+          var data = new google.visualization.DataTable();
+          data.addColumn('number', '날짜');
+          data.addColumn('number', '체결');
+
+          data.addRows([
+            [0, 100000],   [1, 125000],  [2, 80000],  [3, 90000],  [4, 18],  [5, 9],
+            [6, 11],  [7, 27],  [8, 33],  [9, 40],  [10, 32], [11, 35]
+          ]);
+
+          var options = {
+            hAxis: {
+              title: '날짜'
+            },
+            vAxis: {
+              title: 'ShuKream'
+            },
+            backgroundColor: 'white'
+          };
+
+          var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+          chart.draw(data, options);
+        }
 </script>
 
