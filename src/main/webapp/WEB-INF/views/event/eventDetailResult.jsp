@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
@@ -334,7 +335,6 @@
 
 <!-- Css Styles 적용 -->
 <link rel="stylesheet" href="${contextPath}/resources/css/event/eventDetailResult.css" type="text/css">
-
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-blog set-bg"
   data-setbg="${contextPath}/resources/img/event/event_bg.jpg">
@@ -362,10 +362,10 @@
 		   		<a>남은 횟수</a>
 	   		</div>
 	   		<div id="event_detail_result_input">
-		   		<input type="text" placeholder="당첨자명" readonly="readonly" value="" />
-		   		<input type="text" placeholder="총 응모 횟수" readonly="readonly" value="" />
-		   		<input type="text" placeholder="사용한 횟수" readonly="readonly" value="" />
-		   		<input type="text" placeholder="남은 횟수" readonly="readonly" value="" />
+		   		<input type="text" placeholder="당첨자명" readonly="readonly" value="${member_id}" />
+		   		<input type="text" placeholder="총 응모 횟수" readonly="readonly" value="${a_cnt}" />
+		   		<input type="text" placeholder="사용한 횟수" readonly="readonly" value="${u_cnt}" />
+		   		<input type="text" placeholder="남은 횟수" readonly="readonly" value="${d_cnt}" />
 	   		</div>
 	   	</div>
 	   	<div id="event_detail_result_contents">
@@ -378,14 +378,18 @@
 		   		<a>유효 기간</a>
 		   		<a>사용 여부</a>
 	   		</div>
+	   		
+		<c:forEach var="vo" items="${checkuser}">	
 	   		<div id="event_detail_contents_input">
-		   		<input type="text" placeholder="번호" value="" readonly="readonly" />
-		   		<input type="text" placeholder="당첨된 응모권" value="" readonly="readonly" />
-		   		<input type="text" placeholder="당첨 날짜" value="" readonly="readonly" />
-		   		<input type="text" placeholder="신청번호:xxxx 물품명: 조단 판매 완료에 대한 당첨권 1회 발급" value="" readonly="readonly" />
-	   			<input type="text" placeholder="당첨일로 부터 D-30일" value="" readonly="readonly" />
-	   			<input type="text" placeholder="사용 된 날짜 또는 X" value="" readonly="readonly" />
+		   		<input type="text" placeholder="번호" value="${vo.d_idx}" readonly="readonly" />
+		   		<input type="text" placeholder="당첨된 응모권" value="${vo.d_ticket}" readonly="readonly" />
+		   		<input id="d_date" type="text" placeholder="당첨 날짜" value="<fmt:formatDate type="date" dateStyle="full" value="${vo.d_date}"/>" readonly="readonly" />
+		   		<input type="text" placeholder="신청번호:xxxx 물품명: 조단 판매 완료에 대한 당첨권 1회 발급" value="${vo.d_contents}" readonly="readonly" />
+	   			<input style="text-decoration: underline; color:red;" id="expiry_date" type="text" placeholder="당첨일로 부터 D-30일" value="<fmt:formatDate type="date" dateStyle="full" value="${vo.expiry_date}"/> 까지" readonly="readonly" />
+	   			<input type="text" placeholder="사용된 날짜 또는 아니오" value="${vo.d_confirm}" readonly="readonly" />
 	   		</div>
+	 	</c:forEach>
+
 	    </div>
 	   </div>
 	   <div id="event_detail_contents_row">
@@ -406,5 +410,11 @@
   </div>
 </section>
 <!-- Event Section End -->
+
 <script>
+
+$(document).ready(function(){
+
+})
+
 </script>

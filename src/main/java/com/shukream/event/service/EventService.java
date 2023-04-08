@@ -1,10 +1,13 @@
 package com.shukream.event.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shukream.event.dao.EventDAO;
+import com.shukream.event.vo.EventVO;
 
 // 어노테이션 기호로 eventservice 설정하기
 @Service("eventservice")
@@ -15,9 +18,11 @@ public class EventService {
 	private EventDAO eventDAO;
 	
 	// checkdcnt로 전달받은 id session 을 매개 변수로 받아 service로 가져온다.
-	public int checkdcnt(String id) {
+	public List<EventVO> checkuser(String id) {
 		
-		return eventDAO.checkdcnt(id);
+		System.out.println("EventService -> checkdcnt 메소드 호출!");
+		
+		return eventDAO.checkuser(id);
 		
 	}
 
