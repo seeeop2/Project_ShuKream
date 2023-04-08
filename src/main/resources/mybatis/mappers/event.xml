@@ -46,6 +46,7 @@
 	    	select * from shukream_event 
 	    	where  
 		    member_id=#{id}
+		    order by d_idx asc
    	]]>
 </select>	
 
@@ -61,7 +62,26 @@
 		    member_id=#{member_id}
 		    order by d_idx asc
    	]]>
-</select>		
+</select>
+
+<!-- 쿠폰4종에 대해 저장 시킬 SQL 문 -->
+<insert id="addcoupon" parameterType="eventVO">
+	<![CDATA[
+		   insert into shukream_event (member_id,
+		   							   a_cnt,
+		   							   u_cnt,
+		   							   d_cnt,
+		   							   d_ticket,
+		   							   d_contents)
+		                                     values(#{member_id},
+		                                     		#{a_cnt},
+		                                     		#{u_cnt},
+		                                     		#{d_cnt},
+		                                     		#{d_ticket},
+		                                     		#{d_contents})
+	]]>
+	
+</insert>
 	
 
 </mapper>

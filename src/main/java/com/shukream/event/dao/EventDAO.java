@@ -21,7 +21,7 @@ public class EventDAO {
 	
 	public List<EventVO> checkuser(String id)throws DataAccessException{
 		
-		System.out.println("EventDAO -> checkdcnt 메소드 호출!");
+		System.out.println("EventDAO -> checkuser 메소드 호출!");
 		
 		
 		// sqlsession을 이용해서 id를 매개변수로 넘겨주고, db에 접근해서 d_cnt의 값을 반환받는다.
@@ -36,26 +36,22 @@ public class EventDAO {
 	}
 	
 
-	public ModelAndView freeshipping() {
+	public EventVO addcoupon(EventVO coupon, String id) {
 		
-		return null;
+		System.out.println("EventDAO -> addcoupon 메소드 호출!");
+		
+		System.out.println(coupon.getMember_id());
+		System.out.println(coupon.getA_cnt());
+		System.out.println(coupon.getU_cnt());
+		System.out.println(coupon.getD_cnt());
+		System.out.println(coupon.getD_ticket());
+		System.out.println(coupon.getD_contents());
+		
+		sqlSession.insert("mapper.event.addcoupon", coupon);
+		
+		return coupon;
+		
 	}
-
-	public ModelAndView freestore() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ModelAndView freecharge() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ModelAndView OTL() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 
 }

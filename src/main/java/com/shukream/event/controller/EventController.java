@@ -45,7 +45,6 @@ public class EventController {
 	
  // log4j 객체 생성
   private static final Logger logger = LoggerFactory.getLogger(EventController.class);
-  
 
   // #1 ) 2차 주소 : http://localhost:8090/teamproject/event/main.do
   // 가져오는 방식 : GET 방식으로 적용 
@@ -111,10 +110,10 @@ public class EventController {
 			
 			checkuser = eventservice.checkuser(id);
 			 
-			
+			int i = checkuser.size()-1;
 			// checkuser에 저장된 d_cnt만 꺼낸다.
 
-			String d_cnt = checkuser.get(0).getD_cnt();
+			String d_cnt = checkuser.get(i).getD_cnt();
 
 			System.out.println(d_cnt);
 
@@ -163,23 +162,25 @@ public class EventController {
     return mav;
   }
   
-  // #3 ) 2차 주소 : http://localhost:8090/teamproject/event/detailresult.do
+  // #3 ) 2차 주소 : http://localhost:8090/teamproject/event/redirect.do
   // 가져오는 방식 : GET 방식으로 적용 
-  @RequestMapping(value = "/detailresult.do", method = RequestMethod.GET)
-  public ModelAndView detailresult(@RequestParam("id")String id,@RequestParam("ticket")String ticket,HttpServletRequest request, HttpServletResponse response) {
+  @RequestMapping(value = "/redirect.do", method = RequestMethod.GET)
+  public ModelAndView redirect(@RequestParam("id")String id,@RequestParam("ticket")String ticket,HttpServletRequest request, HttpServletResponse response) {
 
-	System.out.println("detailresult.do 호출!"); 
+	System.out.println("redirect.do 호출!"); 
 	 
 	System.out.println(id);
 	
-	  // List 배열 객체 생성  
+	// List 배열 객체 생성  
     List<EventVO> checkuser = null;
+    
+	EventVO coupon =  new EventVO();
+
     
      // 응모권 없음에서 사용할 변수 초기화
     
-    String member_id = null, a_cnt = null, u_cnt = null, d_cnt = null;
+    String member_id = null;
     
-	  
     // @ 1) eventdetail.jsp에서 location.replace로 전달받은 값을 가져온다.
     // 1) 추가중 : login 구현 후 session id 가져오기,
     // 1-1) 무료배송권 : freeshipping
@@ -191,58 +192,154 @@ public class EventController {
 	// @ 2) 로그인 되어있는 id(이메일주소)+ 물품정보(또는 거래번호) + oder_status(최종주문상태)를 가져와서
 	
 	// d_contents 형식을 " @@@ 체결정보에 대한 거래 완료에 따른 이벤트권 발급"으로 설정시키고,
-	// 응모권 추첨 후 남아 있는 추첨권의 값을 - 시킨다.
-    System.out.println(ticket);
-    
+	// 응모권을 사용할 경우 추첨권의 사용을 +1 증가시키고, 남은 사용권을 -1 감소시킨다.
+
     // ticket 내용에 따라서 각각 다른 메소드를 호출 시킨다.
     
+    // #1) 공통 1 = 기존에 저장 된 값 조회해오기
+    
+		// 1) 해당 아이디의 db를 먼저 조회 해온다.
+		checkuser = eventservice.checkuser(id);
+
+    	// 2) 해당 db에 값을 추가한다.
+    	// 2-1) 총 응모권 횟수와 미사용 응모권 횟수의 값을 int로 변환시킨다.
+		int i = checkuser.size()-1;
+    	int a_cnt = Integer.parseInt(checkuser.get(i).getA_cnt());
+    	int d_cnt = Integer.parseInt(checkuser.get(i).getD_cnt());
+    	// uc_cnt는 그냥 가져온다( null 방지 )
+    	String u_cnt = checkuser.get(i).getU_cnt();
+
+	    	//ac_cnt와 dc_cnt의 값을 1 증가 시킨다.
+	    	a_cnt += 1;
+	    	d_cnt += 1;
+    
+    // #1) 무료배송권에 당첨 되었을 때,
     if(ticket.equals("freeshipping")){
     	
-    	ticket = "무료배송권";
-    	
+    	ticket = null;
+
     	System.out.println(ticket);
     	
-    	eventservice.freeshipping(ticket);
+	    	// 티켓명을 저장한다.
+	    	ticket = "무료배송권";
+	    	// 응모당첨 내역을 저장한다.
+	    	// 임시로 넣어놓고, 나중에는 주문번호를 따와서 추가 시킨다.<작성중>
+	        String contents = "(주문번호2)의 주문완료에 대한 응모권 발생";
+	        
+	        //EventVO로 전달한 값들을 저장시킨다.
+	        coupon.setMember_id(id);
+	    	coupon.setA_cnt(Integer.toString(a_cnt));
+	    	coupon.setU_cnt(u_cnt);
+	    	coupon.setD_cnt(Integer.toString(d_cnt));
+	    	coupon.setD_ticket(ticket);
+	    	coupon.setD_contents(contents);
+	    	
+// check!) d_contents = order_status를 조회해와서 주문완료 complete로 추가가 될 때,
+//      상품 거래가 끝난것으로 보고, 응모권을 추가 시키도록 한다. (order_status에 member_id를 엮어줘야 할듯)
+// check!) d_confirm = 살때 혹은 팔때 무료배송권을 사용할 경우, count에 날짜를 표시하도록 한다.
+
+    	// 저장이 완료되었으면, 서비스로 전달시킨다.
+    	eventservice.addcoupon(coupon, id);
     	
-    	
+    // #2) 무료30일보관권에 당첨 되었을 때,
     }else if(ticket.equals("freestore")) {
     	
-    	ticket = "한달무료보관권";
+    	ticket = null;
     	
     	System.out.println(ticket);
+
+	    	// 티켓명을 저장한다.
+	    	ticket = "한달무료입고권";
+	    	// 응모당첨 내역을 저장한다.
+	    	// 임시로 넣어놓고, 나중에는 주문번호를 따와서 추가 시킨다.<작성중>
+	        String contents = "(주문번호2)의 주문완료에 대한 응모권 발생";
+	    	
     	
-    	eventservice.freestore(ticket);
-    	
-    	
-    }else if(ticket.equals("freecharge")) {
-    	
-    	ticket = "수수료1회무료권";
-    	
+	        //EventVO로 전달한 값들을 저장시킨다.
+	        coupon.setMember_id(id);
+	    	coupon.setA_cnt(Integer.toString(a_cnt));
+	    	coupon.setU_cnt(u_cnt);
+	    	coupon.setD_cnt(Integer.toString(d_cnt));
+	    	coupon.setD_ticket(ticket);
+	    	coupon.setD_contents(contents);
+	    	
+// check!) d_contents = order_status를 조회해와서 주문완료 complete로 추가가 될 때,
+//      상품 거래가 끝난것으로 보고, 응모권을 추가 시키도록 한다. (order_status에 member_id를 엮어줘야 할듯)
+// check!) d_confirm = 살때 혹은 팔때 무료배송권을 사용할 경우, count에 날짜를 표시하도록 한다.
+
     	System.out.println(ticket);
+
+    	// 저장이 완료되었으면, 서비스로 전달시킨다.
+    	eventservice.addcoupon(coupon, id);
     	
-    	eventservice.freestore(ticket);
-    	
-    	
-    }else if(ticket.equals("0")) {
-    	
-    	
-    	System.out.println(ticket);
-    
+    	// 다시 리스트를 조회한다.
     	checkuser = eventservice.checkuser(id);
     	
-    	// 가져온 list타입의 eventvo에서 상부에 출력시킬 값들만 따로 변수에 저장시킨다.
-    	member_id = checkuser.get(0).getMember_id();
-    	a_cnt = checkuser.get(0).getA_cnt();
-    	u_cnt = checkuser.get(0).getU_cnt();
-    	d_cnt = checkuser.get(0).getD_cnt();
+	// #3) 수수료무료권에 당첨 되었을 때,	
+    }else if(ticket.equals("freecharge")) {
+    	
+    	ticket = null;
+    	
+	    	// 티켓명을 저장한다.
+	    	ticket = "수수료1회무료권";
+	    	// 응모당첨 내역을 저장한다.
+	    	// 임시로 넣어놓고, 나중에는 주문번호를 따와서 추가 시킨다.<작성중>
+	        String contents = "(주문번호2)의 주문완료에 대한 응모권 발생";
+	    	
+    	
+	        //EventVO로 전달한 값들을 저장시킨다.
+	        coupon.setMember_id(id);
+	    	coupon.setA_cnt(Integer.toString(a_cnt));
+	    	coupon.setU_cnt(u_cnt);
+	    	coupon.setD_cnt(Integer.toString(d_cnt));
+	    	coupon.setD_ticket(ticket);
+	    	coupon.setD_contents(contents);
+
+// check!) d_contents = order_status를 조회해와서 주문완료 complete로 추가가 될 때,
+//      상품 거래가 끝난것으로 보고, 응모권을 추가 시키도록 한다. (order_status에 member_id를 엮어줘야 할듯)
+// check!) d_confirm = 살때 혹은 팔때 무료배송권을 사용할 경우, count에 날짜를 표시하도록 한다.
+
+    	System.out.println(ticket);
+
+    	// 저장이 완료되었으면, 서비스로 전달시킨다.
+    	eventservice.addcoupon(coupon, id);
+    	
     
+    // 응모권이 없을 경우에는, 그대로 DB에 있는 내역만 조회해서 전달한다.
+    }else if(ticket.equals("0")) {
+
+    	checkuser = eventservice.checkuser(id);
+
+    // 꽝일 경우 insert 문으로 티켓을 꽝으로 적립시킨다.
     }else {
     	
-    	ticket = "꽝";
-    	
+    	ticket = null;
+
     	System.out.println(ticket);
+    
+	    	// 티켓명을 저장한다.
+	    	ticket = "꽝";
+	    	// 응모당첨 내역을 저장한다.
+	    	// 임시로 넣어놓고, 나중에는 주문번호를 따와서 추가 시킨다.<작성중>
+	        String contents = "(주문번호2)의 주문완료에 대한 응모권 발생";
+	    	
     	
-    	eventservice.OTL(ticket);
+	        //EventVO로 전달한 값들을 저장시킨다.
+	        coupon.setMember_id(id);
+	    	coupon.setA_cnt(Integer.toString(a_cnt));
+	    	coupon.setU_cnt(u_cnt);
+	    	coupon.setD_cnt(Integer.toString(d_cnt));
+	    	coupon.setD_ticket(ticket);
+	    	coupon.setD_contents(contents);
+	    	
+// check!) d_contents = order_status를 조회해와서 주문완료 complete로 추가가 될 때,
+//      상품 거래가 끝난것으로 보고, 응모권을 추가 시키도록 한다. (order_status에 member_id를 엮어줘야 할듯)
+// check!) d_confirm = 살때 혹은 팔때 무료배송권을 사용할 경우, count에 날짜를 표시하도록 한다.
+
+    	System.out.println(ticket);
+
+    	// 저장이 완료되었으면, 서비스로 전달시킨다.
+    	eventservice.addcoupon(coupon, id);
     	
     }
     
@@ -272,7 +369,42 @@ public class EventController {
 
   }
   
+  // #4 ) 2차 주소 : http://localhost:8090/teamproject/event/detailresult.do
+  // 가져오는 방식 : GET 방식으로 적용 
+  @RequestMapping(value = "/detailresult.do", method = RequestMethod.GET)
+  public ModelAndView detailresult(@RequestParam("id")String id,String ticket,HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+	  System.out.println("detailresult.do 호출!"); 
+	  
+	  // List 배열 객체 생성  
+	    List<EventVO> checkuser = eventservice.checkuser(id);
+	  	
+	    int idx = checkuser.size()-1;
+	  	
+	    String a_cnt = checkuser.get(idx).getA_cnt();
+	    String u_cnt = checkuser.get(idx).getU_cnt();
+	    String d_cnt = checkuser.get(idx).getD_cnt();
+	  
+	// ModelANdView 객체 생성
+    ModelAndView mav = new ModelAndView();
+    
+    // Viewname 가져오기
+    String viewName = (String) request.getAttribute("viewName");
+    
+    // Viewname에 대한 info 생성
+    logger.info(viewName);
+    
+    mav.addObject("checkuser", checkuser);
+    mav.addObject("a_cnt", a_cnt);
+    mav.addObject("u_cnt", u_cnt);
+    mav.addObject("d_cnt", d_cnt);
+    
+    // ModelAndView 객체에 viewName을 셋팅
+    mav.setViewName(viewName);
+
+    // ModelAndView 반환
+    return mav;
+  }
   
   
 

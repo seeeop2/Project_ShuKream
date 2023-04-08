@@ -20,35 +20,18 @@ public class EventService {
 	// checkdcnt로 전달받은 id session 을 매개 변수로 받아 service로 가져온다.
 	public List<EventVO> checkuser(String id) {
 		
-		System.out.println("EventService -> checkdcnt 메소드 호출!");
+		System.out.println("EventService -> checkuser 메소드 호출!");
 		
 		return eventDAO.checkuser(id);
 		
 	}
 
-	// freeshipping으로 전달받은 ticket을 매개변수로 받아 service로 가져온다.
-	public ModelAndView freeshipping(String ticket) {
+	// 쿠폰4종으로 전달받은 ticket을 매개변수로 받아 service로 가져온다.
+	public EventVO addcoupon(EventVO coupon, String id) {
 		
-		return eventDAO.freeshipping();
-	}
-	
-	// freestore으로 전달받은 ticket을 매개변수로 받아 service로 가져온다.
-	public ModelAndView freestore(String ticket) {
-		
-		return eventDAO.freestore();
-	}
-	
-	// freecharge으로 전달받은 ticket을 매개변수로 받아 service로 가져온다.
-	public ModelAndView freecharge(String ticket) {
-		
-		return eventDAO.freecharge();
+		return eventDAO.addcoupon(coupon, id);
 	}
 
-	// OTL으로 전달받은 ticket을 매개변수로 받아 service로 가져온다.
-	public ModelAndView OTL(String ticket) {
-		
-		return  eventDAO.OTL();
-	}
 
 	
 	
