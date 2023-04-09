@@ -23,8 +23,8 @@ public class JDBCTest {
                 // Oracle19 버전인 경우 => "jdbc:oracle:thin:@localhost:1521:orcl"
                 // Oracle11 버전인 경우 => "jdbc:oracle:thin:@localhost:1521:XE"
             "jdbc:oracle:thin:@localhost:1521:XE",
-            "scott",
-            "tiger")){
+            "shukream",
+            "shukream")){
       System.out.println(con);
     } catch (Exception e) {
       fail(e.getMessage());

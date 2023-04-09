@@ -4,7 +4,8 @@
 
 <configuration>
   <typeAliases>
-    <typeAlias type="com.shukream.event.vo.EventVO" alias="eventVO" />
+     <typeAlias type="com.shukream.event.vo.EventVO" alias="eventVO" />
+     <typeAlias type="com.shukream.products.vo.ProductsVO" alias="ProductsVO" />
   </typeAliases>
 </configuration>
 

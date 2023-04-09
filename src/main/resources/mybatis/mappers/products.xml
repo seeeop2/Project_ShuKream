@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.products">
+<!-- 리절트 맵 정의 -->
+  	<resultMap id="ProductsResult" type="ProductsVO">
+	   <result property="product_id" column="product_id" />
+	   <result property="product_name_en" column="product_name_en" />
+     <result property="product_name_kor" column="product_name_kor" />
+	   <result property="model_number" column="model_number" />
+	   <result property="product_brand" column="product_brand" />
+	   <result property="product_price" column="product_price" />
+	   <result property="product_release_date" column="product_release_date" />
+     <result property="product_color" column="product_color" />
+	</resultMap>	
+	
+<select id="getProductsList" resultMap="ProductsResult">
+	<![CDATA[
+    SELECT * FROM PRODUCTS
+	]]>
+	
+</select>	
+	
+
+</mapper>
