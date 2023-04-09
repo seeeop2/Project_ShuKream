@@ -8,7 +8,7 @@
   <bean id="propertyPlaceholderConfigurer"
     class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
     <property name="locations">
-      <value>file:src/main/webapp/WEB-INF/config/jdbc/jdbc.properties</value>
+      <value>/WEB-INF/config/jdbc/jdbc.properties</value>
     </property>
   </bean>
 

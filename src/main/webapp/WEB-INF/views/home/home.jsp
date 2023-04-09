@@ -123,7 +123,7 @@
         class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
         <div class="product__item">
           <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/product-1.jpg">
+            data-setbg="${contextPath}/resources/img/product/sneakers/product_1_main.jpg">
 <!--             <span class="label">New</span> -->
             <ul class="product__hover">
               <li><a href=""><img
