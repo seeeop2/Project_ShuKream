@@ -3,12 +3,14 @@
 .search_wrap {
 	display: table;
 	border: solid 1px gray;
-	width: 600px;
+	width: 50%;
+	min-width: 600px;
 	position: absolute;
-	top: 300px;
+	top: 215px;
 	background-color: white;
 	table-layout: fixed;
 	overflow: auto;
+	padding: 10px;
 }
 
 #search_wrap_row1 {
@@ -24,10 +26,18 @@
 
 #displayList {
 	display : table-row;
-	font-size : 24px;
+	font-size : 16px;
 	cursor: pointer;
 }
 
-.search_result > span:hover {
-	font-weight: bold;
+.search_result {
+	border-bottom: 1px solid #eee;
+	}
+.search_result:nth-last-child(1) {
+	border-bottom:none;	
 }
+.search_result:hover {
+	font-weight: bold;
+	background-color: #ddd;
+}
+

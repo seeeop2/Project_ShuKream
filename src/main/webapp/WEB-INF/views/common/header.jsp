@@ -46,7 +46,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-7">
                         <div class="header__top__left">
-                            <p>Free shipping, 30-day return or refund guarantee.</p>
+                            <p>30일 반품 또는 환불 보장.</p>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-5">
@@ -111,7 +111,7 @@
     <!-- Header Section End -->
     
     <!-- Search Begin -->
-	<div class="search-model" style="background-color: black; opacity: 0.9;">
+	<div class="search-model" style="opacity: 0.9">
 	  <div class="h-100 d-flex align-items-top justify-content-center">
 	    <div class="search-close-switch">+</div>
 	    <form class="search-model-form">

@@ -113,7 +113,8 @@
         <ul class="filter__controls">
           <li class="active" data-filter="*">Best Sellers</li>
           <li data-filter=".new-arrivals">New Arrivals</li>
-          <li data-filter=".hot-sales">Hot Sales</li>
+<!--           <li data-filter=".hot-sales">Hot Sales</li> -->
+          <li data-filter=".popular-items">Popular Items</li>
         </ul>
       </div>
     </div>
@@ -122,7 +123,7 @@
         class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
         <div class="product__item">
           <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/product-1.jpg">
+            data-setbg="${contextPath}/resources/img/product/sneakers/product_1_main.jpg">
 <!--             <span class="label">New</span> -->
             <ul class="product__hover">
               <li><a href=""><img
@@ -157,7 +158,7 @@
         </div>
       </div>
       <div
-        class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot-sales">
+        class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix popular-items">
         <div class="product__item">
           <div class="product__item__pic set-bg"
             data-setbg="${contextPath}/resources/img/product/product-2.jpg">
@@ -232,7 +233,7 @@
         </div>
       </div>
       <div
-        class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot-sales">
+        class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix popular-items">
         <div class="product__item">
           <div class="product__item__pic set-bg"
             data-setbg="${contextPath}/resources/img/product/product-4.jpg">
@@ -306,7 +307,7 @@
         </div>
       </div>
       <div
-        class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot-sales">
+        class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix popular-items">
         <div class="product__item sale">
           <div class="product__item__pic set-bg"
             data-setbg="${contextPath}/resources/img/product/product-6.jpg">
@@ -381,7 +382,7 @@
         </div>
       </div>
       <div
-        class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot-sales">
+        class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix popular-items">
         <div class="product__item">
           <div class="product__item__pic set-bg"
             data-setbg="${contextPath}/resources/img/product/product-8.jpg">

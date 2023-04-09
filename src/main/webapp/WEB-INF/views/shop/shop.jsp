@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 
@@ -185,7 +185,14 @@
           <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="shop__product__option__left">
-                <p>Showing 1–12 of 126 results</p>
+                <p>Showing ${pagination.getStartIndex()} –
+                <c:if test="${pagination.startPage eq pagination.endPage}">
+                	${totalCount}            
+                </c:if>
+                <c:if test="${pagination.startPage ne pagination.endPage}">
+                	${pagination.getEndIndex()}
+                </c:if>
+                  of ${totalCount} results</p>
               </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -201,7 +208,36 @@
           </div>
         </div>
         <div class="row">
+        <%-- 여기서부터 --%>
+		<c:forEach var="product" items="${products}" varStatus="">
           <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="product__item" style="cursor: pointer;"onclick="location.href='/shuKream/shop/list.do'">
+              <div class="product__item__pic set-bg"
+                data-setbg="${contextPath}/resources/img/product/sneakers/${product.IMG_FILE}">
+                <ul class="product__hover">
+                  <li><a href="#"><img
+                      src="${contextPath}/resources/img/icon/heart.png"
+                      alt=""></a></li>
+                  <li><a href="#"><img
+                      src="${contextPath}/resources/img/icon/compare.png"
+                      alt=""> <span>Compare</span></a></li>
+                  <li><a href="#"><img
+                      src="${contextPath}/resources/img/icon/search.png"
+                      alt=""></a></li>
+                </ul>
+              </div>
+              <div class="product__item__text">
+                <span style="">${product.PRODUCT_NAME_EN}</span>
+                <fmt:formatNumber value="${product.PRODUCT_PRICE}" type="number" var="product_price" />
+                <h5>${product_price}원</h5>
+              </div>
+            </div>
+          </div>
+		</c:forEach>
+          <%-- 여기까지 한줄 --%>
+          
+          <%-- 원본 -- %>
+          <%-- <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="product__item">
               <div class="product__item__pic set-bg"
                 data-setbg="${contextPath}/resources/img/product/product-2.jpg">
@@ -648,13 +684,27 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> --%>
         </div>
         <div class="row">
           <div class="col-lg-12">
             <div class="product__pagination">
-              <a class="active" href="#">1</a> <a href="#">2</a> <a
-                href="#">3</a> <span>...</span> <a href="#">21</a>
+            	<c:if test="${pagination.hasPrevBlock()}">
+              		<a class="" href="?page=${pagination.startPage-1}">&laquo;</a> 
+            	</c:if>
+            	<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="pageNumber">
+            		<c:choose>
+            			<c:when test="${pageNumber eq pagination.currentPage}">
+            				<a class="active" href="?page=${pageNumber}">${pageNumber}</a>
+            			</c:when>
+            			<c:otherwise>
+            				<a href="?page=${pageNumber}">${pageNumber}</a>
+            			</c:otherwise>
+            		</c:choose>
+            	</c:forEach>
+            	<c:if test="${pagination.hasNextBlock()}">
+            		<a href="?page=${pagination.endPage+1}">&raquo;</a>
+            	</c:if>
             </div>
           </div>
         </div>

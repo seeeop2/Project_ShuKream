@@ -19,12 +19,13 @@
 	<![CDATA[
 		SELECT *
 		FROM (
-		    SELECT p.*, i.IMG_PRODUCT_IDX, ROWNUM AS rnum
+		    SELECT p.*, i.IMG_FILE, ROWNUM AS rnum
 		    FROM PRODUCTS p
 		    JOIN IMAGES i ON p.PRODUCT_ID = i.IMG_PRODUCT_IDX
-		    WHERE product_name LIKE '%'|| lower(#{searchWord}) || '%'
+		    WHERE LOWER(P.PRODUCT_NAME_EN) LIKE '%'|| LOWER(#{searchWord}) || '%'
+		    OR P.PRODUCT_NAME_KOR LIKE '%'|| #{searchWord} || '%'
 		)
-		WHERE rnum <= 5
+		WHERE IMG_FILE LIKE '%main.jpg'
 		ORDER BY rnum
 	]]>
 	
