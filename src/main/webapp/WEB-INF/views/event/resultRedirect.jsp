@@ -436,6 +436,12 @@
 <script>
 
 $(document).ready(function(){
+	
+	var id = "${id}";
+
+
+	location.replace("${contextPath}/event/detailresult.do?id="+id);
+	
 
 })
 
