@@ -1,6 +1,7 @@
 package com.shukream.home.controller;
 
-import java.util.HashMap;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shukream.home.service.HomeService;
@@ -32,15 +32,15 @@ public class HomeController {
 	public String wordSearch(@PathVariable("word") String word) {
 	    List<Map<String, Object>> productList = homeService.wordSearch(word);
 	    JSONArray jsonArray = new JSONArray();
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	    for (Map<String, Object> product : productList) {
 	        JSONObject jsonObject = new JSONObject();
 	        jsonObject.putAll(product);
-//	        jsonObject.put("model_number", product.get("MODEL_NUMBER"));
-//	        jsonObject.put("product_id", product.get("PRODUCT_ID"));
-//	        jsonObject.put("product_name", product.get("PRODUCT_NAME"));
-//	        jsonObject.put("product_price", product.get("PRODUCT_PRICE"));
-//	        jsonObject.put("ticker_number", product.get("TICKER_NUMBER"));
-//	        jsonObject.put("img_product_idx", product.get("IMG_PRODUCT_IDX"));
+	        
+	        Date releaseDate = (Date) product.get("PRODUCT_RELEASE_DATE");
+	        String releaseDateString = dateFormat.format(releaseDate);
+	        jsonObject.put("PRODUCT_RELEASE_DATE", releaseDateString);
+	        
 	        jsonArray.add(jsonObject);
 	    }
 	    JSONObject result = new JSONObject();

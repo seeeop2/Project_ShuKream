@@ -1,12 +1,13 @@
 package com.shukream.shop.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shukream.shop.dao.ShopDAO;
-import com.shukream.shop.vo.ProductsVO;
+import com.shukream.shop.vo.Pagination;
 
 @Service("shopService")
 public class ShopService {
@@ -14,8 +15,19 @@ public class ShopService {
 	@Autowired
 	ShopDAO shopDAO;
 
-	public List<ProductsVO> shopMainProductsList() {
-		return shopDAO.shopMainProductsList();
+	//메인페이징처리
+	public List<Map<String, Object>> shopMainProductsList(int page, int size) {
+		
+		int totalCount = shopDAO.shopMainProductCount();
+		Pagination pagination = new Pagination(page, size, totalCount);
+		int startIndex = pagination.getStartIndex();
+		int endIndex = pagination.getEndIndex();
+		
+		return shopDAO.shopMainProductsList(startIndex,endIndex);
 	}
-
+	//메인 페이징 처리
+	public int shopMainProductCount() {
+		return shopDAO.shopMainProductCount();
+	}
+	
 }

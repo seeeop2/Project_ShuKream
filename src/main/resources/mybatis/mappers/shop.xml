@@ -6,22 +6,38 @@
 <mapper namespace="mapper.shop">
 <!-- 리절트 맵 정의 -->
 	
-	<resultMap id="productsResult" type="productsVO">
+<!-- 	<resultMap id="productsResult" type="ProductsVO">
 	   <result property="product_id" column="product_id" />
 	   <result property="product_name" column="product_name" />
 	   <result property="model_number" column="model_number" />
 	   <result property="ticker_number" column="ticker_number" />
 	   <result property="product_price" column="product_price" />
 	   <result property="product_release_date" column="product_release_date" />
-	</resultMap>	
+	</resultMap>	 -->
 	
 	
-<select id="shopMainProductsList" resultMap="productsResult">
-	<![CDATA[
-		SELECT PRODUCTS.*,IMAGES.IMG_FILE FROM PRODUCTS JOIN IMAGES ON products.product_id = images.img_product_idx
-	]]>
+	<select id="shopMainProductsList" resultType="Map" parameterType="Map">
+		<![CDATA[
+			SELECT *
+			FROM (
+			  SELECT PRODUCTS.*,IMAGES.IMG_FILE, ROWNUM AS rnum
+			  FROM PRODUCTS
+			  JOIN IMAGES 
+			  ON PRODUCTS.PRODUCT_ID = IMAGES.IMG_PRODUCT_IDX
+			  WHERE IMAGES.IMG_FILE LIKE '%main.jpg'
+			  ORDER BY PRODUCTS.PRODUCT_ID DESC
+			) 
+			WHERE rnum BETWEEN #{start} AND #{end}
+		]]>
+	</select>	
 	
-</select>	
+	<select id="shopMainProductCount" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM PRODUCTS
+		]]>
+	</select>
+
+
 	
 
 </mapper>
