@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<link rel="stylesheet" href="${contextPath}/resources/css/home.css">    
     
   <!-- Page Preloder -->
 <!--     <div id="preloder"> -->
@@ -111,58 +111,24 @@
     <!-- Header Section End -->
     
     <!-- Search Begin -->
-	<div class="search-model">
+	<div class="search-model" style="background-color: black; opacity: 0.9;">
 	  <div class="h-100 d-flex align-items-top justify-content-center">
 	    <div class="search-close-switch">+</div>
 	    <form class="search-model-form">
 	      <input type="text" id="search-input"
 	        placeholder="Search here....." style="position: relative; top:150px;">
 	    </form>
-        <div id="displayList" style="border: solid 1px gray; height: 100px; overflow: auto; margin: 0 auto;">asdsasadadsdasdasdasdasda</div>
+	    <div class="search_wrap" >
+	        	<div id="search_wrap_row1">
+	        		<div class="search_wrap_cell1">상품 이미지 &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 상품명</div>
+	        	</div>
+		        <div id="displayList"></div>
+        </div>
 	  </div>
 	</div>
 	<!-- Search End -->
 	
 	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script>
-		$("#displayList").hide();
-		//검색어 길이가 바뀔 때 마다 호출
-		$("#search-input").keyup(function () {
-			alert("aa");
-			let wordLength = $(this).val().trim().length;
-			if(wordLength == 0) {
-				$("#displayList").hide()
-			} else {
-				$.ajax({
-					url:"${contextPath}/home/wordSearch.do",
-					type : "get",
-					data : {"searchWord" : $("#search-input").val()},
-					dataType:"json",
-					success:function(json) {
-						if(json.length > 0){
-							//검색된 데이터가 있는 경우
-							let html = "";
-							$.each(json, function(index, item) {
-								let word = item.word;
-								//검색 목록들과 검색 단어를 모두 소문자로 바꾼 후 검색 단어가 나타난 곳의 index를 표시.
-// 								index = word.toLowerCase().indexOf($("#search-input").val().toLowerCase());
-								//JaVA -> java
-								let len = $("#search-input").val().length;
-								//검색한 단어를 파랑색으로 표현
-								let result = word.substr(0, index) + "<span style='color:blue;'>" + word.substr(index,len)+"</span>"+word.substr(index+len);
-								html += "<span class='result' style='cursor:pointer;'>" + result + "</span><br>";
-							});
-							let input_width = $("#search-input").css("width"); // 검색어 input 태그 width 알아오기
-							$("#displayList").css({"width":input_width}); // 검색 결과의 width와 일치시키기
-							$("#displayList").html(html);
-							$("#displayList").show();
-						}
-					},
-					error: function(request, status, error){
-		                alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
-					}
-				});
-			}
-		})
-		
-	</script>
+	<%-- 검색어 완성기능용 js파일 --%>
+	<script  src="${contextPath}/resources/js/home.js"></script>
+	

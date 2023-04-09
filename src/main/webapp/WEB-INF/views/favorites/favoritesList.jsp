@@ -29,7 +29,6 @@
 	    font-weight: 600;
 	}
 	
-	
 	.goShop{
 		padding: 80px 0;
 		text-align: center;
@@ -48,6 +47,33 @@
         border-radius: 10px;
 	}
 	
+	#favorites_list{
+	    display: flex;
+		align-items: flex-start;
+	    padding: 20px 0 19px;
+    	webkit-box-align: center;
+/*     	align-items: center; */
+    	border-bottom: 1px solid #ebebeb;
+   		flex-direction: row;
+	}
+	#favorites_detail{
+		argin-right: 30px;
+	    width: 100%;
+	    cursor: pointer;
+	}
+	
+	#favorites_img{
+	    width: 100px;
+	    height: 100px;
+	    border: 2px solid #ebebeb;
+	    border-radius: 15px;
+		margin-left: 20px;		
+	}
+	
+	#favorites_info p{
+		margin-left: 10px;
+	}
+
 </style>
 
 <meta charset="EUC-KR">
@@ -60,13 +86,34 @@
 			<div class="favorites_title">
 				<h4 class="favorites_title_2">관심 상품</h4>
 			</div>
-			
+<%-- 			
 			<div class="goShop">
 				<p >추가하신 관심 상품이 없습니다.</p>
 				<a href="${contextPath}/shop/list.do" id="goShop_a">SHOP바로가기</a>			
 			</div>
+ --%>
 			
+			<ul>
+				<li>
+					<div id="favorites_list">
+						<div id="">
+							<img id=favorites_img src="${contextPath}/resources/img/product/product-3.jpg">
+						</div>
+						<div id="favorites_info">
+							<p>나이키</p>
+							<p> Nike Air Force 1 '07 Low White</p>
+							
+						</div>
+						
+						
+						
+					</div>
+									
+				</li>			
+			</ul>
 			
+		
+		
 		</div>
 	
 	
