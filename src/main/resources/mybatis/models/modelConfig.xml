@@ -7,6 +7,7 @@
      <typeAlias type="com.shukream.event.vo.EventVO" alias="eventVO" />
      <typeAlias type="com.shukream.products.vo.ProductsVO" alias="ProductsVO" />
 	 <typeAlias type="com.shukream.member.vo.MemberVO" alias="memberVO" />  
+     <typeAlias type="com.shukream.asks.vo.AsksVO" alias="AsksVO" />
   </typeAliases>
 </configuration>
 
