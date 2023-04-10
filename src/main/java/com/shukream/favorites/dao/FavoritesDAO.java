@@ -15,19 +15,27 @@ import com.shukream.favorites.vo.LikeVO;
 public class FavoritesDAO {
 	@Autowired
 	private SqlSession sqlSession;
-
-	public List<LikeVO> selectLikeList(LikeVO likeVO) {
+	@Autowired
+	private FavoritesVO favoritesVO;
+	@Autowired
+	private LikeVO likeVO;
+	
+		
+	
+	public List<LikeVO> selectLikeList(LikeVO likeVO)throws Exception {
 		List<LikeVO> likeList =(List)sqlSession.selectList("mapper.favorites.selectLikeList",likeVO);
+		
 		return likeList;
 	}
-
-/*	
-	public List<FavoritesVO> selectFavoritesList(List<LikeVO> myLikeList) {
+	
+	public List<FavoritesVO> selectFavoritesList(List<LikeVO> myLikeList) throws Exception{
+		
 		List<FavoritesVO> myFavoritesList;
+		
 		myFavoritesList = sqlSession.selectList("mapper.favorites.selectFavoritesList",myLikeList);
+		
 		return myFavoritesList;
 	}
-*/	
 
 		
 

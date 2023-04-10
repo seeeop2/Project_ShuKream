@@ -19,23 +19,25 @@ public class FavoritesService{
 	private FavoritesDAO favoritesDAO ;
 
 
-	public Map<String, List> myLikeList(LikeVO likeVO) {
+	public Map<String, List> myLikeList(LikeVO likeVO)throws Exception {
 		
 		Map<String,List> likeMap = new HashMap<String,List>();
-		
 		List<LikeVO> myLikeList=favoritesDAO.selectLikeList(likeVO);
 
+		System.out.println("흠:"+myLikeList.get(likeVO.getLike_idx()));
+		
 		if(myLikeList.size()==0){ 
 			return null;
 		}
-//		List<FavoritesVO> myFavoritesList=favoritesDAO.selectFavoritesList(myLikeList);
+		List<FavoritesVO> myFavoritesList=favoritesDAO.selectFavoritesList(myLikeList);
 
+		
 		likeMap.put("myLikeList", myLikeList);
-//		likeMap.put("myFavoritesList",myFavoritesList);		
+		likeMap.put("myFavoritesList",myFavoritesList);		
 		return likeMap;
 	}
 	
-	
+		
 	
 
 

@@ -6,6 +6,8 @@
   <typeAliases>
      <typeAlias type="com.shukream.event.vo.EventVO" alias="eventVO" />
      <typeAlias type="com.shukream.products.vo.ProductsVO" alias="ProductsVO" />
+     <typeAlias type="com.shukream.favorites.vo.LikeVO" alias="LikeVO" />
+     <typeAlias type="com.shukream.favorites.vo.FavoritesVO" alias="FavoritesVO" />
   </typeAliases>
 </configuration>
 

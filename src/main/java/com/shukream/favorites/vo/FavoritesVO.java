@@ -6,11 +6,12 @@ import org.springframework.stereotype.Component;
 public class FavoritesVO {
 	
 	int	product_id;//상품인덱스					
-	String product_name;//상품명			
+	String product_name_en;//상품명			
+	String product_name_kor;//상품명			
 	String model_number;//모델넘버
-	String ticker_number;//상품코드
     int	product_price;//판매가
 	String product_release_date;//등록일
+	String PRODUCT_COLOR;//색상
 	
 	
 	int	img_id;//이미지인덱스
@@ -28,23 +29,23 @@ public class FavoritesVO {
 	public void setProduct_id(int product_id) {
 		this.product_id = product_id;
 	}
-	public String getProduct_name() {
-		return product_name;
+	public String getProduct_name_en() {
+		return product_name_en;
 	}
-	public void setProduct_name(String product_name) {
-		this.product_name = product_name;
+	public void setProduct_name_en(String product_name_en) {
+		this.product_name_en = product_name_en;
+	}
+	public String getProduct_name_kor() {
+		return product_name_kor;
+	}
+	public void setProduct_name_kor(String product_name_kor) {
+		this.product_name_kor = product_name_kor;
 	}
 	public String getModel_number() {
 		return model_number;
 	}
 	public void setModel_number(String model_number) {
 		this.model_number = model_number;
-	}
-	public String getTicker_number() {
-		return ticker_number;
-	}
-	public void setTicker_number(String ticker_number) {
-		this.ticker_number = ticker_number;
 	}
 	public int getProduct_price() {
 		return product_price;
@@ -57,6 +58,12 @@ public class FavoritesVO {
 	}
 	public void setProduct_release_date(String product_release_date) {
 		this.product_release_date = product_release_date;
+	}
+	public String getPRODUCT_COLOR() {
+		return PRODUCT_COLOR;
+	}
+	public void setPRODUCT_COLOR(String pRODUCT_COLOR) {
+		PRODUCT_COLOR = pRODUCT_COLOR;
 	}
 	public int getImg_id() {
 		return img_id;
@@ -100,6 +107,8 @@ public class FavoritesVO {
 	public void setImg_del(int img_del) {
 		this.img_del = img_del;
 	}
+	
+	
 	
 	
 }

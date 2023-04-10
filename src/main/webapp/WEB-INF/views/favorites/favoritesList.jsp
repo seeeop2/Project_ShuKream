@@ -3,6 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+
+<c:set var="myLikeList"  value="${sessionScope.likeMap.myLikeList}"  />
+<c:set var="myFavoritesList"  value="${sessionScope.likeMap.myFavoritesList}"  />
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -163,7 +168,7 @@
 				<li>
 					<div id="favorites_list">
 						<div id="">
-							<img id=favorites_img src="${contextPath}/resources/img/product/product-3.jpg">
+							<img id=favorites_img src="${contextPath}/resources/img/product/sneakers/product_3_main.jpg">
 						</div>
 						<div id="favorites_info">
 							<p id="brand">³ªÀÌÅ°</p>
@@ -194,8 +199,7 @@
 		
 		</div>
 	
-	
-	
+ 
 	
 	</div>	
 

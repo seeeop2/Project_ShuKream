@@ -12,12 +12,12 @@
 		<result property="like_mem_id" column="like_mem_id" />
 	</resultMap>
 	
-	
 	<resultMap id="favoritesResult" type="FavoritesVO">
 		<result property="product_id" column="product_id" />
-		<result property="product_name" column="product_name" />
+		<result property="product_name_en" column="product_name_en" />
+		<result property="product_name_kor" column="product_name_kor" />
 		<result property="model_number" column="model_number" />
-		<result property="ticker_number" column="ticker_number" />
+		<result property="product_color" column="product_color" />
 		<result property="product_price" column="product_price" />
 		<result property="product_release_date" column="product_release_date" />
 		
@@ -31,19 +31,37 @@
 		
 	</resultMap>
 
-    <!-- 로그인한 회원 아이디로 모든 장바구니 정보를 조회 합니다. -->
-	<select id="selectFavoritesList"  parameterType="favoritesVO"  resultMap="favoritesResult"   >
+
+	<select id="selectLikeList"  parameterType="likeVO"  resultMap="likeResult"   >
 	    <![CDATA[
-		    SELECT G.*, I.FILENAME, C.CART_ID
-		    FROM T_SHOPPING_GOODS G
-		    JOIN T_GOODS_DETAIL_IMAGE I ON G.GOODS_ID = I.GOODS_ID
-		    JOIN T_SHOPPING_CART C ON I.GOODS_ID = C.GOODS_ID
-		    WHERE I.FILETYPE = 'main_image'
-		    AND G.GOODS_ID IN
+
+			SELECT * FROM PRODUCT_LIKE 
+			WHERE LIKE_MEM_ID=#{like_mem_id} 
+			
 		]]>
 	</select>
 
+	<select id="selectFavoritesList" resultMap="favoritesResult" parameterType="java.util.Map">
+  		<![CDATA[
+		    
+	        SELECT P.product_name_en, P.product_name_kor, P.product_price,
+   	  		I.img_file
+		    FROM PRODUCTS P,IMAGES I
+		    WHERE P.PRODUCT_ID = I.IMG_ID 
+            AND P.PRODUCT_ID IN
+			(1,2,3)	
+		]]>
+			 
+<!-- 		
+		<foreach item="item" collection="list" open="("  separator=","  close=")">
+			#{item.LIKE_IDX}
+		</foreach>    
+		 -->
+  		
 
+ 
+	
+	</select>
 
 
 
