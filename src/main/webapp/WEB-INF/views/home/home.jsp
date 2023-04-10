@@ -138,7 +138,7 @@
             </ul>
           </div>
           <div class="product__item__text">
-            <h6><!-- (W) Nike Zoom Vomero 5 Cobblestone and Flat Pewter --> 상품이름 DB에서 받아와야함</h6>
+            <h6><!-- (W) Nike Zoom Vomero 5 Cobblestone and Flat Pewter --> 상품이름 DB에서 받아와야함 판매량 기준 정렬 필요</h6>
             <a href="#" class="add-cart">+ Add To Cart</a>
             <div class="rating">
               <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>

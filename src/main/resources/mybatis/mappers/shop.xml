@@ -6,14 +6,15 @@
 <mapper namespace="mapper.shop">
 <!-- 리절트 맵 정의 -->
 	
-<!-- 	<resultMap id="productsResult" type="ProductsVO">
+<!--  	<resultMap id="productsResult" type="ProductsVO">
 	   <result property="product_id" column="product_id" />
-	   <result property="product_name" column="product_name" />
+	   <result property="product_name_en" column="product_name_en" />
+	   <result property="product_name_kor" column="product_name_kor" />
 	   <result property="model_number" column="model_number" />
 	   <result property="ticker_number" column="ticker_number" />
 	   <result property="product_price" column="product_price" />
 	   <result property="product_release_date" column="product_release_date" />
-	</resultMap>	 -->
+	</resultMap> -->
 	
 	
 	<select id="shopMainProductsList" resultType="Map" parameterType="Map">
