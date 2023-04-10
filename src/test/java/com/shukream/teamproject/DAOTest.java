@@ -1,5 +1,7 @@
 package com.shukream.teamproject;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -53,7 +55,7 @@ public class DAOTest {
     }
   }
   
-  @Test @Ignore
+  @Test
   public void testaddProduct() throws Exception{
     
     ProductsVO productsvo = new ProductsVO();
@@ -64,13 +66,17 @@ public class DAOTest {
     productsvo.setProduct_name_en("Jordan 3 Retro White Cement Reimagined");
     productsvo.setProduct_name_kor("조던 3 레트로 화이트 시멘트 리이매진드");
     productsvo.setProduct_price(259000);
-    productsvo.setProduct_release_date("2023-04-08");
+    
+    Calendar cal = Calendar.getInstance();
+    cal.setTime(new Date());
+    
+    productsvo.setProduct_release_date(cal.getTime());
     
     int result = productsDAO.addProduct(productsvo);
     logger.info("\n Insert Board Result " +result);
   }
   
-  @Test
+  @Test @Ignore
   public void testInsertAsks() throws Exception{
     
     //A상품
