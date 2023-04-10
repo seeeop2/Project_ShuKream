@@ -41,3 +41,7 @@
 	background-color: #ddd;
 }
 
+.product__item__text span {
+	font-size: 10px;
+	font-weight: normal;
+}

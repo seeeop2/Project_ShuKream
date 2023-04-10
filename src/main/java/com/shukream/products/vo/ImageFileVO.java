@@ -12,7 +12,14 @@ public class ImageFileVO {
 	private String img_thumb; // 썸네일 이미지
 	private int img_repthumb; // 대표썸네일 여부
 	private int img_del; // 파일 삭제 여부
+	private ProductsVO productVO;
 	
+	public ProductsVO getProductVO() {
+		return productVO;
+	}
+	public void setProductVO(ProductsVO productVO) {
+		this.productVO = productVO;
+	}
 	public int getImg_id() {
 		return img_id;
 	}
