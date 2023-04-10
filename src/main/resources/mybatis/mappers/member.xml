@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.member">
+<!-- 리절트 맵 정의 -->
+	<resultMap id="memberResult" type="memberVO">
+	   <result property="user_name" column="user_name" />
+	   <result property="user_email" column="user_email" />
+	   <result property="user_pw" column="user_pw" />
+	   <result property="user_regdate" column="user_regdate" />
+	   <result property="user_update" column="user_update" />
+	   <result property="seller_level_id" column="seller_level_id" />
+	   
+	</resultMap>
+
+<!-- 로그인시 입력한 아이디와 비밀번호 값에 해당하는 정보를 테이블에서 조회  -->
+<!-- (남은 응모횟수)d_cnt의 값을 조회한다. -->
+    <!-- 로그인시 입력한 아이디 , 비밀번호 값에 해당하는 정보를 테이블에서 조회!!
+    	 조회가 되면 입력한 아이디 또는 비밀번호가  DB의 테이블에 저장되어 있다는 뜻이므로 
+      -->
+	<select id="login" resultType="memberVO"  parameterType="java.util.Map"  >
+	    <![CDATA[
+			select * from users 
+			 where user_email=#{user_email}
+			 and user_pw=#{user_pw}			
+			 
+		]]>
+	</select>
+
+
+</mapper>
