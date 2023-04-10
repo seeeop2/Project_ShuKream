@@ -9,7 +9,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <style type="text/css">
 	.favorites_total{
-		max-width: 1500px; 
+		width: 1500px; 
 		padding: 40px 250px 160;	
 		margin: auto;
 	}
@@ -48,8 +48,8 @@
 	}
 	
 	#favorites_list{
-	    display: flex;
-		align-items: flex-start;
+ 	    display: flex; 
+ 		align-items: flex-start; 
 	    padding: 20px 0 19px;
     	webkit-box-align: center;
 /*     	align-items: center; */
@@ -69,9 +69,73 @@
 	    border-radius: 15px;
 		margin-left: 20px;		
 	}
+	#favorites_info{
+		width: 55%;
+	}
 	
-	#favorites_info p{
+	#modelName{
 		margin-left: 10px;
+	    margin-top: -13px;
+	}
+	#brand	{
+		margin-left: 10px;
+		font-weight: bold;
+	}
+	
+	#favorites_buy{
+	    margin-left: auto;
+	    text-align: right;
+		width: 21%;	
+	}
+	
+	#buyBtn{
+		height: 75px;
+		text-align: left;
+	 	background-color: #ef6253;
+   	 	border-radius: 10px;
+   	 	color: #fff;
+		width: 210px;
+		float: left;
+	}
+	
+	#buyBtn2{
+		width: 35%;
+		height: 75px;
+		border-right: 1px solid #11111136;
+	    float: left;
+	}
+	
+	#buyBtn2 strong{
+		font-size: 18px;
+    	position: relative;
+		top: 25px;
+		left: 20px;
+	}
+	
+	#buyPrice{
+		width:65%;
+		height: 74px;
+		float: left;
+		margin-top: 14px;
+		padding-left: 8px;
+	}
+		
+	#price{
+		font-weight: 700;
+ 		font-size: 20px;
+ 		color: white; 
+ 		display: table-header-group;;
+	}
+	#Price2{
+ 		color: white; 
+ 		font-size: 17px;
+ 		display: table-header-group;;
+		
+	}
+
+	#del{
+		color: #3d3d3d;
+	    text-decoration: underline;
 	}
 
 </style>
@@ -94,22 +158,36 @@
  --%>
 			
 			<ul>
+				
+				
 				<li>
 					<div id="favorites_list">
 						<div id="">
 							<img id=favorites_img src="${contextPath}/resources/img/product/product-3.jpg">
 						</div>
 						<div id="favorites_info">
-							<p>나이키</p>
-							<p> Nike Air Force 1 '07 Low White</p>
-							
+							<p id="brand">나이키</p>
+							<p id="modelName"> Nike Air Force 1 '07 Low White</p>
 						</div>
-						
-						
-						
+						<div id="favorites_buy">
+							<a href="${contextPath}/shop/list.do">
+								<div id="buyBtn">
+									<div id="buyBtn2">
+										<strong>구매</strong>
+									</div>
+										
+									<div id="buyPrice">
+										<p id="price">1,143,000원</p>
+										<p id="price2">즉시 구매가</p>
+									</div>								
+								</div>
+							</a>
+							<a id="del" href="del">삭제</a>
+						</div>						
 					</div>
-									
 				</li>			
+		
+			
 			</ul>
 			
 		

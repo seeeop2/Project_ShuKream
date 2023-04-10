@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.favorites">
+	<!-- 리절트 맵 정의 -->
+	
+	<resultMap id="likeResult" type="LikeVO">
+		<result property="like_idx" column="like_idx" />
+		<result property="like_product_idx" column="like_product_idx" />
+		<result property="like_mem_id" column="like_mem_id" />
+	</resultMap>
+	
+	
+	<resultMap id="favoritesResult" type="FavoritesVO">
+		<result property="product_id" column="product_id" />
+		<result property="product_name" column="product_name" />
+		<result property="model_number" column="model_number" />
+		<result property="ticker_number" column="ticker_number" />
+		<result property="product_price" column="product_price" />
+		<result property="product_release_date" column="product_release_date" />
+		
+		<result property="img_id" column="img_id" />
+		<result property="img_product_idx" column="img_product_idx" />
+		<result property="img_realfile" column="img_realfile" />
+		<result property="img_file" column="img_file" />
+		<result property="img_thumb" column="img_thumb" />
+		<result property="img_repthumb" column="img_repthumb" />
+		<result property="img_del" column="img_del" />
+		
+	</resultMap>
+
+    <!-- 로그인한 회원 아이디로 모든 장바구니 정보를 조회 합니다. -->
+	<select id="selectFavoritesList"  parameterType="favoritesVO"  resultMap="favoritesResult"   >
+	    <![CDATA[
+		    SELECT G.*, I.FILENAME, C.CART_ID
+		    FROM T_SHOPPING_GOODS G
+		    JOIN T_GOODS_DETAIL_IMAGE I ON G.GOODS_ID = I.GOODS_ID
+		    JOIN T_SHOPPING_CART C ON I.GOODS_ID = C.GOODS_ID
+		    WHERE I.FILETYPE = 'main_image'
+		    AND G.GOODS_ID IN
+		]]>
+	</select>
+
+
+
+
+
+</mapper>
