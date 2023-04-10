@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.asks">
+<!-- 리절트 맵 정의 -->
+  	<resultMap id="AsksResult" type="AsksVO">
+	   <result property="asks_idx" column="asks_idx" />
+	   <result property="asks_size_idx" column="asks_size_idx" />
+     <result property="asks_price" column="asks_price" />
+	   <result property="asks_regdate" column="asks_regdate" />
+	   <result property="asks_update" column="asks_update" />
+	   <result property="asks_expiration" column="asks_expiration" />
+	   <result property="asks_order_state_idx" column="asks_order_state_idx" />
+     <result property="asks_matched_date" column="asks_matched_date" />
+     <result property="asks_total_price" column="asks_total_price" />
+     <result property="asks_order_number" column="asks_order_number" />
+     <result property="asks_address" column="asks_address" />
+	</resultMap>	
+	
+<select id="getAsksList" resultMap="AsksResult">
+	<![CDATA[
+    SELECT * FROM ASKS
+	]]>
+</select>	
+
+
+<insert id="insertAsks" parameterType="AsksVO">
+
+  <selectKey resultType="Integer" keyProperty="asks_idx" order="BEFORE">
+    select asks_seq.nextval from dual
+  </selectKey>
+  
+  <![CDATA[
+    INSERT INTO ASKS
+    (
+    asks_idx,
+    asks_size_idx,
+    asks_price,
+    asks_regdate
+    )
+    VALUES
+    (
+    #{asks_idx},
+    #{asks_size_idx},
+    #{asks_price},
+    sysdate
+    )
+  ]]>
+  
+</insert>
+
+
+	
+
+</mapper>
