@@ -15,4 +15,9 @@ public class ProductsDAO {
   public List<ProductsVO> getProductsList(){
     return sqlSession.selectList("mapper.products.getProductsList");
   }
+  
+  public int addProduct(ProductsVO productsvo) {
+    return sqlSession.insert("mapper.products.addProduct", productsvo);
+    
+  }
 }

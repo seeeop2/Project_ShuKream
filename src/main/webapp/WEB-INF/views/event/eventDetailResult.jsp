@@ -207,7 +207,7 @@
     margin: 0 auto;
     top: 0;
     left: 0px;
-    width: calc(100%/6);
+    width: calc(99%/6);
     height: 100%;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -404,7 +404,7 @@
 		<c:forEach var="vo" items="${checkuser}">	
 	   		<div id="event_detail_contents_input">
 		   		<input type="text" placeholder="번호" value="${vo.d_idx}" readonly="readonly" />
-		   		<input class="ticket" type="text" placeholder="당첨된 응모권" value="${vo.d_ticket}" readonly="readonly" />
+		   		<input id="ticket" class="ticket" type="text" placeholder="당첨된 응모권" value="${vo.d_ticket}" readonly="readonly" />
 		   		<input class="d_date" type="text" placeholder="당첨 날짜" value="<fmt:formatDate type="date" dateStyle="full" value="${vo.d_date}"/>" readonly="readonly" />
 		   		<input type="text" placeholder="신청번호:xxxx 물품명: 조단 판매 완료에 대한 당첨권 1회 발급" value="${vo.d_contents}" readonly="readonly" />
 	   			<input class="expiry_date" style="text-decoration: underline; color:red;" id="expiry_date" type="text" placeholder="" value="<fmt:formatDate type="date" dateStyle="full" value="${vo.expiry_date}"/> 까지" readonly="readonly" />
@@ -436,6 +436,26 @@
 <script>
 
 $(document).ready(function(){
+	
+	// d 배열을 생성하고
+	var d = [];
+	
+	// checkuser에 저장된 사이즈 만큼 반복시킨다.
+	for(i=1; i < ${checkuser.size()}; i++){
+	
+	// d 배열에 checkuser에서 가져온 ticket 값을 저장시키는데
+	d = document.getElementsByClassName("ticket")[i].value;
+
+	// 만약에 티켓 내용이 "꽝" 이라면
+		if(d == "꽝"){
+			
+			// 해당 하는 티켓 내용의 색상을 빨갛게 바꾼다.
+			document.getElementsByClassName("ticket")[i].style.color = "red";
+			document.getElementsByClassName("d_confirm")[i].style.color = "red";
+			document.getElementsByClassName("d_confirm")[i].value = "X";
+		}
+	
+	}
 
 })
 
