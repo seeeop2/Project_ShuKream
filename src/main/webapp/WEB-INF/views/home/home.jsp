@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-
+<c:set var="bestSeller" value="${mainProductMap.bestSeller}"/>
+<c:set var="newArrivals" value="${mainProductMap.newArrivals}"/>
+<c:set var="popularItems" value="${mainProductMap.popularItems}"/>
 
 <!-- Hero Section Begin -->
 <section class="hero">
@@ -123,7 +126,7 @@
         class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
         <div class="product__item">
           <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/sneakers/product_1_main.jpg">
+            data-setbg="${contextPath}/resources/img/product/sneakers/${newArrivals[0].img_file}">
 <!--             <span class="label">New</span> -->
             <ul class="product__hover">
               <li><a href=""><img
@@ -138,14 +141,16 @@
             </ul>
           </div>
           <div class="product__item__text">
-            <h6><!-- (W) Nike Zoom Vomero 5 Cobblestone and Flat Pewter --> 상품이름 DB에서 받아와야함 판매량 기준 정렬 필요</h6>
+            <h6>${newArrivals[0].productVO.product_name_en}<br><span>${newArrivals[0].productVO.product_name_kor}</span></h6>
+            
             <a href="#" class="add-cart">+ Add To Cart</a>
             <div class="rating">
               <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
               <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
               <i class="fa fa-star-o"></i>
             </div>
-            <h5>$67.24</h5>
+            <fmt:formatNumber value="${newArrivals[0].productVO.product_price}" type="number" var="product_price" />
+            <h5>${product_price}원</h5>
             <div class="product__color__select">
               <label for="pc-1"> <input type="radio" id="pc-1">
               </label> <label class="active black" for="pc-2"> <input
@@ -161,7 +166,7 @@
         class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix popular-items">
         <div class="product__item">
           <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/product-2.jpg">
+            data-setbg="${contextPath}/resources/img/product/sneakers/${popularItems[0].img_file}">
             <ul class="product__hover">
               <li><a href="#"><img
                   src="${contextPath}/resources/img/icon/heart.png"
@@ -175,14 +180,16 @@
             </ul>
           </div>
           <div class="product__item__text">
-            <h6>Nike Air Force 1 '07 WB Flax</h6>
+            <h6>${popularItems[0].productVO.product_name_en}<br><span>${popularItems[0].productVO.product_name_kor}</span></h6>
+            
             <a href="#" class="add-cart">+ Add To Cart</a>
             <div class="rating">
               <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
               <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
               <i class="fa fa-star-o"></i>
             </div>
-            <h5>$67.24</h5>
+            <fmt:formatNumber value="${popularItems[0].productVO.product_price}" type="number" var="product_price" />
+            <h5>${product_price}원</h5>
             <div class="product__color__select">
               <label for="pc-4"> <input type="radio" id="pc-4">
               </label> <label class="active black" for="pc-5"> <input
@@ -198,7 +205,7 @@
         class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
         <div class="product__item sale">
           <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/product-3.jpg">
+            data-setbg="${contextPath}/resources/img/product/sneakers/${newArrivals[1].img_file}">
 <!--             <span class="label">Sale</span> -->
             <ul class="product__hover">
               <li><a href="#"><img
@@ -213,14 +220,16 @@
             </ul>
           </div>
           <div class="product__item__text">
-            <h6>Nike Air Force 1 '07 Low White</h6>
+            <div style="height:48px; padding-bottom: 5px;"><h6>${newArrivals[1].productVO.product_name_en}<br><span>${newArrivals[1].productVO.product_name_kor}</span></h6></div>
+           
             <a href="#" class="add-cart">+ Add To Cart</a>
             <div class="rating">
               <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
                 class="fa fa-star"></i> <i class="fa fa-star"></i> <i
                 class="fa fa-star-o"></i>
             </div>
-            <h5>$43.48</h5>
+            <fmt:formatNumber value="${newArrivals[1].productVO.product_price}" type="number" var="product_price" />
+            <h5>${product_price}원</h5>
             <div class="product__color__select">
               <label for="pc-7"> <input type="radio" id="pc-7">
               </label> <label class="active black" for="pc-8"> <input
@@ -236,7 +245,7 @@
         class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix popular-items">
         <div class="product__item">
           <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/product-4.jpg">
+            data-setbg="${contextPath}/resources/img/product/sneakers/${popularItems[1].img_file}">
             <ul class="product__hover">
               <li><a href="#"><img
                   src="${contextPath}/resources/img/icon/heart.png"
@@ -250,14 +259,15 @@
             </ul>
           </div>
           <div class="product__item__text">
-            <h6>(W) Nike Zoom Vomero 5 Photon Dust and Metallic Silver</h6>
+            <h6>${popularItems[1].productVO.product_name_en}<br><span>${popularItems[1].productVO.product_name_kor}</span></h6>
             <a href="#" class="add-cart">+ Add To Cart</a>
             <div class="rating">
               <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
               <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
               <i class="fa fa-star-o"></i>
             </div>
-            <h5>$60.9</h5>
+            <fmt:formatNumber value="${popularItems[1].productVO.product_price}" type="number" var="product_price" />
+            <h5>${product_price}원</h5>
             <div class="product__color__select">
               <label for="pc-10"> <input type="radio" id="pc-10">
               </label> <label class="active black" for="pc-11"> <input
@@ -273,7 +283,7 @@
         class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
         <div class="product__item">
           <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/product-5.jpg">
+            data-setbg="${contextPath}/resources/img/product/sneakers/${newArrivals[2].img_file}">
             <ul class="product__hover">
               <li><a href="#"><img
                   src="${contextPath}/resources/img/icon/heart.png"
@@ -287,14 +297,15 @@
             </ul>
           </div>
           <div class="product__item__text">
-            <h6>Jordan 1 Low SE Tokyo 96</h6>
+            <h6>${newArrivals[2].productVO.product_name_en}<br><span>${newArrivals[2].productVO.product_name_kor}</span></h6>
             <a href="#" class="add-cart">+ Add To Cart</a>
             <div class="rating">
               <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
               <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
               <i class="fa fa-star-o"></i>
             </div>
-            <h5>$31.37</h5>
+            <fmt:formatNumber value="${newArrivals[2].productVO.product_price}" type="number" var="product_price" />
+            <h5>${product_price}원</h5>
             <div class="product__color__select">
               <label for="pc-13"> <input type="radio" id="pc-13">
               </label> <label class="active black" for="pc-14"> <input
@@ -310,7 +321,7 @@
         class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix popular-items">
         <div class="product__item sale">
           <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/product-6.jpg">
+            data-setbg="${contextPath}/resources/img/product/sneakers/${popularItems[2].img_file}">
 <!--             <span class="label">Sale</span> -->
             <ul class="product__hover">
               <li><a href="#"><img
@@ -325,14 +336,15 @@
             </ul>
           </div>
           <div class="product__item__text">
-            <h6>Jordan 4 x Nike SB Retro Pine Green</h6>
+            <h6>${popularItems[2].productVO.product_name_en}<br><span>${popularItems[2].productVO.product_name_kor}</span></h6>
             <a href="#" class="add-cart">+ Add To Cart</a>
             <div class="rating">
               <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
                 class="fa fa-star"></i> <i class="fa fa-star"></i> <i
                 class="fa fa-star-o"></i>
             </div>
-            <h5>$98.49</h5>
+            <fmt:formatNumber value="${popularItems[2].productVO.product_price}" type="number" var="product_price" />
+            <h5>${product_price}원</h5>
             <div class="product__color__select">
               <label for="pc-16"> <input type="radio" id="pc-16">
               </label> <label class="active black" for="pc-17"> <input
@@ -348,7 +360,7 @@
         class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
         <div class="product__item">
           <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/product-7.jpg">
+            data-setbg="${contextPath}/resources/img/product/sneakers/${newArrivals[3].img_file}">
             <ul class="product__hover">
               <li><a href="#"><img
                   src="${contextPath}/resources/img/icon/heart.png"
@@ -362,14 +374,15 @@
             </ul>
           </div>
           <div class="product__item__text">
-            <h6>Jordan 1 Retro High OG Chicago 2022</h6>
+            <h6>${newArrivals[3].productVO.product_name_en}<br><span>${newArrivals[3].productVO.product_name_kor}</span></h6>
             <a href="#" class="add-cart">+ Add To Cart</a>
             <div class="rating">
               <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
               <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
               <i class="fa fa-star-o"></i>
             </div>
-            <h5>$49.66</h5>
+            <fmt:formatNumber value="${newArrivals[3].productVO.product_price}" type="number" var="product_price" />
+            <h5>${product_price}원</h5>
             <div class="product__color__select">
               <label for="pc-19"> <input type="radio" id="pc-19">
               </label> <label class="active black" for="pc-20"> <input
@@ -385,7 +398,7 @@
         class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix popular-items">
         <div class="product__item">
           <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/product-8.jpg">
+            data-setbg="${contextPath}/resources/img/product/sneakers/${popularItems[3].img_file}">
             <ul class="product__hover">
               <li><a href="#"><img
                   src="${contextPath}/resources/img/icon/heart.png"
@@ -399,14 +412,15 @@
             </ul>
           </div>
           <div class="product__item__text">
-            <h6>Jordan 1 x Travis Scott Retro Low OG SP Black Phantom</h6>
+            <h6>${popularItems[3].productVO.product_name_en}<br><span>${popularItems[3].productVO.product_name_kor}</span></h6>
             <a href="#" class="add-cart">+ Add To Cart</a>
             <div class="rating">
               <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
               <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
               <i class="fa fa-star-o"></i>
             </div>
-            <h5>$26.28</h5>
+            <fmt:formatNumber value="${popularItems[3].productVO.product_price}" type="number" var="product_price" />
+            <h5>${product_price}원</h5>
             <div class="product__color__select">
               <label for="pc-22"> <input type="radio" id="pc-22">
               </label> <label class="active black" for="pc-23"> <input
