@@ -211,7 +211,7 @@
         <%-- 여기서부터 --%>
 		<c:forEach var="product" items="${products}" varStatus="">
           <div class="col-lg-4 col-md-6 col-sm-6">
-            <div class="product__item" style="cursor: pointer;"onclick="location.href='shopDetails.do/${product.PRODUCT_ID}'">
+            <div class="product__item" style="cursor: pointer;"onclick="location.href='shopDetails.do?product_id=${product.PRODUCT_ID}'">
             <c:choose>
             	<c:when test="${product.CATEGORY eq 0}">
             	 <div class="product__item__pic set-bg"
