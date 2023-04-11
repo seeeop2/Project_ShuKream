@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.shukream.shopdetails.service.ShopDetailsService;
 
@@ -24,7 +26,9 @@ public class shopDetailsController {
 
   
   @RequestMapping(value = "/shopDetails.do", method = RequestMethod.GET)
-  public String ShopDetailsMain(HttpServletRequest request, HttpServletResponse response,Model model) {
+  public String ShopDetailsMain(
+								  @RequestParam(value = "product_id", required = false) String product_id,
+								  HttpServletRequest request, HttpServletResponse response,Model model) {
 
 //    ModelAndView mav = new ModelAndView();
 //    
@@ -38,7 +42,6 @@ public class shopDetailsController {
     //model로 변경
     String viewName = (String) request.getAttribute("viewName");
     logger.info(viewName);
-    
     model.addAttribute("lowAsks", shopDetailsService.SelectLowAsks());
 
     return viewName;

@@ -212,7 +212,7 @@
 		<c:forEach var="product" items="${products}" varStatus="">
 		<c:set var="ran"><%= java.lang.Math.round(java.lang.Math.random() * 10) %></c:set>
           <div class="col-lg-4 col-md-6 col-sm-6">
-            <div class="product__item" style="cursor: pointer;"onclick="location.href='/shuKream/shop/list.do'">
+            <div class="product__item" style="cursor: pointer;"onclick="location.href='shopDetails.do?product_id=${product.PRODUCT_ID}'">
             <c:choose>
             	<c:when test="${ran >=5 }">
             	 <div class="product__item__pic set-bg"
