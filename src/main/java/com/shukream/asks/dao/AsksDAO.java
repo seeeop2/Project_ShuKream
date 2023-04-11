@@ -19,8 +19,13 @@ public class AsksDAO {
   public int selectLowAsks() {
     return sqlSession.selectOne("mapper.asks.selectLowAsks");
   }
-  public int selectLowAsksAll(int size) {
-    return sqlSession.selectOne("mapper.asks.selectLowAsksAll",size);
+  public Map<String, Object> selectLowAsksAll(int size) {
+    return sqlSession.selectOne("mapper.asks.selectLowAsksAll", size);
   }
+  
+  public int selectLowAsksAll_1(int size) {
+    return sqlSession.selectOne("mapper.asks.selectLowAsksAll_1", size);
+  }
+  
   
 }
