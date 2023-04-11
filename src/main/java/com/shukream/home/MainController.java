@@ -36,7 +36,6 @@ public class MainController {
     logger.info(viewName);
     
     mav.addObject("mainProductMap",mainProductMap);
-    System.out.println(mainProductMap);
     mav.setViewName(viewName);
 
     return mav;

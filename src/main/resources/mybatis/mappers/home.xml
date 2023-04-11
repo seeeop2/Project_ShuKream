@@ -10,8 +10,11 @@
 	   <result property="product_name_en" column="product_name_en" />
 	   <result property="product_name_kor" column="product_name_kor" />
 	   <result property="model_number" column="model_number" />
+	   <result property="product_brand" column="product_brand" />
 	   <result property="product_price" column="product_price" />
 	   <result property="product_release_date" column="product_release_date" />
+	   <result property="product_color" column="product_color" />
+	   <result property="category" column="category" />
 	</resultMap>
 	<resultMap type="imageFileVO" id="imageFileResult">
 		<result property="img_id" column="img_id"/>
@@ -39,13 +42,22 @@
 	]]>
 </select>	
 <!-- bestseller 판매량 기준은 어느부분 참고?, new Arrivals는 release date 기준, popular items는 관심등록수기준? -->
-<select id="selectMainProductsList" parameterType="String" resultMap="imageFileResult">
-	<![CDATA[
+<select id="selectMainProductsList" parameterType="Map" resultMap="imageFileResult">
 			SELECT PRODUCTS.*, IMAGES.IMG_FILE FROM PRODUCTS, IMAGES
                 where product_id = img_product_idx
                 and img_file like '%main%'
-				ORDER BY #{option}	
-		]]>
+				ORDER BY 
+			<choose>
+		        <when test="option == 'PRODUCT_ID'">
+		          PRODUCTS.PRODUCT_ID
+		        </when>
+		        <when test="option == 'PRODUCT_RELEASE_DATE'">
+		          PRODUCTS.PRODUCT_RELEASE_DATE
+		        </when>
+		        <when test="option == 'PRODUCT_PRICE'">
+		          PRODUCTS.PRODUCT_PRICE
+		        </when>
+	      </choose>
 </select>
 
 	
