@@ -69,7 +69,7 @@
               data-toggle="tab" href="#tabs-4" role="tab">
                 <div class="product__thumb__pic set-bg"
                   data-setbg="${contextPath}/resources/img/shop-details/thumb-4.png">
-                  <i class="fa fa-play"></i>
+                  <i class="fa fa-play"></i>  
                 </div>
             </a></li>
           </ul>

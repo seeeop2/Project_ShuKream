@@ -18,9 +18,19 @@
 	
 <select id="getProductsList" resultMap="ProductsResult">
 	<![CDATA[
-    SELECT * FROM PRODUCTS
+    SELECT * 
+    FROM PRODUCTS
 	]]>
 </select>	
+
+
+<select id="selectProduct" resultMap="ProductsResult">
+  <![CDATA[
+    SELECT * 
+    FROM PRODUCTS
+    WHERE PRODUCT_ID = #{product_id}
+  ]]>
+</select> 
 
 
 <insert id="addProduct" parameterType="ProductsVO">

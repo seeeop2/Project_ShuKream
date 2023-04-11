@@ -8,6 +8,8 @@ import com.shukream.asks.dao.AsksDAO;
 import com.shukream.asks.vo.AsksVO;
 import com.shukream.bids.dao.BidsDAO;
 import com.shukream.bids.vo.BidsVO;
+import com.shukream.products.dao.ProductsDAO;
+import com.shukream.products.vo.ProductsVO;
 
 @Service
 public class ShopDetailsService {
@@ -17,6 +19,9 @@ public class ShopDetailsService {
   
   @Autowired
   BidsDAO bidsdao;
+  
+  @Autowired
+  ProductsDAO productsdao;
   
   public int InsertAsks(AsksVO asksvo) {
     return asksdao.insertAsks(asksvo);
@@ -34,4 +39,7 @@ public class ShopDetailsService {
 //    return asksdao.
 //  }
 
+  public ProductsVO SelectProduct(int product_id) {
+    return productsdao.selectProduct(product_id);
+  }
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import com.shukream.products.vo.ProductsVO;
 import com.shukream.shopdetails.service.ShopDetailsService;
 
 @Controller
@@ -26,23 +27,17 @@ public class shopDetailsController {
 
   
   @RequestMapping(value = "/shopDetails.do", method = RequestMethod.GET)
-  public String ShopDetailsMain(
-								  @RequestParam(value = "product_id", required = false) String product_id,
-								  HttpServletRequest request, HttpServletResponse response,Model model) {
+  public String ShopDetailsMain(HttpServletRequest request, 
+                                HttpServletResponse response, 
+                                Model model,
+                                @RequestParam(value = "product_id", required = false) int product_id) {
 
-//    ModelAndView mav = new ModelAndView();
-//    
-//    String viewName = (String) request.getAttribute("viewName");
-//    logger.info(viewName);
-//    
-//    mav.setViewName(viewName);
-//
-//    return mav;
-    
     //model로 변경
     String viewName = (String) request.getAttribute("viewName");
     logger.info(viewName);
-    model.addAttribute("lowAsks", shopDetailsService.SelectLowAsks());
+//    model.addAttribute("lowAsks", shopDetailsService.SelectLowAsks());
+    ProductsVO productsvo = shopDetailsService.SelectProduct(product_id);
+    model.addAttribute("productsvo", productsvo);
 
     return viewName;
     

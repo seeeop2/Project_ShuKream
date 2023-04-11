@@ -18,6 +18,8 @@ public class ProductsDAO {
   
   public int addProduct(ProductsVO productsvo) {
     return sqlSession.insert("mapper.products.addProduct", productsvo);
-    
+  }
+  public ProductsVO selectProduct(int product_id) {
+    return sqlSession.selectOne("mapper.products.selectProduct", product_id);
   }
 }
