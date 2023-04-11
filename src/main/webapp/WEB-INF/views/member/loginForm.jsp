@@ -15,7 +15,7 @@ window.onload=function()
 }
 
 function result(){
-	alert("아이디나  비밀번호가 틀립니다. 다시 로그인해주세요");
+	alert("이메일 또는 비밀번호가 틀립니다. 다시 로그인해주세요");
 }
 </script>
 </c:if>
@@ -27,7 +27,7 @@ function result(){
 		<TABLE>
 			<TBODY>
 				<TR class="dot_line">
-					<TD class="fixed_join">아이디</TD>
+					<TD class="fixed_join">이메일</TD>
 					<TD><input name="user_email" type="text" size="20" /></TD>
 				</TR>
 				<TR class="solid_line">
@@ -41,11 +41,12 @@ function result(){
 		<INPUT type="button" value="초기화">
 		
 		<Br><br>
-		   <a href="#">아이디 찾기</a>  | 
+		   <a href="#">가입 이메일 찾기</a>  | 
 		   <a href="#">비밀번호 찾기</a> | 
 		   <a href="#">회원가입</a>    | 
 		   <a href="#">고객 센터</a>
 					   
-	</form>		
+	</form>
+	</DIV>	
 </body>
 </html>
