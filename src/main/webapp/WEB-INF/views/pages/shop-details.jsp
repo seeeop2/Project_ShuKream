@@ -139,7 +139,7 @@
                           <div>
                           <ul>
                             <li>
-                              <button class="btn btn-outline-dark">모든사이즈 <br>가격</button>
+                              <button class="btn btn-outline-dark">모든사이즈 <br>${lowAsks}</button>
                             </li>
                             <li>
                               <button class="btn btn-outline-dark">220 <br>가격</button>

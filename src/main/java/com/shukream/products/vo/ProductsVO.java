@@ -1,5 +1,6 @@
 package com.shukream.products.vo;
 
+import java.util.Date;
 import org.springframework.stereotype.Component;
 
 @Component("ProductsVO")
@@ -11,7 +12,7 @@ public class ProductsVO {
   private String model_number;
   private String product_brand;
   private int product_price;
-  private String product_release_date;
+  private Date product_release_date;
   private String product_color;
   
   public int getProduct_id() {
@@ -50,10 +51,10 @@ public class ProductsVO {
   public void setProduct_price(int product_price) {
     this.product_price = product_price;
   }
-  public String getProduct_release_date() {
+  public Date getProduct_release_date() {
     return product_release_date;
   }
-  public void setProduct_release_date(String product_release_date) {
+  public void setProduct_release_date(Date product_release_date) {
     this.product_release_date = product_release_date;
   }
   public String getProduct_color() {
