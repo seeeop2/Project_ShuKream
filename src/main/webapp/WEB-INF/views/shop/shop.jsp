@@ -218,8 +218,8 @@
           </div>
         </div>
         <div class="row">
-        <%-- 여기서부터 --%>
 		<c:forEach var="product" items="${products}" varStatus="">
+        <%-- 여기서부터 --%>
           <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="product__item" style="cursor: pointer;"onclick="location.href='shopDetails.do?product_id=${product.PRODUCT_ID}'">
             <c:choose>
