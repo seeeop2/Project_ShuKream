@@ -1,6 +1,7 @@
 package com.shukream.home.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,8 @@ public class HomeDAO {
 	}
 	
 	public List<ImageFileVO> selectMainProductsList (String option) throws DataAccessException {
-		return sqlSession.selectList("mapper.home.selectMainProductsList",option);
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("option", option);
+		return sqlSession.selectList("mapper.home.selectMainProductsList",paramMap);
 	}
 }

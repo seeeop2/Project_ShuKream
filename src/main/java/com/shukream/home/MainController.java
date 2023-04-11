@@ -32,11 +32,20 @@ public class MainController {
     String viewName = (String) request.getAttribute("viewName");
     
     Map<String, List<ImageFileVO>> mainProductMap = homeService.selectMainProductsList();
+    List<ImageFileVO> vo = mainProductMap.get("newArrivals");
+    List<ImageFileVO> vo2 = mainProductMap.get("popularItems");
+    
+    ImageFileVO ivo = vo.get(0);
+    ImageFileVO ivo2 = vo2.get(0);
+    
+    System.out.println("newArrivals에 있는 ivo 처음값"+ivo.getImg_file());    
+    System.out.println("popularItems에 들어간 값 "+ivo2.getImg_file());    
+    
+    
     
     logger.info(viewName);
     
     mav.addObject("mainProductMap",mainProductMap);
-    System.out.println(mainProductMap);
     mav.setViewName(viewName);
 
     return mav;
