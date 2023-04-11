@@ -130,9 +130,15 @@
     <div
         class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
         <div class="product__item" style="cursor: pointer;"onclick="location.href='shop/shopDetails.do?product_id=${newArrivals.productVO.product_id}'">
+		<c:if test="${newArrivals.productVO.category eq 0}">
           <div class="product__item__pic set-bg"
             data-setbg="${contextPath}/resources/img/product/sneakers/${newArrivals.img_file}">
-<!--             <span class="label">New</span> -->
+         </c:if>
+         <c:if test="${newArrivals.productVO.category eq 1}">
+        	<div class="product__item__pic set-bg"
+            	data-setbg="${contextPath}/resources/img/product/slipper/${newArrivals.img_file}">
+         </c:if>
+         
             <ul class="product__hover">
               <li><a href=""><img
                   src="${contextPath}/resources/img/icon/heart.png"
@@ -163,8 +169,14 @@
        <div
         class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix popular-items">
         <div class="product__item" style="cursor: pointer;"onclick="location.href='shop/shopDetails.do?product_id=${mainProductMap.popularItems[i.index].productVO.product_id}'">
+         <c:if test="${mainProductMap.popularItems[i.index].productVO.category eq 0}">
           <div class="product__item__pic set-bg"
             data-setbg="${contextPath}/resources/img/product/sneakers/${mainProductMap.popularItems[i.index].img_file}">
+         </c:if>
+          <c:if test="${mainProductMap.popularItems[i.index].productVO.category eq 1}">
+        	<div class="product__item__pic set-bg"
+            	data-setbg="${contextPath}/resources/img/product/slipper/${mainProductMap.popularItems[i.index].img_file}">
+         </c:if>
             <ul class="product__hover">
               <li><a href="#"><img
                   src="${contextPath}/resources/img/icon/heart.png"

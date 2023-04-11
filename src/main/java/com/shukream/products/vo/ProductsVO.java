@@ -14,6 +14,7 @@ public class ProductsVO {
   private int product_price;
   private Date product_release_date;
   private String product_color;
+  private int category;
   
   public int getProduct_id() {
     return product_id;
@@ -62,6 +63,12 @@ public class ProductsVO {
   }
   public void setProduct_color(String product_color) {
     this.product_color = product_color;
+  }
+  public int getCategory() {
+	return category;
+  }
+  public void setCategory(int category) {
+	this.category = category;
   }
   
 }
