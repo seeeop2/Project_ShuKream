@@ -17,9 +17,10 @@ $("#search-input").keyup(function () {
                 data.products.forEach(function (product,index) {
                     let productEnName = product.PRODUCT_NAME_EN;
                     let productKrName = product.PRODUCT_NAME_KOR;
+                    let productID = product.PRODUCT_ID;
                     let productImgFileName = product.IMG_FILE;
 					html += `
-						<div class="search_result" onclick="location.href='/shuKream/shop/list.do?'">
+						<div class="search_result" onclick="location.href='/shuKream/shop/shopDetails.do?product_id=${productID}'">
 							<img width="70px" height="70px" src="/shuKream/resources/img/product/sneakers/${productImgFileName}" alt="">
 							<div style='display:inline-block; vertical-align:middle;'><span><strong>${productEnName}</strong></span><br>
 							<span>${productKrName}</span></div>

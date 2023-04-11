@@ -27,11 +27,11 @@ public class HomeService {
 		Map<String, List<ImageFileVO>> mainProductMap = new HashMap<String, List<ImageFileVO>>();
 		
 		//베스트셀러(우선 판매가격으로 정렬)
-		mainProductMap.put("bestSeller",homeDAO.selectMainProductsList("PRODUCT_PRICE"));
+		mainProductMap.put("bestSeller",homeDAO.selectMainProductsList("PRODUCT_ID"));
 		//신상품
 		mainProductMap.put("newArrivals", homeDAO.selectMainProductsList("PRODUCT_RELEASE_DATE"));
 		//인기아이템(우선 상품인덱스로 정렬)
-		mainProductMap.put("popularItems", homeDAO.selectMainProductsList("PRODUCT_ID"));
+		mainProductMap.put("popularItems", homeDAO.selectMainProductsList("PRODUCT_PRICE"));
 		
 		return mainProductMap;
 	}
