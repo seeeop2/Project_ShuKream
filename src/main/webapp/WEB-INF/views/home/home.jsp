@@ -122,12 +122,91 @@
       </div>
     </div>
     <div class="row product__filter">
-      <div
+    
+    <div class="row product__filter">
+    
+    <%-- 여기부터 --%>
+    <c:forEach var="newArrivals" items="${mainProductMap.newArrivals}" begin="0" end="3" varStatus="i">
+    <div
+        class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
+        <div class="product__item">
+          <div class="product__item__pic set-bg"
+            data-setbg="${contextPath}/resources/img/product/sneakers/${newArrivals.img_file}">
+<!--             <span class="label">New</span> -->
+            <ul class="product__hover">
+              <li><a href=""><img
+                  src="${contextPath}/resources/img/icon/heart.png"
+                  alt=""></a></li>
+              <li><a href="#"><img
+                  src="${contextPath}/resources/img/icon/compare.png"
+                  alt=""> <span>Compare</span></a></li>
+              <li><a href="#"><img
+                  src="${contextPath}/resources/img/icon/search.png"
+                  alt=""></a></li>
+            </ul>
+          </div>
+          <div class="product__item__text">
+            <h6>
+            ${newArrivals.productVO.product_name_en}<br>
+            <span>${newArrivals.productVO.product_name_kor}</span>
+            </h6>
+            <a href="#" class="add-cart">+ Add To Cart</a>
+            <div class="rating">
+              <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
+              <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
+              <i class="fa fa-star-o"></i>
+            </div>
+            <fmt:formatNumber value="${newArrivals.productVO.product_price}" type="number" var="product_price" />
+            <h5>${product_price}원</h5>
+          </div>
+        </div>
+      </div>
+      <%--popular --%>
+       <div
+        class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix popular-items">
+        <div class="product__item">
+          <div class="product__item__pic set-bg"
+            data-setbg="${contextPath}/resources/img/product/sneakers/${mainProductMap.popularItems[i.index].img_file}">
+            <ul class="product__hover">
+              <li><a href="#"><img
+                  src="${contextPath}/resources/img/icon/heart.png"
+                  alt=""></a></li>
+              <li><a href="#"><img
+                  src="${contextPath}/resources/img/icon/compare.png"
+                  alt=""> <span>Compare</span></a></li>
+              <li><a href="#"><img
+                  src="${contextPath}/resources/img/icon/search.png"
+                  alt=""></a></li>
+            </ul>
+          </div>
+          <div class="product__item__text">
+            <h6>
+	            ${mainProductMap.popularItems[i.index].productVO.product_name_en}<br>
+	            <span>${mainProductMap.popularItems[i.index].productVO.product_name_kor}</span>
+            </h6>
+            
+            <a href="#" class="add-cart">+ Add To Cart</a>
+            <div class="rating">
+              <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
+              <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
+              <i class="fa fa-star-o"></i>
+            </div>
+            <fmt:formatNumber value="${mainProductMap.popularItems[i.index].productVO.product_price}" type="number" var="product_price" />
+            <h5>${product_price}원</h5>
+          </div>
+        </div>
+      </div>
+      </c:forEach>
+    <%-- 여기까지 --%>
+    
+    
+    
+<%--       <div
         class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
         <div class="product__item">
           <div class="product__item__pic set-bg"
             data-setbg="${contextPath}/resources/img/product/sneakers/${newArrivals[0].img_file}">
-<!--             <span class="label">New</span> -->
+             <span class="label">New</span>
             <ul class="product__hover">
               <li><a href=""><img
                   src="${contextPath}/resources/img/icon/heart.png"
@@ -206,7 +285,7 @@
         <div class="product__item sale">
           <div class="product__item__pic set-bg"
             data-setbg="${contextPath}/resources/img/product/sneakers/${newArrivals[1].img_file}">
-<!--             <span class="label">Sale</span> -->
+             <span class="label">Sale</span> 
             <ul class="product__hover">
               <li><a href="#"><img
                   src="${contextPath}/resources/img/icon/heart.png"
@@ -322,7 +401,7 @@
         <div class="product__item sale">
           <div class="product__item__pic set-bg"
             data-setbg="${contextPath}/resources/img/product/sneakers/${popularItems[2].img_file}">
-<!--             <span class="label">Sale</span> -->
+             <span class="label">Sale</span> 
             <ul class="product__hover">
               <li><a href="#"><img
                   src="${contextPath}/resources/img/icon/heart.png"
@@ -431,7 +510,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> --%>
     </div>
   </div>
 </section>

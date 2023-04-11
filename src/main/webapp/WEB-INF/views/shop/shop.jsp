@@ -46,16 +46,9 @@
                   data-parent="#accordionExample">
                   <div class="card-body">
                     <div class="shop__sidebar__categories">
-                      <ul class="nice-scroll">
-                        <li><a href="#">Men (20)</a></li>
-                        <li><a href="#">Women (20)</a></li>
-                        <li><a href="#">Bags (20)</a></li>
-                        <li><a href="#">Clothing (20)</a></li>
-                        <li><a href="#">Shoes (20)</a></li>
-                        <li><a href="#">Accessories (20)</a></li>
-                        <li><a href="#">Kids (20)</a></li>
-                        <li><a href="#">Kids (20)</a></li>
-                        <li><a href="#">Kids (20)</a></li>
+                      <ul>
+                        <li><a href="#">Sneakers</a></li>
+                        <li><a href="#">Slipper</a></li>
                       </ul>
                     </div>
                   </div>
@@ -70,10 +63,17 @@
                   <div class="card-body">
                     <div class="shop__sidebar__brand">
                       <ul>
-                        <li><a href="#">Louis Vuitton</a></li>
-                        <li><a href="#">Chanel</a></li>
+                        <li><a href="#">Nike</a></li>
+                        <li><a href="#">Adidas</a></li>
+                        <li><a href="#">Jordan</a></li>
+                        <li><a href="#">New Balance</a></li>
+                        <li><a href="#">Birkenstock</a></li>
                         <li><a href="#">Hermes</a></li>
-                        <li><a href="#">Gucci</a></li>
+                        <li><a href="#">Chanel</a></li>
+                        <li><a href="#">Crocs</a></li>
+                        <li><a href="#">Salomon</a></li>
+                        <li><a href="#">Oofos</a></li>
+                        <li><a href="#">Asics</a></li>
                       </ul>
                     </div>
                   </div>
@@ -210,20 +210,18 @@
         <div class="row">
         <%-- 여기서부터 --%>
 		<c:forEach var="product" items="${products}" varStatus="">
-		<c:set var="ran"><%= java.lang.Math.round(java.lang.Math.random() * 10) %></c:set>
           <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="product__item" style="cursor: pointer;"onclick="location.href='/shuKream/shop/list.do'">
             <c:choose>
-            	<c:when test="${ran >=5 }">
+            	<c:when test="${product.CATEGORY eq 0}">
             	 <div class="product__item__pic set-bg"
                 data-setbg="${contextPath}/resources/img/product/sneakers/${product.IMG_FILE}">
                 </c:when>
                 <c:otherwise>
-                	 <div class="product__item__pic set-bg"
+			 <div class="product__item__pic set-bg"
                 data-setbg="${contextPath}/resources/img/product/slipper/${product.IMG_FILE}">
                 </c:otherwise>
-            </c:choose>
-             
+			</c:choose>
                 <ul class="product__hover">
                   <li><a href="#"><img
                       src="${contextPath}/resources/img/icon/heart.png"
@@ -237,14 +235,15 @@
                 </ul>
               </div>
               <div class="product__item__text">
-	                <span style=""><strong>${product.PRODUCT_NAME_EN}</strong></span><br>
+	                <h6>${product.PRODUCT_NAME_EN}${product.CATEGORY}</h6>
 	                <span style="font-size: 12px;">${product.PRODUCT_NAME_KOR}</span>
+	                <a href="#" class="add-cart">+ Add To Cart</a>
                 <fmt:formatNumber value="${product.PRODUCT_PRICE}" type="number" var="product_price" />
                 <h5>${product_price}원</h5>
               </div>
             </div>
           </div>
-		</c:forEach>
+          </c:forEach>
           <%-- 여기까지 한줄 --%>
           
           <%-- 원본 -- %>
