@@ -5,15 +5,24 @@
 
 <mapper namespace="mapper.home">
 <!-- 리절트 맵 정의 -->
-<!-- 	<resultMap id="ProductsResult" type="ProductsVO">
+ 	<resultMap id="productsResult" type="ProductsVO">
 	   <result property="product_id" column="product_id" />
-	   <result property="product_name" column="product_name" />
+	   <result property="product_name_en" column="product_name_en" />
+	   <result property="product_name_kor" column="product_name_kor" />
 	   <result property="model_number" column="model_number" />
-	   <result property="ticker_number" column="ticker_number" />
 	   <result property="product_price" column="product_price" />
 	   <result property="product_release_date" column="product_release_date" />
-	</resultMap>	 -->
-	
+	</resultMap>
+	<resultMap type="imageFileVO" id="imageFileResult">
+		<result property="img_id" column="img_id"/>
+		<result property="img_product_idx" column="img_product_idx"/>
+		<result property="img_realFile" column="img_realFile"/>
+		<result property="img_file" column="img_file"/>
+		<result property="img_thumb" column="img_thumb"/>
+		<result property="img_repthumb" column="img_repthumb"/>
+		<result property="img_del" column="img_del"/>
+		<collection property="productVO" resultMap="productsResult"/>
+	</resultMap>
 	
 <select id="wordSearch" parameterType="String" resultType="map">
 	<![CDATA[
@@ -28,8 +37,17 @@
 		WHERE IMG_FILE LIKE '%main.jpg'
 		ORDER BY rnum
 	]]>
-	
 </select>	
+<!-- bestseller 판매량 기준은 어느부분 참고?, new Arrivals는 release date 기준, popular items는 관심등록수기준? -->
+<select id="selectMainProductsList" parameterType="String" resultMap="imageFileResult">
+	<![CDATA[
+			SELECT PRODUCTS.*, IMAGES.IMG_FILE FROM PRODUCTS, IMAGES
+                where product_id = img_product_idx
+                and img_file like '%main%'
+				ORDER BY #{option}	
+		]]>
+</select>
+
 	
 
 </mapper>

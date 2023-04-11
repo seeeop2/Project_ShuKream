@@ -78,10 +78,12 @@ public class EventController {
 		
 	  System.out.println("detail.do 호출!"); 
 	  
+	  
 	  request.setCharacterEncoding("utf-8");
 	  response.setCharacterEncoding("utf-8");
 	  response.setContentType("text/html; charset=utf-8");
 
+	  String contextPath = request.getContextPath();
 	  
 	  //PrintWirter 객체 out 생성 및 초기화
 		PrintWriter out = response.getWriter();
@@ -129,7 +131,7 @@ public class EventController {
 					// ticket 값을 0으로 입력하여 eventdetailresult.jsp에 ticket값이 0일 경우 jstl을 이용하여 소지하고있는 응모권이 없습니다를 생성시킨다!
 					out.println("<script>alert('보유하신 응모권이 없습니다!, 상세페이지로 이동합니다');");
 //					out.println("window.location.replace('http://localhost:8090/shuKream/event/detailresult.do?ticket=0');</script>");
-					out.println("window.location.href='http://localhost:8090/shuKream/event/detailresult.do?ticket=0&id="+id+"';</script>");
+					out.println("window.location.href='"+contextPath+"/event/detailresult.do?ticket=0&id="+id+"';</script>");
 					out.flush();
 					out.close();
 				}
@@ -138,7 +140,7 @@ public class EventController {
 		}else {
 
 			out.println("<script>alert('로그인 후 이용가능합니다!, 메인 페이지로 이동합니다');");
-			out.println("window.location.replace('http://localhost:8090/shuKream/main.do');</script>");
+			out.println("window.location.replace('"+contextPath+"/main.do');</script>");
 			out.flush();
 			out.close();
 			
@@ -323,11 +325,16 @@ public class EventController {
 	    	// 임시로 넣어놓고, 나중에는 주문번호를 따와서 추가 시킨다.<작성중>
 	        String contents = "(주문번호2)의 주문완료에 대한 응모권 발생";
 	    	
+	        // 이미 사용 된 응모권으로 처리하고
+	        // 보유중인 응모권에서 -1 한다.
+	        int u = Integer.parseInt(u_cnt);
+	        u += 1;
+	        d_cnt -= 1;
     	
 	        //EventVO로 전달한 값들을 저장시킨다.
 	        coupon.setMember_id(id);
 	    	coupon.setA_cnt(Integer.toString(a_cnt));
-	    	coupon.setU_cnt(u_cnt);
+	    	coupon.setU_cnt(Integer.toString(u));
 	    	coupon.setD_cnt(Integer.toString(d_cnt));
 	    	coupon.setD_ticket(ticket);
 	    	coupon.setD_contents(contents);

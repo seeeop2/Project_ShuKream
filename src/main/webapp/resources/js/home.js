@@ -15,12 +15,14 @@ $("#search-input").keyup(function () {
             success: function (data) {
 
                 data.products.forEach(function (product,index) {
-                    let productName = product.PRODUCT_NAME_EN;
+                    let productEnName = product.PRODUCT_NAME_EN;
+                    let productKrName = product.PRODUCT_NAME_KOR;
                     let productImgFileName = product.IMG_FILE;
 					html += `
 						<div class="search_result" onclick="location.href='/shuKream/shop/list.do?'">
 							<img width="70px" height="70px" src="/shuKream/resources/img/product/sneakers/${productImgFileName}" alt="">
-							<span>${productName}</span>
+							<div style='display:inline-block; vertical-align:middle;'><span><strong>${productEnName}</strong></span><br>
+							<span>${productKrName}</span></div>
 						</div>
 						  `;
                 });
