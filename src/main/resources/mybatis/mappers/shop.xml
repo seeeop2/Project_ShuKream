@@ -20,7 +20,7 @@
 	<select id="shopMainProductsList" resultType="Map" parameterType="Map">
 			SELECT *
 			FROM (
-			  SELECT PRODUCTS.*,IMAGES.IMG_FILE, ROWNUM AS rnum
+			  SELECT PRODUCTS.*,IMAGES.IMG_FILE, ROW_NUMBER() OVER (ORDER BY PRODUCTS.PRODUCT_PRICE ASC) AS rnum
 			  FROM PRODUCTS
 			  JOIN IMAGES 
 			  ON PRODUCTS.PRODUCT_ID = IMAGES.IMG_PRODUCT_IDX
@@ -33,9 +33,6 @@
 			  		AND PRODUCTS.PRODUCT_BRAND = #{division}
 			  	</when>
 			  </choose>
-			  
-			  
-			  ORDER BY PRODUCTS.PRODUCT_ID DESC
 			) 
 			WHERE rnum BETWEEN #{start} AND #{end}
 	</select>	

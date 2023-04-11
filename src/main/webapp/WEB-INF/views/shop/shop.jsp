@@ -109,23 +109,30 @@
                   data-parent="#accordionExample">
                   <div class="card-body">
                     <div class="shop__sidebar__size">
-                      <label for="xs">xs <input type="radio"
-                        id="xs">
-                      </label> <label for="sm">s <input type="radio"
-                        id="sm">
-                      </label> <label for="md">m <input type="radio"
-                        id="md">
-                      </label> <label for="xl">xl <input type="radio"
-                        id="xl">
-                      </label> <label for="2xl">2xl <input type="radio"
-                        id="2xl">
-                      </label> <label for="xxl">xxl <input type="radio"
-                        id="xxl">
-                      </label> <label for="3xl">3xl <input type="radio"
-                        id="3xl">
-                      </label> <label for="4xl">4xl <input type="radio"
-                        id="4xl">
-                      </label>
+                      <label for="220 ">220 <input type="radio"
+                        id="220 ">
+                      </label> <label for="225">225 <input type="radio"
+                        id="225">
+                      </label> <label for="230">230 <input type="radio"
+                        id="230">
+                      </label> <label for="235">235 <input type="radio"
+                        id="235">
+                      </label> <label for="240">240 <input type="radio"
+                        id="240">
+                      </label> <label for="245">245 <input type="radio"
+                        id="245">
+                      </label> <label for="250">250 <input type="radio"
+                        id="250"></label> 
+                        <label for="255">255 <input type="radio" id="255"></label>
+                        <label for="260">260 <input type="radio" id="260"></label>
+                        <label for="265">265 <input type="radio" id="265"></label>
+                        <label for="270">270 <input type="radio" id="270"></label>
+                        <label for="275">275 <input type="radio" id="275"></label>
+                        <label for="280">280 <input type="radio" id="280"></label>
+                        <label for="285">285 <input type="radio" id="285"></label>
+                        <label for="290">290 <input type="radio" id="290"></label>
+                        <label for="295">295 <input type="radio" id="295"></label>
+                        <label for="300">300 <input type="radio" id="300"></label>
                     </div>
                   </div>
                 </div>
