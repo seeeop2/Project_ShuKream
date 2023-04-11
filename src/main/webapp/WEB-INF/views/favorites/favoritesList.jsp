@@ -4,10 +4,8 @@
     
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 
-<c:set var="myLikeList"  value="${sessionScope.likeMap.myLikeList}"  />
-<c:set var="myFavoritesList"  value="${sessionScope.likeMap.myFavoritesList}"  />
-
-
+<c:set var="myLikeList"   value="${sessionScope.likeMap.myLikeList}"  />
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,11 +76,11 @@
 		width: 55%;
 	}
 	
-	#modelName{
+	#name_en{
 		margin-left: 10px;
 	    margin-top: -13px;
 	}
-	#brand	{
+	#name_kor	{
 		margin-left: 10px;
 		font-weight: bold;
 	}
@@ -163,42 +161,39 @@
  --%>
 			
 			<ul>
-				
-				
-				<li>
-					<div id="favorites_list">
-						<div id="">
-							<img id=favorites_img src="${contextPath}/resources/img/product/sneakers/product_3_main.jpg">
-						</div>
-						<div id="favorites_info">
-							<p id="brand">나이키</p>
-							<p id="modelName"> Nike Air Force 1 '07 Low White</p>
-						</div>
-						<div id="favorites_buy">
-							<a href="${contextPath}/shop/list.do">
-								<div id="buyBtn">
-									<div id="buyBtn2">
-										<strong>구매</strong>
+			
+	      		<c:forEach var="L" items="${myLikeList}" varStatus="status">
+	      		
+					<li>
+						<div id="favorites_list">
+							<div id="">
+								<img id=favorites_img src="${contextPath}/resources/img/product/sneakers/${L.like_img_file}">
+							</div>
+							<div id="favorites_info">
+								<p id="name_kor">${L.like_product_name_kor}</p>
+								<p id="name_en">${L.like_product_name_en}</p>
+							</div>
+							<div id="favorites_buy">
+								<a href="${contextPath}/shop/list.do">
+									<div id="buyBtn">
+										<div id="buyBtn2">
+											<strong>구매</strong>
+										</div>
+											
+										<div id="buyPrice">
+											<p id="price">${L.like_product_price}</p>
+											<p id="price2">즉시 구매가</p>
+										</div>								
 									</div>
-										
-									<div id="buyPrice">
-										<p id="price">1,143,000원</p>
-										<p id="price2">즉시 구매가</p>
-									</div>								
-								</div>
-							</a>
-							<a id="del" href="del">삭제</a>
-						</div>						
-					</div>
-				</li>			
-		
+								</a>
+								<a id="del" href="${contextPath}/favorites/favoritesDel.do?like_idx=${L.like_idx}">삭제</a>
+							</div>						
+						</div>
+					</li>			
+					</c:forEach>
 			
 			</ul>
-			
-		
-		
 		</div>
-	
  
 	
 	</div>	

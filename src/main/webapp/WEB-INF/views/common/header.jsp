@@ -14,7 +14,7 @@
     <div class="offcanvas-menu-wrapper">
         <div class="offcanvas__option">
             <div class="offcanvas__links">
-                <a href="#">Sign in</a>
+                <a href="${contextPath}/member/loginForm.do">Sign in</a>
                 <a href="#">FAQs</a>
             </div>
             <div class="offcanvas__top__hover">
@@ -52,7 +52,7 @@
                     <div class="col-lg-6 col-md-5">
                         <div class="header__top__right">
                             <div class="header__top__links">
-                                <a href="#">Sign in</a>
+                                <a href="${contextPath}/member/loginForm.do">Sign in</a>
                                 <a href="#">FAQs</a>
                             </div>
                             <div class="header__top__hover">
@@ -131,4 +131,5 @@
 	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<%-- 검색어 완성기능용 js파일 --%>
 	<script  src="${contextPath}/resources/js/home.js"></script>
+	
 	

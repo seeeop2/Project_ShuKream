@@ -10,8 +10,14 @@
 		<result property="like_idx" column="like_idx" />
 		<result property="like_product_idx" column="like_product_idx" />
 		<result property="like_mem_id" column="like_mem_id" />
-	</resultMap>
+		<result property="like_product_name_en" column="like_product_name_en" />
+		<result property="like_product_name_kor" column="like_product_name_kor" />
+		<result property="like_product_price" column="like_product_price" />
+		<result property="like_img_file" column="like_img_file" />
 	
+	</resultMap>
+
+<!-- 
 	<resultMap id="favoritesResult" type="FavoritesVO">
 		<result property="product_id" column="product_id" />
 		<result property="product_name_en" column="product_name_en" />
@@ -31,7 +37,9 @@
 		
 	</resultMap>
 
-
+ -->
+	
+	
 	<select id="selectLikeList"  parameterType="likeVO"  resultMap="likeResult"   >
 	    <![CDATA[
 
@@ -40,8 +48,10 @@
 			
 		]]>
 	</select>
-
-	<select id="selectFavoritesList" resultMap="favoritesResult" parameterType="java.util.Map">
+	
+	
+<!-- 
+	<select id="selectFavoritesList" parameterType="java.util.Map" resultMap="favoritesResult" >
   		<![CDATA[
 		    
 	        SELECT P.product_name_en, P.product_name_kor, P.product_price,
@@ -49,20 +59,24 @@
 		    FROM PRODUCTS P,IMAGES I
 		    WHERE P.PRODUCT_ID = I.IMG_ID 
             AND P.PRODUCT_ID IN
-			(1,2,3)	
+				
 		]]>
-			 
-<!-- 		
+		
 		<foreach item="item" collection="list" open="("  separator=","  close=")">
-			#{item.LIKE_IDX}
+			#{item.like_idx}
 		</foreach>    
-		 -->
-  		
-
  
 	
 	</select>
-
-
+ -->
+	
+	<delete id="deleteLikeList" parameterType="likeVO">
+	    <![CDATA[
+	      delete from PRODUCT_LIKE
+	      where LIKE_IDX=#{like_idx} and
+	      		LIKE_MEM_ID=#{like_mem_id}
+    	]]>
+	</delete>
+	
 
 </mapper>

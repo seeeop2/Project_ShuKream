@@ -23,20 +23,29 @@ public class FavoritesDAO {
 		
 	
 	public List<LikeVO> selectLikeList(LikeVO likeVO)throws Exception {
+
 		List<LikeVO> likeList =(List)sqlSession.selectList("mapper.favorites.selectLikeList",likeVO);
-		
+
 		return likeList;
 	}
-	
+/*	
 	public List<FavoritesVO> selectFavoritesList(List<LikeVO> myLikeList) throws Exception{
 		
 		List<FavoritesVO> myFavoritesList;
 		
 		myFavoritesList = sqlSession.selectList("mapper.favorites.selectFavoritesList",myLikeList);
 		
+		System.out.println("favoritesList:"+ myFavoritesList);
+		
 		return myFavoritesList;
 	}
+*/
 
+
+
+	public void deleteLikeList(LikeVO likeVO) {
 		
-
+		sqlSession.delete("mapper.favorites.deleteLikeList",likeVO);
+		
+	}
 }

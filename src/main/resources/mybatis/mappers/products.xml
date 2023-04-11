@@ -20,8 +20,43 @@
 	<![CDATA[
     SELECT * FROM PRODUCTS
 	]]>
-	
 </select>	
+
+
+<insert id="addProduct" parameterType="ProductsVO">
+
+  <selectKey resultType="Integer" keyProperty="product_id" order="BEFORE">
+    select products_seq.nextval from dual
+  </selectKey>
+  
+  <![CDATA[
+    INSERT INTO PRODUCTS
+    (
+    product_id,
+    product_name_en,
+    product_name_kor,
+    model_number,
+    product_brand,
+    product_price,
+    product_release_date,
+    product_color
+    )
+    VALUES
+    (
+    #{product_id},
+    #{product_name_en},
+    #{product_name_kor},
+    #{model_number},
+    #{product_brand},
+    #{product_price},
+    #{product_release_date},
+    #{product_color}
+    )
+  ]]>
+  
+</insert>
+
+
 	
 
 </mapper>

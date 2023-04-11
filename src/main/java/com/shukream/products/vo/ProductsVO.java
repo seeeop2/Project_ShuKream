@@ -1,6 +1,6 @@
 package com.shukream.products.vo;
 
-import java.sql.Date;
+import java.util.Date;
 import org.springframework.stereotype.Component;
 
 @Component("ProductsVO")
@@ -63,7 +63,5 @@ public class ProductsVO {
   public void setProduct_color(String product_color) {
     this.product_color = product_color;
   }
-  
-  
   
 }

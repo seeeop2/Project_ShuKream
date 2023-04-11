@@ -210,10 +210,20 @@
         <div class="row">
         <%-- 여기서부터 --%>
 		<c:forEach var="product" items="${products}" varStatus="">
+		<c:set var="ran"><%= java.lang.Math.round(java.lang.Math.random() * 10) %></c:set>
           <div class="col-lg-4 col-md-6 col-sm-6">
-            <div class="product__item" style="cursor: pointer;"onclick="location.href='/shuKream/shop/list.do'">
-              <div class="product__item__pic set-bg"
+            <div class="product__item" style="cursor: pointer;"onclick="location.href='shopDetails.do?product_id=${product.PRODUCT_ID}'">
+            <c:choose>
+            	<c:when test="${ran >=5 }">
+            	 <div class="product__item__pic set-bg"
                 data-setbg="${contextPath}/resources/img/product/sneakers/${product.IMG_FILE}">
+                </c:when>
+                <c:otherwise>
+                	 <div class="product__item__pic set-bg"
+                data-setbg="${contextPath}/resources/img/product/slipper/${product.IMG_FILE}">
+                </c:otherwise>
+            </c:choose>
+             
                 <ul class="product__hover">
                   <li><a href="#"><img
                       src="${contextPath}/resources/img/icon/heart.png"
@@ -227,7 +237,8 @@
                 </ul>
               </div>
               <div class="product__item__text">
-                <span style="">${product.PRODUCT_NAME_EN}</span>
+	                <span style=""><strong>${product.PRODUCT_NAME_EN}</strong></span><br>
+	                <span style="font-size: 12px;">${product.PRODUCT_NAME_KOR}</span>
                 <fmt:formatNumber value="${product.PRODUCT_PRICE}" type="number" var="product_price" />
                 <h5>${product_price}원</h5>
               </div>
