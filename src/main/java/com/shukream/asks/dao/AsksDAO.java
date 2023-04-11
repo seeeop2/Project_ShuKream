@@ -1,5 +1,7 @@
 package com.shukream.asks.dao;
 
+import java.util.List;
+import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,6 +15,12 @@ public class AsksDAO {
   
   public int insertAsks(AsksVO asksvo) {
     return sqlSession.insert("mapper.asks.insertAsks",asksvo);
+  }
+  public int selectLowAsks() {
+    return sqlSession.selectOne("mapper.asks.selectLowAsks");
+  }
+  public int selectLowAsksAll(int size) {
+    return sqlSession.selectOne("mapper.asks.selectLowAsksAll",size);
   }
   
 }

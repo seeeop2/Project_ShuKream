@@ -25,7 +25,26 @@
 	]]>
 </select>	
 
+<!-- 모든 사이즈 클릭시 버튼 하단에 나타낼 값 -->
+<select id="selectLowAsks" resultType="_int">
+  <![CDATA[
+    SELECT ASKS_PRICE
+    FROM ( SELECT * FROM ASKS ORDER BY ASKS_PRICE)
+    WHERE ROWNUM = 1
+  ]]>
+</select> 
 
+<!-- 모든 사이즈 클릭시 버튼 하단에 나타낼 값..수정중... -->
+<select id="selectLowAsksAll" parameterType="int"  resultType="int">
+  <![CDATA[
+    SELECT ASKS_PRICE
+    FROM ( SELECT * FROM ASKS WHERE ASKS_SIZE_IDX = #{size} ORDER BY ASKS_PRICE) 
+    WHERE ROWNUM = 1
+  ]]>
+</select> 
+
+
+<!--////////////////////////////     SELECT     ////////////////////////////-->
 <insert id="insertAsks" parameterType="AsksVO">
 
   <selectKey resultType="Integer" keyProperty="asks_idx" order="BEFORE">
