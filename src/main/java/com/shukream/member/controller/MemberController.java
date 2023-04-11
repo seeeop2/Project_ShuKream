@@ -81,7 +81,6 @@ public class MemberController {
 			mav.addObject("message" , message);
 			mav.setViewName("/member/loginForm");
 		}
-		
 		return mav;
 		
 	}

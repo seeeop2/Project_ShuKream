@@ -132,3 +132,4 @@
 	<%-- 검색어 완성기능용 js파일 --%>
 	<script  src="${contextPath}/resources/js/home.js"></script>
 	
+	
