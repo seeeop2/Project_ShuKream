@@ -34,30 +34,21 @@
   ]]>
 </select> 
 
-<!-- 모든 사이즈 클릭시 버튼 하단에 나타낼 값..수정중... -->
-<select id="selectLowAsksAll" parameterType="int"  resultType="map">
-  <![CDATA[
-    SELECT *
-    FROM ( 
-        SELECT ASKS_SIZE_IDX "SIZE", ASKS_PRICE "PRICE"
-        FROM ASKS
-        WHERE ASKS_SIZE_IDX = #{size}
-        ORDER BY ASKS_PRICE) 
-    WHERE ROWNUM = 1
-    
-  ]]>
-</select> 
 
-<select id="selectLowAsksAll_1" parameterType="int"  resultType="int">
+<!-- 모든 사이즈 클릭시 버튼 하단에 나타낼 값..수정중... -->
+<select id="selectLowAsksAll" parameterType="int"  resultType="int">
   <![CDATA[
-    SELECT *
-    FROM ( 
-        SELECT ASKS_PRICE "PRICE"
-        FROM ASKS
-        WHERE ASKS_SIZE_IDX = #{size}
-        ORDER BY ASKS_PRICE) 
-    WHERE ROWNUM = 1
-    
+    SELECT NVL(ASKS_PRICE,0)
+    FROM(
+      SELECT * 
+      FROM(
+        SELECT * 
+        FROM ASKS 
+        ORDER BY ASKS_SIZE_IDX
+      )
+      WHERE ROWNUM =1) 
+    RIGHT OUTER JOIN DUAL 
+    ON ASKS_SIZE_IDX = #{size}
   ]]>
 </select> 
 

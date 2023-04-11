@@ -1,5 +1,7 @@
 package com.shukream.shopdetails.controller;
 
+import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -36,9 +38,12 @@ public class shopDetailsController {
     String viewName = (String) request.getAttribute("viewName");
     logger.info(viewName);
 //    model.addAttribute("lowAsks", shopDetailsService.SelectLowAsks());
-    ProductsVO productsvo = shopDetailsService.SelectProduct(product_id);
-    model.addAttribute("productsvo", productsvo);
-
+    List productvoList = shopDetailsService.SelectProduct(product_id);
+    System.out.println("이거 봐라 : "+productvoList);
+    model.addAttribute("productvoList", productvoList);
+    Map map =shopDetailsService.selectLowAsksAll();
+    System.out.println(map);
+    model.addAttribute("theLowestAsks",map);
     return viewName;
     
   }

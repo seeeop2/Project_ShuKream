@@ -1,6 +1,8 @@
 package com.shukream.shopdetails.service;
 
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,12 +36,20 @@ public class ShopDetailsService {
     return asksdao.selectLowAsks();
   }
   
-//  public Map SelectEachLowAsks() {
-//    
-//    return asksdao.
-//  }
+  public Map selectLowAsksAll() {
+    
+    Map result = new HashMap();
+    for(int i = 220; i<=300;i=i+5) {
+      result.put(i, asksdao.selectLowAsksAll(i));
+    }
+    
+    
+    return result;
+  }
 
-  public ProductsVO SelectProduct(int product_id) {
+  public List SelectProduct(int product_id) {
     return productsdao.selectProduct(product_id);
   }
+  
+  
 }

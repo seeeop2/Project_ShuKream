@@ -5,7 +5,7 @@
 
 <mapper namespace="mapper.products">
 <!-- 리절트 맵 정의 -->
-  	<resultMap id="ProductsResult" type="ProductsVO">
+  	<resultMap id="ProductsResult" type="ProductsVOWithIMG">
 	   <result property="product_id" column="product_id" />
 	   <result property="product_name_en" column="product_name_en" />
      <result property="product_name_kor" column="product_name_kor" />
@@ -14,6 +14,15 @@
 	   <result property="product_price" column="product_price" />
 	   <result property="product_release_date" column="product_release_date" />
      <result property="product_color" column="product_color" />
+     <result property="category" column="category" />
+     
+     <result property="img_id" column="img_id" />
+     <result property="img_product_idx" column="img_product_idx" />
+     <result property="img_realFile" column="img_realFile" />
+     <result property="img_file" column="img_file" />
+     <result property="img_thumb" column="img_thumb" />
+     <result property="img_repthumb" column="img_repthumb" />
+     <result property="img_del" column="img_del" />
 	</resultMap>	
 	
 <select id="getProductsList" resultMap="ProductsResult">
@@ -24,11 +33,13 @@
 </select>	
 
 
-<select id="selectProduct" resultMap="ProductsResult">
+<select id="selectProduct" parameterType="int" resultType="map">
   <![CDATA[
-    SELECT * 
-    FROM PRODUCTS
-    WHERE PRODUCT_ID = #{product_id}
+    SELECT PRODUCTS.*,IMAGES.*
+    FROM PRODUCTS, IMAGES
+    WHERE PRODUCTS.PRODUCT_ID = IMAGES.IMG_PRODUCT_IDX
+    AND PRODUCTS.PRODUCT_ID = #{product_id}
+
   ]]>
 </select> 
 

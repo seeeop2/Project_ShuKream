@@ -50,27 +50,26 @@
       <div class="row">
         <div class="col-lg-3 col-md-3">
           <ul class="nav nav-tabs" role="tablist">
+          
+<%--           <c:forEach var="productvo" items="${productvoList}">
+            
+            <c:if test="${productvo.product_name_kor eq '뉴발란스 2002R 그레이' }">
             <li class="nav-item"><a class="nav-link active"
               data-toggle="tab" href="#tabs-1" role="tab">
                 <div class="product__thumb__pic set-bg"
                   data-setbg="${contextPath}/resources/img/shop-details/thumb-1.png"></div>
             </a></li>
+            </c:if>
+            
+          </c:forEach>
+ --%>          
+          
+            
+            
             <li class="nav-item"><a class="nav-link"
               data-toggle="tab" href="#tabs-2" role="tab">
                 <div class="product__thumb__pic set-bg"
                   data-setbg="${contextPath}/resources/img/shop-details/thumb-2.png"></div>
-            </a></li>
-            <li class="nav-item"><a class="nav-link"
-              data-toggle="tab" href="#tabs-3" role="tab">
-                <div class="product__thumb__pic set-bg"
-                  data-setbg="${contextPath}/resources/img/shop-details/thumb-3.png"></div>
-            </a></li>
-            <li class="nav-item"><a class="nav-link"
-              data-toggle="tab" href="#tabs-4" role="tab">
-                <div class="product__thumb__pic set-bg"
-                  data-setbg="${contextPath}/resources/img/shop-details/thumb-4.png">
-                  <i class="fa fa-play"></i>  
-                </div>
             </a></li>
           </ul>
         </div>
@@ -141,51 +140,12 @@
                             <li>
                               <button class="btn btn-outline-dark">모든사이즈 <br>${lowAsks}</button>
                             </li>
+                            
+                            <c:forEach var="theLowestAsks" items="${theLowestAsks}">
                             <li>
-                              <button class="btn btn-outline-dark">220 <br>가격</button>
+                              <button class="btn btn-outline-dark">${theLowestAsks.key}<br>${theLowestAsks.value}</button>
                             </li>
-                            <li>
-                              <button class="btn btn-outline-dark">225 <br>가격</button>
-                            </li>
-                            <li>
-                              <button class="btn btn-outline-dark">230 <br>가격</button>
-                            </li>
-                            <li>
-                              <button class="btn btn-outline-dark">235 <br>가격</button>
-                            </li>
-                            <li>
-                              <button class="btn btn-outline-dark">240 <br>가격</button>
-                            </li>
-                            <li>
-                              <button class="btn btn-outline-dark">245 <br>가격</button>
-                            </li>
-                            <li>
-                              <button class="btn btn-outline-dark">250 <br>가격</button>
-                            </li>
-                            <li>
-                              <button class="btn btn-outline-dark">255 <br>가격</button>
-                            </li>
-                            <li>
-                              <button class="btn btn-outline-dark">260 <br>가격</button>
-                            </li>
-                            <li>
-                              <button class="btn btn-outline-dark">265 <br>가격</button>
-                            </li>
-                            <li>
-                              <button class="btn btn-outline-dark">270 <br>가격</button>
-                            </li>
-                            <li>
-                              <button class="btn btn-outline-dark">275 <br>가격</button>
-                            </li>
-                            <li>
-                              <button class="btn btn-outline-dark">280 <br>가격</button>
-                            </li>
-                            <li>
-                              <button class="btn btn-outline-dark">285 <br>가격</button>
-                            </li>
-                            <li>
-                              <button class="btn btn-outline-dark">290 <br>가격</button>
-                            </li>
+                            </c:forEach>
                           </ul>
                           </div>
                         </div>

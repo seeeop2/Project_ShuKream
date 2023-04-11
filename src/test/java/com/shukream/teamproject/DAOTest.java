@@ -134,28 +134,26 @@ public class DAOTest {
   @Test
   public void testSelectLowAsksAll() throws Exception{
     
-//    List list = new ArrayList();
-//    list.add(250);
-//    list.add(260);
-    
-
-    
-    List result = new ArrayList();
+    Map result = new HashMap();
     for(int i = 220; i<=300;i=i+5) {
-      result.add(asksDAO.selectLowAsksAll(i));
+      result.put(i, asksDAO.selectLowAsksAll(i));
     }
-//    Map result = new HashMap();
-//    for(int i = 220; i<=300;i=i+5) {
-//      result.put(i, asksDAO.selectLowAsksAll_1(i));
-//    }
-    
-    logger.info("list---- :" + result);
     
     logger.info("\n Select Result :" + result);
+    logger.info("\n Select Result :" + result.get(260));
   }
   
-  
-  
+  @Test @Ignore
+  public void testSelectProduct() throws Exception{
+    
+    List result = productsDAO.selectProduct(25);
+    logger.info("\n Insert Bids Result " +result);
+    logger.info("\n Insert Bids Result " +result.get(1));
+    logger.info("\n Insert Bids Result " +result.get(1));
+    
+    
+  }
+
   
   
   
