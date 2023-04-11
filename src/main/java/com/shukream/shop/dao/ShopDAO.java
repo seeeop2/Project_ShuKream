@@ -15,16 +15,20 @@ public class ShopDAO {
 	@Autowired
 	SqlSession sqlSession;
 
-	public List<Map<String,Object>> shopMainProductsList(int start, int end) {
-		Map<String, Integer> paramMap = new HashMap<String, Integer>();
+	public List<Map<String,Object>> shopMainProductsList(int start, int end,String opt, String division) {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("start", start);
 		paramMap.put("end", end);
-		
+		paramMap.put("opt", opt);
+		paramMap.put("division", division);
 		return sqlSession.selectList("mapper.shop.shopMainProductsList",paramMap);
 	}
 	
-	public int shopMainProductCount() {
-		return sqlSession.selectOne("mapper.shop.shopMainProductCount");
+	public int shopMainProductCount(String opt, String division) {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("opt", opt);
+		paramMap.put("division", division);
+		return sqlSession.selectOne("mapper.shop.shopMainProductCount",paramMap);
 	}
 	
 	
