@@ -1238,7 +1238,7 @@ ol {
 .shop__sidebar__categories ul,
 .shop__sidebar__price ul,
 .shop__sidebar__brand ul {
-	height: 55px; /*2023-04-11 225px->55px변경*/
+	min-height: 95px; /*2023-04-11 225px->105px변경*/
 }
 
 .shop__sidebar__categories ul li,

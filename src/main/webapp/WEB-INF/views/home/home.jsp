@@ -129,7 +129,7 @@
     <c:forEach var="newArrivals" items="${mainProductMap.newArrivals}" begin="0" end="3" varStatus="i">
     <div
         class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
-        <div class="product__item">
+        <div class="product__item" style="cursor: pointer;"onclick="location.href='shop/shopDetails.do?product_id=${newArrivals.productVO.product_id}'">
           <div class="product__item__pic set-bg"
             data-setbg="${contextPath}/resources/img/product/sneakers/${newArrivals.img_file}">
 <!--             <span class="label">New</span> -->
@@ -146,11 +146,9 @@
             </ul>
           </div>
           <div class="product__item__text">
-            <h6>
-            ${newArrivals.productVO.product_name_en}<br>
+            <h6>${newArrivals.productVO.product_name_en}</h6>
             <span>${newArrivals.productVO.product_name_kor}</span>
-            </h6>
-            <a href="#" class="add-cart">+ Add To Cart</a>
+            <a href="#" class="add-cart">+ Add To Wish List</a>
             <div class="rating">
               <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
               <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
@@ -164,7 +162,7 @@
       <%--popular --%>
        <div
         class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix popular-items">
-        <div class="product__item">
+        <div class="product__item" style="cursor: pointer;"onclick="location.href='shop/shopDetails.do?product_id=${mainProductMap.popularItems[i.index].productVO.product_id}'">
           <div class="product__item__pic set-bg"
             data-setbg="${contextPath}/resources/img/product/sneakers/${mainProductMap.popularItems[i.index].img_file}">
             <ul class="product__hover">
@@ -180,12 +178,9 @@
             </ul>
           </div>
           <div class="product__item__text">
-            <h6>
-	            ${mainProductMap.popularItems[i.index].productVO.product_name_en}<br>
-	            <span>${mainProductMap.popularItems[i.index].productVO.product_name_kor}</span>
-            </h6>
-            
-            <a href="#" class="add-cart">+ Add To Cart</a>
+            <h6>${mainProductMap.popularItems[i.index].productVO.product_name_en}</h6>
+            <span>${mainProductMap.popularItems[i.index].productVO.product_name_kor}</span>
+            <a href="#" class="add-cart">+ Add To Wish List</a>
             <div class="rating">
               <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
               <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>

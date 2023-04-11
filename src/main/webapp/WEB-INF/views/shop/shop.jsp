@@ -47,8 +47,9 @@
                   <div class="card-body">
                     <div class="shop__sidebar__categories">
                       <ul>
-                        <li><a href="#">Sneakers</a></li>
-                        <li><a href="#">Slipper</a></li>
+                        <li><a href="?">All</a></li>
+                        <li><a href="?opt=category&division=0">Sneakers</a></li>
+                        <li><a href="?opt=category&division=1">Slipper</a></li>
                       </ul>
                     </div>
                   </div>
@@ -63,23 +64,23 @@
                   <div class="card-body">
                     <div class="shop__sidebar__brand">
                       <ul>
-                        <li><a href="#">Nike</a></li>
-                        <li><a href="#">Adidas</a></li>
-                        <li><a href="#">Jordan</a></li>
-                        <li><a href="#">New Balance</a></li>
-                        <li><a href="#">Birkenstock</a></li>
-                        <li><a href="#">Hermes</a></li>
-                        <li><a href="#">Chanel</a></li>
-                        <li><a href="#">Crocs</a></li>
-                        <li><a href="#">Salomon</a></li>
-                        <li><a href="#">Oofos</a></li>
-                        <li><a href="#">Asics</a></li>
+                        <li><a href="?opt=brand&division=Nike">Nike</a></li>
+                        <li><a href="?opt=brand&division=Adidas">Adidas</a></li>
+                        <li><a href="?opt=brand&division=Jordan">Jordan</a></li>
+                        <li><a href="?opt=brand&division=New Balance">New Balance</a></li>
+                        <li><a href="?opt=brand&division=Birkenstock">Birkenstock</a></li>
+                        <li><a href="?opt=brand&division=Hermes">Hermes</a></li>
+                        <li><a href="?opt=brand&division=Chanel">Chanel</a></li>
+                        <li><a href="?opt=brand&division=Crocs">Crocs</a></li>
+                        <li><a href="?opt=brand&division=Salomon">Salomon</a></li>
+                        <li><a href="?opt=brand&division=Oofos">Oofos</a></li>
+                        <li><a href="?opt=brand&division=Asics">Asics</a></li>
                       </ul>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="card">
+            <!--   <div class="card">
                 <div class="card-heading">
                   <a data-toggle="collapse" data-target="#collapseThree">Filter
                     Price</a>
@@ -99,7 +100,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="card">
                 <div class="card-heading">
                   <a data-toggle="collapse" data-target="#collapseFour">Size</a>
@@ -129,7 +130,7 @@
                   </div>
                 </div>
               </div>
-              <div class="card">
+              <!-- <div class="card">
                 <div class="card-heading">
                   <a data-toggle="collapse" data-target="#collapseFive">Colors</a>
                 </div>
@@ -159,7 +160,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="card">
                 <div class="card-heading">
                   <a data-toggle="collapse" data-target="#collapseSix">Tags</a>
@@ -186,12 +187,14 @@
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="shop__product__option__left">
                 <p>Showing ${pagination.getStartIndex()} –
-                <c:if test="${pagination.startPage eq pagination.endPage}">
-                	${totalCount}            
-                </c:if>
-                <c:if test="${pagination.startPage ne pagination.endPage}">
-                	${pagination.getEndIndex()}
-                </c:if>
+                <c:choose>
+                	<c:when test="${pagination.currentPage eq pagination.totalPage}">
+                		${totalCount}
+                	</c:when>
+                	<c:otherwise>
+                		${pagination.getEndIndex()}
+                	</c:otherwise>
+                </c:choose>
                   of ${totalCount} results</p>
               </div>
             </div>
@@ -199,7 +202,7 @@
               <div class="shop__product__option__right">
                 <p>Sort by Price:</p>
                 <select>
-                  <option value="">Low To High</option>
+                  <option value="opt=price&division=">Low To High</option>
                   <option value="">$0 - $55</option>
                   <option value="">$55 - $100</option>
                 </select>
@@ -235,9 +238,9 @@
                 </ul>
               </div>
               <div class="product__item__text">
-	                <h6>${product.PRODUCT_NAME_EN}${product.CATEGORY}</h6>
+	                <h6>${product.PRODUCT_NAME_EN}</h6>
 	                <span style="font-size: 12px;">${product.PRODUCT_NAME_KOR}</span>
-	                <a href="#" class="add-cart">+ Add To Cart</a>
+	                <a href="#" class="add-cart">+ Add To Wish List</a>
                 <fmt:formatNumber value="${product.PRODUCT_PRICE}" type="number" var="product_price" />
                 <h5>${product_price}원</h5>
               </div>
@@ -700,20 +703,20 @@
           <div class="col-lg-12">
             <div class="product__pagination">
             	<c:if test="${pagination.hasPrevBlock()}">
-              		<a class="" href="?page=${pagination.startPage-1}">&laquo;</a> 
+              		<a class="" href="?page=${pagination.startPage-1}&opt=${opt}&division=${division}">&laquo;</a> 
             	</c:if>
             	<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="pageNumber">
             		<c:choose>
             			<c:when test="${pageNumber eq pagination.currentPage}">
-            				<a class="active" href="?page=${pageNumber}">${pageNumber}</a>
+            				<a class="active" href="?page=${pageNumber}&opt=${opt}&division=${division}">${pageNumber}</a>
             			</c:when>
             			<c:otherwise>
-            				<a href="?page=${pageNumber}">${pageNumber}</a>
+            				<a href="?page=${pageNumber}&opt=${opt}&division=${division}">${pageNumber}</a>
             			</c:otherwise>
             		</c:choose>
             	</c:forEach>
             	<c:if test="${pagination.hasNextBlock()}">
-            		<a href="?page=${pagination.endPage+1}">&raquo;</a>
+            		<a href="?page=${pagination.endPage+1}&opt=${opt}&division=${division}">&raquo;</a>
             	</c:if>
             </div>
           </div>
