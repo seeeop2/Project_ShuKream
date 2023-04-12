@@ -109,5 +109,6 @@ public class ShopDetailsService {
     Map map1=asksdao.SelectLatestOrder(map);
     int latestMoney = Integer.parseInt(String.valueOf(map1.get("ASKS_PRICE")));
     return latestMoney;
+    
   }
 }
