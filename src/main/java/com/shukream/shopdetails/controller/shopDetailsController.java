@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.shukream.products.vo.ProductsVO;
+import com.shukream.products.vo.ProductsVOWithIMG;
 import com.shukream.shopdetails.service.ShopDetailsService;
 
 @Controller
@@ -38,9 +39,18 @@ public class shopDetailsController {
     String viewName = (String) request.getAttribute("viewName");
     logger.info(viewName);
 //    model.addAttribute("lowAsks", shopDetailsService.SelectLowAsks());
-    List productvoList = shopDetailsService.SelectProduct(product_id);
-    model.addAttribute("productvoList", productvoList);
-    Map map =shopDetailsService.selectLowAsksAll();
+    String imgNameMain = shopDetailsService.SelectProduct(product_id);
+    String imgNameDetail = shopDetailsService.selectProductDetail(product_id);
+    Map map =shopDetailsService.selectLowAsksAll(product_id);
+    ProductsVOWithIMG productvo = shopDetailsService.selectProductOne(product_id);
+    
+    System.out.println(productvo.toString());
+    
+    System.out.println(imgNameMain);
+    model.addAttribute("product_id", product_id);
+    model.addAttribute("productvo", productvo);
+    model.addAttribute("imgNameMain", imgNameMain);
+    model.addAttribute("imgNameDetail", imgNameDetail);
     model.addAttribute("theLowestAsks",map);
     return viewName;
     

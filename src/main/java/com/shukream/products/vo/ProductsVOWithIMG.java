@@ -1,7 +1,9 @@
 package com.shukream.products.vo;
 
 import java.sql.Date;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProductsVOWithIMG {
 
   private int product_id;

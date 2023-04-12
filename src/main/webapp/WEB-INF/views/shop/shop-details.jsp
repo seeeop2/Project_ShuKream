@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-
+<c:set var="sneakers" value="sneakers" />
+<c:set var="slipper" value="slipper" />
 
 <style>   
 /* //모달에 적용한 css속성값.  */
@@ -51,45 +52,69 @@
         <div class="col-lg-3 col-md-3">
           <ul class="nav nav-tabs" role="tablist">
           
-<%--           <c:forEach var="productvo" items="${productvoList}">
-            
-            <c:if test="${productvo.product_name_kor eq '뉴발란스 2002R 그레이' }">
-            <li class="nav-item"><a class="nav-link active"
-              data-toggle="tab" href="#tabs-1" role="tab">
-                <div class="product__thumb__pic set-bg"
-                  data-setbg="${contextPath}/resources/img/shop-details/thumb-1.png"></div>
-            </a></li>
-            </c:if>
-            
-          </c:forEach>
- --%>          
-          
-            
-            
-            <li class="nav-item"><a class="nav-link"
+          <c:choose>
+            <c:when test="${product_id <30}">
+              <li class="nav-item"><a class="nav-link active"
+                data-toggle="tab" href="#tabs-1" role="tab">
+                  <div class="product__thumb__pic set-bg"
+                    data-setbg="${contextPath}/resources/img/product/sneakers/${imgNameMain}"></div>
+              </a></li>
+              
+              
+              <li class="nav-item"><a class="nav-link"
               data-toggle="tab" href="#tabs-2" role="tab">
                 <div class="product__thumb__pic set-bg"
-                  data-setbg="${contextPath}/resources/img/shop-details/thumb-2.png"></div>
-            </a></li>
-          </ul>
+                  data-setbg="${contextPath}/resources/img/product/sneakers/${imgNameDetail}"></div>
+              </a></li>
+              
+              </ul>
         </div>
         <div class="col-lg-6 col-md-9">
           <div class="tab-content">
             <div class="tab-pane active" id="tabs-1" role="tabpanel">
               <div class="product__details__pic__item">
-                <img src="${contextPath}/resources/img/shop-details/product-big-2.png" alt="">
+                <img src="${contextPath}/resources/img/product/sneakers/${imgNameMain}" alt="">
               </div>
             </div>
             <div class="tab-pane" id="tabs-2" role="tabpanel">
               <div class="product__details__pic__item">
-                <img src="${contextPath}/resources/img/shop-details/product-big-3.png" alt="">
+                <img src="${contextPath}/resources/img/product/sneakers/${imgNameDetail}" alt="">
               </div>
             </div>
-            <div class="tab-pane" id="tabs-3" role="tabpanel">
+              
+            </c:when>
+            
+            <c:otherwise>
+              <li class="nav-item"><a class="nav-link active"
+                data-toggle="tab" href="#tabs-1" role="tab">
+                  <div class="product__thumb__pic set-bg"
+                    data-setbg="${contextPath}/resources/img/product/slipper/${imgNameMain}"></div>
+              </a></li>
+              <li class="nav-item"><a class="nav-link active"
+                data-toggle="tab" href="#tabs-1" role="tab">
+                  <div class="product__thumb__pic set-bg"
+                    data-setbg="${contextPath}/resources/img/product/slipper/${imgNameDetail}"></div>
+              </a></li>
+              
+                        </ul>
+        </div>
+        <div class="col-lg-6 col-md-9">
+          <div class="tab-content">
+            <div class="tab-pane active" id="tabs-1" role="tabpanel">
               <div class="product__details__pic__item">
-                <img src="${contextPath}/resources/img/shop-details/product-big.png" alt="">
+                <img src="${contextPath}/resources/img/product/slipper/${imgNameMain}" alt="">
               </div>
             </div>
+            <div class="tab-pane" id="tabs-2" role="tabpanel">
+              <div class="product__details__pic__item">
+                <img src="${contextPath}/resources/img/product/slipper/${imgNameDetail}" alt="">
+              </div>
+            </div>
+              
+            </c:otherwise>
+          </c:choose>
+            
+
             <div class="tab-pane" id="tabs-4" role="tabpanel">
               <div class="product__details__pic__item">
                 <img src="${contextPath}/resources/img/shop-details/product-big-4.png" alt="">
@@ -107,14 +132,14 @@
           <div class="product__details__text" style="text-align: left; margin-left: 30px;">
             <h4>
               <span style="border-bottom: 1px solid;">
-                <b>Jordan</b>
+                <b>${productvo.product_brand}</b>
               </span>
             </h4>
-            <h4> Jordan 1 Retro High OG Chicago 2022 </h4>
+            <h4> ${productvo.product_name_en} </h4>
             <div class="rating">
-              <span> 조던 1 레트로 하이 OG 시카고 2022</span>
+              <span> ${productvo.product_name_kor}</span>
             </div>
-            <h3>495,000원</h3>
+            <h3>${productvo.product_price}원</h3>
             <div class="product__details__option">
               <div class="product__details__option__size" style="width: 100%; display: flex; justify-content: space-between;">
                 <span style="font-size: 20px;">Size</span> 
@@ -180,11 +205,10 @@
                 <span>상품 정보</span>
               </h5>
               <ul style="padding-top: 5px;">
-                <li><span>모델번호 :</span> <b>DZ5485-612</b></li>
-                <li><span>출시일 :</span> 22/12/01</li>
-                <li><span>컬러 :</span> VARSITY RED/BLACK/SAIL/MUSLIN</li>
-                <li><span>발매가 :</span> 209,000원</li>
-                <li><span>Tag :</span> Nike, Jordan, Chicago</li>
+                <li><span>모델번호 :</span> <b>${productvo.model_number}</b></li>
+                <li><span>출시일 :</span> ${productvo.product_release_date}</li>
+                <li><span>컬러 :</span> ${productvo.product_color}</li>
+                <li><span>발매가 :</span> ${productvo.product_price}</li>
               </ul>
             </div>            
             <div class="product__details__last__option" style="margin-bottom: 20px;">

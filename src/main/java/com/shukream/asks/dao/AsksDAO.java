@@ -29,6 +29,10 @@ public class AsksDAO {
     return result;
   }
   
+  public AsksVO test(HashMap<String, Object> map) {
+    AsksVO result = sqlSession.selectOne("mapper.asks.test", map );
+    return result;
+  }
   
   
   

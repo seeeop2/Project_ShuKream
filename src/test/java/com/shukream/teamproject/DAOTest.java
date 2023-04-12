@@ -22,6 +22,7 @@ import com.shukream.bids.dao.BidsDAO;
 import com.shukream.bids.vo.BidsVO;
 import com.shukream.products.dao.ProductsDAO;
 import com.shukream.products.vo.ProductsVO;
+import com.shukream.products.vo.ProductsVOWithIMG;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -132,12 +133,14 @@ public class DAOTest {
     logger.info("\n Insert Bids Result " +result);
   }
   
-  @Test
+  @Test@Ignore
   public void testSelectLowAsksAll() throws Exception{
     
+    int product_id= 43;
     LinkedHashMap result1 = new LinkedHashMap();
     for(int i = 220; i<=300;i=i+5) {
       HashMap<String, Object> map = new HashMap<String, Object>();
+      map.put("product_id",product_id);
       map.put("size1", i);
       map.put("size2", i);
       int result2 = asksDAO.selectLowAsksAll(map);
@@ -147,13 +150,17 @@ public class DAOTest {
     logger.info("\n Select Result :" + result1);
   }
   
-  @Test @Ignore
+  @Test 
   public void testSelectProduct() throws Exception{
     
-    List result = productsDAO.selectProduct(25);
+    Map map = new HashMap();
+    map.put("product_id", 24);
+    map.put("detail","detail");
+    map.put("main","main");
+    
+    Map result = productsDAO.selectProduct(map);
     logger.info("\n Insert Bids Result " +result);
-    logger.info("\n Insert Bids Result " +result.get(1));
-    logger.info("\n Insert Bids Result " +result.get(1));
+    logger.info("\n Insert Bids Result " +result.get("PRODUCT_COLOR"));
     
   }
 
@@ -162,6 +169,14 @@ public class DAOTest {
     
     AsksVO result = asksDAO.SelectLowAsksRownum(300);
     logger.info("\n Insert Bids Result " +result.toString());
+    
+  }
+
+  @Test @Ignore
+  public void selectProductOne() throws Exception{
+    int product_id = 43;
+    ProductsVOWithIMG result = productsDAO.selectProductOne(product_id);
+    logger.info("\n Insert Bids Result " + result);
     
   }
   

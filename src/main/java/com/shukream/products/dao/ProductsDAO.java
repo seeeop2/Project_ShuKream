@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.shukream.products.vo.ProductsVO;
+import com.shukream.products.vo.ProductsVOWithIMG;
 
 @Repository
 public class ProductsDAO {
@@ -20,7 +21,15 @@ public class ProductsDAO {
   public int addProduct(ProductsVO productsvo) {
     return sqlSession.insert("mapper.products.addProduct", productsvo);
   }
-  public List selectProduct(int product_id) {
-    return sqlSession.selectList("mapper.products.selectProduct", product_id);
+  public Map selectProduct(Map map) {
+    return sqlSession.selectOne("mapper.products.selectProduct", map);
+  }
+
+  public Map selectProductDetail(Map map) {
+    return sqlSession.selectOne("mapper.products.selectProductDetail", map);
+  }
+
+  public ProductsVOWithIMG selectProductOne(int product_id) {
+    return sqlSession.selectOne("mapper.products.selectProductOne", product_id);
   }
 }

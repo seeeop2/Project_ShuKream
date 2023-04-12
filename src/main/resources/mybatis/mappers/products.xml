@@ -33,13 +33,38 @@
 </select>	
 
 
-<select id="selectProduct" parameterType="int" resultType="map">
+<select id="selectProduct" parameterType="map" resultType="map">
   <![CDATA[
-    SELECT PRODUCTS.*,IMAGES.*
+  
+    SELECT * FROM
+    (SELECT PRODUCTS.*,IMAGES.*
     FROM PRODUCTS, IMAGES
     WHERE PRODUCTS.PRODUCT_ID = IMAGES.IMG_PRODUCT_IDX
-    AND PRODUCTS.PRODUCT_ID = #{product_id}
+    AND PRODUCTS.PRODUCT_ID = #{product_id})
+    WHERE IMG_FILE LIKE '%'||#{main}||'%'
+    
+  ]]>
+</select>
 
+
+<select id="selectProductDetail" parameterType="map" resultType="map">
+  <![CDATA[
+  
+    SELECT * FROM
+    (SELECT PRODUCTS.*,IMAGES.*
+    FROM PRODUCTS, IMAGES
+    WHERE PRODUCTS.PRODUCT_ID = IMAGES.IMG_PRODUCT_IDX
+    AND PRODUCTS.PRODUCT_ID = #{product_id})
+    WHERE IMG_FILE LIKE '%'||#{detail}||'%'
+    
+  ]]>
+</select>
+ 
+<select id="selectProductOne" parameterType="int" resultMap="ProductsResult">
+  <![CDATA[
+    SELECT *
+    FROM PRODUCTS
+    WHERE PRODUCT_ID = #{product_id}
   ]]>
 </select> 
 
