@@ -29,14 +29,20 @@ public class ShopController {
 
   @RequestMapping(value = "/list.do", method = RequestMethod.GET)
   public ModelAndView list(
+		  				@RequestParam(name="opt", required = false) String opt,
+		  				@RequestParam(name="division", required = false) String division,
 		  				@RequestParam(name="page", defaultValue = "1") int page,
 		  				@RequestParam(name="size", defaultValue = "6") int size,
 		  				HttpServletRequest request, HttpServletResponse response) {
 
     ModelAndView mav = new ModelAndView();
-    List<Map<String, Object>> productList = shopService.shopMainProductsList(page,size);
-    int totalCount = shopService.shopMainProductCount();
+    
+    List<Map<String, Object>> productList = shopService.shopMainProductsList(page,size,opt,division);
+    	
+    
+    int totalCount = shopService.shopMainProductCount(opt,division);
     Pagination pagination = new Pagination(page, size, totalCount);
+    
     
     String viewName = (String) request.getAttribute("viewName");
     logger.info(viewName);
@@ -44,11 +50,12 @@ public class ShopController {
     mav.addObject("products",productList);
     mav.addObject("pagination", pagination);
     mav.addObject("totalCount",totalCount);
+    mav.addObject("opt",opt);
+    mav.addObject("division",division);
     mav.setViewName(viewName);
 
     return mav;
   }
-  
   
 
 }

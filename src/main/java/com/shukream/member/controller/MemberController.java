@@ -66,12 +66,15 @@ public class MemberController {
 		
 		memberVO = memberService.login(loginMap);
 		
+		String email = memberVO.getUser_email();
+		
 		
 		if(memberVO != null && memberVO.getUser_email() != null) {
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("isLogOn", true);
 			session.setAttribute("memberInfo", memberVO);
+			session.setAttribute("email", email);
 			
 			mav.setViewName("redirect:/main.do");
 			

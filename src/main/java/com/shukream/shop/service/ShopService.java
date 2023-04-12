@@ -16,18 +16,18 @@ public class ShopService {
 	ShopDAO shopDAO;
 
 	//메인페이징처리
-	public List<Map<String, Object>> shopMainProductsList(int page, int size) {
+	public List<Map<String, Object>> shopMainProductsList(int page, int size, String opt, String division) {
 		
-		int totalCount = shopDAO.shopMainProductCount();
+		int totalCount = shopDAO.shopMainProductCount(opt,division);
 		Pagination pagination = new Pagination(page, size, totalCount);
 		int startIndex = pagination.getStartIndex();
 		int endIndex = pagination.getEndIndex();
 		
-		return shopDAO.shopMainProductsList(startIndex,endIndex);
+		return shopDAO.shopMainProductsList(startIndex,endIndex,opt,division);
 	}
 	//메인 페이징 처리
-	public int shopMainProductCount() {
-		return shopDAO.shopMainProductCount();
+	public int shopMainProductCount(String opt, String division) {
+		return shopDAO.shopMainProductCount(opt,division);
 	}
 	
 }

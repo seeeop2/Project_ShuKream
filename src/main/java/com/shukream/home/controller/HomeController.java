@@ -37,9 +37,16 @@ public class HomeController {
 	        JSONObject jsonObject = new JSONObject();
 	        jsonObject.putAll(product);
 	        
-	        Date releaseDate = (Date) product.get("PRODUCT_RELEASE_DATE");
-	        String releaseDateString = dateFormat.format(releaseDate);
+	        String releaseDateString;
+	        
+	        if(product.get("PRODUCT_RELEASE_DATE") == null) {
+	        	releaseDateString = "";
+	        } else {
+	        	Date releaseDate = (Date) product.get("PRODUCT_RELEASE_DATE");
+	        	releaseDateString = dateFormat.format(releaseDate);	
+	        }
 	        jsonObject.put("PRODUCT_RELEASE_DATE", releaseDateString);
+	        
 	        
 	        jsonArray.add(jsonObject);
 	    }

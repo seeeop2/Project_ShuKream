@@ -18,24 +18,37 @@
 	
 	
 	<select id="shopMainProductsList" resultType="Map" parameterType="Map">
-		<![CDATA[
 			SELECT *
 			FROM (
-			  SELECT PRODUCTS.*,IMAGES.IMG_FILE, ROWNUM AS rnum
+			  SELECT PRODUCTS.*,IMAGES.IMG_FILE, ROW_NUMBER() OVER (ORDER BY PRODUCTS.PRODUCT_PRICE ASC) AS rnum
 			  FROM PRODUCTS
 			  JOIN IMAGES 
 			  ON PRODUCTS.PRODUCT_ID = IMAGES.IMG_PRODUCT_IDX
 			  WHERE IMAGES.IMG_FILE LIKE '%main.jpg'
-			  ORDER BY PRODUCTS.PRODUCT_ID DESC
+			  <choose>
+			  	<when test="opt == 'category'">
+			  		AND PRODUCTS.category = #{division}
+			  	</when>
+			  	<when test="opt == 'brand'">
+			  		AND PRODUCTS.PRODUCT_BRAND = #{division}
+			  	</when>
+			  </choose>
 			) 
 			WHERE rnum BETWEEN #{start} AND #{end}
-		]]>
 	</select>	
 	
-	<select id="shopMainProductCount" resultType="int">
-		<![CDATA[
+	<select id="shopMainProductCount" resultType="int" parameterType="Map">
+		
 			SELECT COUNT(*) FROM PRODUCTS
-		]]>
+			  <choose>
+			  	<when test="opt == 'category'">
+			  		WHERE PRODUCTS.category = #{division}
+			  	</when>
+			  	<when test="opt == 'brand'">
+			  		WHERE PRODUCTS.PRODUCT_BRAND = #{division}
+			  	</when>
+			  </choose>
+						
 	</select>
 
 
