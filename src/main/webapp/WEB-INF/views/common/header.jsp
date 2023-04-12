@@ -17,6 +17,7 @@
             <%
             if(session.getAttribute("isLogOn") == null) {
             %>
+<<<<<<< HEAD
                <a href="${contextPath}/member/loginForm.do">로그인</a>
                 <a href="#">문의</a>
              <%
@@ -36,12 +37,26 @@
                     <li>USD</li>
                 </ul>
             </div>
+=======
+            	<a href="${contextPath}/member/loginForm.do">로그인</a>
+                <a href="#">문의</a>
+             <%
+            }else{
+             %>	
+            	<a href="${contextPath}/member/logout.do">로그아웃</a>
+                <a href="#">문의</a> 
+             <%
+             }
+             %>   
+             </div>
+            
+>>>>>>> branch 'develop' of https://github.com/seeeop2/ShuKream_.git
         </div>
         <div class="offcanvas__nav__option">
             <a href="#" class="search-switch"><img src="${contextPath}/resources/img/icon/search.png" alt=""></a>
             <a href="#"><img src="${contextPath}/resources/img/icon/heart.png" alt=""></a>
-            <a href="#"><img src="${contextPath}/resources/img/icon/cart.png" alt=""> <span>0</span></a>
-            <div class="price">$0.00</div>
+          
+            
         </div>
         <div id="mobile-menu-wrap"></div>
         <div class="offcanvas__text">
@@ -63,18 +78,21 @@
                     <div class="col-lg-6 col-md-5">
                         <div class="header__top__right">
                             <div class="header__top__links">
-                                <a href="${contextPath}/member/loginForm.do">Sign in</a>
-                                <a href="#">FAQs</a>
-                            </div>
-                            <div class="header__top__hover">
-                                <span>Usd <i class="arrow_carrot-down"></i></span>
-                                <ul>
-                                    <li>USD</li>
-                                    <li>EUR</li>
-                                    <li>USD</li>
-                                </ul>
-                            </div>
-                        </div>
+					           <%
+					            if(session.getAttribute("isLogOn") == null) {
+					            %>
+					            	<a href="${contextPath}/member/loginForm.do">로그인</a>
+					                <a href="#">문의</a>
+					             <%
+					            }else{
+					             %>	
+					            	<a href="${contextPath}/member/logout.do">로그아웃</a>
+					                <a href="#">문의</a> 
+					             <%
+					             }
+					             %>   
+					           </div>
+                          </div>
                     </div>
                 </div>
             </div>
@@ -111,8 +129,7 @@
                     <div class="header__nav__option">
                         <a href="#" class="search-switch"><img src="${contextPath}/resources/img/icon/search.png" alt=""></a>
                         <a href="${contextPath}/favorites/favoritesList.do"><img src="${contextPath}/resources/img/icon/heart.png" alt=""></a>
-                        <a href="#"><img src="${contextPath}/resources/img/icon/cart.png" alt=""> <span>0</span></a>
-                        <div class="price">$0.00</div>
+                        
                     </div>
                 </div>
             </div>

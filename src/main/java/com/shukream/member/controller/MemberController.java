@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,29 +36,23 @@ public class MemberController {
    // log4j 객체 생성
    private static final Logger logger = LoggerFactory.getLogger(EventController.class);
 
-   
-   @RequestMapping(value="/loginForm.do", method = RequestMethod.GET)
-   public ModelAndView loginForm(HttpServletRequest request, HttpServletResponse response) throws Exception{
-      
-	  request.setCharacterEncoding("utf-8");
-	  response.setCharacterEncoding("utf-8");
-	  response.setContentType("text/html; charset=utf-8");
-	   
-	   
-        System.out.println("loginForm.do 호출!"); 
-        
-         // ModelANdView 객체 생성
-          ModelAndView mav = new ModelAndView();
-          
-          // Viewname 가져오기
-          String viewName = (String) request.getAttribute("viewName");
-          
-          // Viewname에 대한 info 생성
-          logger.info(viewName);
-          
-          // ModelAndView 객체에 viewName을 셋팅
-          mav.setViewName(viewName);
-
+	
+	@RequestMapping(value="/loginForm.do", method = RequestMethod.GET)
+	public ModelAndView loginForm(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		
+		  System.out.println("loginForm.do 호출!"); 
+		  
+			// ModelANdView 객체 생성
+		    ModelAndView mav = new ModelAndView();
+		    
+		    // Viewname 가져오기
+		    String viewName = (String) request.getAttribute("viewName");
+		    
+		    // Viewname에 대한 info 생성
+		    logger.info(viewName);
+		    
+		    // ModelAndView 객체에 viewName을 셋팅
+		    mav.setViewName(viewName);
           // ModelAndView 반환
           return mav;
       
@@ -142,56 +137,61 @@ public class MemberController {
           
           // ModelAndView 객체에 viewName을 셋팅
           mav.setViewName(viewName);
+		    // ModelAndView 반환
+		    return mav;
+		
+		
+	}
+	
+		
+	      @RequestMapping(value="/addMember.do", method = RequestMethod.POST)
+	      public void addMember(@RequestParam("user_email")String user_email,
+	                              @RequestParam("user_name")String user_name,
+	                              @RequestParam("user_pw")String user_pw,
+	                              @RequestParam("seller_level_id")int seller_level_id,
+	                              HttpServletRequest request, 
+	                              HttpServletResponse response) throws Exception {
+	    	  
+	          // addmMember.do를 호출시킨다.
+	         System.out.println("addMember.do호출");
+	         
+	         // 한글화 처리 한다.
+	         request.setCharacterEncoding("utf-8");
+	         response.setCharacterEncoding("utf-8");
+	         response.setContentType("text/html; charset=utf-8");
+	         
+	         // 받아온 param 값들을 출력시켜 본다.
+	         System.out.println(user_email);
+	         System.out.println(user_name);
+	         System.out.println(user_pw);
+	         System.out.println(seller_level_id);
+	         
+	        // 받아온 변수들을 저장시킬 memberVO를 객체 생성한다.
+	         MemberVO memberVO = new MemberVO();
+	         
+	         // memberVO객체에 받아온 변수들을 저장시킨다.
+	         memberVO.setUser_email(user_email);
+	         memberVO.setUser_name(user_name);
+	         memberVO.setUser_pw(user_pw);
+	         memberVO.setSeller_level_id(seller_level_id);
+	         
+	         // memberService를 호출하여 addMember메소들르 호출할때, memberVO를 매개변수로 전달한다.
+	         memberService.addMember(memberVO);
+	         
+	 
+	          //PrintWirter 객체 out 생성 및 초기화
+	          PrintWriter out = response.getWriter();
+	      
+	         
+	          out.println("<script>alert('회원가입이 완료되었습니다!, 로그인 페이지로 이동합니다');");
+	          out.println("location.href='"+request.getContextPath()+"/member/loginForm.do';</script>");
+	          out.flush();
+	          out.close();
 
-          // ModelAndView 반환
-          return mav;
-      }
-      
-      @RequestMapping(value="/addMember.do", method = RequestMethod.POST)
-      public void addMember(@RequestParam("user_email")String user_email,
-    		  						@RequestParam("user_name")String user_name,
-    		  						@RequestParam("user_pw")String user_pw,
-    		  						@RequestParam("seller_level_id")int seller_level_id,
-    		  						HttpServletRequest request, 
-    		  						HttpServletResponse response) throws Exception {
-          // addmMember.do를 호출시킨다.
-    	  System.out.println("addMember.do호출");
-    	  
-    	  // 한글화 처리 한다.
-    	  request.setCharacterEncoding("utf-8");
-    	  response.setCharacterEncoding("utf-8");
-    	  response.setContentType("text/html; charset=utf-8");
-    	  
-    	  // 받아온 param 값들을 출력시켜 본다.
-    	  System.out.println(user_email);
-    	  System.out.println(user_name);
-    	  System.out.println(user_pw);
-    	  System.out.println(seller_level_id);
-    	  
-    	 // 받아온 변수들을 저장시킬 memberVO를 객체 생성한다.
-         MemberVO memberVO = new MemberVO();
-         
-         // memberVO객체에 받아온 변수들을 저장시킨다.
-         memberVO.setUser_email(user_email);
-         memberVO.setUser_name(user_name);
-         memberVO.setUser_pw(user_pw);
-         memberVO.setSeller_level_id(seller_level_id);
-         
-         // memberService를 호출하여 addMember메소들르 호출할때, memberVO를 매개변수로 전달한다.
-         memberService.addMember(memberVO);
-         
-         
-   	    //PrintWirter 객체 out 생성 및 초기화
- 		PrintWriter out = response.getWriter();
- 	  
- 		  
- 			out.println("<script>alert('회원가입이 완료되었습니다!, 로그인 페이지로 이동합니다');");
- 			out.println("location.href='"+request.getContextPath()+"/member/loginForm.do';</script>");
- 			out.flush();
- 			out.close();
+	      }
+		
+		
 
-      }
-      
 //      @RequestMapping(value="/overlapped.do", method = RequestMethod.POST)
 //      public ResponseEntity overlapped(@RequestParam("email") String email,
 //                               HttpServletRequest request, 

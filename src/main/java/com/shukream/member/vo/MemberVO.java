@@ -91,6 +91,13 @@ public class MemberVO {
 		this.user_update = user_update;
 		this.seller_level_id = seller_level_id;
 	}
+
+	@Override
+	public String toString() {
+		return "MemberVO [user_name=" + user_name + ", user_email=" + user_email + ", user_pw=" + user_pw
+				+ ", user_regdate=" + user_regdate + ", user_update=" + user_update + ", seller_level_id="
+				+ seller_level_id + "]";
+	}
 	
 	
 	
