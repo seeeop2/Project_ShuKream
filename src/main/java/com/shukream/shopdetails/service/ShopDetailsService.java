@@ -1,7 +1,9 @@
 package com.shukream.shopdetails.service;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,12 +40,14 @@ public class ShopDetailsService {
   
   public Map selectLowAsksAll() {
     
-    Map result = new HashMap();
+    Map result = new LinkedHashMap();
     for(int i = 220; i<=300;i=i+5) {
-      result.put(i, asksdao.selectLowAsksAll(i));
+      HashMap<String, Object> map = new HashMap<String, Object>();
+      map.put("size1", i);
+      map.put("size2", i);
+      result.put(i,asksdao.selectLowAsksAll(map));
+    System.out.println("리스트다"+result);
     }
-    
-    
     return result;
   }
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.Ignore;
@@ -89,7 +90,7 @@ public class DAOTest {
     
     //A상품
     AsksVO asksvo = new AsksVO();
-    asksvo.setAsks_size_idx(260);
+    asksvo.setAsks_size_idx(230);
     
     for(int i = 0 ; i <500; i++) {
       int price = 100000;
@@ -134,13 +135,16 @@ public class DAOTest {
   @Test
   public void testSelectLowAsksAll() throws Exception{
     
-    Map result = new HashMap();
+    LinkedHashMap result1 = new LinkedHashMap();
     for(int i = 220; i<=300;i=i+5) {
-      result.put(i, asksDAO.selectLowAsksAll(i));
+      HashMap<String, Object> map = new HashMap<String, Object>();
+      map.put("size1", i);
+      map.put("size2", i);
+      int result2 = asksDAO.selectLowAsksAll(map);
+      result1.put(i,result2);
     }
     
-    logger.info("\n Select Result :" + result);
-    logger.info("\n Select Result :" + result.get(260));
+    logger.info("\n Select Result :" + result1);
   }
   
   @Test @Ignore
@@ -151,9 +155,15 @@ public class DAOTest {
     logger.info("\n Insert Bids Result " +result.get(1));
     logger.info("\n Insert Bids Result " +result.get(1));
     
-    
   }
 
+  @Test @Ignore
+  public void testSelectLowAsksRownum() throws Exception{
+    
+    AsksVO result = asksDAO.SelectLowAsksRownum(300);
+    logger.info("\n Insert Bids Result " +result.toString());
+    
+  }
   
   
   

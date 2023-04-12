@@ -39,10 +39,8 @@ public class shopDetailsController {
     logger.info(viewName);
 //    model.addAttribute("lowAsks", shopDetailsService.SelectLowAsks());
     List productvoList = shopDetailsService.SelectProduct(product_id);
-    System.out.println("이거 봐라 : "+productvoList);
     model.addAttribute("productvoList", productvoList);
     Map map =shopDetailsService.selectLowAsksAll();
-    System.out.println(map);
     model.addAttribute("theLowestAsks",map);
     return viewName;
     
