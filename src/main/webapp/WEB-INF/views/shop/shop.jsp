@@ -2,9 +2,11 @@
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%-- <c:set var="email"  value="${email}"  /> --%>
+ <c:set var="email" value="admin" /> 
+
+
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-
-
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-option">
   <div class="container">
@@ -221,7 +223,8 @@
 		<c:forEach var="product" items="${products}" varStatus="">
         <%-- 여기서부터 --%>
           <div class="col-lg-4 col-md-6 col-sm-6">
-            <div class="product__item" style="cursor: pointer;"onclick="location.href='shopDetails.do?product_id=${product.PRODUCT_ID}'">
+            <div class="product__item">
+<%--             <div class="product__item" style="cursor: pointer;"onclick="location.href='shopDetails.do?product_id=${product.PRODUCT_ID}'"> --%>
             <c:choose>
             	<c:when test="${product.CATEGORY eq 0}">
             	 <div class="product__item__pic set-bg"
@@ -233,10 +236,13 @@
                 </c:otherwise>
 			</c:choose>
                 <ul class="product__hover">
-                  <li><a href="#"><img
-                      src="${contextPath}/resources/img/icon/heart.png"
-                      alt=""></a></li>
-                  <li><a href="#"><img
+                  <li>
+               		<a id="heartBtn" href="javascript:clickHeart('${product.PRODUCT_ID}','${email}')">
+               			<img id="heartImg" src="${contextPath}/resources/img/icon/heart.png" alt="">
+                  	</a>
+              	  </li>
+                  
+                  <li><a href="#" id="heartBtn"><img
                       src="${contextPath}/resources/img/icon/compare.png"
                       alt=""> <span>Compare</span></a></li>
                   <li><a href="#"><img
@@ -254,7 +260,6 @@
             </div>
           </div>
           </c:forEach>
-          <%-- 여기까지 한줄 --%>
           
           <%-- 원본 -- %>
           <%-- <div class="col-lg-4 col-md-6 col-sm-6">
@@ -733,4 +738,39 @@
   </div>
 </section>
 <!-- Shop Section End -->
-
+	<script type="text/javascript">
+	
+	    function clickLike(product.PRODUCT_ID , email){
+	        if(email == "null"){
+	          alert("로그인을 하여주세요");
+	          alert(product.PRODUCT_ID + email)
+	        } else{
+	          $.ajax({
+	                  url: ${contextPath} + "favorites/like.do",
+	                  async : true,
+	                  type : 'POST',
+	                  data : {
+	                            b_idx : b_idx,
+	                            id : id
+	                          },
+	                  success : function(data) {
+	                    var arr=data.split("l");
+	                    var arr1 = arr[0];
+	                    var arr2 = arr[1];
+	                      $("#countLike").text(arr1);
+	                      $("#topLike").text(arr1);
+	                      
+	                      if ( arr2 == 8 ) {
+	                        $("#likeimggg").attr("class","fa-solid fa-heart fa-4x");//이제 좋아요 누른 경우;
+	                      } else if (arr2 == 9) {
+	                        $("#likeimggg").attr("class","fa-regular fa-heart fa-4x"); //이미 좋아요 누른 경우;
+	                      }
+	                  }
+	            });
+	        }
+	      }
+	
+	
+	</script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+	
