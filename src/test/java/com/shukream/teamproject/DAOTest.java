@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.Ignore;
@@ -21,6 +22,7 @@ import com.shukream.bids.dao.BidsDAO;
 import com.shukream.bids.vo.BidsVO;
 import com.shukream.products.dao.ProductsDAO;
 import com.shukream.products.vo.ProductsVO;
+import com.shukream.products.vo.ProductsVOWithIMG;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -89,7 +91,7 @@ public class DAOTest {
     
     //A상품
     AsksVO asksvo = new AsksVO();
-    asksvo.setAsks_size_idx(260);
+    asksvo.setAsks_size_idx(230);
     
     for(int i = 0 ; i <500; i++) {
       int price = 100000;
@@ -131,27 +133,52 @@ public class DAOTest {
     logger.info("\n Insert Bids Result " +result);
   }
   
-  @Test
+  @Test@Ignore
   public void testSelectLowAsksAll() throws Exception{
     
-    List list = new ArrayList();
-    list.add(250);
-    list.add(260);
+    int product_id= 43;
+    LinkedHashMap result1 = new LinkedHashMap();
+    for(int i = 220; i<=300;i=i+5) {
+      HashMap<String, Object> map = new HashMap<String, Object>();
+      map.put("product_id",product_id);
+      map.put("size1", i);
+      map.put("size2", i);
+      int result2 = asksDAO.selectLowAsksAll(map);
+      result1.put(i,result2);
+    }
     
-    
-    List result = new ArrayList();
-    Map map = new HashMap();
-    map.put(250, asksDAO.selectLowAsksAll(250));
-    map.put(260,asksDAO.selectLowAsksAll(260));
-    logger.info("map :" + map);
-    logger.info("map :" + map.get(250));
-    result.add(asksDAO.selectLowAsksAll(250));
-    result.add(asksDAO.selectLowAsksAll(260));
-    logger.info("\n Insert Bids Result :" + result);
+    logger.info("\n Select Result :" + result1);
   }
   
-  
-  
+  @Test 
+  public void testSelectProduct() throws Exception{
+    
+    Map map = new HashMap();
+    map.put("product_id", 24);
+    map.put("detail","detail");
+    map.put("main","main");
+    
+    Map result = productsDAO.selectProduct(map);
+    logger.info("\n Insert Bids Result " +result);
+    logger.info("\n Insert Bids Result " +result.get("PRODUCT_COLOR"));
+    
+  }
+
+  @Test @Ignore
+  public void testSelectLowAsksRownum() throws Exception{
+    
+    AsksVO result = asksDAO.SelectLowAsksRownum(300);
+    logger.info("\n Insert Bids Result " +result.toString());
+    
+  }
+
+  @Test @Ignore
+  public void selectProductOne() throws Exception{
+    int product_id = 43;
+    ProductsVOWithIMG result = productsDAO.selectProductOne(product_id);
+    logger.info("\n Insert Bids Result " + result);
+    
+  }
   
   
   

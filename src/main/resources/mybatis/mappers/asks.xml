@@ -34,14 +34,41 @@
   ]]>
 </select> 
 
+
 <!-- 모든 사이즈 클릭시 버튼 하단에 나타낼 값..수정중... -->
-<select id="selectLowAsksAll" parameterType="int"  resultType="int">
+<select id="selectLowAsksRownum_" parameterType="int"  resultMap="AsksResult">
   <![CDATA[
-    SELECT ASKS_PRICE
-    FROM ( SELECT * FROM ASKS WHERE ASKS_SIZE_IDX = #{size} ORDER BY ASKS_PRICE) 
-    WHERE ROWNUM = 1
+
+
+SELECT * FROM ASKS WHERE ASKS_SIZE_IDX = #{size} ORDER BY ASKS_PRICE
+
   ]]>
 </select> 
+
+<!-- 모든 사이즈 클릭시 버튼 하단에 나타낼 값..수정중... -->
+<select id="selectLowAsksRownum" parameterType="int"  resultMap="AsksResult">
+  <![CDATA[
+
+SELECT * FROM(
+SELECT * FROM ASKS WHERE ASKS_SIZE_IDX = #{size} ORDER BY ASKS_PRICE)
+WHERE ROWNUM =1
+  ]]>
+</select> 
+
+<select id="selectLowAsksAll" parameterType="hashmap"  resultType="int">
+  <![CDATA[
+
+
+SELECT NVL(ASKS_PRICE,0)
+from(
+select * from 
+(SELECT * FROM ASKS WHERE ASKS_PRODUCT_ID = #{product_id} and asks_size_idx = #{size1} order by asks_price )
+WHERE ROWNUM =1)
+RIGHT OUTER JOIN DUAL 
+ON ASKS_SIZE_IDX = #{size2}
+  ]]>
+</select> 
+
 
 
 <!--////////////////////////////     SELECT     ////////////////////////////-->

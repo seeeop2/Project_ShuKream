@@ -83,6 +83,16 @@ public class AsksVO {
   public void setAsks_address(int asks_address) {
     this.asks_address = asks_address;
   }
+  @Override
+  public String toString() {
+    return "AsksVO [asks_idx=" + asks_idx + ", asks_size_idx=" + asks_size_idx + ", asks_price="
+        + asks_price + ", asks_regdate=" + asks_regdate + ", asks_update=" + asks_update
+        + ", asks_expiration=" + asks_expiration + ", asks_order_state_idx=" + asks_order_state_idx
+        + ", asks_matched_date=" + asks_matched_date + ", asks_total_price=" + asks_total_price
+        + ", asks_order_number=" + asks_order_number + ", asks_address=" + asks_address + "]";
+  }
+  
+  
   
   
 }
