@@ -18,4 +18,14 @@ public class MemberService {
 		return memberDAO.login(loginMap);
 	}
 
+	public void addMember(MemberVO memberVO) {
+		memberDAO.insertNewMember(memberVO);
+		
+	}
+
+	public String overlapped(String email) {
+		
+		return memberDAO.selectOverlappedID(email);
+	}
+
 }

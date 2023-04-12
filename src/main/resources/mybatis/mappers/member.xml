@@ -29,5 +29,27 @@
 		]]>
 	</select>
 
+	<insert id="insertNewMember" parameterType="memberVO">
+  		<![CDATA[
+    		insert into users(user_name,
+    						  user_email,
+    						  user_pw,
+    						  user_regdate,
+    						  user_update,
+    						  seller_level_id)
+					 		values(#{user_name},
+					 			   #{user_email},
+					 			   #{user_regdate},
+					 			   #{user_update}
+					 			   #{seller_level_id})
+		]]>      
+   </insert>
+   
+	<!-- 이메일 중복확인 -->
+	<select id="selectOverlappedID" parameterType="String" resultType="String">
+	   select decode(count(*),1, 'true', 0, 'false')
+	   from users
+	   where user_email = #{user_email}
+	</select>
 
 </mapper>

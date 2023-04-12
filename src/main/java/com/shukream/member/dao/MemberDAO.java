@@ -23,4 +23,14 @@ public class MemberDAO {
 		return member;
 	}
 
+	public void insertNewMember(MemberVO memberVO) throws DataAccessException {
+		sqlSession.insert("mapper.member.insertNewMember",memberVO);
+		
+	}
+
+	public String selectOverlappedID(String email) throws DataAccessException {
+		String result =  sqlSession.selectOne("mapper.member.selectOverlappedID",email);
+		return result;
+	}
+
 }
