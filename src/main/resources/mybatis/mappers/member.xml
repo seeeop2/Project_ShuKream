@@ -28,6 +28,19 @@
 			 
 		]]>
 	</select>
+	
+  <insert id="insertNewMember" parameterType="memberVO">
+        <![CDATA[
+          insert into users(user_name,
+                        user_email,
+                        user_pw,
+                        seller_level_id)
+                      values(#{user_name},
+                            #{user_email},
+                            #{user_pw},
+                            #{seller_level_id})
+      ]]>      
+   </insert>
 
 
 </mapper>

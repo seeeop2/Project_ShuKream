@@ -125,6 +125,7 @@
 
 <script type="text/javascript">
 		
+	$(document).ready(fucntion(){
 		
 		$("#goShop_a").mouseover(function(){
 		    
@@ -138,7 +139,9 @@
 	  		$("#goShop_a").css("background-color", "white");
 		
 		});
-	
+		
+	})	
+		
 </script>
 
 </body>

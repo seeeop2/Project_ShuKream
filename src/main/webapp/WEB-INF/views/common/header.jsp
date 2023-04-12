@@ -14,8 +14,19 @@
     <div class="offcanvas-menu-wrapper">
         <div class="offcanvas__option">
             <div class="offcanvas__links">
-                <a href="${contextPath}/member/loginForm.do">Sign in</a>
-                <a href="#">FAQs</a>
+            <%
+            if(session.getAttribute("isLogOn") == null) {
+            %>
+               <a href="${contextPath}/member/loginForm.do">로그인</a>
+                <a href="#">문의</a>
+             <%
+            }else{
+             %>   
+               <a href="${contextPath}/member/logout.do">로그아웃</a>
+                <a href="#">문의</a> 
+             <%
+             }
+             %>   
             </div>
             <div class="offcanvas__top__hover">
                 <span>Usd <i class="arrow_carrot-down"></i></span>
