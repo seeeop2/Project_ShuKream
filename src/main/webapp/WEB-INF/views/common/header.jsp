@@ -17,27 +17,6 @@
             <%
             if(session.getAttribute("isLogOn") == null) {
             %>
-<<<<<<< HEAD
-               <a href="${contextPath}/member/loginForm.do">로그인</a>
-                <a href="#">문의</a>
-             <%
-            }else{
-             %>   
-               <a href="${contextPath}/member/logout.do">로그아웃</a>
-                <a href="#">문의</a> 
-             <%
-             }
-             %>   
-            </div>
-            <div class="offcanvas__top__hover">
-                <span>Usd <i class="arrow_carrot-down"></i></span>
-                <ul>
-                    <li>USD</li>
-                    <li>EUR</li>
-                    <li>USD</li>
-                </ul>
-            </div>
-=======
             	<a href="${contextPath}/member/loginForm.do">로그인</a>
                 <a href="#">문의</a>
              <%
@@ -50,7 +29,6 @@
              %>   
              </div>
             
->>>>>>> branch 'develop' of https://github.com/seeeop2/ShuKream_.git
         </div>
         <div class="offcanvas__nav__option">
             <a href="#" class="search-switch"><img src="${contextPath}/resources/img/icon/search.png" alt=""></a>
