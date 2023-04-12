@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,66 +37,34 @@
     left: 130px;
 }
 </style>
-	<script>
-		function fn_overlapped() {
-			
-			var email = $("#user_email").val();
-			
-			if(email == ''){
-				alert("ÀÌ¸ŞÀÏÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä");
-			return;
-			}
-			$.ajax({
-				type:get,
-				async:false,
-				url:"${contextPath}/member/overlapped.do",
-				dataType:"text",
-				data:{email:email},
-				success:function (data,textStatus){
-					if(data=='false'){
-						alert("»ç¿ëÇÒ ¼ö ÀÖ´Â ÀÌ¸ŞÀÏÀÔ´Ï´Ù.");
-						$('#checkBtn').prop("disabled", true);
-						$('#user_email').prop("disabled", true);
-					}else{
-						alert("»ç¿ëÇÒ ¼ö ¾ø´Â ÀÌ¸ŞÀÏÀÔ´Ï´Ù.");
-					}
-				},
-				error:function(data,textStatus){
-					alert("¿¡·¯°¡ ¹ß»ıÇß½À´Ï´Ù.");
-				},
-				complete:function(data,textStatus){
-				}
-			});
-		}
-	</script>
+
 </head>
 <body>
 
 <div class="addMem" style="text-align: center">
-	<form action="${contextPath}/member/addMemberForm.do" method= "get" style="display: inline-block;">
+	<form action="${contextPath}/member/addMember.do" method= "post" style="display: inline-block;">
+		<input type="hidden" name="seller_level_id" value="1" />
 		<table>
 			<tr class="add" style="position: relative; top: 40px;">	
-				<td class="join">ÀÌ¸ŞÀÏ</td>
+				<td class="join">ì´ë©”ì¼</td>
 				<td>
-					<input type="text" name="user_email" id="user_email" size="20" placeholder="ÀÌ¸ŞÀÏÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä">
-					<input type="hidden" name="email" id="email" value="">
-					
-					<input type="button" id="checkBtn" value="Áßº¹È®ÀÎ" onClick="fn_overlapped()"/>
+					<input type="text" name="user_email" id="user_email" size="20" placeholder="ì´ë©”ì¼ì„ ì…ë ¥í•´ì£¼ì„¸ìš”" />
+					<input type="button" id="checkBtn" value="ì¤‘ë³µí™•ì¸" onClick="fn_overlapped()"/>
 				</td>
 			</tr>
 			<tr class="add" style="position: relative; top: 60px;">
-				<td class="join">ºñ¹Ğ¹øÈ£</td>
-				<td><input type="password" name="user_pw" size="20" placeholder="ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä"></td>
+				<td class="join">ë¹„ë°€ë²ˆí˜¸</td>
+				<td><input type="password" name="user_pw" size="20" placeholder="ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”"></td>
 			</tr>
 			<tr class="add" style="position: relative; top: 80px;">
-				<td class="join">ÀÌ¸§</td>
-				<td><input type="text" name="user_name" size="20" placeholder="ÀÌ¸§À» ÀÔ·ÂÇØÁÖ¼¼¿ä"></td>
+				<td class="join">ì´ë¦„</td>
+				<td><input type="text" name="user_name" size="20" placeholder="ì´ë¦„ì„ ì…ë ¥í•´ì£¼ì„¸ìš”" /></td>
 			</tr>
+			
+			
 			<tr class="add">
-				
-					<td><input type="submit" id="addBtn" value="È¸¿ø°¡ÀÔ"></td>
-					<td><input type="reset" id="resetBtn" value="´Ù½ÃÀÔ·Â"></td>
-				</td>
+				<td><input type="submit" id="addBtn" value="íšŒì›ê°€ì…" /></td>
+					<td><input type="reset" id="resetBtn" value="ë‹¤ì‹œì…ë ¥" /></td>
 			</tr>
 		</table>
 	</form>

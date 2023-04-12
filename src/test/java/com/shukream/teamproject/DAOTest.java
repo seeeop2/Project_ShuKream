@@ -1,6 +1,11 @@
 package com.shukream.teamproject;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +17,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import com.shukream.asks.dao.AsksDAO;
 import com.shukream.asks.vo.AsksVO;
+import com.shukream.bids.dao.BidsDAO;
+import com.shukream.bids.vo.BidsVO;
 import com.shukream.products.dao.ProductsDAO;
 import com.shukream.products.vo.ProductsVO;
 
@@ -32,9 +39,12 @@ public class DAOTest {
   @Autowired
   private AsksDAO asksDAO;
   
+  @Autowired 
+  private BidsDAO bisDAO;
+  
   int random1to5 = (int) (Math.random()*4) + 1;
   
-  
+
   
   @Test @Ignore
   public void testGetProductsList() throws Exception{
@@ -64,18 +74,22 @@ public class DAOTest {
     productsvo.setProduct_name_en("Jordan 3 Retro White Cement Reimagined");
     productsvo.setProduct_name_kor("조던 3 레트로 화이트 시멘트 리이매진드");
     productsvo.setProduct_price(259000);
-    productsvo.setProduct_release_date("2023-04-08");
+    
+    Calendar cal = Calendar.getInstance();
+    cal.setTime(new Date());
+    
+    productsvo.setProduct_release_date(cal.getTime());
     
     int result = productsDAO.addProduct(productsvo);
-    logger.info("\n Insert Board Result " +result);
+    logger.info("\n Insert Product Result " +result);
   }
   
-  @Test
-  public void testInsertAsks() throws Exception{
+  @Test @Ignore
+  public void testInsertAsksAlot() throws Exception{
     
     //A상품
     AsksVO asksvo = new AsksVO();
-    asksvo.setAsks_size_idx(250);
+    asksvo.setAsks_size_idx(260);
     
     for(int i = 0 ; i <500; i++) {
       int price = 100000;
@@ -99,6 +113,56 @@ public class DAOTest {
       }
     }
   }
+  
+  @Test @Ignore
+  public void testInsertBids() throws Exception{
+    
+    BidsVO bidsVO = new BidsVO();
+    
+    bidsVO.setBids_size_idx(250);
+    bidsVO.setBids_price(200000);
+    
+    Calendar cal = Calendar.getInstance();
+    cal.setTime(new Date());
+    
+    bidsVO.setBids_regdate(cal.getTime());
+    
+    int result = bisDAO.insertBids(bidsVO);
+    logger.info("\n Insert Bids Result " +result);
+  }
+  
+  @Test
+  public void testSelectLowAsksAll() throws Exception{
+    
+    List list = new ArrayList();
+    list.add(250);
+    list.add(260);
+    
+    
+    List result = new ArrayList();
+    Map map = new HashMap();
+    map.put(250, asksDAO.selectLowAsksAll(250));
+    map.put(260,asksDAO.selectLowAsksAll(260));
+    logger.info("map :" + map);
+    logger.info("map :" + map.get(250));
+    result.add(asksDAO.selectLowAsksAll(250));
+    result.add(asksDAO.selectLowAsksAll(260));
+    logger.info("\n Insert Bids Result :" + result);
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   public int doForPlus(int price,AsksVO asksvo) {
     int add_price = 1000;

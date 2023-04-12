@@ -66,7 +66,7 @@ window.onload=function()
 }
 
 function result(){
-	alert("아이디나  비밀번호가 틀립니다. 다시 로그인해주세요");
+	alert("이메일 또는 비밀번호가 틀립니다. 다시 로그인해주세요");
 }
 </script>
 </c:if>
@@ -98,6 +98,7 @@ function result(){
 		   <a href="${contextPath}/member/addMemberForm.do">회원가입</a>    | 
 		   <a href="#">고객 센터</a>
 		</div>			   
-	</form>		
+	</form>
+	</DIV>	
 </body>
 </html>

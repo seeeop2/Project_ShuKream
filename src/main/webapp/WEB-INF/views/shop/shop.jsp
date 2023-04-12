@@ -46,16 +46,10 @@
                   data-parent="#accordionExample">
                   <div class="card-body">
                     <div class="shop__sidebar__categories">
-                      <ul class="nice-scroll">
-                        <li><a href="#">Men (20)</a></li>
-                        <li><a href="#">Women (20)</a></li>
-                        <li><a href="#">Bags (20)</a></li>
-                        <li><a href="#">Clothing (20)</a></li>
-                        <li><a href="#">Shoes (20)</a></li>
-                        <li><a href="#">Accessories (20)</a></li>
-                        <li><a href="#">Kids (20)</a></li>
-                        <li><a href="#">Kids (20)</a></li>
-                        <li><a href="#">Kids (20)</a></li>
+                      <ul>
+                        <li><a href="?">All</a></li>
+                        <li><a href="?opt=category&division=0">Sneakers</a></li>
+                        <li><a href="?opt=category&division=1">Slipper</a></li>
                       </ul>
                     </div>
                   </div>
@@ -70,16 +64,23 @@
                   <div class="card-body">
                     <div class="shop__sidebar__brand">
                       <ul>
-                        <li><a href="#">Louis Vuitton</a></li>
-                        <li><a href="#">Chanel</a></li>
-                        <li><a href="#">Hermes</a></li>
-                        <li><a href="#">Gucci</a></li>
+                        <li><a href="?opt=brand&division=Nike">Nike</a></li>
+                        <li><a href="?opt=brand&division=Adidas">Adidas</a></li>
+                        <li><a href="?opt=brand&division=Jordan">Jordan</a></li>
+                        <li><a href="?opt=brand&division=New Balance">New Balance</a></li>
+                        <li><a href="?opt=brand&division=Birkenstock">Birkenstock</a></li>
+                        <li><a href="?opt=brand&division=Hermes">Hermes</a></li>
+                        <li><a href="?opt=brand&division=Chanel">Chanel</a></li>
+                        <li><a href="?opt=brand&division=Crocs">Crocs</a></li>
+                        <li><a href="?opt=brand&division=Salomon">Salomon</a></li>
+                        <li><a href="?opt=brand&division=Oofos">Oofos</a></li>
+                        <li><a href="?opt=brand&division=Asics">Asics</a></li>
                       </ul>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="card">
+            <!--   <div class="card">
                 <div class="card-heading">
                   <a data-toggle="collapse" data-target="#collapseThree">Filter
                     Price</a>
@@ -99,7 +100,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="card">
                 <div class="card-heading">
                   <a data-toggle="collapse" data-target="#collapseFour">Size</a>
@@ -108,28 +109,35 @@
                   data-parent="#accordionExample">
                   <div class="card-body">
                     <div class="shop__sidebar__size">
-                      <label for="xs">xs <input type="radio"
-                        id="xs">
-                      </label> <label for="sm">s <input type="radio"
-                        id="sm">
-                      </label> <label for="md">m <input type="radio"
-                        id="md">
-                      </label> <label for="xl">xl <input type="radio"
-                        id="xl">
-                      </label> <label for="2xl">2xl <input type="radio"
-                        id="2xl">
-                      </label> <label for="xxl">xxl <input type="radio"
-                        id="xxl">
-                      </label> <label for="3xl">3xl <input type="radio"
-                        id="3xl">
-                      </label> <label for="4xl">4xl <input type="radio"
-                        id="4xl">
-                      </label>
+                      <label for="220 ">220 <input type="radio"
+                        id="220 ">
+                      </label> <label for="225">225 <input type="radio"
+                        id="225">
+                      </label> <label for="230">230 <input type="radio"
+                        id="230">
+                      </label> <label for="235">235 <input type="radio"
+                        id="235">
+                      </label> <label for="240">240 <input type="radio"
+                        id="240">
+                      </label> <label for="245">245 <input type="radio"
+                        id="245">
+                      </label> <label for="250">250 <input type="radio"
+                        id="250"></label> 
+                        <label for="255">255 <input type="radio" id="255"></label>
+                        <label for="260">260 <input type="radio" id="260"></label>
+                        <label for="265">265 <input type="radio" id="265"></label>
+                        <label for="270">270 <input type="radio" id="270"></label>
+                        <label for="275">275 <input type="radio" id="275"></label>
+                        <label for="280">280 <input type="radio" id="280"></label>
+                        <label for="285">285 <input type="radio" id="285"></label>
+                        <label for="290">290 <input type="radio" id="290"></label>
+                        <label for="295">295 <input type="radio" id="295"></label>
+                        <label for="300">300 <input type="radio" id="300"></label>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="card">
+              <!-- <div class="card">
                 <div class="card-heading">
                   <a data-toggle="collapse" data-target="#collapseFive">Colors</a>
                 </div>
@@ -159,7 +167,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="card">
                 <div class="card-heading">
                   <a data-toggle="collapse" data-target="#collapseSix">Tags</a>
@@ -186,12 +194,14 @@
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="shop__product__option__left">
                 <p>Showing ${pagination.getStartIndex()} –
-                <c:if test="${pagination.startPage eq pagination.endPage}">
-                	${totalCount}            
-                </c:if>
-                <c:if test="${pagination.startPage ne pagination.endPage}">
-                	${pagination.getEndIndex()}
-                </c:if>
+                <c:choose>
+                	<c:when test="${pagination.currentPage eq pagination.totalPage}">
+                		${totalCount}
+                	</c:when>
+                	<c:otherwise>
+                		${pagination.getEndIndex()}
+                	</c:otherwise>
+                </c:choose>
                   of ${totalCount} results</p>
               </div>
             </div>
@@ -199,7 +209,7 @@
               <div class="shop__product__option__right">
                 <p>Sort by Price:</p>
                 <select>
-                  <option value="">Low To High</option>
+                  <option value="opt=price&division=">Low To High</option>
                   <option value="">$0 - $55</option>
                   <option value="">$55 - $100</option>
                 </select>
@@ -208,22 +218,20 @@
           </div>
         </div>
         <div class="row">
-        <%-- 여기서부터 --%>
 		<c:forEach var="product" items="${products}" varStatus="">
-		<c:set var="ran"><%= java.lang.Math.round(java.lang.Math.random() * 10) %></c:set>
+        <%-- 여기서부터 --%>
           <div class="col-lg-4 col-md-6 col-sm-6">
-            <div class="product__item" style="cursor: pointer;"onclick="location.href='/shuKream/shop/list.do'">
+            <div class="product__item" style="cursor: pointer;"onclick="location.href='shopDetails.do?product_id=${product.PRODUCT_ID}'">
             <c:choose>
-            	<c:when test="${ran >=5 }">
+            	<c:when test="${product.CATEGORY eq 0}">
             	 <div class="product__item__pic set-bg"
                 data-setbg="${contextPath}/resources/img/product/sneakers/${product.IMG_FILE}">
                 </c:when>
                 <c:otherwise>
-                	 <div class="product__item__pic set-bg"
+			 <div class="product__item__pic set-bg"
                 data-setbg="${contextPath}/resources/img/product/slipper/${product.IMG_FILE}">
                 </c:otherwise>
-            </c:choose>
-             
+			</c:choose>
                 <ul class="product__hover">
                   <li><a href="#"><img
                       src="${contextPath}/resources/img/icon/heart.png"
@@ -237,14 +245,15 @@
                 </ul>
               </div>
               <div class="product__item__text">
-	                <span style=""><strong>${product.PRODUCT_NAME_EN}</strong></span><br>
+	                <h6>${product.PRODUCT_NAME_EN}</h6>
 	                <span style="font-size: 12px;">${product.PRODUCT_NAME_KOR}</span>
+	                <a href="#" class="add-cart">+ Add To Wish List</a>
                 <fmt:formatNumber value="${product.PRODUCT_PRICE}" type="number" var="product_price" />
                 <h5>${product_price}원</h5>
               </div>
             </div>
           </div>
-		</c:forEach>
+          </c:forEach>
           <%-- 여기까지 한줄 --%>
           
           <%-- 원본 -- %>
@@ -701,20 +710,20 @@
           <div class="col-lg-12">
             <div class="product__pagination">
             	<c:if test="${pagination.hasPrevBlock()}">
-              		<a class="" href="?page=${pagination.startPage-1}">&laquo;</a> 
+              		<a class="" href="?page=${pagination.startPage-1}&opt=${opt}&division=${division}">&laquo;</a> 
             	</c:if>
             	<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="pageNumber">
             		<c:choose>
             			<c:when test="${pageNumber eq pagination.currentPage}">
-            				<a class="active" href="?page=${pageNumber}">${pageNumber}</a>
+            				<a class="active" href="?page=${pageNumber}&opt=${opt}&division=${division}">${pageNumber}</a>
             			</c:when>
             			<c:otherwise>
-            				<a href="?page=${pageNumber}">${pageNumber}</a>
+            				<a href="?page=${pageNumber}&opt=${opt}&division=${division}">${pageNumber}</a>
             			</c:otherwise>
             		</c:choose>
             	</c:forEach>
             	<c:if test="${pagination.hasNextBlock()}">
-            		<a href="?page=${pagination.endPage+1}">&raquo;</a>
+            		<a href="?page=${pagination.endPage+1}&opt=${opt}&division=${division}">&raquo;</a>
             	</c:if>
             </div>
           </div>
