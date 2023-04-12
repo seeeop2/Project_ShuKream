@@ -139,7 +139,7 @@
             <div class="rating">
               <span> ${productvo.product_name_kor}</span>
             </div>
-            <h3>${productvo.product_price}원</h3>
+            <h3>${latestMoney}원</h3>
             <div class="product__details__option">
               <div class="product__details__option__size" style="width: 100%; display: flex; justify-content: space-between;">
                 <span style="font-size: 20px;">Size</span> 
@@ -163,12 +163,12 @@
                           <div>
                           <ul>
                             <li>
-                              <button class="btn btn-outline-dark">모든사이즈 <br>${lowAsks}</button>
+                              <button class="btn btn-outline-dark">모든사이즈 <br>${lowBids}</button>
                             </li>
                             
-                            <c:forEach var="theLowestAsks" items="${theLowestAsks}">
+                            <c:forEach var="theLowestBids" items="${theLowestBids}">
                             <li>
-                              <button class="btn btn-outline-dark">${theLowestAsks.key}<br>${theLowestAsks.value}</button>
+                              <button class="btn btn-outline-dark">${theLowestBids.key}<br>${theLowestBids.value}</button>
                             </li>
                             </c:forEach>
                           </ul>
@@ -185,12 +185,12 @@
               <div style="margin-bottom: 5px;">
                 <button type="button" class="btn btn-danger" style="width: 49%; background-color: #ef6253">
                   <span style="float: left; font-size:2rem; border-right:1px solid white; padding-right: 10px;">구매</span>
-                  <span style="vertical-align: middle;"><b>342,000</b>원</span><br>
+                  <span style="vertical-align: middle;"><b>${lowBids}</b>원</span><br>
                   <span style="vertical-align: middle; font-size: 0.8rem;">즉시 구매가</span>
                 </button>
                 <button type="button" class="btn btn-success" style="width: 49%; background-color: #41b979">
                   <span style="float: left; font-size:2rem; border-right:1px solid white; padding-right: 10px;">판매</span>
-                  <span style="vertical-align: middle;"><b>342,000</b>원</span><br>
+                  <span style="vertical-align: middle;"><b>${lowAsks}</b>원</span><br>
                   <span style="vertical-align: middle; font-size: 0.8rem;">즉시 판매가</span>
                 </button>
               </div>

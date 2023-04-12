@@ -47,7 +47,7 @@ public class DAOTest {
   int random1to5 = (int) (Math.random()*4) + 1;
   
 
-  
+//=======================product 목록 다 가져오기=================================
   @Test @Ignore
   public void testGetProductsList() throws Exception{
     
@@ -64,7 +64,7 @@ public class DAOTest {
         logger.info("데이터가 없습니다.");
     }
   }
-  
+//=======================product 목록에 추가하기=================================
   @Test @Ignore
   public void testaddProduct() throws Exception{
     
@@ -85,54 +85,74 @@ public class DAOTest {
     int result = productsDAO.addProduct(productsvo);
     logger.info("\n Insert Product Result " +result);
   }
-  
+//=======================ASKS 목록에 다중 업로드 =================================
   @Test @Ignore
   public void testInsertAsksAlot() throws Exception{
     
     //A상품
     AsksVO asksvo = new AsksVO();
-    asksvo.setAsks_size_idx(230);
     
-    for(int i = 0 ; i <500; i++) {
-      int price = 100000;
+    for(int j = 1; j <=50 ; j++ ) { //product_id
+      asksvo.setAsks_product_id(j);
+    
+      for(int m = 220 ; m<=280 ; m= m+5) {  //size
+        asksvo.setAsks_size_idx(m);
       
-      if(price==0) {
-        return;
-      }
-      
-      int random1to3 = (int) (Math.random()*3) + 1;
-      String random1to3String = Integer.toString(random1to3);
-      logger.info(random1to3String);
-      if(random1to3 == 1) {
-        logger.info("plus");
-        price = doForPlus(price,asksvo);
-      } else if(random1to3 == 2) {
-        logger.info("stay");
-        price = doForStay(price,asksvo);
-      } else {
-        logger.info("minus");
-        price = doForMinus(price,asksvo);
+        for(int i = 0 ; i <1; i++) {
+          int price = 100000;
+          
+          if(price==0) {
+            return;
+          }
+        
+          int random1to3 = (int) (Math.random()*3) + 1;
+          
+          if(random1to3 == 1) {
+            price = doForPlus(price,asksvo);
+          } else if(random1to3 == 2) {
+            price = doForStay(price,asksvo);
+          } else {
+            price = doForMinus(price,asksvo);
+          }
+        }
       }
     }
+
   }
-  
+//=======================BIDS 목록에 다중 추가하기 =================================
   @Test @Ignore
   public void testInsertBids() throws Exception{
     
-    BidsVO bidsVO = new BidsVO();
+    //A상품
+    BidsVO bidsvo = new BidsVO();
     
-    bidsVO.setBids_size_idx(250);
-    bidsVO.setBids_price(200000);
+    for(int j = 1; j <=50 ; j++ ) { //product_id
+      bidsvo.setBids_product_id(j);
     
-    Calendar cal = Calendar.getInstance();
-    cal.setTime(new Date());
-    
-    bidsVO.setBids_regdate(cal.getTime());
-    
-    int result = bisDAO.insertBids(bidsVO);
-    logger.info("\n Insert Bids Result " +result);
+      for(int m = 220 ; m<=280 ; m= m+5) {  //size
+        bidsvo.setBids_size_idx(m);
+      
+        for(int i = 0 ; i <1; i++) {
+          int price = 100000;
+          
+          if(price==0) {
+            return;
+          }
+        
+          int random1to3 = (int) (Math.random()*3) + 1;
+          
+          if(random1to3 == 1) {
+            price = doForPlus_(price,bidsvo);
+          } else if(random1to3 == 2) {
+            price = doForStay_(price,bidsvo);
+          } else {
+            price = doForMinus_(price,bidsvo);
+          }
+        }
+      }
+    }
   }
-  
+//=======================ASKS 목록에서 낮은 가격 구하기 =================================
   @Test@Ignore
   public void testSelectLowAsksAll() throws Exception{
     
@@ -149,8 +169,8 @@ public class DAOTest {
     
     logger.info("\n Select Result :" + result1);
   }
-  
-  @Test 
+//=======================shopdetails에 사진 가져오기 위함 =================================
+  @Test @Ignore
   public void testSelectProduct() throws Exception{
     
     Map map = new HashMap();
@@ -163,19 +183,23 @@ public class DAOTest {
     logger.info("\n Insert Bids Result " +result.get("PRODUCT_COLOR"));
     
   }
-
-  @Test @Ignore
-  public void testSelectLowAsksRownum() throws Exception{
-    
-    AsksVO result = asksDAO.SelectLowAsksRownum(300);
-    logger.info("\n Insert Bids Result " +result.toString());
-    
-  }
-
+//=============shopdetails에 사진 가져오기 위함(vo한줄 가져온다.) ======================
   @Test @Ignore
   public void selectProductOne() throws Exception{
     int product_id = 43;
     ProductsVOWithIMG result = productsDAO.selectProductOne(product_id);
+    logger.info("\n Insert Bids Result " + result);
+    
+  }
+//=============asks'최근 거래 내역 조회 ======================
+
+  @Test 
+  public void testSelectLatestOrder() throws Exception{
+    Map map1 = new HashMap();
+    map1.put("product_id1", 43);
+    map1.put("product_id2", 43);
+    
+    Map result = asksDAO.SelectLatestOrder(map1);
     logger.info("\n Insert Bids Result " + result);
     
   }
@@ -190,7 +214,7 @@ public class DAOTest {
   
   
   
-  
+//=====================For ASKS=================
   public int doForPlus(int price,AsksVO asksvo) {
     int add_price = 1000;
 
@@ -224,5 +248,41 @@ public class DAOTest {
     }
     return price;
   }
+//=====================For ASKS=================
+//=====================For BIDS=================
+  public int doForPlus_(int price,BidsVO bidsvo) {
+    int add_price = 1000;
+
+    for(int j=0;j<random1to5;j++) {
+      price = price + add_price;
+      bidsvo.setBids_price(price);
+      int result = bisDAO.insertBids(bidsvo);
+      logger.info("\n Insert Board Result " +result);
+    }
+    return price;
+  }
   
+  public int doForStay_(int price,BidsVO bidsvo) {
+    int random = (int) (Math.random()*3) + 1;
+    
+    for(int j=0;j<random;j++) {
+      bidsvo.setBids_price(price);
+      int result = bisDAO.insertBids(bidsvo);
+      logger.info("\n Insert Board Result " +result);
+    }
+    return price;
+  }
+  
+  public int doForMinus_(int price,BidsVO bidsvo) {
+    int minus_price = 1000;
+    for(int j=0;j<random1to5;j++) {
+      price = price - minus_price;
+      bidsvo.setBids_price(price);
+      int result = bisDAO.insertBids(bidsvo);
+      logger.info("\n Insert Board Result " +result);
+    }
+    return price;
+  }
+//=====================For BIDS=================
+
 }

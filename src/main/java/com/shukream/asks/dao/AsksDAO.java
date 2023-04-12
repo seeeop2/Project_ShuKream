@@ -33,6 +33,11 @@ public class AsksDAO {
     AsksVO result = sqlSession.selectOne("mapper.asks.test", map );
     return result;
   }
+  public Map SelectLatestOrder(Map map) {
+    Map map1 = sqlSession.selectOne("mapper.asks.selectLatestOrder",map);
+    System.out.println("map1:"+ map1);
+    return map1;
+  }
   
   
   

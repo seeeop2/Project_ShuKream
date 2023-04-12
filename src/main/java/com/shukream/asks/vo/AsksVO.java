@@ -15,6 +15,7 @@ public class AsksVO {
   private int asks_total_price;
   private String asks_order_number;
   private int asks_address;
+  private int asks_product_id;;
   
   
   public int getAsks_idx() {
@@ -83,16 +84,12 @@ public class AsksVO {
   public void setAsks_address(int asks_address) {
     this.asks_address = asks_address;
   }
-  @Override
-  public String toString() {
-    return "AsksVO [asks_idx=" + asks_idx + ", asks_size_idx=" + asks_size_idx + ", asks_price="
-        + asks_price + ", asks_regdate=" + asks_regdate + ", asks_update=" + asks_update
-        + ", asks_expiration=" + asks_expiration + ", asks_order_state_idx=" + asks_order_state_idx
-        + ", asks_matched_date=" + asks_matched_date + ", asks_total_price=" + asks_total_price
-        + ", asks_order_number=" + asks_order_number + ", asks_address=" + asks_address + "]";
+  public int getAsks_product_id() {
+    return asks_product_id;
   }
-  
-  
+  public void setAsks_product_id(int asks_product_id) {
+    this.asks_product_id = asks_product_id;
+  }
   
   
 }

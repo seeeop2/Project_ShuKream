@@ -1,5 +1,6 @@
 package com.shukream.shopdetails.controller;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -38,23 +39,29 @@ public class shopDetailsController {
     //model로 변경
     String viewName = (String) request.getAttribute("viewName");
     logger.info(viewName);
-//    model.addAttribute("lowAsks", shopDetailsService.SelectLowAsks());
     String imgNameMain = shopDetailsService.SelectProduct(product_id);
     String imgNameDetail = shopDetailsService.selectProductDetail(product_id);
-    Map map =shopDetailsService.selectLowAsksAll(product_id);
+//    Map map =shopDetailsService.selectLowAsksAll(product_id);
+    Map map =shopDetailsService.selectLowBidsAll(product_id);
     ProductsVOWithIMG productvo = shopDetailsService.selectProductOne(product_id);
+    System.out.println(map);
     
-    System.out.println(productvo.toString());
+    int latestMoney = shopDetailsService.SelectLatestOrder(product_id);
+    System.out.println(latestMoney);
     
-    System.out.println(imgNameMain);
+    model.addAttribute("lowAsks", shopDetailsService.SelectLowAsks());
+    model.addAttribute("lowBids", shopDetailsService.SelectLowBids());
     model.addAttribute("product_id", product_id);
     model.addAttribute("productvo", productvo);
     model.addAttribute("imgNameMain", imgNameMain);
     model.addAttribute("imgNameDetail", imgNameDetail);
-    model.addAttribute("theLowestAsks",map);
+//  model.addAttribute("theLowestAsks",map);
+    model.addAttribute("theLowestBids",map);
+    model.addAttribute("latestMoney",latestMoney);
     return viewName;
     
   }
+  
   
 
 }

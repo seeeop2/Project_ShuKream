@@ -69,29 +69,49 @@ ON ASKS_SIZE_IDX = #{size2}
   ]]>
 </select> 
 
+<select id="selectLatestOrder"  parameterType="map" resultType="map">
+  <![CDATA[
+
+select nvl(asks_price,0)ASKS_PRICE
+from 
+(select * from
+(SELECT * FROM (SELECT A.*, B.*
+FROM ORDERS A, ASKS B
+WHERE A.ORDERS_ASK_IDX = B.ASKS_IDX
+order by asks_regdate desc) WHERE ASKS_PRODUCT_ID = #{product_id1})
+where rownum = 1)
+RIGHT OUTER JOIN DUAL
+on asks_product_id = #{product_id2}
+
+
+
+  ]]>
+</select> 
 
 
 <!--////////////////////////////     SELECT     ////////////////////////////-->
 <insert id="insertAsks" parameterType="AsksVO">
 
-  <selectKey resultType="Integer" keyProperty="asks_idx" order="BEFORE">
+<!--   <selectKey resultType="Integer" keyProperty="asks_idx" order="BEFORE">
     select asks_seq.nextval from dual
   </selectKey>
-  
+ -->  
   <![CDATA[
     INSERT INTO ASKS
     (
     asks_idx,
     asks_size_idx,
     asks_price,
-    asks_regdate
+    asks_regdate,
+    asks_product_id
     )
     VALUES
     (
     #{asks_idx},
     #{asks_size_idx},
     #{asks_price},
-    sysdate
+    sysdate,
+    #{asks_product_id}
     )
   ]]>
   
