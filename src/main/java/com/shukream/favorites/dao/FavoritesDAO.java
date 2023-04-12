@@ -1,7 +1,9 @@
 package com.shukream.favorites.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,4 +50,25 @@ public class FavoritesDAO {
 		sqlSession.delete("mapper.favorites.deleteLikeList",likeVO);
 		
 	}
+
+	public List<Map<String, Object>> myLikeList(int start, int end, String like_mem_id) {
+		Map paramMap = new HashMap();
+		paramMap.put("start", start);
+		paramMap.put("end", end);
+		paramMap.put("like_mem_id", like_mem_id);
+		
+		return sqlSession.selectList("mapper.favorites.myLikeList",paramMap);
+	}
+
+
+	public int myLikeCount(String like_mem_id) {
+
+		return sqlSession.selectOne("mapper.favorites.myLikeCount",like_mem_id);
+				
+				
+	}
+
+
+
+
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.shukream.favorites.dao.FavoritesDAO;
 import com.shukream.favorites.vo.FavoritesVO;
 import com.shukream.home.dao.HomeDAO;
+import com.shukream.shop.vo.Pagination;
 import com.shukream.favorites.vo.LikeVO;
 
 @Service("favoritesService ")
@@ -18,7 +19,7 @@ public class FavoritesService{
 	@Autowired
 	private FavoritesDAO favoritesDAO ;
 
-
+/*
 	public Map<String, List> myLikeList(LikeVO likeVO)throws Exception {
 
 		Map<String,List> likeMap = new HashMap<String,List>();
@@ -37,13 +38,36 @@ public class FavoritesService{
 		return likeMap;
 	}
 
+*/	
+	
+	
+	public List<Map<String, Object>> myLikeList(int page, int size, String like_mem_id) {
+		
+		int totalCount = favoritesDAO.myLikeCount(like_mem_id);
+		Pagination pagination = new Pagination(page, size, totalCount);
+		int startIndex = pagination.getStartIndex();
+		int endIndex = pagination.getEndIndex();
+		
+		return favoritesDAO.myLikeList(startIndex,endIndex,like_mem_id);
+	}
 
+	
+	
+	public int myLikeCount(String like_mem_id) {
+		
+		return favoritesDAO.myLikeCount(like_mem_id);
+	
+	}
+
+	
+	
 	public void removeLikeList(LikeVO likeVO) {
 		
-		favoritesDAO.deleteLikeList(likeVO);
+		 favoritesDAO.deleteLikeList(likeVO);
 		
 	}
-	
+
+
 		
 	
 

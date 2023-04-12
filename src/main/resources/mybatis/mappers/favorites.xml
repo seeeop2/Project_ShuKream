@@ -5,7 +5,7 @@
 
 <mapper namespace="mapper.favorites">
 	<!-- 리절트 맵 정의 -->
-	
+<!-- 	
 	<resultMap id="likeResult" type="LikeVO">
 		<result property="like_idx" column="like_idx" />
 		<result property="like_product_idx" column="like_product_idx" />
@@ -16,7 +16,8 @@
 		<result property="like_img_file" column="like_img_file" />
 	
 	</resultMap>
-
+-->
+	
 <!-- 
 	<resultMap id="favoritesResult" type="FavoritesVO">
 		<result property="product_id" column="product_id" />
@@ -39,7 +40,7 @@
 
  -->
 	
-	
+<!-- 	
 	<select id="selectLikeList"  parameterType="likeVO"  resultMap="likeResult"   >
 	    <![CDATA[
 
@@ -48,6 +49,34 @@
 			
 		]]>
 	</select>
+ -->	
+	
+	<select id="myLikeList" resultType="Map" parameterType="Map">
+		<![CDATA[
+			SELECT *
+			FROM (
+			  SELECT PRODUCT_LIKE.*, ROWNUM AS rnum
+			  FROM PRODUCT_LIKE
+			  WHERE PRODUCT_LIKE.LIKE_MEM_ID = #{like_mem_id}
+			  ORDER BY PRODUCT_LIKE.LIKE_IDX DESC
+			) 
+			WHERE rnum BETWEEN #{start} AND #{end}
+		]]>
+	</select>	
+	
+	<select id="myLikeCount" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM PRODUCT_LIKE
+			WHERE LIKE_MEM_ID =#{like_mem_id}
+		]]>
+	</select>
+	
+	
+	
+	
+	
+	
+	
 	
 	
 <!-- 

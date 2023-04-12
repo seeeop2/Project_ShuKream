@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.shukream.favorites.service.FavoritesService;
 import com.shukream.favorites.vo.FavoritesVO;
 import com.shukream.favorites.vo.LikeVO;
+import com.shukream.shop.vo.Pagination;
 
 @Controller("favoritesController")
 @RequestMapping(value = "/favorites")
@@ -34,27 +35,42 @@ public class FavoritesController {
 	private static final Logger logger = LoggerFactory.getLogger(FavoritesController.class);
 
 	@RequestMapping(value = "/favoritesList.do", method = RequestMethod.GET)
-	public ModelAndView list(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView list(
+								@RequestParam(name="page", defaultValue = "1") int page,
+								@RequestParam(name="size", defaultValue = "5") int size,
+								HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		ModelAndView mav = new ModelAndView();
 
 		HttpSession session = request.getSession();
 		String viewName = (String) request.getAttribute("viewName");
 		logger.info(viewName);
-//		HttpSession session=request.getSession();
+
 //		LikeVO likeVO =(LikeVO)session.getAttribute("id");	
 //		String like_mem_id = likeVO.getLike_mem_id();
 
 		String like_mem_id = "admin";
 
-		likeVO.setLike_mem_id(like_mem_id);
+//		likeVO.setLike_mem_id(like_mem_id);
 
-		Map<String, List> likeMap = favoritesService.myLikeList(likeVO);
-
+//		Map<String, List> likeMap = favoritesService.myLikeList(likeVO);
+	 	List<Map<String, Object>> likeMap = favoritesService.myLikeList(page,size,like_mem_id);
+	 	
+	 	int totalCount = favoritesService.myLikeCount(like_mem_id);
+	    Pagination pagination = new Pagination(page, size, totalCount);
+		
 		mav.setViewName(viewName);
-
-		session.setAttribute("likeMap", likeMap);
-
+		
+//		session.setAttribute("likeMap", likeMap);
+		
+		System.out.println(likeMap);
+		mav.addObject("likeMap", likeMap);
+	    mav.addObject("pagination", pagination);
+	    mav.addObject("totalCount",totalCount);
+	    mav.setViewName(viewName);
+		
+	    System.out.println("mav:"+mav);
+	    
 		return mav;
 	}
 
@@ -77,9 +93,6 @@ public class FavoritesController {
 		mav.setViewName("redirect:/favorites/favoritesList.do");
 		return mav;
 	}
-	 
-	 
-	 
 	 
 	 
 }

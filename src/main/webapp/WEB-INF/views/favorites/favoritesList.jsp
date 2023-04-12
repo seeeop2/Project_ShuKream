@@ -4,8 +4,8 @@
     
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 
-<c:set var="myLikeList"   value="${sessionScope.likeMap.myLikeList}"  />
- 
+<%-- <c:set var="myLikeList"   value="${sessionScope.likeMap}"  /> --%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -162,16 +162,15 @@
 			
 			<ul>
 			
-	      		<c:forEach var="L" items="${myLikeList}" varStatus="status">
-	      		
+				<c:forEach var="L" items="${likeMap}" varStatus="">
 					<li>
 						<div id="favorites_list">
 							<div id="">
-								<img id=favorites_img src="${contextPath}/resources/img/product/sneakers/${L.like_img_file}">
+								<img id=favorites_img src="${contextPath}/resources/img/product/sneakers/${L.LIKE_IMG_FILE}">
 							</div>
 							<div id="favorites_info">
-								<p id="name_kor">${L.like_product_name_kor}</p>
-								<p id="name_en">${L.like_product_name_en}</p>
+								<p id="name_kor">${L.LIKE_PRODUCT_NAME_KOR}</p>
+								<p id="name_en">${L.LIKE_PRODUCT_NAME_EN}</p>
 							</div>
 							<div id="favorites_buy">
 								<a href="${contextPath}/shop/list.do">
@@ -181,23 +180,43 @@
 										</div>
 											
 										<div id="buyPrice">
-											<p id="price">${L.like_product_price}</p>
+											<p id="price">${L.LIKE_PRODUCT_PRICE}</p>
 											<p id="price2">즉시 구매가</p>
 										</div>								
 									</div>
 								</a>
-								<a id="del" href="${contextPath}/favorites/favoritesDel.do?like_idx=${L.like_idx}">삭제</a>
+								<a id="del" href="${contextPath}/favorites/favoritesDel.do?like_idx=${L.LIKE_IDX}">삭제</a>
 							</div>						
 						</div>
 					</li>			
-					</c:forEach>
-			
+				</c:forEach>
 			</ul>
+		<div class="row">
+          <div class="col-lg-12">
+            <div class="product__pagination">
+            	<c:if test="${pagination.hasPrevBlock()}">
+              		<a class="" href="?page=${pagination.startPage-1}">&laquo;</a> 
+            	</c:if>
+            	<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="pageNumber">
+            		<c:choose>
+            			<c:when test="${pageNumber eq pagination.currentPage}">
+            				<a class="active" href="?page=${pageNumber}">${pageNumber}</a>
+            			</c:when>
+            			<c:otherwise>
+            				<a href="?page=${pageNumber}">${pageNumber}</a>
+            			</c:otherwise>
+            		</c:choose>
+            	</c:forEach>
+            	<c:if test="${pagination.hasNextBlock()}">
+            		<a href="?page=${pagination.endPage+1}">&raquo;</a>
+            	</c:if>
+            </div>
+          </div>
+        </div>
 		</div>
  
 	
 	</div>	
-
 
 
 <script type="text/javascript">
