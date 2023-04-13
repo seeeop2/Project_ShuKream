@@ -21,7 +21,9 @@ $("#search-input").keyup(function () {
                     let productImgFileName = product.IMG_FILE;
 					html += `
 						<div class="search_result" onclick="location.href='/shuKream/shop/shopDetails.do?product_id=${productID}'">
-							<img width="70px" height="70px" src="/shuKream/resources/img/product/sneakers/${productImgFileName}" alt="">
+							${product.CATEGORY == 0 ? 
+									`<img width="70px" height="70px" src="/shuKream/resources/img/product/sneakers/${productImgFileName}" alt="">` :
+									`<img width="70px" height="70px" src="/shuKream/resources/img/product/slipper/${productImgFileName}" alt="">` }
 							<div style='display:inline-block; vertical-align:middle;'><span><strong>${productEnName}</strong></span><br>
 							<span>${productKrName}</span></div>
 						</div>

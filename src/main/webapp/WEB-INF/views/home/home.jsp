@@ -168,7 +168,8 @@
       <%--popular --%>
        <div
         class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix popular-items">
-        <div class="product__item" style="cursor: pointer;"onclick="location.href='shop/shopDetails.do?product_id=${mainProductMap.popularItems[i.index].productVO.product_id}'">
+<%--         <div class="product__item" style="cursor: pointer;"onclick="location.href='shop/shopDetails.do?product_id=${mainProductMap.popularItems[i.index].productVO.product_id}'"> --%>
+        <div class="product__item">
          <c:if test="${mainProductMap.popularItems[i.index].productVO.category eq 0}">
           <div class="product__item__pic set-bg"
             data-setbg="${contextPath}/resources/img/product/sneakers/${mainProductMap.popularItems[i.index].img_file}">
