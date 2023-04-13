@@ -129,7 +129,8 @@
     <c:forEach var="newArrivals" items="${mainProductMap.newArrivals}" begin="0" end="3" varStatus="i">
     <div
         class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
-        <div class="product__item" style="cursor: pointer;"onclick="location.href='shop/shopDetails.do?product_id=${newArrivals.productVO.product_id}'">
+        <div class="product__item">
+<%--         <div class="product__item" style="cursor: pointer;"onclick="location.href='shop/shopDetails.do?product_id=${newArrivals.productVO.product_id}'"> --%>
 		<c:if test="${newArrivals.productVO.category eq 0}">
           <div class="product__item__pic set-bg"
             data-setbg="${contextPath}/resources/img/product/sneakers/${newArrivals.img_file}">
@@ -146,7 +147,7 @@
               <li><a href="#"><img
                   src="${contextPath}/resources/img/icon/compare.png"
                   alt=""> <span>Compare</span></a></li>
-              <li><a href="#"><img
+              <li><a href="shop/shopDetails.do?product_id=${newArrivals.productVO.product_id}"><img
                   src="${contextPath}/resources/img/icon/search.png"
                   alt=""></a></li>
             </ul>
@@ -168,7 +169,8 @@
       <%--popular --%>
        <div
         class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix popular-items">
-        <div class="product__item" style="cursor: pointer;"onclick="location.href='shop/shopDetails.do?product_id=${mainProductMap.popularItems[i.index].productVO.product_id}'">
+<%--         <div class="product__item" style="cursor: pointer;"onclick="location.href='shop/shopDetails.do?product_id=${mainProductMap.popularItems[i.index].productVO.product_id}'"> --%>
+        <div class="product__item">
          <c:if test="${mainProductMap.popularItems[i.index].productVO.category eq 0}">
           <div class="product__item__pic set-bg"
             data-setbg="${contextPath}/resources/img/product/sneakers/${mainProductMap.popularItems[i.index].img_file}">
@@ -184,7 +186,7 @@
               <li><a href="#"><img
                   src="${contextPath}/resources/img/icon/compare.png"
                   alt=""> <span>Compare</span></a></li>
-              <li><a href="#"><img
+              <li><a href="shop/shopDetails.do?product_id=${mainProductMap.popularItems[i.index].productVO.product_id}"><img
                   src="${contextPath}/resources/img/icon/search.png"
                   alt=""></a></li>
             </ul>
