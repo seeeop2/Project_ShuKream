@@ -30,6 +30,10 @@ public class ShopDAO {
 		paramMap.put("division", division);
 		return sqlSession.selectOne("mapper.shop.shopMainProductCount",paramMap);
 	}
-	
+
+	public String likeList(String email) {
+
+		return sqlSession.selectOne("mapper.shop.likeList",email);
+	}
 	
 }

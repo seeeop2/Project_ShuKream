@@ -30,4 +30,9 @@ public class ShopService {
 		return shopDAO.shopMainProductCount(opt,division);
 	}
 	
+	public String likeList(String email) {
+		
+		return shopDAO.likeList(email);
+	}
+
 }
