@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.order">
+<!-- 리절트 맵 정의 -->
+ 	<resultMap id="orderResult" type="orderVO">
+		<result property="ship_id" column="ship_id"/>
+		<result property="ship_name" column="ship_name"/>
+		<result property="phone_number" column="phone_number"/>
+		<result property="primary_address" column="primary_address"/>
+		<result property="user_id" column="user_id"/>
+		<result property="sample4_postcode" column="sample4_postcode"/>
+		<result property="sample4_roadAddress" column="sample4_roadAddress"/>
+		<result property="sample4_jibunAddress" column="sample4_jibunAddress"/>
+		<result property="sample4_detailAddress" column="sample4_detailAddress"/>
+		<result property="sample4_extraAddress" column="sample4_extraAddress"/>
+		<collection property="productVO" resultMap="productsResult"/>
+	</resultMap>
+<!-- 구매애서 들어간건지, 판매에서 들어간건지에 따라 BIDS, ASKS 중 어느 테이블에 등록 될지 나누어야함. 우선은 ASKS(판매입찰)에 올려진 상품을 구매하는걸로 가정(구매버튼을 눌렀을 때)
+	
+	수정할 때 참고할것
+	ASKS_IDX -> 여기 들어가는 ASKS_IDX는 구매 버튼을 눌렀을 때 부터 가져가는 IDX번호임, 이걸 기준으로 BIDS테이블에 데이터가 들어가야 함
+	(지금은 ASKS테이블의 IDX값이 1인 상품에서 구매 들어가는것을 기준으로함)
+	
+	SHIPPING_INFORMATION에 들어가는 정보는 VO에 담겨서 온 정보들
+	 
+	추후에 상품 데이터가 넘어오면 productVO의 IDX를 BIDS_PRODUCT_ID 여기 넣어야함 지금은 1을넣음(1번상품기준)
+	
+	ORDERS엔 ASKS_IDX(처음에 받아온 IDX)와 BIDS_IDX(방금 등록한 BIDS_IDX)를 등록해야하는데 어떻게?? 무얼기준으로?
+	
+-->
+<insert id="checkOut" parameterType="orderVO">
+	
+	INSERT INTO SHIPPING_INFORMATION(
+									SHIP_NAME, 
+									PRIMARY_ADDRESS,
+									SECONDARY_ADDRESS, 
+									PHONE_NUMBER, 
+									USER_ID,
+									SHIP_REGDATE,
+									SHIP_UPDATE
+									) 
+							VALUES (
+									#{ship_name},
+									#{primary_address}, 
+									#{primary_address},
+									#{phone_number}, 
+									#{user_id},
+									SYSDATE, 
+									SYSDATE)
+									
+				
+		
+		
+				
+
+</insert>	
+<!-- 		INTO ORDERS(ORDERS_BID_IDX, ORDERS_ASK_IDX) SELECT B.BIDS_IDX, A.ASKS_IDX FROM BIDS B, ASKS A WHERE A.ASKS_IDX = 1 -->
+	
+	<!-- BIDS_ORDER_NUMBER 주문번호가 달라저야? 자동증가? -->
+<insert id="insertBids">
+INSERT	INTO BIDS(
+						BIDS_SIZE_IDX,
+						BIDS_PRICE,
+						BIDS_REGDATE,
+						BIDS_UPDATE,
+						BIDS_EXPIRATION,
+						BIDS_ORDER_STATE_IDX,
+						BIDS_MATCHED_DATE,
+						BIDS_TOTAL_PRICE,
+						BIDS_ORDER_NUMBER,
+						BIDS_SHIP_IDX,
+						BIDS_PRODUCT_ID
+						)
+			SELECT 
+						A.ASKS_SIZE_IDX, 
+						A.ASKS_PRICE, 
+						SYSDATE, 
+						SYSDATE,
+						SYSDATE,
+						1,
+						SYSDATE, 
+						A.ASKS_PRICE,
+						1,
+						1,
+						1
+						FROM ASKS A WHERE A.ASKS_IDX = 1
+</insert>
+
+<insert id="insertOrder">
+	INSERT INTO ORDERS(ORDERS_BID_IDX, ORDERS_ASK_IDX) VALUES (1,1)
+</insert>
+
+</mapper>
