@@ -7,11 +7,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
+import org.springframework.context.annotation.Role;
 import org.springframework.stereotype.Service;
 import com.shukream.asks.dao.AsksDAO;
 import com.shukream.asks.vo.AsksVO;
 import com.shukream.bids.dao.BidsDAO;
 import com.shukream.bids.vo.BidsVO;
+import com.shukream.orders.dao.OrdersDAO;
 import com.shukream.products.dao.ProductsDAO;
 import com.shukream.products.vo.ProductsVO;
 import com.shukream.products.vo.ProductsVOWithIMG;
@@ -27,6 +30,9 @@ public class ShopDetailsService {
   
   @Autowired
   ProductsDAO productsdao;
+  
+  @Autowired
+  OrdersDAO orderdao;
   
   public int InsertAsks(AsksVO asksvo) {
     return asksdao.insertAsks(asksvo);
@@ -101,14 +107,21 @@ public class ShopDetailsService {
     return bidsdao.selectLowBids();
   }
   
-  public int SelectLatestOrder(int product_id) {
-    Map map = new HashMap();
-    map.put("product_id1", product_id);
-    map.put("product_id2",product_id);
+//  public int SelectLatestOrder(int product_id) {
+//    Map map = new HashMap();
+//    map.put("product_id1", product_id);
+//    map.put("product_id2",product_id);
+//    map.put("product_id3",product_id);
+//    
+//    
+//    Map askMap=orderdao.SelectLatestOrderAsk(map);
+//    Map bidMap=orderdao.SelectLatestOrderBid(map);
     
-    Map map1=asksdao.SelectLatestOrder(map);
-    int latestMoney = Integer.parseInt(String.valueOf(map1.get("ASKS_PRICE")));
-    return latestMoney;
     
-  }
+    
+//    int latestMoney = Integer.parseInt(String.valueOf(map1.get("ASKS_PRICE")));
+//    return latestMoney;
+//  }
+
+  
 }
