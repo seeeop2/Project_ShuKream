@@ -1,6 +1,7 @@
 package com.shukream.teamproject;
 
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -20,6 +21,7 @@ import com.shukream.asks.dao.AsksDAO;
 import com.shukream.asks.vo.AsksVO;
 import com.shukream.bids.dao.BidsDAO;
 import com.shukream.bids.vo.BidsVO;
+import com.shukream.orders.dao.OrdersDAO;
 import com.shukream.products.dao.ProductsDAO;
 import com.shukream.products.vo.ProductsVO;
 import com.shukream.products.vo.ProductsVOWithIMG;
@@ -43,6 +45,9 @@ public class DAOTest {
   
   @Autowired 
   private BidsDAO bisDAO;
+  
+  @Autowired
+  private OrdersDAO ordersDAO;
   
   int random1to5 = (int) (Math.random()*4) + 1;
   
@@ -86,7 +91,7 @@ public class DAOTest {
     logger.info("\n Insert Product Result " +result);
   }
 //=======================ASKS 목록에 다중 업로드 =================================
-  @Test @Ignore
+  @Test  @Ignore
   public void testInsertAsksAlot() throws Exception{
     
     //A상품
@@ -193,15 +198,95 @@ public class DAOTest {
   }
 //=============asks'최근 거래 내역 조회 ======================
 
-  @Test 
+  @Test @Ignore
   public void testSelectLatestOrder() throws Exception{
     Map map1 = new HashMap();
     map1.put("product_id1", 43);
     map1.put("product_id2", 43);
+    map1.put("product_id3", 43);
     
     Map result = asksDAO.SelectLatestOrder(map1);
-    logger.info("\n Insert Bids Result " + result);
+    logger.info("\n testSelectLatestOrder " + result);
     
+  }
+//=====================================
+  @Test 
+  public void selectLatestOrderAsk() throws Exception{
+    
+    int latest = 0;
+    
+    Map map1 = new HashMap();
+    map1.put("product_id1", 39);
+    map1.put("product_id2", 39);
+    
+    Map result = ordersDAO.SelectLatestOrderAsk(map1);
+    Map result2 = ordersDAO.SelectLatestOrderBid(map1);
+    
+    String askDate = (String) result.get("ASKS_REGDATE1");
+    String bidDate = (String) result2.get("BIDS_REGDATE1");
+    
+    
+    logger.info("\n result " + result);
+    logger.info("\n result2 " + result2);
+    logger.info("\n askDate " + askDate);
+    logger.info("\n bidDate " + bidDate);
+//  int latestMoney = Integer.parseInt(String.valueOf(map1.get("ASKS_PRICE")));
+
+    if (bidDate.equals("0") && askDate.equals("0")) {
+      latest = 0;
+    } else {
+    if(askDate.equals("0")) {
+      latest = Integer.parseInt(String.valueOf(result2.get("BIDS_PRICE")));
+    } else if( bidDate.equals("0")) {
+      latest = Integer.parseInt(String.valueOf(result.get("ASKS_PRICE")));
+    } /*else if (bidDate.equals("0") && askDate.equals("0")) {
+      latest = 0;
+    }*/ else {
+      
+      try {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date askDate1 = format.parse(askDate);
+        Date bidDate1 = format.parse(bidDate);
+        
+        int result3 = askDate1.compareTo(bidDate1); //0 -> 동일한 날짜
+                                                     //result<0   ->askdate가 더 빠르다!
+                                                      //result>0   ->biddate가 더 빠르다!
+        logger.info("\n result3 " + result3);
+        if(result3==0) {
+          latest = Integer.parseInt(String.valueOf(result.get("ASKS_PRICE")));
+        } else if ( result3 <0) {
+          latest = Integer.parseInt(String.valueOf(result2.get("BIDS_PRICE")));
+        } else {
+          latest = Integer.parseInt(String.valueOf(result.get("ASKS_PRICE")));
+        }
+        
+        logger.info("\n latest " + latest);
+        
+        
+        logger.info("\n selectLatestOrderAsk " + askDate);
+        logger.info("\n SelectLatestOrderBid " + bidDate);
+      } catch(ParseException e) {
+        e.printStackTrace();
+      }
+    }
+      
+    }
+    logger.info("\n latest " + latest);
+  }
+
+  @Test @Ignore
+  public void selectLatestOrderBId() throws Exception{
+    
+    Map map1 = new HashMap();
+    map1.put("product_id1", 45);
+    map1.put("product_id2", 45);
+    map1.put("product_id3", 45);
+    
+
+    
+    Map result = ordersDAO.SelectLatestOrderBid(map1);
+    
+    logger.info("\n selectLatestOrderBId " + result);
   }
   
   
@@ -210,10 +295,7 @@ public class DAOTest {
   
   
   
-  
-  
-  
-  
+
 //=====================For ASKS=================
   public int doForPlus(int price,AsksVO asksvo) {
     int add_price = 1000;
