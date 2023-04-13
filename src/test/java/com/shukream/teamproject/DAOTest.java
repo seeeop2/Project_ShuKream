@@ -213,9 +213,11 @@ public class DAOTest {
   @Test 
   public void selectLatestOrderAsk() throws Exception{
     
+    int latest = 0;
+    
     Map map1 = new HashMap();
-    map1.put("product_id1", 43);
-    map1.put("product_id2", 43);
+    map1.put("product_id1", 39);
+    map1.put("product_id2", 39);
     
     Map result = ordersDAO.SelectLatestOrderAsk(map1);
     Map result2 = ordersDAO.SelectLatestOrderBid(map1);
@@ -223,19 +225,53 @@ public class DAOTest {
     String askDate = (String) result.get("ASKS_REGDATE1");
     String bidDate = (String) result2.get("BIDS_REGDATE1");
     
-    try {
-      SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-      Date askDate1 = format.parse(askDate);
-      Date bidDate1 = format.parse(bidDate);
-      int result3 = askDate1.compareTo(bidDate1);
-      logger.info("\n result3 " + result3);
-    } catch(ParseException e) {
-      e.printStackTrace();
+    
+    logger.info("\n result " + result);
+    logger.info("\n result2 " + result2);
+    logger.info("\n askDate " + askDate);
+    logger.info("\n bidDate " + bidDate);
+//  int latestMoney = Integer.parseInt(String.valueOf(map1.get("ASKS_PRICE")));
+
+    if (bidDate.equals("0") && askDate.equals("0")) {
+      latest = 0;
+    } else {
+    if(askDate.equals("0")) {
+      latest = Integer.parseInt(String.valueOf(result2.get("BIDS_PRICE")));
+    } else if( bidDate.equals("0")) {
+      latest = Integer.parseInt(String.valueOf(result.get("ASKS_PRICE")));
+    } /*else if (bidDate.equals("0") && askDate.equals("0")) {
+      latest = 0;
+    }*/ else {
+      
+      try {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date askDate1 = format.parse(askDate);
+        Date bidDate1 = format.parse(bidDate);
+        
+        int result3 = askDate1.compareTo(bidDate1); //0 -> 동일한 날짜
+                                                     //result<0   ->askdate가 더 빠르다!
+                                                      //result>0   ->biddate가 더 빠르다!
+        logger.info("\n result3 " + result3);
+        if(result3==0) {
+          latest = Integer.parseInt(String.valueOf(result.get("ASKS_PRICE")));
+        } else if ( result3 <0) {
+          latest = Integer.parseInt(String.valueOf(result2.get("BIDS_PRICE")));
+        } else {
+          latest = Integer.parseInt(String.valueOf(result.get("ASKS_PRICE")));
+        }
+        
+        logger.info("\n latest " + latest);
+        
+        
+        logger.info("\n selectLatestOrderAsk " + askDate);
+        logger.info("\n SelectLatestOrderBid " + bidDate);
+      } catch(ParseException e) {
+        e.printStackTrace();
+      }
     }
-    
-    
-    logger.info("\n selectLatestOrderAsk " + askDate);
-    logger.info("\n SelectLatestOrderBid " + bidDate);
+      
+    }
+    logger.info("\n latest " + latest);
   }
 
   @Test @Ignore

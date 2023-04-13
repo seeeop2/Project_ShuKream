@@ -25,10 +25,12 @@ public class ServiceTest {
   private ShopDetailsService shopdetailsService;
 
   @Test
-  public void testSelectLowAsks() throws Exception{
+  public void SelectLatestMoney() throws Exception{
     
-    int result = shopdetailsService.SelectLowAsks();
-    logger.info("\n SelectLowAsks Result : " +result);
+    int product_id = 39;
+    int result = shopdetailsService.SelectLatestMoney(product_id);
+    logger.info("\n result " + result);
+
   }
 
   

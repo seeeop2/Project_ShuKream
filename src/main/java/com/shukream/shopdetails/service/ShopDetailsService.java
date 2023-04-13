@@ -1,11 +1,16 @@
 package com.shukream.shopdetails.service;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.context.annotation.Role;
@@ -21,6 +26,8 @@ import com.shukream.products.vo.ProductsVOWithIMG;
 
 @Service
 public class ShopDetailsService {
+
+  private static final Logger logger = LoggerFactory.getLogger(ShopDetailsService.class);
 
   @Autowired
   AsksDAO asksdao;
@@ -122,6 +129,61 @@ public class ShopDetailsService {
 //    int latestMoney = Integer.parseInt(String.valueOf(map1.get("ASKS_PRICE")));
 //    return latestMoney;
 //  }
+  public int SelectLatestMoney(int product_id){
+    
+    int latest = 0;
+    
+    Map map1 = new HashMap();
+    map1.put("product_id1", product_id);
+    map1.put("product_id2", product_id);
+    
+    Map result = orderdao.SelectLatestOrderAsk(map1);
+    Map result2 = orderdao.SelectLatestOrderBid(map1);
+    
+    String askDate = (String) result.get("ASKS_REGDATE1");
+    String bidDate = (String) result2.get("BIDS_REGDATE1");
 
+    if (bidDate.equals("0") && askDate.equals("0")) {
+      latest = 0;
+    } else {
+    if(askDate.equals("0")) {
+      latest = Integer.parseInt(String.valueOf(result2.get("BIDS_PRICE")));
+    } else if( bidDate.equals("0")) {
+      latest = Integer.parseInt(String.valueOf(result.get("ASKS_PRICE")));
+    } /*else if (bidDate.equals("0") && askDate.equals("0")) {
+      latest = 0;
+    }*/ else {
+      
+      try {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date askDate1 = format.parse(askDate);
+        Date bidDate1 = format.parse(bidDate);
+        
+        int result3 = askDate1.compareTo(bidDate1); //0 -> 동일한 날짜
+                                                     //result<0   ->askdate가 더 빠르다!
+                                                      //result>0   ->biddate가 더 빠르다!
+        logger.info("\n result3 " + result3);
+        if(result3==0) {
+          latest = Integer.parseInt(String.valueOf(result.get("ASKS_PRICE")));
+        } else if ( result3 <0) {
+          latest = Integer.parseInt(String.valueOf(result2.get("BIDS_PRICE")));
+        } else {
+          latest = Integer.parseInt(String.valueOf(result.get("ASKS_PRICE")));
+        }
+        
+        logger.info("\n latest " + latest);
+        
+        
+        logger.info("\n selectLatestOrderAsk " + askDate);
+        logger.info("\n SelectLatestOrderBid " + bidDate);
+      } catch(ParseException e) {
+        e.printStackTrace();
+      }
+    }
+      
+    }
+    logger.info("\n latest " + latest);
+    return latest;
+  }
   
 }
