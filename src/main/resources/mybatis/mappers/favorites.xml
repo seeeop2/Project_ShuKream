@@ -83,7 +83,7 @@
 	    <![CDATA[
 	      delete from PRODUCT_LIKE
 	      where LIKE_PRODUCT=#{like_product} and
-	      		LIKE_MEM_ID=#{email}
+	      		LIKE_MEM_ID=#{like_mem_id}
     	]]>
 	</delete>
 	
