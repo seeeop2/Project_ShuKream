@@ -221,7 +221,8 @@
 		<c:forEach var="product" items="${products}" varStatus="">
         <%-- 여기서부터 --%>
           <div class="col-lg-4 col-md-6 col-sm-6">
-            <div class="product__item" style="cursor: pointer;"onclick="location.href='shopDetails.do?product_id=${product.PRODUCT_ID}'">
+            <div class="product__item">
+<%--             <div class="product__item" style="cursor: pointer;"onclick="location.href='shopDetails.do?product_id=${product.PRODUCT_ID}'"> --%>
             <c:choose>
             	<c:when test="${product.CATEGORY eq 0}">
             	 <div class="product__item__pic set-bg"
@@ -239,7 +240,7 @@
                   <li><a href="#"><img
                       src="${contextPath}/resources/img/icon/compare.png"
                       alt=""> <span>Compare</span></a></li>
-                  <li><a href="#"><img
+                  <li><a href="shopDetails.do?product_id=${product.PRODUCT_ID}"><img
                       src="${contextPath}/resources/img/icon/search.png"
                       alt=""></a></li>
                 </ul>
