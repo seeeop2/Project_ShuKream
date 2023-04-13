@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-
+<c:set var="sneakers" value="sneakers" />
+<c:set var="slipper" value="slipper" />
 
 <style>   
 /* //모달에 적용한 css속성값.  */
@@ -50,47 +51,70 @@
       <div class="row">
         <div class="col-lg-3 col-md-3">
           <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item"><a class="nav-link active"
-              data-toggle="tab" href="#tabs-1" role="tab">
-                <div class="product__thumb__pic set-bg"
-                  data-setbg="${contextPath}/resources/img/shop-details/thumb-1.png"></div>
-            </a></li>
-            <li class="nav-item"><a class="nav-link"
+          
+          <c:choose>
+            <c:when test="${product_id <30}">
+              <li class="nav-item"><a class="nav-link active"
+                data-toggle="tab" href="#tabs-1" role="tab">
+                  <div class="product__thumb__pic set-bg"
+                    data-setbg="${contextPath}/resources/img/product/sneakers/${imgNameMain}"></div>
+              </a></li>
+              
+              
+              <li class="nav-item"><a class="nav-link"
               data-toggle="tab" href="#tabs-2" role="tab">
                 <div class="product__thumb__pic set-bg"
-                  data-setbg="${contextPath}/resources/img/shop-details/thumb-2.png"></div>
-            </a></li>
-            <li class="nav-item"><a class="nav-link"
-              data-toggle="tab" href="#tabs-3" role="tab">
-                <div class="product__thumb__pic set-bg"
-                  data-setbg="${contextPath}/resources/img/shop-details/thumb-3.png"></div>
-            </a></li>
-            <li class="nav-item"><a class="nav-link"
-              data-toggle="tab" href="#tabs-4" role="tab">
-                <div class="product__thumb__pic set-bg"
-                  data-setbg="${contextPath}/resources/img/shop-details/thumb-4.png">
-                  <i class="fa fa-play"></i>
-                </div>
-            </a></li>
-          </ul>
+                  data-setbg="${contextPath}/resources/img/product/sneakers/${imgNameDetail}"></div>
+              </a></li>
+              
+              </ul>
         </div>
         <div class="col-lg-6 col-md-9">
           <div class="tab-content">
             <div class="tab-pane active" id="tabs-1" role="tabpanel">
               <div class="product__details__pic__item">
-                <img src="${contextPath}/resources/img/shop-details/product-big-2.png" alt="">
+                <img src="${contextPath}/resources/img/product/sneakers/${imgNameMain}" alt="">
               </div>
             </div>
             <div class="tab-pane" id="tabs-2" role="tabpanel">
               <div class="product__details__pic__item">
-                <img src="${contextPath}/resources/img/shop-details/product-big-3.png" alt="">
+                <img src="${contextPath}/resources/img/product/sneakers/${imgNameDetail}" alt="">
               </div>
             </div>
-            <div class="tab-pane" id="tabs-3" role="tabpanel">
+              
+            </c:when>
+            
+            <c:otherwise>
+              <li class="nav-item"><a class="nav-link active"
+                data-toggle="tab" href="#tabs-1" role="tab">
+                  <div class="product__thumb__pic set-bg"
+                    data-setbg="${contextPath}/resources/img/product/slipper/${imgNameMain}"></div>
+              </a></li>
+              <li class="nav-item"><a class="nav-link active"
+                data-toggle="tab" href="#tabs-1" role="tab">
+                  <div class="product__thumb__pic set-bg"
+                    data-setbg="${contextPath}/resources/img/product/slipper/${imgNameDetail}"></div>
+              </a></li>
+              
+                        </ul>
+        </div>
+        <div class="col-lg-6 col-md-9">
+          <div class="tab-content">
+            <div class="tab-pane active" id="tabs-1" role="tabpanel">
               <div class="product__details__pic__item">
-                <img src="${contextPath}/resources/img/shop-details/product-big.png" alt="">
+                <img src="${contextPath}/resources/img/product/slipper/${imgNameMain}" alt="">
               </div>
             </div>
+            <div class="tab-pane" id="tabs-2" role="tabpanel">
+              <div class="product__details__pic__item">
+                <img src="${contextPath}/resources/img/product/slipper/${imgNameDetail}" alt="">
+              </div>
+            </div>
+              
+            </c:otherwise>
+          </c:choose>
+            
+
             <div class="tab-pane" id="tabs-4" role="tabpanel">
               <div class="product__details__pic__item">
                 <img src="${contextPath}/resources/img/shop-details/product-big-4.png" alt="">
@@ -108,14 +132,14 @@
           <div class="product__details__text" style="text-align: left; margin-left: 30px;">
             <h4>
               <span style="border-bottom: 1px solid;">
-                <b>Jordan</b>
+                <b>${productvo.product_brand}</b>
               </span>
             </h4>
-            <h4> Jordan 1 Retro High OG Chicago 2022 </h4>
+            <h4> ${productvo.product_name_en} </h4>
             <div class="rating">
-              <span> 조던 1 레트로 하이 OG 시카고 2022</span>
+              <span> ${productvo.product_name_kor}</span>
             </div>
-            <h3>495,000원</h3>
+            <h3>${latestMoney}원</h3>
             <div class="product__details__option">
               <div class="product__details__option__size" style="width: 100%; display: flex; justify-content: space-between;">
                 <span style="font-size: 20px;">Size</span> 
@@ -139,53 +163,14 @@
                           <div>
                           <ul>
                             <li>
-                              <button class="btn btn-outline-dark">모든사이즈 <br>${lowAsks}</button>
+                              <button class="btn btn-outline-dark">모든사이즈 <br>${lowBids}</button>
                             </li>
+                            
+                            <c:forEach var="theLowestBids" items="${theLowestBids}">
                             <li>
-                              <button class="btn btn-outline-dark">220 <br>가격</button>
+                              <button class="btn btn-outline-dark">${theLowestBids.key}<br>${theLowestBids.value}</button>
                             </li>
-                            <li>
-                              <button class="btn btn-outline-dark">225 <br>가격</button>
-                            </li>
-                            <li>
-                              <button class="btn btn-outline-dark">230 <br>가격</button>
-                            </li>
-                            <li>
-                              <button class="btn btn-outline-dark">235 <br>가격</button>
-                            </li>
-                            <li>
-                              <button class="btn btn-outline-dark">240 <br>가격</button>
-                            </li>
-                            <li>
-                              <button class="btn btn-outline-dark">245 <br>가격</button>
-                            </li>
-                            <li>
-                              <button class="btn btn-outline-dark">250 <br>가격</button>
-                            </li>
-                            <li>
-                              <button class="btn btn-outline-dark">255 <br>가격</button>
-                            </li>
-                            <li>
-                              <button class="btn btn-outline-dark">260 <br>가격</button>
-                            </li>
-                            <li>
-                              <button class="btn btn-outline-dark">265 <br>가격</button>
-                            </li>
-                            <li>
-                              <button class="btn btn-outline-dark">270 <br>가격</button>
-                            </li>
-                            <li>
-                              <button class="btn btn-outline-dark">275 <br>가격</button>
-                            </li>
-                            <li>
-                              <button class="btn btn-outline-dark">280 <br>가격</button>
-                            </li>
-                            <li>
-                              <button class="btn btn-outline-dark">285 <br>가격</button>
-                            </li>
-                            <li>
-                              <button class="btn btn-outline-dark">290 <br>가격</button>
-                            </li>
+                            </c:forEach>
                           </ul>
                           </div>
                         </div>
@@ -200,12 +185,12 @@
               <div style="margin-bottom: 5px;">
                 <button type="button" class="btn btn-danger" style="width: 49%; background-color: #ef6253">
                   <span style="float: left; font-size:2rem; border-right:1px solid white; padding-right: 10px;">구매</span>
-                  <span style="vertical-align: middle;"><b>342,000</b>원</span><br>
+                  <span style="vertical-align: middle;"><b>${lowBids}</b>원</span><br>
                   <span style="vertical-align: middle; font-size: 0.8rem;">즉시 구매가</span>
                 </button>
                 <button type="button" class="btn btn-success" style="width: 49%; background-color: #41b979">
                   <span style="float: left; font-size:2rem; border-right:1px solid white; padding-right: 10px;">판매</span>
-                  <span style="vertical-align: middle;"><b>342,000</b>원</span><br>
+                  <span style="vertical-align: middle;"><b>${lowAsks}</b>원</span><br>
                   <span style="vertical-align: middle; font-size: 0.8rem;">즉시 판매가</span>
                 </button>
               </div>
@@ -220,11 +205,10 @@
                 <span>상품 정보</span>
               </h5>
               <ul style="padding-top: 5px;">
-                <li><span>모델번호 :</span> <b>DZ5485-612</b></li>
-                <li><span>출시일 :</span> 22/12/01</li>
-                <li><span>컬러 :</span> VARSITY RED/BLACK/SAIL/MUSLIN</li>
-                <li><span>발매가 :</span> 209,000원</li>
-                <li><span>Tag :</span> Nike, Jordan, Chicago</li>
+                <li><span>모델번호 :</span> <b>${productvo.model_number}</b></li>
+                <li><span>출시일 :</span> ${productvo.product_release_date}</li>
+                <li><span>컬러 :</span> ${productvo.product_color}</li>
+                <li><span>발매가 :</span> ${productvo.product_price}</li>
               </ul>
             </div>            
             <div class="product__details__last__option" style="margin-bottom: 20px;">

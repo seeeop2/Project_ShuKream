@@ -12,15 +12,25 @@ import com.shukream.member.vo.MemberVO;
 @Repository("memberDAO")
 public class MemberDAO {
 
-	
-	@Autowired
-	private SqlSession sqlSession;
-	
-	public MemberVO login(Map<String, String> loginMap) throws DataAccessException{
+   
+   @Autowired
+   private SqlSession sqlSession;
+   
+   public MemberVO login(Map<String, String> loginMap) throws DataAccessException{
+      
+      MemberVO member=(MemberVO)sqlSession.selectOne("mapper.member.login", loginMap);
+      
+      return member;
+   }
+
+	public void insertNewMember(MemberVO memberVO) throws DataAccessException {
+		sqlSession.insert("mapper.member.insertNewMember",memberVO);
 		
-		MemberVO member=(MemberVO)sqlSession.selectOne("mapper.member.login", loginMap);
-		
-		return member;
+	}
+
+	public String selectOverlappedID(String email) throws DataAccessException {
+		String result =  sqlSession.selectOne("mapper.member.selectOverlappedID",email);
+		return result;
 	}
 
 }

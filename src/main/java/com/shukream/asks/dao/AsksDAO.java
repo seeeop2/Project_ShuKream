@@ -1,5 +1,6 @@
 package com.shukream.asks.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
@@ -19,8 +20,25 @@ public class AsksDAO {
   public int selectLowAsks() {
     return sqlSession.selectOne("mapper.asks.selectLowAsks");
   }
-  public int selectLowAsksAll(int size) {
-    return sqlSession.selectOne("mapper.asks.selectLowAsksAll",size);
+  public int selectLowAsksAll(HashMap<String, Object> map) {
+    int result = sqlSession.selectOne("mapper.asks.selectLowAsksAll", map );
+    return result;
   }
+  public AsksVO SelectLowAsksRownum(int size) {
+    AsksVO result = sqlSession.selectOne("mapper.asks.selectLowAsksRownum", size );
+    return result;
+  }
+  
+  public AsksVO test(HashMap<String, Object> map) {
+    AsksVO result = sqlSession.selectOne("mapper.asks.test", map );
+    return result;
+  }
+  public Map SelectLatestOrder(Map map) {
+    Map map1 = sqlSession.selectOne("mapper.asks.selectLatestOrder",map);
+    System.out.println("map1:"+ map1);
+    return map1;
+  }
+  
+  
   
 }

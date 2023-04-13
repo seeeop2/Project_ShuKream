@@ -16,6 +16,7 @@ public class BidsVO {
   private int bids_total_price;
   private String bids_order_number;
   private int bids_ship_idx;
+  private int bids_product_id;
   
   public int getBids_idx() {
     return bids_idx;
@@ -83,7 +84,12 @@ public class BidsVO {
   public void setBids_ship_idx(int bids_ship_idx) {
     this.bids_ship_idx = bids_ship_idx;
   }
-  
+  public int getBids_product_id() {
+    return bids_product_id;
+  }
+  public void setBids_product_id(int bids_product_id) {
+    this.bids_product_id = bids_product_id;
+  }
   
   
 }

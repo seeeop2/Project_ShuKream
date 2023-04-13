@@ -50,8 +50,30 @@ public class EventController {
   // 가져오는 방식 : GET 방식으로 적용 
   @RequestMapping(value = "/main.do", method = RequestMethod.GET)
   public ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	  
+	  HttpSession session = request.getSession();
+	  String  id = (String)session.getAttribute("email");
+	  
+	  request.setCharacterEncoding("utf-8");
+	  response.setCharacterEncoding("utf-8");
+	  response.setContentType("text/html; charset=utf-8");
 
 	  System.out.println("main.do 호출!"); 
+	  
+	  System.out.println(id);
+	  
+	  String contextPath = request.getContextPath();
+	  
+	  //PrintWirter 객체 out 생성 및 초기화
+		PrintWriter out = response.getWriter();
+	  
+	  if(id == null) {
+		  
+			out.println("<script>alert('로그인 후 이용가능합니다!, 로그인 페이지로 이동합니다');");
+			out.println("window.location.replace('"+contextPath+"/member/loginForm.do');</script>");
+			out.flush();
+			out.close();
+	  }
 	  
 	// ModelANdView 객체 생성
     ModelAndView mav = new ModelAndView();
@@ -64,6 +86,7 @@ public class EventController {
     
     // ModelAndView 객체에 viewName을 셋팅
     mav.setViewName(viewName);
+    mav.addObject("id", id);
 
     // ModelAndView 반환
     return mav;
@@ -74,14 +97,13 @@ public class EventController {
   // #2 ) 2차 주소 : http://localhost:8090/teamproject/event/detail.do
   // 가져오는 방식 : GET 방식으로 적용 
   @RequestMapping(value = "/detail.do", method = RequestMethod.GET)
-  public ModelAndView detail(HttpServletRequest request, HttpServletResponse response)throws Exception {
-		
-	  System.out.println("detail.do 호출!"); 
-	  
+  public ModelAndView detail(HttpSession session,HttpServletRequest request, HttpServletResponse response)throws Exception {
 	  
 	  request.setCharacterEncoding("utf-8");
 	  response.setCharacterEncoding("utf-8");
 	  response.setContentType("text/html; charset=utf-8");
+		
+	  System.out.println("detail.do 호출!"); 
 
 	  String contextPath = request.getContextPath();
 	  
@@ -95,58 +117,41 @@ public class EventController {
 		  
 	  
 	// @ 1) 로그인이 안되어있을 경우 로그인 페이지로 이동 시킨다.
-		// #1. session에 저장한 id 값을 가져와 id 변수에 저장 시킨다. 
-		HttpSession session = request.getSession();
-		String id = "admin@shukream.co.kr";
-		session.setAttribute("id", id);
+	    String id = (String)session.getAttribute("email");
+	    
+		System.out.println("email 값은 : "+id);
 
-		System.out.println("id값은 : "+id);
+			
+		// @ 2) 응모권이 없을 경우(null), 추첨을 할 수 없도록 설정 한다.
+		// #1. service -> dao로 id 값을 보내서 dao에서 조회 시킨다.
+		
+		checkuser = eventservice.checkuser(id);
+		 
+		int i = checkuser.size()-1;
+		// checkuser에 저장된 d_cnt만 꺼낸다.
+
+		String d_cnt = checkuser.get(i).getD_cnt();
+
+		System.out.println(d_cnt);
 
 		
-		// 로그인 되어있다면?
-
-		if(!id.isEmpty()) {
-			
-			// @ 2) 응모권이 없을 경우(null), 추첨을 할 수 없도록 설정 한다.
-			// #1. service -> dao로 id 값을 보내서 dao에서 조회 시킨다.
-			
-			checkuser = eventservice.checkuser(id);
-			 
-			int i = checkuser.size()-1;
-			// checkuser에 저장된 d_cnt만 꺼낸다.
-
-			String d_cnt = checkuser.get(i).getD_cnt();
-
-			System.out.println(d_cnt);
-
-			
-				 // 만약에 응모권이 한개도 없다면
-				if(d_cnt.equals("0")) {
-					
-					// msg 변수에 로그인 해야한다는 문구 저장
-					//	String msg = "보유하신 응모권이 없습니다!, 상세페이지로 이동합니다!";
-					
-					
-					// PrinterWriter 클래스를 이용하여 JAVASCRIPT 구문으로 alert를 발생시키고, location.replace 메소드를 통해서 바로 상세페이지로 이동 시킬 때,
-					// ticket 값을 0으로 입력하여 eventdetailresult.jsp에 ticket값이 0일 경우 jstl을 이용하여 소지하고있는 응모권이 없습니다를 생성시킨다!
-					out.println("<script>alert('보유하신 응모권이 없습니다!, 상세페이지로 이동합니다');");
+			 // 만약에 응모권이 한개도 없다면
+			if(d_cnt.equals("0")) {
+				
+				// msg 변수에 로그인 해야한다는 문구 저장
+				//	String msg = "보유하신 응모권이 없습니다!, 상세페이지로 이동합니다!";
+				
+				
+				// PrinterWriter 클래스를 이용하여 JAVASCRIPT 구문으로 alert를 발생시키고, location.replace 메소드를 통해서 바로 상세페이지로 이동 시킬 때,
+				// ticket 값을 0으로 입력하여 eventdetailresult.jsp에 ticket값이 0일 경우 jstl을 이용하여 소지하고있는 응모권이 없습니다를 생성시킨다!
+				out.println("<script>alert('보유하신 응모권이 없습니다!, 상세페이지로 이동합니다');");
 //					out.println("window.location.replace('http://localhost:8090/shuKream/event/detailresult.do?ticket=0');</script>");
-					out.println("window.location.href='"+contextPath+"/event/detailresult.do?ticket=0&id="+id+"';</script>");
-					out.flush();
-					out.close();
-				}
+				out.println("window.location.href='"+contextPath+"/event/detailresult.do?ticket=0&id="+id+"';</script>");
+				out.flush();
+				out.close();
+			}
 
-		// 만약에 로그인 하지 않았다면?
-		}else {
-
-			out.println("<script>alert('로그인 후 이용가능합니다!, 메인 페이지로 이동합니다');");
-			out.println("window.location.replace('"+contextPath+"/main.do');</script>");
-			out.flush();
-			out.close();
-			
-		}
-
-    
+   
     // Viewname 가져오기
     String viewName = (String) request.getAttribute("viewName");
     

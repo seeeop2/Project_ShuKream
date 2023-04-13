@@ -1,5 +1,6 @@
 package com.shukream.bids.dao;
 
+import java.util.HashMap;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,6 +15,15 @@ public class BidsDAO {
   
   public int insertBids(BidsVO bidsvo) {
     return sqlSession.insert("mapper.bids.insertBids",bidsvo);
+  }
+
+  public int selectLowBidsAll(HashMap<String, Object> map) {
+    int result = sqlSession.selectOne("mapper.bids.selectLowBidsAll", map );
+    return result;
+  }
+
+  public int selectLowBids() {
+    return sqlSession.selectOne("mapper.bids.selectLowBids");
   }
   
 }

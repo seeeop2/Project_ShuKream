@@ -1,5 +1,8 @@
 package com.shukream.shopdetails.controller;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import com.shukream.products.vo.ProductsVO;
+import com.shukream.products.vo.ProductsVOWithIMG;
 import com.shukream.shopdetails.service.ShopDetailsService;
 
 @Controller
@@ -26,27 +31,37 @@ public class shopDetailsController {
 
   
   @RequestMapping(value = "/shopDetails.do", method = RequestMethod.GET)
-  public String ShopDetailsMain(
-								  @RequestParam(value = "product_id", required = false) String product_id,
-								  HttpServletRequest request, HttpServletResponse response,Model model) {
+  public String ShopDetailsMain(HttpServletRequest request, 
+                                HttpServletResponse response, 
+                                Model model,
+                                @RequestParam(value = "product_id", required = false) int product_id) {
 
-//    ModelAndView mav = new ModelAndView();
-//    
-//    String viewName = (String) request.getAttribute("viewName");
-//    logger.info(viewName);
-//    
-//    mav.setViewName(viewName);
-//
-//    return mav;
-    
     //model로 변경
     String viewName = (String) request.getAttribute("viewName");
     logger.info(viewName);
+    String imgNameMain = shopDetailsService.SelectProduct(product_id);
+    String imgNameDetail = shopDetailsService.selectProductDetail(product_id);
+//    Map map =shopDetailsService.selectLowAsksAll(product_id);
+    Map map =shopDetailsService.selectLowBidsAll(product_id);
+    ProductsVOWithIMG productvo = shopDetailsService.selectProductOne(product_id);
+    System.out.println(map);
+    
+    int latestMoney = shopDetailsService.SelectLatestOrder(product_id);
+    System.out.println(latestMoney);
+    
     model.addAttribute("lowAsks", shopDetailsService.SelectLowAsks());
-
+    model.addAttribute("lowBids", shopDetailsService.SelectLowBids());
+    model.addAttribute("product_id", product_id);
+    model.addAttribute("productvo", productvo);
+    model.addAttribute("imgNameMain", imgNameMain);
+    model.addAttribute("imgNameDetail", imgNameDetail);
+//  model.addAttribute("theLowestAsks",map);
+    model.addAttribute("theLowestBids",map);
+    model.addAttribute("latestMoney",latestMoney);
     return viewName;
     
   }
+  
   
 
 }
