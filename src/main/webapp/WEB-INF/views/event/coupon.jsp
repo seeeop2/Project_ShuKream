@@ -44,8 +44,8 @@
 
     position: relative;
     display: flex;
-    margin: 0 auto;
-    width: 100%;
+    margin: 5px;
+    width: 97%;
     height: 100px;
     top: 0;
     left: 0;
@@ -95,10 +95,11 @@
     left: 0;
     flex-direction: column;
     flex-wrap: nowrap;
-    justify-content: center;
+    justify-content: flex-start;
     border-radius: 10px;
     padding: 0;
     overflow-y: auto;
+    
 
 }
 
@@ -108,11 +109,11 @@
 
     position: relative;
     display: flex;
-    margin: 0 auto;
-    width: 100%;
+    margin: 3px;
+    width: 97%;
     height: 50px;
-    top: 200px;
-    left: 0;
+    top: 0;
+    left: 2px;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
@@ -124,6 +125,10 @@
 #content_row > input{
 
 	float : left;
+	margin : 0px 15px;
+	top : 0;
+	left : 0;
+	padding : 0;
 	
 
 
@@ -135,7 +140,6 @@
 	
     position: relative;
     display: flex;
-    margin: 10px;
     width: 100%;
     height: 100%;
     top: 0;
@@ -181,8 +185,8 @@
 	    	<div id="content_row">
 		    	<input class="coupon_content" id="coupon_num" type="text" value="${coupon.d_idx}" readonly="readonly" />
 		    	<input class="coupon_content" id="coupon_name" type="text" value="${coupon.d_ticket}" readonly="readonly" />
-		    	<input class="coupon_content" id="coupon_date" type="text" value="${coupon.d_date}" readonly="readonly" />
-		    	<input class="coupon_content" id="coupon_expiry_date" type="text" value="${coupon.expiry_date}" readonly="readonly" />
+		    	<input class="coupon_content" id="coupon_date" type="text" value="<fmt:formatDate value="${coupon.d_date}" dateStyle="long" /> 발급" readonly="readonly" />
+		    	<input style="color : red; text-decoration: underline;"class="coupon_content" id="coupon_expiry_date" type="text" value="<fmt:formatDate value="${coupon.expiry_date}" dateStyle="long" /> 폐기 됨" readonly="readonly" />
 	    	</div>
     	</c:forEach>
     </div>
