@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%--
 	BIDS_IDX // 주문인덱스
@@ -28,6 +29,7 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <link rel="stylesheet" href="${contextPath}/resources/css/checkout.css">
+
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-option">
   <div class="container">
@@ -52,12 +54,45 @@
     <div class="checkout__form">
       <form action="${contextPath}/order/orderDetail.do" method="post">
         <div class="row">
-          <div class="col-lg-8 col-md-6">
-            <h6 class="coupon__code">
-              <span class="icon_tag_alt"></span> Have a coupon? <a
-                href="#">Click here</a> to enter your code
-            </h6>
-            <h6 class="checkout__title">주문 상세</h6>
+          <div class="col-lg-7 col-md-6">
+          <c:choose>
+          	<c:when test="${type eq 'buy'}">
+	            <h4 class="coupon__code">
+					<input type="radio" id="bids" name="option" value="00" onchange="setDisplay()"  checked="checked" > 
+					<label for="bids"><span style="font-size:24px;">구매입찰</span></label>
+					<input type="radio" id="check" name="option" value="10" onchange="setDisplay()" > 
+					<label for="check"><span style="font-size:24px;">즉시구매</span></label>
+					<input type="hidden" name="type" value="buy">
+	            </h4>
+				<div class="checkout__input">
+					<div id="price">
+						<p style="font-size: 24px;">
+						   	구매희망가격<span>*</span>
+						 </p>
+						<input type="text" name="bids" placeholder="구매 희망가" style="color:black;"/>
+					</div>
+				</div>
+			</c:when>
+			<c:otherwise>
+           		<h4 class="coupon__code">
+					<input type="radio" id="asks" name="option" value="00" onchange="setDisplay()"  checked="checked" > 
+					<label for="asks"><span style="font-size:24px;">판매입찰</span></label>
+					<input type="radio" id="check" name="option" value="10" onchange="setDisplay()" > 
+					<label for="check"><span style="font-size:24px;">즉시판매</span></label>
+					<input type="hidden" name="type" value="sell">
+	            </h4>
+				<div class="checkout__input">
+					<div id="price">
+						<p style="font-size: 24px;">
+						   	판매희망가격<span>*</span>
+						 </p>
+						<input type="text" name="asks" placeholder="판매 희망가" style="color:black;"/>
+					</div>
+				</div>
+			</c:otherwise>
+			
+			</c:choose>
+            <h4 class="checkout__title">주문 상세</h4>
             <div class="row">
               <div class="col-lg-8">
                 <div class="checkout__input">
@@ -104,27 +139,27 @@
               <p>
                 	우편번호<span>*</span>
               </p>
-              <input type="text" id="sample4_postcode" name="sample4_postcode" placeholder="우편번호" required>
+              <input type="text" id="sample4_postcode" name="sample4_postcode" placeholder="우편번호" required value="13529">
             </div>
            
             <div class="checkout__input">
               <p>
                 도로명/지번 주소<span>*</span>
               </p>
-              <input type="text" id="sample4_roadAddress" name="sample4_roadAddress" placeholder="도로명주소" required> 
-              <input type="text" id="sample4_jibunAddress" name="sample4_jibunAddress" placeholder="지번주소" required>
+              <input type="text" id="sample4_roadAddress" name="sample4_roadAddress" placeholder="도로명주소" required value="경기 성남시 분당구 판교역로 166"> 
+              <input type="text" id="sample4_jibunAddress" name="sample4_jibunAddress" placeholder="지번주소" required value="경기 성남시 분당구 백현동 532">
             </div>
             <div class="checkout__input">
               <p>
                 상세주소<span>*</span>
               </p>
-              <input type="text" id="sample4_detailAddress" name="sample4_detailAddress" placeholder="상세주소" required>
+              <input type="text" id="sample4_detailAddress" name="sample4_detailAddress" placeholder="상세주소" required value="12층">
             </div>
             <div class="checkout__input">
               <p>
                	참고항목
               </p>
-              <input type="text" id="sample4_extraAddress" name="sample4_extraAddress" placeholder="참고항목">
+              <input type="text" id="sample4_extraAddress" name="sample4_extraAddress" placeholder="참고항목" value=" (백현동)">
             <span id="guide" style="color:#999;display:none"></span>
             </div>
 <!--             <div class="checkout__input__checkbox">
@@ -156,14 +191,16 @@
                 placeholder="Notes about your order, e.g. special notes for delivery.">
             </div> -->
           </div>
-          <div class="col-lg-4 col-md-6">
+          <div class="col-lg-5 col-md-6">
             <div class="checkout__order">
               <h4 class="order__title">Your order</h4>
               <div class="checkout__order__products">
                 <h5>Product</h5> <%-- <span>Total</span> --%>
               </div>
               <ul class="checkout__total__products">
-                <li>PRODUCT_NAME상품명 뿌려주기 </li> <%-- <span>$ 300.0</span></li>--%>
+                <li>${product.PRODUCT_NAME_EN}<br>
+                	${product.PRODUCT_NAME_KOR}
+                 </li> <%-- <span>$ 300.0</span></li>--%>
                 <li>SIZE 뿌려주기 </li>
 <%--                 <li>02. German chocolate <span>$ 170.0</span></li>
                 <li>03. Sweet autumn <span>$ 170.0</span></li>
@@ -171,7 +208,8 @@
                 <input type="hidden" value="">
               </ul>
               <ul class="checkout__total__all">
-                <li>Total <span>bids_price 뿌려주기</span></li>
+              <fmt:formatNumber var="asks_price" value="${buyAsks.ASKS_PRICE}"/>
+                <li>Total <span>${asks_price}원</span></li>
               </ul>
               <!-- <div class="checkout__input__checkbox">
                 <label for="acc-or"> Create an account? <input
@@ -262,4 +300,16 @@
             }
         }).open();
     }
+    
+    
+    //구매입찰가 온오프
+    function setDisplay(){
+        if($('input:radio[id=check]').is(':checked')){
+            $('#price').hide();
+        }else{
+            $('#price').show();
+        }
+    }
+     
+     
 </script>

@@ -50,12 +50,6 @@
 									#{user_id},
 									SYSDATE, 
 									SYSDATE)
-									
-				
-		
-		
-				
-
 </insert>	
 <!-- 		INTO ORDERS(ORDERS_BID_IDX, ORDERS_ASK_IDX) SELECT B.BIDS_IDX, A.ASKS_IDX FROM BIDS B, ASKS A WHERE A.ASKS_IDX = 1 -->
 	
@@ -92,5 +86,14 @@ INSERT	INTO BIDS(
 <insert id="insertOrder">
 	INSERT INTO ORDERS(ORDERS_BID_IDX, ORDERS_ASK_IDX) VALUES (1,1)
 </insert>
+
+<select id="selectAsks" parameterType="String" resultType="Map">
+	select * from asks where asks_idx = #{asks_idx}
+</select>
+
+<select id="selectProduct" parameterType="Int" resultType="Map">
+	select * from products where product_id = #{product_id}
+</select>
+
 
 </mapper>
