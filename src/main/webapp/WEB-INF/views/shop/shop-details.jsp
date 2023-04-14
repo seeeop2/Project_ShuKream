@@ -13,25 +13,20 @@
   text-align: left;
   font-weight: bold;
 }
-
 .modal_table {
   width: 100%;
 }
-
 .modal_table>div>ul {
   list-style: none;
 }
-
 .modal_table>div>ul>li {
   float: left;
 }
-
 #modal_userFollow {
   /*   margin:10px; */
   /*   text-align: right; */
   
 }
-
 .btn-outline-dark {
   /*   padding: 30px 55px; */
   width: 150px;
@@ -51,7 +46,8 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="product__details__breadcrumb">
-              <a href="./index.html">Home</a> <a href="./shop.html">Shop</a>
+              <a href="./index.html">Home</a>
+              <a href="./shop.html">Shop</a>
               <span>Product Details</span>
             </div>
           </div>
@@ -62,37 +58,31 @@
 
               <c:choose>
                 <c:when test="${product_id <30}">
-                  <li class="nav-item"><a class="nav-link active"
-                    data-toggle="tab" href="#tabs-1" role="tab">
-                      <div class="product__thumb__pic set-bg"
-                        data-setbg="${contextPath}/resources/img/product/sneakers/${imgNameMain}"></div>
-                  </a></li>
+                  <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">
+                      <div class="product__thumb__pic set-bg" data-setbg="${contextPath}/resources/img/product/sneakers/${imgNameMain}"></div>
+                    </a>
+                  </li>
 
-
-                  <li class="nav-item"><a class="nav-link"
-                    data-toggle="tab" href="#tabs-2" role="tab">
-                      <div class="product__thumb__pic set-bg"
-                        data-setbg="${contextPath}/resources/img/product/sneakers/${imgNameDetail}"></div>
-                  </a></li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">
+                      <div class="product__thumb__pic set-bg" data-setbg="${contextPath}/resources/img/product/sneakers/${imgNameDetail}"></div>
+                    </a>
+                  </li>
             </ul>
           </div>
           <div class="col-lg-6 col-md-9">
             <div class="tab-content">
               <div class="tab-pane active" id="tabs-1" role="tabpanel">
                 <div class="product__details__pic__item">
-                  <img
-                    src="${contextPath}/resources/img/product/sneakers/${imgNameMain}"
-                    alt="">
+                  <img src="${contextPath}/resources/img/product/sneakers/${imgNameMain}" alt="">
                 </div>
               </div>
               <div class="tab-pane" id="tabs-2" role="tabpanel">
                 <div class="product__details__pic__item">
-                  <img
-                    src="${contextPath}/resources/img/product/sneakers/${imgNameDetail}"
-                    alt="">
+                  <img src="${contextPath}/resources/img/product/sneakers/${imgNameDetail}" alt="">
                 </div>
               </div>
-
               </c:when>
 
               <c:otherwise>
@@ -148,14 +138,15 @@
         <div class="product__details__text"
           style="text-align: left; margin-left: 30px;">
           <h4>
-            <span style="border-bottom: 1px solid;"> <b>${productvo.product_brand}</b>
+            <span style="border-bottom: 1px solid;">
+            <b>${productvo.product_brand}</b>
             </span>
           </h4>
           <h4>${productvo.product_name_en}</h4>
           <div class="rating">
             <span> ${productvo.product_name_kor}</span>
           </div>
-          <h3>${latestMoney}원</h3>
+          <h3><span id="biglow">${latestMoney}</span>원</h3>
           <div class="product__details__option">
             <div class="product__details__option__size"
               style="width: 100%; display: flex; justify-content: space-between;">
@@ -165,7 +156,7 @@
                 <i class="fa-solid fa-caret-up"></i> 
               </a>
               <%------------- Modal ---------------%>
-              <div class="modal fade" id="followModal" role="dialog">
+              <div class="modal fade" id="followModal" role="dialog" style="display:hidden;">
                 <!--   이곳에 적어준 id 값을 토대로 모달을 호출하게 된다.  -->
                 <div class="modal-dialog">
                   <!-- Modal content-->
@@ -182,7 +173,7 @@
                         <div>
                           <ul>
                             <li>
-                              <button class="btn btn-outline-dark">모든사이즈 <br>${lowBids}</button>
+                              <button class="btn btn-outline-dark" id="clickForsizeAll"><span id="forAllSize">모든사이즈</span> <br><span id="forLowBids">${lowBids}</span></button>
                             </li>
 
                             <c:forEach var="theLowestBids" items="${theLowestBids}" varStatus="status">
@@ -210,16 +201,14 @@
                 <span
                   style="float: left; font-size: 2rem; border-right: 1px solid white; padding-right: 10px;">구매</span>
                 <span style="vertical-align: middle;"><b>${lowBids}</b>원</span><br>
-                <span style="vertical-align: middle; font-size: 0.8rem;">즉시
-                  구매가</span>
+                <span style="vertical-align: middle; font-size: 0.8rem;">즉시 구매가</span>
               </button>
               <button type="button" class="btn btn-success"
                 style="width: 49%; background-color: #41b979">
                 <span
                   style="float: left; font-size: 2rem; border-right: 1px solid white; padding-right: 10px;">판매</span>
                 <span style="vertical-align: middle;"><b>${lowAsks}</b>원</span><br>
-                <span style="vertical-align: middle; font-size: 0.8rem;">즉시
-                  판매가</span>
+                <span style="vertical-align: middle; font-size: 0.8rem;">즉시 판매가</span>
               </button>
             </div>
             <div style="background-color: yellow">
@@ -514,60 +503,100 @@
 <script>
     /*팔로우 버튼 클릭*/
     $('.follower').click(function(){
-        $('#followModal').modal();   //id가 "followModal"인 모달창을 열어준다. 
+        $('#followModal').modal('show');   //id가 "followModal"인 모달창을 열어준다. 
         $('.modal-title').text("사이즈");    //modal 의 header 부분에 "팔로우"라는 값을 넣어준다. 
         
         
+        $('#clickForsizeAll').click(function(){
+          $("#forSize").html($('#forAllSize').clone());
+          $("#biglow").html($('#forLowBids').clone());
+          $('#followModal').modal('hide');
+         })
+        
         $('#clickForSizeBtn0').click(function(){
           $("#forSize").html($('#clickForSize0').clone());
+          $("#biglow").html($('#clickForMoney0').clone());
+          $('#followModal').modal('hide');   //id가 "followModal"인 모달창을 닫아준다.
          })
          $('#clickForSizeBtn1').click(function(){
            $("#forSize").html($('#clickForSize1').clone());
+           $("#biglow").html($('#clickForMoney1').clone());
+           $('#followModal').modal('hide');
           })
           $('#clickForSizeBtn2').click(function(){
             $("#forSize").html($('#clickForSize2').clone());
+            $("#biglow").html($('#clickForMoney2').clone());
+            $('#followModal').modal('hide');
            })
            $('#clickForSizeBtn3').click(function(){
              $("#forSize").html($('#clickForSize3').clone());
+             $("#biglow").html($('#clickForMoney3').clone());
+             $('#followModal').modal('hide');
             })
             $('#clickForSizeBtn4').click(function(){
               $("#forSize").html($('#clickForSize4').clone());
+              $("#biglow").html($('#clickForMoney4').clone());
+              $('#followModal').modal('hide');
              })
              $('#clickForSizeBtn5').click(function(){
                $("#forSize").html($('#clickForSize5').clone());
+               $("#biglow").html($('#clickForMoney5').clone());
+               $('#followModal').modal('hide');
               })
               $('#clickForSizeBtn6').click(function(){
                 $("#forSize").html($('#clickForSize6').clone());
+                $("#biglow").html($('#clickForMoney6').clone());
+                $('#followModal').modal('hide');
                })
                $('#clickForSizeBtn7').click(function(){
                  $("#forSize").html($('#clickForSize7').clone());
+                 $("#biglow").html($('#clickForMoney7').clone());
+                 $('#followModal').modal('hide');
                 })
                 $('#clickForSizeBtn8').click(function(){
                   $("#forSize").html($('#clickForSize8').clone());
+                  $("#biglow").html($('#clickForMoney8').clone());
+                  $('#followModal').modal('hide');
                  })
                  $('#clickForSizeBtn9').click(function(){
                    $("#forSize").html($('#clickForSize9').clone());
+                   $("#biglow").html($('#clickForMoney9').clone());
+                   $('#followModal').modal('hide');
                   })
                   $('#clickForSizeBtn10').click(function(){
                     $("#forSize").html($('#clickForSize10').clone());
+                    $("#biglow").html($('#clickForMoney10').clone());
+                    $('#followModal').modal('hide');
                    })
                    $('#clickForSizeBtn11').click(function(){
                      $("#forSize").html($('#clickForSize11').clone());
+                     $("#biglow").html($('#clickForMoney11').clone());
+                     $('#followModal').modal('hide');
                     })
                     $('#clickForSizeBtn12').click(function(){
                       $("#forSize").html($('#clickForSize12').clone());
+                      $("#biglow").html($('#clickForMoney12').clone());
+                      $('#followModal').modal('hide');
                      })
                      $('#clickForSizeBtn13').click(function(){
                        $("#forSize").html($('#clickForSize13').clone());
+                       $("#biglow").html($('#clickForMoney13').clone());
+                       $('#followModal').modal('hide');
                       })
                       $('#clickForSizeBtn14').click(function(){
                         $("#forSize").html($('#clickForSize14').clone());
+                        $("#biglow").html($('#clickForMoney14').clone());
+                        $('#followModal').modal('hide');
                        })
                        $('#clickForSizeBtn15').click(function(){
                          $("#forSize").html($('#clickForSize15').clone());
+                         $("#biglow").html($('#clickForMoney15').clone());
+                         $('#followModal').modal('hide');
                         })
                         $('#clickForSizeBtn16').click(function(){
                           $("#forSize").html($('#clickForSize16').clone());
+                          $("#biglow").html($('#clickForMoney16').clone());
+                          $('#followModal').modal('hide');
                          })
           
           
