@@ -47,6 +47,7 @@
     justify-content: center;
     box-shadow: 0 0 10px 5px;
     border-radius: 20px;
+    font-weight : bold;
 
 }
 
@@ -64,6 +65,7 @@
     justify-content: center;
     box-shadow: 0 0 10px 5px;
     border-radius: 20px;
+    font-weight : bold;
 
 }
 
@@ -81,6 +83,7 @@
     justify-content: center;
     box-shadow: 0 0 10px 5px;
     border-radius: 20px;
+    font-weight : bold;
 }
 
 .couponinfo {
@@ -97,12 +100,13 @@
     justify-content: center;
     box-shadow: 0 0 10px 5px;
     border-radius: 20px;
+    font-weight : bold;
 
 }
 
 .mybtn {
 
-	border: 2px dotted black;
+	border: 1px dashed black;
 	
     position: relative;
     display: flex;
@@ -117,9 +121,10 @@
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: center;
-    transition : 0.3s;
+    transition : 1s;
     color : black;
     background : white;
+    font-weight : bold;
 }
 
 .mybtn:hover {
@@ -129,6 +134,7 @@
 	color : white;
 	transition : 0.3s;
 	box-shadow : 0 0 10px 5px;
+	font-weight : bold;
 }
 
 </style>

@@ -83,6 +83,18 @@
 	]]>
 	
 </insert>
-	
+
+<!-- 쿠폰을 조회해올 때, 어제날짜 기준으로 expiry_date가 지난것은 제외시킨다. -->
+<select id="checkcoupon"  resultMap="eventResult" parameterType="java.util.Map">
+    <![CDATA[
+	    	select * from shukream_event 
+	    	where 
+	    	expiry_date > sysdate-1 AND
+	    	member_id=#{id} AND 
+	    	not d_ticket=#{d_ticket} AND 
+	    	d_confirm=#{d_confirm} 
+	    	order by d_idx desc
+   	]]>
+</select>	
 
 </mapper>
