@@ -35,4 +35,9 @@ public class HomeService {
 		
 		return mainProductMap;
 	}
+
+	public String likeList(String email) {
+		
+		return homeDAO.likeList(email);
+	}
 }
