@@ -17,11 +17,7 @@
     <put-attribute name="body" value="/WEB-INF/views/order/order-detail.jsp" />
   </definition>
   
-  <definition name="/order/buy" extends="baseLayout">
-    <put-attribute name="title" value="주문상세 페이지" />
-    <put-attribute name="body" value="/WEB-INF/views/pages/checkout.jsp" />
-  </definition>
-  <definition name="/order/sell" extends="baseLayout">
+  <definition name="/order/checkout" extends="baseLayout">
     <put-attribute name="title" value="주문상세 페이지" />
     <put-attribute name="body" value="/WEB-INF/views/pages/checkout.jsp" />
   </definition>

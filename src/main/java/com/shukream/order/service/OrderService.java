@@ -28,4 +28,8 @@ public class OrderService {
 		return orderDAO.selectProduct(product_id);
 	}
 
+	public void insertNewBids(Map<String, Object> paramMap) {
+		orderDAO.insertNewBids(paramMap);
+	}
+
 }

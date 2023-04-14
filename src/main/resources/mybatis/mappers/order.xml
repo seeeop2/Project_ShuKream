@@ -95,5 +95,71 @@ INSERT	INTO BIDS(
 	select * from products where product_id = #{product_id}
 </select>
 
+<!-- asks_idx가없으면? <- 판매입찰로 걸린 물품이 없다는 뜻 이전페이지에서 product_idx와 size넘겨준 값을 받아 새로운 구매입찰을 생성, 
+	  참고* BIDS_PRICE는 구매희망가격
+	  		 BIDS_ORDER_NUMBER 는??
+	  		 
+-->
+<!-- asks_idx가 있으면? <- 즉시구매로 판매입찰테이블에 있는 IDX와 연결하여 데이터들을 넣어 새로운 구매입찰을 생성 -->
+<insert id="insertNewBids" parameterType="Map">
+	<choose>
+		<when test="asks_idx eq null">
+		INSERT INTO BIDS(BIDS_SIZE_IDX,
+						 BIDS_PRICE,
+						 BIDS_REGDATE,
+						 BIDS_UPDATE,
+						 BIDS_EXPIRATION,
+						 BIDS_ORDER_STATE_IDX,
+						 BIDS_MATCHED_DATE,
+						 BODS_TOTAL_PRICE,
+						 BIDS_ORDER_NUMBER,
+						 BIDS_SHIP_IDX,
+						 BIDS_PRODUCT_ID)
+						VALUES
+						(260,
+						30000,
+						SYSDATE,
+						SYSDATE,
+						NULL,
+						0,
+						NULL,
+						30000,
+						NULL,
+						NULL,
+						1
+						)
+		</when>
+		<otherwise>
+			INSERT INTO BIDS(BIDS_SIZE_IDX,
+							 BIDS_PRICE,
+							 BIDS_REGDATE,
+							 BIDS_UPDATE,
+							 BIDS_EXPIRATION,
+							 BIDS_ORDER_STATE_IDX,
+							 BIDS_MATCHED_DATE,
+							 BODS_TOTAL_PRICE,
+							 BIDS_ORDER_NUMBER,
+							 BIDS_SHIP_IDX,
+							 BIDS_PRODUCT_ID)
+						 
+						 SELECT 
+							A.ASKS_SIZE_IDX, 
+							A.ASKS_PRICE, 
+							SYSDATE, 
+							SYSDATE,
+							NULL,
+							1,
+							SYSDATE, 
+							A.ASKS_PRICE,
+							NULL,
+							0,
+							A.ASKS_PRODUCT_ID
+							FROM ASKS A WHERE A.ASKS_IDX = #{asks_idx}
+		</otherwise>
+	</choose>			
+	
+</insert>
+
+
 
 </mapper>

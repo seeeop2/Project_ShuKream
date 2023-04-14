@@ -63,6 +63,7 @@
 					<input type="radio" id="check" name="option" value="10" onchange="setDisplay()" > 
 					<label for="check"><span style="font-size:24px;">즉시구매</span></label>
 					<input type="hidden" name="type" value="buy">
+					<input type="hidden" name="asks_idx" value="${buyAsks.ASKS_IDX}">
 	            </h4>
 				<div class="checkout__input">
 					<div id="price">
@@ -80,6 +81,7 @@
 					<input type="radio" id="check" name="option" value="10" onchange="setDisplay()" > 
 					<label for="check"><span style="font-size:24px;">즉시판매</span></label>
 					<input type="hidden" name="type" value="sell">
+<%-- 			판매로 들어왔을시 IDX를 넘겨줌		<input type="hidden" name="bids_idx" value="${sellBids.BIDS_IDX}"> --%>
 	            </h4>
 				<div class="checkout__input">
 					<div id="price">

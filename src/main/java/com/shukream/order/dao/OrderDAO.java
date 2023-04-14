@@ -16,18 +16,9 @@ public class OrderDAO {
 	SqlSession sqlSession;
 	
 	public void checkOut(OrderVO vo) {
-		insertBids();
-		insertOrder();
+//		insertBids();
+//		insertOrder();
 		sqlSession.insert("mapper.order.checkOut", vo);
-	}
-	
-	//구매입찰로 들어온건지, 판매입찰로 들어온건지 확인해서 각각 다른 sql 구문 실행필요
-	public void insertBids() {
-		sqlSession.insert("mapper.order.insertBids");
-	}
-	
-	public void insertAsks() {
-		sqlSession.insert("mapper.order.insertAsks");
 	}
 	
 	public void insertOrder() {
@@ -39,8 +30,11 @@ public class OrderDAO {
 	}
 
 	public Map<String, Object> selectProduct(int product_id) {
-		
 		return sqlSession.selectOne("mapper.order.selectProduct",product_id);
+	}
+
+	public void insertNewBids(Map<String, Object> paramMap) {
+		sqlSession.insert("mapper.order.insertNewBids",paramMap);
 	}
 
 }
