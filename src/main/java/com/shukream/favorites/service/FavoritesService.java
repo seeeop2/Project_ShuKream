@@ -41,14 +41,14 @@ public class FavoritesService{
 */	
 	
 	
-	public List<Map<String, Object>> myLikeList(int page, int size, String like_mem_id) {
+	public List<Map<String, Object>> myLikeList(int page, int size, String email) {
 		
-		int totalCount = favoritesDAO.myLikeCount(like_mem_id);
+		int totalCount = favoritesDAO.myLikeCount(email);
 		Pagination pagination = new Pagination(page, size, totalCount);
 		int startIndex = pagination.getStartIndex();
 		int endIndex = pagination.getEndIndex();
 		
-		return favoritesDAO.myLikeList(startIndex,endIndex,like_mem_id);
+		return favoritesDAO.myLikeList(startIndex,endIndex,email);
 	}
 
 	
@@ -65,6 +65,34 @@ public class FavoritesService{
 		
 		 favoritesDAO.deleteLikeList(likeVO);
 		
+	}
+
+
+
+	public int LikeCheck(String product_id, String email) {
+		
+		LikeVO likeVO = new LikeVO();
+		likeVO.setLike_mem_id(email);
+		likeVO.setLike_product(product_id);
+		return favoritesDAO.LikeCheck(likeVO);
+	}
+
+
+
+	public void deleteLike(String product_id, String email) {
+			
+		LikeVO likeVO = new LikeVO();
+		likeVO.setLike_mem_id(email);
+		likeVO.setLike_product(product_id);
+		
+		favoritesDAO.deleteLike(likeVO);
+	}
+
+
+
+	public int insertLike(LikeVO likeVO) {
+    	System.out.println("2");
+		return favoritesDAO.insertLike(likeVO);
 	}
 
 

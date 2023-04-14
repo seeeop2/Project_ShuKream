@@ -1,5 +1,6 @@
 package com.shukream.favorites.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -42,34 +43,25 @@ public class FavoritesController {
 
 		ModelAndView mav = new ModelAndView();
 
-		HttpSession session = request.getSession();
 		String viewName = (String) request.getAttribute("viewName");
 		logger.info(viewName);
 
-//		LikeVO likeVO =(LikeVO)session.getAttribute("id");	
-//		String like_mem_id = likeVO.getLike_mem_id();
+		HttpSession session = request.getSession();
+		String  email = (String)session.getAttribute("email");
 
-		String like_mem_id = "admin";
 
-//		likeVO.setLike_mem_id(like_mem_id);
-
-//		Map<String, List> likeMap = favoritesService.myLikeList(likeVO);
-	 	List<Map<String, Object>> likeMap = favoritesService.myLikeList(page,size,like_mem_id);
+	 	List<Map<String, Object>> likeMap = favoritesService.myLikeList(page,size,email);
 	 	
-	 	int totalCount = favoritesService.myLikeCount(like_mem_id);
+	 	int totalCount = favoritesService.myLikeCount(email);
 	    Pagination pagination = new Pagination(page, size, totalCount);
 		
 		mav.setViewName(viewName);
 		
-//		session.setAttribute("likeMap", likeMap);
-		
-		System.out.println(likeMap);
 		mav.addObject("likeMap", likeMap);
 	    mav.addObject("pagination", pagination);
 	    mav.addObject("totalCount",totalCount);
 	    mav.setViewName(viewName);
 		
-	    System.out.println("mav:"+mav);
 	    
 		return mav;
 	}
@@ -77,22 +69,68 @@ public class FavoritesController {
 	@RequestMapping(value = "/favoritesDel.do", method = RequestMethod.GET)
 	public ModelAndView removeCartGoods(@RequestParam("like_idx") int like_idx, HttpServletRequest request,
 										HttpServletResponse response) throws Exception {
-//		HttpSession session=request.getSession();
-//		LikeVO likeVO =(LikeVO)session.getAttribute("id");	
-//		String like_mem_id = likeVO.getLike_mem_id();
-
-		String like_mem_id = "admin";
+		
+		HttpSession session = request.getSession();
+		String  email = (String)session.getAttribute("email");
 		
 		ModelAndView mav = new ModelAndView();
 		
-		likeVO.setLike_mem_id(like_mem_id);
+		likeVO.setLike_mem_id(email);
 		
 		likeVO.setLike_idx(like_idx);
 		
+		System.out.println(email);
+		System.out.println(like_idx);
 		favoritesService.removeLikeList(likeVO);
 		mav.setViewName("redirect:/favorites/favoritesList.do");
 		return mav;
 	}
 	 
-	 
-}
+	@RequestMapping(value = "/favoritesLike.do", method = RequestMethod.POST)
+	public ModelAndView likeProduct(@RequestParam("PRODUCT_ID") String product_id  ,
+									@RequestParam("IMG_FILE") String img_file  ,
+									@RequestParam("PRODUCT_NAME_EN") String product_name_en  ,
+									@RequestParam("PRODUCT_NAME_KOR") String product_name_kor  ,
+									@RequestParam("PRODUCT_PRICE") int product_price  ,
+									HttpServletRequest request,
+									HttpServletResponse response) throws Exception {
+		
+		HttpSession session = request.getSession();
+		String  email = (String)session.getAttribute("email");
+		
+		int result1 = favoritesService.LikeCheck(product_id , email);
+        
+		PrintWriter out = response.getWriter();
+        if (result1 == 1) {// 1이면 이미 테이블에 있다 == 이미 좋아요를 눌렀다.
+            
+        	
+        	System.out.println("좋아요 삭제");
+            favoritesService.deleteLike(product_id, email);
+            //int result2 = boarddao.getOnlyLikeCount(b_idx2);
+            result1 = 0; 
+        out.print(result1);
+
+        }else { // 테이블에 없다면?
+    		LikeVO likeVO = new LikeVO();
+    		likeVO.setLike_mem_id(email);
+    		likeVO.setLike_product(product_id);
+    		likeVO.setLike_img_file(img_file);
+    		likeVO.setLike_product_name_en(product_name_en);
+    		likeVO.setLike_product_name_kor(product_name_kor);
+    		likeVO.setLike_product_price(product_price);
+        	
+        	int result2 = favoritesService.insertLike(likeVO);
+            System.out.println("result2:"+result2);
+        	if (result2 == 1) {
+              System.out.println("like투입성공");
+              out.print(result2);
+        	} else {
+              System.out.println("like투입실패");
+            }
+          }
+		return null;
+        }
+	
+	}
+	
+	

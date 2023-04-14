@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 public class LikeVO {
 	
 	int like_idx; //관심등록인덱스
-	String like_product_idx; //상품번호
+	String like_product; //상품번호
 	String like_mem_id; //회원아이디
 	String like_product_name_en; //관심상품 이름 (영어)
 	String like_product_name_kor; //관심상품 이름 (한국어)
@@ -44,11 +44,11 @@ public class LikeVO {
 	public void setLike_idx(int like_idx) {
 		this.like_idx = like_idx;
 	}
-	public String getLike_product_idx() {
-		return like_product_idx;
+	public String getLike_product() {
+		return like_product;
 	}
-	public void setLike_product_idx(String like_product_idx) {
-		this.like_product_idx = like_product_idx;
+	public void setLike_product(String like_product) {
+		this.like_product = like_product;
 	}
 	public String getLike_mem_id() {
 		return like_mem_id;

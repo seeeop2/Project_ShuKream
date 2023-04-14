@@ -153,44 +153,48 @@
 			<div class="favorites_title">
 				<h4 class="favorites_title_2">관심 상품</h4>
 			</div>
-<%-- 			
-			<div class="goShop">
-				<p >추가하신 관심 상품이 없습니다.</p>
-				<a href="${contextPath}/shop/list.do" id="goShop_a">SHOP바로가기</a>			
-			</div>
- --%>
+			<c:choose>
+			<c:when test="${totalCount eq 0}">
+				<div class="goShop">
+					<p >추가하신 관심 상품이 없습니다.</p>
+					<a href="${contextPath}/shop/list.do" id="goShop_a">SHOP바로가기</a>			
+				</div>
+			</c:when>
 			
-			<ul>
-			
-				<c:forEach var="L" items="${likeMap}" varStatus="">
-					<li>
-						<div id="favorites_list">
-							<div id="">
-								<img id=favorites_img src="${contextPath}/resources/img/product/sneakers/${L.LIKE_IMG_FILE}">
-							</div>
-							<div id="favorites_info">
-								<p id="name_kor">${L.LIKE_PRODUCT_NAME_KOR}</p>
-								<p id="name_en">${L.LIKE_PRODUCT_NAME_EN}</p>
-							</div>
-							<div id="favorites_buy">
-								<a href="${contextPath}/shop/list.do">
-									<div id="buyBtn">
-										<div id="buyBtn2">
-											<strong>구매</strong>
+			<c:otherwise> 
+				<ul>
+					<c:forEach var="L" items="${likeMap}" varStatus="">
+						<li>
+							<div id="favorites_list">
+								<div id="">
+									<img id=favorites_img src="${contextPath}/resources/img/product/sneakers/${L.LIKE_IMG_FILE}">
+								</div>
+								<div id="favorites_info">
+									<p id="name_kor">${L.LIKE_PRODUCT_NAME_KOR}</p>
+									<p id="name_en">${L.LIKE_PRODUCT_NAME_EN}</p>
+								</div>
+								<div id="favorites_buy">
+									<a href="${contextPath}/shop/list.do">
+										<div id="buyBtn">
+											<div id="buyBtn2">
+												<strong>구매</strong>
+											</div>
+												
+											<div id="buyPrice">
+												<p id="price">${L.LIKE_PRODUCT_PRICE}</p>
+												<p id="price2">즉시 구매가</p>
+											</div>								
 										</div>
-											
-										<div id="buyPrice">
-											<p id="price">${L.LIKE_PRODUCT_PRICE}</p>
-											<p id="price2">즉시 구매가</p>
-										</div>								
-									</div>
-								</a>
-								<a id="del" href="${contextPath}/favorites/favoritesDel.do?like_idx=${L.LIKE_IDX}">삭제</a>
-							</div>						
-						</div>
-					</li>			
-				</c:forEach>
-			</ul>
+									</a>
+									<a id="del" href="${contextPath}/favorites/favoritesDel.do?like_idx=${L.LIKE_IDX}">삭제</a>
+								</div>						
+							</div>
+						</li>			
+					</c:forEach>
+				</ul>
+			</c:otherwise>
+			</c:choose>
+		
 		<div class="row">
           <div class="col-lg-12">
             <div class="product__pagination">
@@ -218,10 +222,8 @@
 	
 	</div>	
 
-
 <script type="text/javascript">
 		
-	$(document).ready(fucntion(){
 		
 		$("#goShop_a").mouseover(function(){
 		    
@@ -236,7 +238,6 @@
 		
 		});
 		
-	})	
 		
 </script>
 
