@@ -60,7 +60,7 @@
 	    	select * from  shukream_event 
 	    	where  
 		    member_id=#{member_id}
-		    order by d_idx asc
+		    order by d_idx desc
    	]]>
 </select>
 
