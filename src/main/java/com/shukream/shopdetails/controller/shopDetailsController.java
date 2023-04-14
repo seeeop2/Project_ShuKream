@@ -57,6 +57,12 @@ public class shopDetailsController {
     model.addAttribute("theLowestBids",map);
     model.addAttribute("latestMoney",latestMoney);
     return viewName;
+  }
+  
+  @RequestMapping(value = "/getMoneyForModal.do", method = RequestMethod.GET)
+  public void getMoneyForModal() {
+    
+    
     
   }
 

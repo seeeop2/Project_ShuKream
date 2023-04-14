@@ -36,14 +36,16 @@ public class ShopController {
 		  				@RequestParam(name="size", defaultValue = "6") int size,
 		  				HttpServletRequest request, HttpServletResponse response) {
 	
-	  HttpSession session = request.getSession();
+	HttpSession session = request.getSession();
 	String  email = (String)session.getAttribute("email");
     
 	ModelAndView mav = new ModelAndView();
     
     List<Map<String, Object>> productList = shopService.shopMainProductsList(page,size,opt,division);
+    if(email != null) {
     String likeList = shopService.likeList(email);
-    
+    mav.addObject("likeList",likeList);
+    }
     int totalCount = shopService.shopMainProductCount(opt,division);
     Pagination pagination = new Pagination(page, size, totalCount);
     
@@ -56,7 +58,6 @@ public class ShopController {
     mav.addObject("totalCount",totalCount);
     mav.addObject("opt",opt);
     mav.addObject("division",division);
-    mav.addObject("likeList",likeList);
     mav.setViewName(viewName);
 
     return mav;

@@ -167,7 +167,14 @@
 						<li>
 							<div id="favorites_list">
 								<div id="">
-									<img id=favorites_img src="${contextPath}/resources/img/product/sneakers/${L.LIKE_IMG_FILE}">
+									<c:choose>
+										<c:when test="${L.LIKE_PRODUCT <= 30}">
+											<img id=favorites_img src="${contextPath}/resources/img/product/sneakers/${L.LIKE_IMG_FILE}">
+										</c:when>
+										<c:otherwise> 
+											<img id=favorites_img src="${contextPath}/resources/img/product/slipper/${L.LIKE_IMG_FILE}">
+										</c:otherwise>
+									</c:choose>
 								</div>
 								<div id="favorites_info">
 									<p id="name_kor">${L.LIKE_PRODUCT_NAME_KOR}</p>

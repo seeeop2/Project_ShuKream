@@ -49,17 +49,17 @@ public class FavoritesController {
 		HttpSession session = request.getSession();
 		String  email = (String)session.getAttribute("email");
 
-
-	 	List<Map<String, Object>> likeMap = favoritesService.myLikeList(page,size,email);
+	    if(email != null) {
+		 	List<Map<String, Object>> likeMap = favoritesService.myLikeList(page,size,email);
+			mav.addObject("likeMap", likeMap);
+		 	int totalCount = favoritesService.myLikeCount(email);
+		    Pagination pagination = new Pagination(page, size, totalCount);
+			mav.setViewName(viewName);
+		    mav.addObject("pagination", pagination);
+		    mav.addObject("totalCount",totalCount);	
+	    }
 	 	
-	 	int totalCount = favoritesService.myLikeCount(email);
-	    Pagination pagination = new Pagination(page, size, totalCount);
-		
-		mav.setViewName(viewName);
-		
-		mav.addObject("likeMap", likeMap);
-	    mav.addObject("pagination", pagination);
-	    mav.addObject("totalCount",totalCount);
+
 	    mav.setViewName(viewName);
 		
 	    
