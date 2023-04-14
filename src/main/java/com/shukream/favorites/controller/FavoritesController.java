@@ -111,7 +111,6 @@ public class FavoritesController {
         out.print(result1);
 
         }else { // 테이블에 없다면?
-        	System.out.println("5");
     		LikeVO likeVO = new LikeVO();
     		likeVO.setLike_mem_id(email);
     		likeVO.setLike_product(product_id);
@@ -120,7 +119,6 @@ public class FavoritesController {
     		likeVO.setLike_product_name_kor(product_name_kor);
     		likeVO.setLike_product_price(product_price);
         	
-        	System.out.println("1");
         	int result2 = favoritesService.insertLike(likeVO);
             System.out.println("result2:"+result2);
         	if (result2 == 1) {
