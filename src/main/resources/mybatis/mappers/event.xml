@@ -71,13 +71,15 @@
 		   							   u_cnt,
 		   							   d_cnt,
 		   							   d_ticket,
-		   							   d_contents)
+		   							   d_contents,
+		   							   d_confirm)
 		                                     values(#{member_id},
 		                                     		#{a_cnt},
 		                                     		#{u_cnt},
 		                                     		#{d_cnt},
 		                                     		#{d_ticket},
-		                                     		#{d_contents})
+		                                     		#{d_contents},
+		                                     		#{d_confirm})
 	]]>
 	
 </insert>
