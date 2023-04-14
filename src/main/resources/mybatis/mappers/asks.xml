@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.asks">
+<!-- 리절트 맵 정의 -->
+  	<resultMap id="AsksResult" type="AsksVO">
+	   <result property="asks_idx" column="asks_idx" />
+	   <result property="asks_size_idx" column="asks_size_idx" />
+     <result property="asks_price" column="asks_price" />
+	   <result property="asks_regdate" column="asks_regdate" />
+	   <result property="asks_update" column="asks_update" />
+	   <result property="asks_expiration" column="asks_expiration" />
+	   <result property="asks_order_state_idx" column="asks_order_state_idx" />
+     <result property="asks_matched_date" column="asks_matched_date" />
+     <result property="asks_total_price" column="asks_total_price" />
+     <result property="asks_order_number" column="asks_order_number" />
+     <result property="asks_address" column="asks_address" />
+	</resultMap>	
+	
+<select id="getAsksList" resultMap="AsksResult">
+	<![CDATA[
+    SELECT * FROM ASKS
+	]]>
+</select>	
+
+<!-- 모든 사이즈 클릭시 버튼 하단에 나타낼 값 -->
+<select id="selectLowAsks" resultType="_int">
+  <![CDATA[
+    SELECT ASKS_PRICE
+    FROM ( SELECT * FROM ASKS ORDER BY ASKS_PRICE)
+    WHERE ROWNUM = 1
+  ]]>
+</select> 
+
+
+<!-- 모든 사이즈 클릭시 버튼 하단에 나타낼 값..수정중... -->
+<select id="selectLowAsksRownum_" parameterType="int"  resultMap="AsksResult">
+  <![CDATA[
+
+
+SELECT * FROM ASKS WHERE ASKS_SIZE_IDX = #{size} ORDER BY ASKS_PRICE
+
+  ]]>
+</select> 
+
+<!-- 모든 사이즈 클릭시 버튼 하단에 나타낼 값..수정중... -->
+<select id="selectLowAsksRownum" parameterType="int"  resultMap="AsksResult">
+  <![CDATA[
+
+SELECT * FROM(
+SELECT * FROM ASKS WHERE ASKS_SIZE_IDX = #{size} ORDER BY ASKS_PRICE)
+WHERE ROWNUM =1
+  ]]>
+</select> 
+
+<select id="selectLowAsksAll" parameterType="hashmap"  resultType="int">
+  <![CDATA[
+
+
+SELECT NVL(ASKS_PRICE,0)
+from(
+select * from 
+(SELECT * FROM ASKS WHERE ASKS_PRODUCT_ID = #{product_id} and asks_size_idx = #{size1} order by asks_price )
+WHERE ROWNUM =1)
+RIGHT OUTER JOIN DUAL 
+ON ASKS_SIZE_IDX = #{size2}
+  ]]>
+</select> 
+
+<select id="selectLatestOrder"  parameterType="map" resultType="map">
+  <![CDATA[
+
+select nvl(asks_price,0)ASKS_PRICE
+from 
+(select * from
+(SELECT * FROM (SELECT A.*, B.*
+FROM ORDERS A, ASKS B
+WHERE A.ORDERS_ASK_IDX = B.ASKS_IDX
+order by asks_regdate desc) WHERE ASKS_PRODUCT_ID = #{product_id1})
+where rownum = 1)
+RIGHT OUTER JOIN DUAL
+on asks_product_id = #{product_id2}
+
+
+
+  ]]>
+</select> 
+
+
+<!--////////////////////////////     SELECT     ////////////////////////////-->
+<insert id="insertAsks" parameterType="AsksVO">
+
+<!--   <selectKey resultType="Integer" keyProperty="asks_idx" order="BEFORE">
+    select asks_seq.nextval from dual
+  </selectKey>
+ -->  
+  <![CDATA[
+    INSERT INTO ASKS
+    (
+    asks_idx,
+    asks_size_idx,
+    asks_price,
+    asks_regdate,
+    asks_product_id
+    )
+    VALUES
+    (
+    #{asks_idx},
+    #{asks_size_idx},
+    #{asks_price},
+    sysdate,
+    #{asks_product_id}
+    )
+  ]]>
+  
+</insert>
+
+
+	
+
+</mapper>

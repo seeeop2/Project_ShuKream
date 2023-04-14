@@ -13,16 +13,24 @@ import com.shukream.member.vo.MemberVO;
 public class MemberDAO {
 
 	@Autowired
-	private SqlSession sqlSession;	
-	
-	public MemberVO login(String user_email) throws DataAccessException{
+   private SqlSession sqlSession;
+   
+   public MemberVO login(Map<String, String> loginMap) throws DataAccessException{
+      
+      MemberVO member=(MemberVO)sqlSession.selectOne("mapper.member.login", loginMap);
+      
+      return member;
+   }
+
+	public void insertNewMember(MemberVO memberVO) throws DataAccessException {
+		sqlSession.insert("mapper.member.insertNewMember",memberVO);
 		
-		MemberVO member=(MemberVO)sqlSession.selectOne("mapper.member.login",user_email);
-		
-	   return member;
 	}
 
+	public Map emailCheck(Map map){
+		Map result = sqlSession.selectOne("mapper.member.emailCheck", map);
+		return result;
+	}
 	
-	
-	
+
 }

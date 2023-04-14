@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.favorites">
+	<!-- 리절트 맵 정의 -->
+<!-- 	
+	<resultMap id="likeResult" type="LikeVO">
+		<result property="like_idx" column="like_idx" />
+		<result property="like_product_idx" column="like_product_idx" />
+		<result property="like_mem_id" column="like_mem_id" />
+		<result property="like_product_name_en" column="like_product_name_en" />
+		<result property="like_product_name_kor" column="like_product_name_kor" />
+		<result property="like_product_price" column="like_product_price" />
+		<result property="like_img_file" column="like_img_file" />
+	
+	</resultMap>
+-->
+	
+<!-- 
+	<resultMap id="favoritesResult" type="FavoritesVO">
+		<result property="product_id" column="product_id" />
+		<result property="product_name_en" column="product_name_en" />
+		<result property="product_name_kor" column="product_name_kor" />
+		<result property="model_number" column="model_number" />
+		<result property="product_color" column="product_color" />
+		<result property="product_price" column="product_price" />
+		<result property="product_release_date" column="product_release_date" />
+		
+		<result property="img_id" column="img_id" />
+		<result property="img_product_idx" column="img_product_idx" />
+		<result property="img_realfile" column="img_realfile" />
+		<result property="img_file" column="img_file" />
+		<result property="img_thumb" column="img_thumb" />
+		<result property="img_repthumb" column="img_repthumb" />
+		<result property="img_del" column="img_del" />
+		
+	</resultMap>
+
+ -->
+	
+<!-- 	
+	<select id="selectLikeList"  parameterType="likeVO"  resultMap="likeResult"   >
+	    <![CDATA[
+
+			SELECT * FROM PRODUCT_LIKE 
+			WHERE LIKE_MEM_ID=#{like_mem_id} 
+			
+		]]>
+	</select>
+ -->	
+	
+	<select id="myLikeList" resultType="Map" parameterType="Map">
+		<![CDATA[
+			SELECT *
+			FROM (
+			  SELECT PRODUCT_LIKE.*, ROWNUM AS rnum
+			  FROM PRODUCT_LIKE
+			  WHERE PRODUCT_LIKE.LIKE_MEM_ID = #{like_mem_id}
+			  ORDER BY PRODUCT_LIKE.LIKE_IDX DESC
+			) 
+			WHERE rnum BETWEEN #{start} AND #{end}
+		]]>
+	</select>	
+	
+	<select id="myLikeCount" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM PRODUCT_LIKE
+			WHERE LIKE_MEM_ID =#{like_mem_id}
+		]]>
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+<!-- 
+	<select id="selectFavoritesList" parameterType="java.util.Map" resultMap="favoritesResult" >
+  		<![CDATA[
+		    
+	        SELECT P.product_name_en, P.product_name_kor, P.product_price,
+   	  		I.img_file
+		    FROM PRODUCTS P,IMAGES I
+		    WHERE P.PRODUCT_ID = I.IMG_ID 
+            AND P.PRODUCT_ID IN
+				
+		]]>
+		
+		<foreach item="item" collection="list" open="("  separator=","  close=")">
+			#{item.like_idx}
+		</foreach>    
+ 
+	
+	</select>
+ -->
+	
+	<delete id="deleteLikeList" parameterType="likeVO">
+	    <![CDATA[
+	      delete from PRODUCT_LIKE
+	      where LIKE_IDX=#{like_idx} and
+	      		LIKE_MEM_ID=#{like_mem_id}
+    	]]>
+	</delete>
+	
+
+</mapper>

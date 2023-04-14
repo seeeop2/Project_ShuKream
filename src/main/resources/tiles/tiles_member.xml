@@ -5,6 +5,7 @@
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
        
 <tiles-definitions>
+  <!-- 기본 레이아웃 설정 -->
   <definition name="baseLayout"
     template="/WEB-INF/views/common/layout.jsp">
     <put-attribute name="title" value="" />
@@ -12,10 +13,16 @@
     <put-attribute name="body" value="" />
     <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
   </definition>
-  
-  <definition name="/member/login" extends="baseLayout">
-    <put-attribute name="title" value="로그인페이지" />
-    <put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp" />
+
+  <!-- member 페이지 설정 -->
+  <definition name="/member/loginForm" extends="baseLayout">
+        <put-attribute name="title" value="로그인 페이지" />
+        <put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp" />
+  </definition>
+
+  <definition name="/member/addMemberForm" extends="baseLayout">
+        <put-attribute name="title" value="회원가입 페이지" />
+        <put-attribute name="body" value="/WEB-INF/views/member/addMember.jsp" />
   </definition>
 
 </tiles-definitions>

@@ -211,31 +211,32 @@ $( document ).ready(function() {
 // 로그인 기능 구현되었을 때 , id값도 같이 넘길 것
 function reply_click(clicked_value){
 	
+	var id = "${id}";
+	
 	if(clicked_value == 1.0){
 		
 		alert("무료 배송권 당첨!! 당첨내역으로 이동합니다!");
 		
-		location.replace("${contextPath}/event/detailresult.do?ticket=freeshipping");
-		
+		location.replace("${contextPath}/event/redirect.do?id="+id+"&ticket=freeshipping");
 		
 		
 	}else if(clicked_value == 3.0){
 		
 		alert("한달 무료입고권 당첨!! 당첨내역으로 이동합니다!");
 		
-		location.replace("${contextPath}/event/detailresult.do?ticket=freestore");
+		location.replace("${contextPath}/event/redirect.do?id="+id+"&ticket=freestore");
 		
 	}else if(clicked_value == 5.0){
 		
 		alert("수수료 1회 무료권 당첨!! 당첨내역으로 이동합니다!");
 		
-		location.replace("${contextPath}/event/detailresult.do?ticket=freecharge");
+		location.replace("${contextPath}/event/redirect.do?id="+id+"&ticket=freecharge");
 		
 	}else {
 		
 		alert("꽝입니다.... 당첨내역으로 이동합니다!");
 		
-		location.replace("${contextPath}/event/detailresult.do?ticket=OTL");
+		location.replace("${contextPath}/event/redirect.do?id="+id+"&ticket=OTL");
 		
 	}
 }

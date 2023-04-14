@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
@@ -148,17 +149,38 @@
     text-align: center;
 }
 
+#event_detail_result_contents_title{
+
+    border: 1px solid dodgerblue;
+
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    background: dodgerblue;
+    position: relative;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+
 #event_detail_result_contents{
 
-	border : 1px solid orangered;
+	border : 1px solid dodgeblue;
 
 	position : relative;
 	margin : 0 auto;
 	top : 0;
 	left : 0;
 	width: 100%;
-	height : 400px;
+	height : 360px;
 	border-radius: 5px;
+	overflow-y: auto;
+
 
 }
 
@@ -185,7 +207,7 @@
     margin: 0 auto;
     top: 0;
     left: 0px;
-    width: calc(100%/6);
+    width: calc(99%/6);
     height: 100%;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -334,7 +356,6 @@
 
 <!-- Css Styles 적용 -->
 <link rel="stylesheet" href="${contextPath}/resources/css/event/eventDetailResult.css" type="text/css">
-
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-blog set-bg"
   data-setbg="${contextPath}/resources/img/event/event_bg.jpg">
@@ -357,18 +378,18 @@
 	   	<div id="event_detail_result_title">
 	   	   <div id="event_detail_result_a">
 		   		<a>당첨자</a>
-		   		<a>총 응모 횟수</a>
+		   		<a>총 응모권 횟수</a>
 		   		<a>사용한 횟수</a>
 		   		<a>남은 횟수</a>
 	   		</div>
 	   		<div id="event_detail_result_input">
-		   		<input type="text" placeholder="당첨자명" readonly="readonly" value="" />
-		   		<input type="text" placeholder="총 응모 횟수" readonly="readonly" value="" />
-		   		<input type="text" placeholder="사용한 횟수" readonly="readonly" value="" />
-		   		<input type="text" placeholder="남은 횟수" readonly="readonly" value="" />
+		   		<input type="text" placeholder="당첨자명" readonly="readonly" value="${id}" />
+		   		<input type="text" placeholder="총 응모권 횟수" readonly="readonly" value="${a_cnt}" />
+		   		<input type="text" placeholder="사용한 횟수" readonly="readonly" value="${u_cnt}" />
+		   		<input type="text" placeholder="남은 횟수" readonly="readonly" value="${d_cnt}" />
 	   		</div>
 	   	</div>
-	   	<div id="event_detail_result_contents">
+	   	<div id="event_detail_result_contents_title">
 <!--  당첨 내역을 table로 표시하고, 테이블 밖에 하단에는 부가 설명을 첨부한다.-->
 	   	   <div id="event_detail_contents_a">
 		   		<a>번호</a>
@@ -378,14 +399,19 @@
 		   		<a>유효 기간</a>
 		   		<a>사용 여부</a>
 	   		</div>
+	   	</div>	
+	   	<div id="event_detail_result_contents">	
+		<c:forEach var="vo" items="${checkuser}">	
 	   		<div id="event_detail_contents_input">
-		   		<input type="text" placeholder="번호" value="" readonly="readonly" />
-		   		<input type="text" placeholder="당첨된 응모권" value="" readonly="readonly" />
-		   		<input type="text" placeholder="당첨 날짜" value="" readonly="readonly" />
-		   		<input type="text" placeholder="신청번호:xxxx 물품명: 조단 판매 완료에 대한 당첨권 1회 발급" value="" readonly="readonly" />
-	   			<input type="text" placeholder="당첨일로 부터 D-30일" value="" readonly="readonly" />
-	   			<input type="text" placeholder="사용 된 날짜 또는 X" value="" readonly="readonly" />
+		   		<input type="text" placeholder="번호" value="${vo.d_idx}" readonly="readonly" />
+		   		<input id="ticket" class="ticket" type="text" placeholder="당첨된 응모권" value="${vo.d_ticket}" readonly="readonly" />
+		   		<input class="d_date" type="text" placeholder="당첨 날짜" value="<fmt:formatDate type="date" dateStyle="full" value="${vo.d_date}"/>" readonly="readonly" />
+		   		<input type="text" placeholder="신청번호:xxxx 물품명: 조단 판매 완료에 대한 당첨권 1회 발급" value="${vo.d_contents}" readonly="readonly" />
+	   			<input class="expiry_date" style="text-decoration: underline; color:red;" id="expiry_date" type="text" placeholder="" value="<fmt:formatDate type="date" dateStyle="full" value="${vo.expiry_date}"/> 까지" readonly="readonly" />
+	   			<input class="d_confirm" type="text" value="${vo.d_confirm}" readonly="readonly" />
 	   		</div>
+	 	</c:forEach>
+
 	    </div>
 	   </div>
 	   <div id="event_detail_contents_row">
@@ -406,5 +432,31 @@
   </div>
 </section>
 <!-- Event Section End -->
+
 <script>
+
+$(document).ready(function(){
+	
+	// d 배열을 생성하고
+	var d = [];
+	
+	// checkuser에 저장된 사이즈 만큼 반복시킨다.
+	for(i=1; i < ${checkuser.size()}; i++){
+	
+	// d 배열에 checkuser에서 가져온 ticket 값을 저장시키는데
+	d = document.getElementsByClassName("ticket")[i].value;
+
+	// 만약에 티켓 내용이 "꽝" 이라면
+		if(d == "꽝"){
+			
+			// 해당 하는 티켓 내용의 색상을 빨갛게 바꾼다.
+			document.getElementsByClassName("ticket")[i].style.color = "red";
+			document.getElementsByClassName("d_confirm")[i].style.color = "red";
+			document.getElementsByClassName("d_confirm")[i].value = "X";
+		}
+	
+	}
+
+})
+
 </script>

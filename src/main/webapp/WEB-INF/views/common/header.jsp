@@ -14,23 +14,27 @@
     <div class="offcanvas-menu-wrapper">
         <div class="offcanvas__option">
             <div class="offcanvas__links">
-                <a href="#">Sign in</a>
-                <a href="#">FAQs</a>
-            </div>
-            <div class="offcanvas__top__hover">
-                <span>Usd <i class="arrow_carrot-down"></i></span>
-                <ul>
-                    <li>USD</li>
-                    <li>EUR</li>
-                    <li>USD</li>
-                </ul>
-            </div>
+            <%
+            if(session.getAttribute("isLogOn") == null) {
+            %>
+            	<a href="${contextPath}/member/loginForm.do">로그인</a>
+                <a href="#">문의</a>
+             <%
+            }else{
+             %>	
+            	<a href="${contextPath}/member/logout.do">로그아웃</a>
+                <a href="#">문의</a> 
+             <%
+             }
+             %>   
+             </div>
+            
         </div>
         <div class="offcanvas__nav__option">
             <a href="#" class="search-switch"><img src="${contextPath}/resources/img/icon/search.png" alt=""></a>
             <a href="#"><img src="${contextPath}/resources/img/icon/heart.png" alt=""></a>
-            <a href="#"><img src="${contextPath}/resources/img/icon/cart.png" alt=""> <span>0</span></a>
-            <div class="price">$0.00</div>
+          
+            
         </div>
         <div id="mobile-menu-wrap"></div>
         <div class="offcanvas__text">
@@ -46,24 +50,29 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-7">
                         <div class="header__top__left">
-                            <p>Free shipping, 30-day return or refund guarantee.</p>
+                            <p>30일 반품 또는 환불 보장.</p>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-5">
                         <div class="header__top__right">
                             <div class="header__top__links">
-                                <a href="${contextPath}/member/login.do">Sign in</a>
-                                <a href="#">FAQs</a>
-                            </div>
-                            <div class="header__top__hover">
-                                <span>Usd <i class="arrow_carrot-down"></i></span>
-                                <ul>
-                                    <li>USD</li>
-                                    <li>EUR</li>
-                                    <li>USD</li>
-                                </ul>
-                            </div>
-                        </div>
+
+					           <%
+					            if(session.getAttribute("isLogOn") == null) {
+					            %>
+					            	<a href="${contextPath}/member/loginForm.do">로그인</a>
+					                <a href="#">문의</a>
+					             <%
+					            }else{
+					             %>	
+					            	<a href="${contextPath}/member/logout.do">로그아웃</a>
+					                <a href="#">문의</a> 
+					             <%
+					             }
+					             %>   
+					           </div>
+                          </div>
+
                     </div>
                 </div>
             </div>
@@ -83,7 +92,6 @@
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
                                     <li><a href="${contextPath}/pages/about.do">About Us</a></li>
-                                    <li><a href="${contextPath}/shop/shopDetails.do">Shop Details</a></li>
                                     <li><a href="${contextPath}/pages/shoppingCart.do">Shopping Cart</a></li>
                                     <li><a href="${contextPath}/pages/checkOut.do">Check Out</a></li>
                                     <li><a href="${contextPath}/pages/blogDetails.do">Blog Details</a></li>
@@ -100,8 +108,7 @@
                     <div class="header__nav__option">
                         <a href="#" class="search-switch"><img src="${contextPath}/resources/img/icon/search.png" alt=""></a>
                         <a href="${contextPath}/favorites/favoritesList.do"><img src="${contextPath}/resources/img/icon/heart.png" alt=""></a>
-                        <a href="#"><img src="${contextPath}/resources/img/icon/cart.png" alt=""> <span>0</span></a>
-                        <div class="price">$0.00</div>
+                        
                     </div>
                 </div>
             </div>
@@ -111,7 +118,7 @@
     <!-- Header Section End -->
     
     <!-- Search Begin -->
-	<div class="search-model" style="background-color: black; opacity: 0.9;">
+	<div class="search-model" style="opacity: 0.9">
 	  <div class="h-100 d-flex align-items-top justify-content-center">
 	    <div class="search-close-switch">+</div>
 	    <form class="search-model-form">
@@ -131,4 +138,5 @@
 	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<%-- 검색어 완성기능용 js파일 --%>
 	<script  src="${contextPath}/resources/js/home.js"></script>
+	
 	

@@ -14,7 +14,7 @@
   
   <definition name="/shop/shopDetails" extends="baseLayout">
     <put-attribute name="title" value="블로그 페이지" />
-    <put-attribute name="body" value="/WEB-INF/views/pages/shop-details.jsp" />
+    <put-attribute name="body" value="/WEB-INF/views/shop/shop-details.jsp" />
   </definition>
 
 </tiles-definitions>
