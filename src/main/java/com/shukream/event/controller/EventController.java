@@ -407,6 +407,7 @@ public class EventController {
     logger.info(viewName);
     
     mav.addObject("checkuser", checkuser);
+    mav.addObject("id", id);
     mav.addObject("a_cnt", a_cnt);
     mav.addObject("u_cnt", u_cnt);
     mav.addObject("d_cnt", d_cnt);
