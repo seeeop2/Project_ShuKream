@@ -44,7 +44,7 @@ public class DAOTest {
   private AsksDAO asksDAO;
   
   @Autowired 
-  private BidsDAO bisDAO;
+  private BidsDAO bidsDAO;
   
   @Autowired
   private OrdersDAO ordersDAO;
@@ -174,6 +174,23 @@ public class DAOTest {
     
     logger.info("\n Select Result :" + result1);
   }
+//=======================Bids 목록에서 가장 높은 가격 구하기 =================================
+  @Test 
+  public void selectLowBidsAll() throws Exception{
+    
+    int product_id= 43;
+    LinkedHashMap result1 = new LinkedHashMap();
+    for(int i = 220; i<=300;i=i+5) {
+      HashMap<String, Object> map = new HashMap<String, Object>();
+      map.put("product_id",product_id);
+      map.put("size1", i);
+      map.put("size2", i);
+      int result2 = bidsDAO.selectHighBidsAll(map);
+      result1.put(i,result2);
+    }
+    
+    logger.info("\n Select Result :" + result1);
+  }
 //=======================shopdetails에 사진 가져오기 위함 =================================
   @Test @Ignore
   public void testSelectProduct() throws Exception{
@@ -210,7 +227,7 @@ public class DAOTest {
     
   }
 //=====================================
-  @Test 
+  @Test @Ignore
   public void selectLatestOrderAsk() throws Exception{
     
     int latest = 0;
@@ -338,7 +355,7 @@ public class DAOTest {
     for(int j=0;j<random1to5;j++) {
       price = price + add_price;
       bidsvo.setBids_price(price);
-      int result = bisDAO.insertBids(bidsvo);
+      int result = bidsDAO.insertBids(bidsvo);
       logger.info("\n Insert Board Result " +result);
     }
     return price;
@@ -349,7 +366,7 @@ public class DAOTest {
     
     for(int j=0;j<random;j++) {
       bidsvo.setBids_price(price);
-      int result = bisDAO.insertBids(bidsvo);
+      int result = bidsDAO.insertBids(bidsvo);
       logger.info("\n Insert Board Result " +result);
     }
     return price;
@@ -360,7 +377,7 @@ public class DAOTest {
     for(int j=0;j<random1to5;j++) {
       price = price - minus_price;
       bidsvo.setBids_price(price);
-      int result = bisDAO.insertBids(bidsvo);
+      int result = bidsDAO.insertBids(bidsvo);
       logger.info("\n Insert Board Result " +result);
     }
     return price;

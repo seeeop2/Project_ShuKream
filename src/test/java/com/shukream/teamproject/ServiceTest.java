@@ -1,5 +1,7 @@
 package com.shukream.teamproject;
 
+import java.util.Map;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -24,14 +26,32 @@ public class ServiceTest {
   @Autowired
   private ShopDetailsService shopdetailsService;
 
-  @Test
+  @Test @Ignore
   public void SelectLatestMoney() throws Exception{
     
     int product_id = 39;
     int result = shopdetailsService.SelectLatestMoney(product_id);
     logger.info("\n result " + result);
-
   }
+  
+  @Test @Ignore
+  public void selectLowAsksAll() throws Exception{
+    
+    int product_id = 43;
+    Map result = shopdetailsService.selectLowAsksAll(product_id);
+    
+    logger.info("\n result " + result);
+  }
+  @Test
+  public void selectLowBidsAll() throws Exception{
+    
+    int product_id = 43;
+    Map result = shopdetailsService.selectHighBidsAll(product_id);
+    
+    logger.info("\n result " + result);
+  }
+  
+  
 
   
 }

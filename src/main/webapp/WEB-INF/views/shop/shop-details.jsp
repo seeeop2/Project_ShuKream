@@ -176,11 +176,11 @@
                               <button class="btn btn-outline-dark" id="clickForsizeAll"><span id="forAllSize">모든사이즈</span> <br><span id="forLowBids">${lowBids}</span></button>
                             </li>
 
-                            <c:forEach var="theLowestBids" items="${theLowestBids}" varStatus="status">
+                            <c:forEach var="theLowestAsks" items="${theLowestAsks}" varStatus="status">
                               <li>
                                 <button class="btn btn-outline-dark" id="clickForSizeBtn${status.index}">
-                                  <span id="clickForSize${status.index}">${theLowestBids.key}</span><br>
-                                  <span id="clickForMoney${status.index}">${theLowestBids.value}</span><br>
+                                  <span id="clickForSize${status.index}">${theLowestAsks.key}</span><br>
+                                  <span id="clickForMoney${status.index}">${theLowestAsks.value}</span><br>
                                 </button>
                               </li>
                             </c:forEach>
@@ -200,14 +200,14 @@
                 style="width: 49%; background-color: #ef6253">
                 <span
                   style="float: left; font-size: 2rem; border-right: 1px solid white; padding-right: 10px;">구매</span>
-                <span style="vertical-align: middle;"><b>${lowBids}</b>원</span><br>
+                <span style="vertical-align: middle;"><b><span id="thisSizeLow">${lowBids}</span></b>원</span><br>
                 <span style="vertical-align: middle; font-size: 0.8rem;">즉시 구매가</span>
               </button>
               <button type="button" class="btn btn-success"
                 style="width: 49%; background-color: #41b979">
                 <span
                   style="float: left; font-size: 2rem; border-right: 1px solid white; padding-right: 10px;">판매</span>
-                <span style="vertical-align: middle;"><b>${lowAsks}</b>원</span><br>
+                <span style="vertical-align: middle;"><b><span id="thisSizeHigh">${lowBids}</span></b>원</span><br>
                 <span style="vertical-align: middle; font-size: 0.8rem;">즉시 판매가</span>
               </button>
             </div>
@@ -507,95 +507,96 @@
         $('.modal-title').text("사이즈");    //modal 의 header 부분에 "팔로우"라는 값을 넣어준다. 
         
         
-        $('#clickForsizeAll').click(function(){
+        $('#clickForsizeAll').click(function(){ //전체
           $("#forSize").html($('#forAllSize').clone());
-          $("#biglow").html($('#forLowBids').clone());
+          $("#thisSizeLow").html($('#forLowBids').clone());
           $('#followModal').modal('hide');
          })
         
         $('#clickForSizeBtn0').click(function(){
           $("#forSize").html($('#clickForSize0').clone());
-          $("#biglow").html($('#clickForMoney0').clone());
+          $("#thisSizeLow").html($('#clickForMoney0').clone());
+          $("#thisSizeHigh").text('${theHighestBids}');
           $('#followModal').modal('hide');   //id가 "followModal"인 모달창을 닫아준다.
          })
          $('#clickForSizeBtn1').click(function(){
            $("#forSize").html($('#clickForSize1').clone());
-           $("#biglow").html($('#clickForMoney1').clone());
+           $("#thisSizeLow").html($('#clickForMoney1').clone());
            $('#followModal').modal('hide');
           })
           $('#clickForSizeBtn2').click(function(){
             $("#forSize").html($('#clickForSize2').clone());
-            $("#biglow").html($('#clickForMoney2').clone());
+            $("#thisSizeLow").html($('#clickForMoney2').clone());
             $('#followModal').modal('hide');
            })
            $('#clickForSizeBtn3').click(function(){
              $("#forSize").html($('#clickForSize3').clone());
-             $("#biglow").html($('#clickForMoney3').clone());
+             $("#thisSizeLow").html($('#clickForMoney3').clone());
              $('#followModal').modal('hide');
             })
             $('#clickForSizeBtn4').click(function(){
               $("#forSize").html($('#clickForSize4').clone());
-              $("#biglow").html($('#clickForMoney4').clone());
+              $("#thisSizeLow").html($('#clickForMoney4').clone());
               $('#followModal').modal('hide');
              })
              $('#clickForSizeBtn5').click(function(){
                $("#forSize").html($('#clickForSize5').clone());
-               $("#biglow").html($('#clickForMoney5').clone());
+               $("#thisSizeLow").html($('#clickForMoney5').clone());
                $('#followModal').modal('hide');
               })
               $('#clickForSizeBtn6').click(function(){
                 $("#forSize").html($('#clickForSize6').clone());
-                $("#biglow").html($('#clickForMoney6').clone());
+                $("#thisSizeLow").html($('#clickForMoney6').clone());
                 $('#followModal').modal('hide');
                })
                $('#clickForSizeBtn7').click(function(){
                  $("#forSize").html($('#clickForSize7').clone());
-                 $("#biglow").html($('#clickForMoney7').clone());
+                 $("#thisSizeLow").html($('#clickForMoney7').clone());
                  $('#followModal').modal('hide');
                 })
                 $('#clickForSizeBtn8').click(function(){
                   $("#forSize").html($('#clickForSize8').clone());
-                  $("#biglow").html($('#clickForMoney8').clone());
+                  $("#thisSizeLow").html($('#clickForMoney8').clone());
                   $('#followModal').modal('hide');
                  })
                  $('#clickForSizeBtn9').click(function(){
                    $("#forSize").html($('#clickForSize9').clone());
-                   $("#biglow").html($('#clickForMoney9').clone());
+                   $("#thisSizeLow").html($('#clickForMoney9').clone());
                    $('#followModal').modal('hide');
                   })
                   $('#clickForSizeBtn10').click(function(){
                     $("#forSize").html($('#clickForSize10').clone());
-                    $("#biglow").html($('#clickForMoney10').clone());
+                    $("#thisSizeLow").html($('#clickForMoney10').clone());
                     $('#followModal').modal('hide');
                    })
                    $('#clickForSizeBtn11').click(function(){
                      $("#forSize").html($('#clickForSize11').clone());
-                     $("#biglow").html($('#clickForMoney11').clone());
+                     $("#thisSizeLow").html($('#clickForMoney11').clone());
                      $('#followModal').modal('hide');
                     })
                     $('#clickForSizeBtn12').click(function(){
                       $("#forSize").html($('#clickForSize12').clone());
-                      $("#biglow").html($('#clickForMoney12').clone());
+                      $("#thisSizeLow").html($('#clickForMoney12').clone());
                       $('#followModal').modal('hide');
                      })
                      $('#clickForSizeBtn13').click(function(){
                        $("#forSize").html($('#clickForSize13').clone());
-                       $("#biglow").html($('#clickForMoney13').clone());
+                       $("#thisSizeLow").html($('#clickForMoney13').clone());
                        $('#followModal').modal('hide');
                       })
                       $('#clickForSizeBtn14').click(function(){
                         $("#forSize").html($('#clickForSize14').clone());
-                        $("#biglow").html($('#clickForMoney14').clone());
+                        $("#thisSizeLow").html($('#clickForMoney14').clone());
                         $('#followModal').modal('hide');
                        })
                        $('#clickForSizeBtn15').click(function(){
                          $("#forSize").html($('#clickForSize15').clone());
-                         $("#biglow").html($('#clickForMoney15').clone());
+                         $("#thisSizeLow").html($('#clickForMoney15').clone());
                          $('#followModal').modal('hide');
                         })
                         $('#clickForSizeBtn16').click(function(){
                           $("#forSize").html($('#clickForSize16').clone());
-                          $("#biglow").html($('#clickForMoney16').clone());
+                          $("#thisSizeLow").html($('#clickForMoney16').clone());
                           $('#followModal').modal('hide');
                          })
           

@@ -17,7 +17,7 @@ public class BidsDAO {
     return sqlSession.insert("mapper.bids.insertBids",bidsvo);
   }
 
-  public int selectLowBidsAll(HashMap<String, Object> map) {
+  public int selectHighBidsAll(HashMap<String, Object> map) {
     int result = sqlSession.selectOne("mapper.bids.selectLowBidsAll", map );
     return result;
   }
