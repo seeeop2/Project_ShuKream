@@ -15,9 +15,9 @@ public class OrderService {
 	@Autowired
 	OrderDAO orderDAO;
 
-	public void checkOut(OrderVO vo) {
+	public int insertShipInfo(OrderVO vo) {
 	vo.setPrimary_address(vo.getSample4_postcode()+vo.getSample4_roadAddress()+vo.getSample4_jibunAddress()+vo.getSample4_detailAddress()+vo.getSample4_extraAddress());	
-		orderDAO.checkOut(vo);
+		return orderDAO.insertShipInfo(vo);
 	}
 
 	public Map<String, Object> selectAsks(String asks_idx) {
@@ -28,8 +28,30 @@ public class OrderService {
 		return orderDAO.selectProduct(product_id);
 	}
 
-	public void insertNewBids(Map<String, Object> paramMap) {
-		orderDAO.insertNewBids(paramMap);
+	public int insertNewBids(Map<String, Object> paramMap) {
+		return orderDAO.insertNewBids(paramMap);
+	}
+
+	public int insertOrders(Map<String, Object> paramMap) {
+		//인덱스를 받야아햠.
+		return orderDAO.insertOrders(paramMap);
+	}
+
+	public void updateAsks(Map<String, Object> paramMap) {
+		orderDAO.updateAsks(paramMap);
+	}
+
+	public void updateBids(Map<String, Object> paramMap) {
+		orderDAO.updateBids(paramMap);
+		
+	}
+
+	public int insertNewAsks(Map<String, Object> paramMap) {
+		return orderDAO.insertNewAsks(paramMap);
+	}
+
+	public Map<String, Object> selectBids(String bids_idx) {
+		return orderDAO.selectBids(bids_idx);
 	}
 
 }

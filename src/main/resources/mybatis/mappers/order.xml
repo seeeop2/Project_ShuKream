@@ -18,6 +18,45 @@
 		<result property="sample4_extraAddress" column="sample4_extraAddress"/>
 		<collection property="productVO" resultMap="productsResult"/>
 	</resultMap>
+	
+<select id="selectBidsIdxFromDual" resultType="int">
+	SELECT BIDS_SEQ.CURRVAL FROM DUAL
+</select>
+
+<select id="selectShipInfoIdxFromDual" resultType="int">
+	SELECT SHIPPING_INFORMATION_SEQ.CURRVAL FROM DUAL
+</select>
+
+<select id="selectAsksIdxFromDual" resultType="int">
+	SELECT ASKS_SEQ.CURRVAL FROM DUAL
+</select>
+
+<select id="selectOrderIdxFromDual" resultType="int">
+	SELECT ORDERS_SEQ.CURRVAL FROM DUAL
+</select>
+
+<update id="updateAsks" parameterType="Map">
+		<choose>
+			<when test="asks_idx != null">
+				UPDATE ASKS SET ASKS_ORDER_STATE_IDX = 1, ASKS_ORDER_NUMBER =  #{orderIdx}, ASKS_MATCHED_DATE = SYSDATE  WHERE ASKS_IDX = #{asks_idx}
+			</when>
+			<otherwise>
+				UPDATE ASKS SET ASKS_ORDER_STATE_IDX = 1, ASKS_ORDER_NUMBER =  #{orderIdx}, ASKS_MATCHED_DATE = SYSDATE  WHERE ASKS_IDX = #{newAsksIdx}
+			</otherwise>
+		</choose>
+</update>
+
+<update id="updateBids" parameterType="Map">
+		<choose>
+			<when test="newBidsIdx != null">
+				UPDATE BIDS SET BIDS_ORDER_STATE_IDX = 1, BIDS_ORDER_NUMBER = #{orderIdx}, BIDS_SHIP_IDX = #{shipIdx}, BIDS_MATCHED_DATE = SYSDATE  WHERE BIDS_IDX = #{newBidsIdx}
+			</when>
+			<otherwise>
+				UPDATE BIDS SET BIDS_ORDER_STATE_IDX = 1, BIDS_ORDER_NUMBER = #{orderIdx}, BIDS_SHIP_IDX = #{shipIdx}, BIDS_MATCHED_DATE = SYSDATE  WHERE BIDS_IDX = #{bids_idx}
+			</otherwise>
+		</choose>
+</update>
+
 <!-- 구매애서 들어간건지, 판매에서 들어간건지에 따라 BIDS, ASKS 중 어느 테이블에 등록 될지 나누어야함. 우선은 ASKS(판매입찰)에 올려진 상품을 구매하는걸로 가정(구매버튼을 눌렀을 때)
 	
 	수정할 때 참고할것
@@ -31,9 +70,9 @@
 	ORDERS엔 ASKS_IDX(처음에 받아온 IDX)와 BIDS_IDX(방금 등록한 BIDS_IDX)를 등록해야하는데 어떻게?? 무얼기준으로?
 	
 -->
-<insert id="checkOut" parameterType="orderVO">
+<insert id="insertShipInfo" parameterType="orderVO">
 	
-	INSERT INTO SHIPPING_INFORMATION(
+	INSERT INTO SHIPPING_INFORMATION(SHIP_ID,
 									SHIP_NAME, 
 									PRIMARY_ADDRESS,
 									SECONDARY_ADDRESS, 
@@ -43,6 +82,7 @@
 									SHIP_UPDATE
 									) 
 							VALUES (
+									SHIPPING_INFORMATION_SEQ.NEXTVAL,
 									#{ship_name},
 									#{primary_address}, 
 									#{primary_address},
@@ -51,44 +91,17 @@
 									SYSDATE, 
 									SYSDATE)
 </insert>	
-<!-- 		INTO ORDERS(ORDERS_BID_IDX, ORDERS_ASK_IDX) SELECT B.BIDS_IDX, A.ASKS_IDX FROM BIDS B, ASKS A WHERE A.ASKS_IDX = 1 -->
-	
-	<!-- BIDS_ORDER_NUMBER 주문번호가 달라저야? 자동증가? -->
-<insert id="insertBids">
-INSERT	INTO BIDS(
-						BIDS_SIZE_IDX,
-						BIDS_PRICE,
-						BIDS_REGDATE,
-						BIDS_UPDATE,
-						BIDS_EXPIRATION,
-						BIDS_ORDER_STATE_IDX,
-						BIDS_MATCHED_DATE,
-						BIDS_TOTAL_PRICE,
-						BIDS_ORDER_NUMBER,
-						BIDS_SHIP_IDX,
-						BIDS_PRODUCT_ID
-						)
-			SELECT 
-						A.ASKS_SIZE_IDX, 
-						A.ASKS_PRICE, 
-						SYSDATE, 
-						SYSDATE,
-						SYSDATE,
-						1,
-						SYSDATE, 
-						A.ASKS_PRICE,
-						1,
-						1,
-						1
-						FROM ASKS A WHERE A.ASKS_IDX = 1
-</insert>
 
-<insert id="insertOrder">
-	INSERT INTO ORDERS(ORDERS_BID_IDX, ORDERS_ASK_IDX) VALUES (1,1)
+<insert id="insertOrders" parameterType="Map">
+	INSERT INTO ORDERS(ORDERS_BID_IDX, ORDERS_ASK_IDX) VALUES (#{newBidsIdx},#{asks_idx})
 </insert>
 
 <select id="selectAsks" parameterType="String" resultType="Map">
 	select * from asks where asks_idx = #{asks_idx}
+</select>
+
+<select id="selectBids" parameterType="String" resultType="Map">
+	select * from bids where bids_idx = #{bids_idx}
 </select>
 
 <select id="selectProduct" parameterType="Int" resultType="Map">
@@ -104,62 +117,124 @@ INSERT	INTO BIDS(
 <insert id="insertNewBids" parameterType="Map">
 	<choose>
 		<when test="asks_idx eq null">
-		INSERT INTO BIDS(BIDS_SIZE_IDX,
+		INSERT INTO BIDS(BIDS_IDX,
+						 BIDS_SIZE_IDX,
 						 BIDS_PRICE,
 						 BIDS_REGDATE,
 						 BIDS_UPDATE,
 						 BIDS_EXPIRATION,
 						 BIDS_ORDER_STATE_IDX,
 						 BIDS_MATCHED_DATE,
-						 BODS_TOTAL_PRICE,
+						 BIDS_TOTAL_PRICE,
 						 BIDS_ORDER_NUMBER,
 						 BIDS_SHIP_IDX,
 						 BIDS_PRODUCT_ID)
 						VALUES
-						(260,
-						30000,
+						(
+						BIDS_SEQ.NEXTVAL,
+						#{size},
+						#{product_price},
 						SYSDATE,
 						SYSDATE,
 						NULL,
 						0,
 						NULL,
-						30000,
-						NULL,
-						NULL,
-						1
+						#{product_price},
+						0,
+						0,
+						#{product_id}
 						)
 		</when>
 		<otherwise>
-			INSERT INTO BIDS(BIDS_SIZE_IDX,
+			INSERT INTO BIDS(BIDS_IDX,
+							 BIDS_SIZE_IDX,
 							 BIDS_PRICE,
 							 BIDS_REGDATE,
 							 BIDS_UPDATE,
 							 BIDS_EXPIRATION,
 							 BIDS_ORDER_STATE_IDX,
 							 BIDS_MATCHED_DATE,
-							 BODS_TOTAL_PRICE,
+							 BIDS_TOTAL_PRICE,
 							 BIDS_ORDER_NUMBER,
 							 BIDS_SHIP_IDX,
 							 BIDS_PRODUCT_ID)
 						 
-						 SELECT 
-							A.ASKS_SIZE_IDX, 
-							A.ASKS_PRICE, 
-							SYSDATE, 
-							SYSDATE,
-							NULL,
-							1,
-							SYSDATE, 
-							A.ASKS_PRICE,
-							NULL,
-							0,
-							A.ASKS_PRODUCT_ID
-							FROM ASKS A WHERE A.ASKS_IDX = #{asks_idx}
+						 VALUES (
+				                BIDS_SEQ.NEXTVAL,
+				                (SELECT ASKS_SIZE_IDX FROM ASKS WHERE ASKS_IDX = #{asks_idx}),
+				                (SELECT ASKS_PRICE FROM ASKS WHERE ASKS_IDX = #{asks_idx}),
+				                SYSDATE,
+				                SYSDATE,
+				                NULL,
+				                1,
+				                SYSDATE,
+				                (SELECT ASKS_PRICE FROM ASKS WHERE ASKS_IDX = #{asks_idx}),
+				                0,
+				                0,
+				                (SELECT ASKS_PRODUCT_ID FROM ASKS WHERE ASKS_IDX = #{asks_idx})
+				           		 )
 		</otherwise>
 	</choose>			
-	
 </insert>
 
-
+<!-- 위와 마찬가지로 판매입찰(ASKS)을 무조건 걸어야 하는 아이템의경우 (BIDS_IDX가 없음) "bids_idx eq null"에 PRODUCT_ID,SIZE 받아와서 넣어줘야함  -->
+<insert id="insertNewAsks" parameterType="Map">
+	<choose>
+		<when test="bids_idx eq null">
+		INSERT INTO ASKS(ASKS_IDX,
+						 ASKS_SIZE_IDX,
+						 ASKS_PRICE,
+						 ASKS_REGDATE,
+						 ASKS_UPDATE,
+						 ASKS_EXPIRATION,
+						 ASKS_ORDER_STATE_IDX,
+						 ASKS_MATCHED_DATE,
+						 ASKS_TOTAL_PRICE,
+						 ASKS_ORDER_NUMBER,
+						 ASKS_PRODUCT_ID)
+						VALUES
+						(
+						ASKS_SEQ.NEXTVAL,
+						#{size},
+						#{product_price},
+						SYSDATE,
+						SYSDATE,
+						NULL,
+						0,
+						NULL,
+						#{product_price},
+						0,
+						#{product_id}
+						)
+		</when>
+		<otherwise>
+			INSERT INTO ASKS(ASKS_IDX,
+							 ASKS_SIZE_IDX,
+							 ASKS_PRICE,
+							 ASKS_REGDATE,
+							 ASKS_UPDATE,
+							 ASKS_EXPIRATION,
+							 ASKS_ORDER_STATE_IDX,
+							 ASKS_MATCHED_DATE,
+							 ASKS_TOTAL_PRICE,
+							 ASKS_ORDER_NUMBER,
+							 ASKS_PRODUCT_ID)
+						 
+						 VALUES (
+				                ASKS_SEQ.NEXTVAL,
+				                (SELECT BIDS_SIZE_IDX FROM BIDS WHERE BIDS_IDX = #{bids_idx}),
+				                (SELECT BIDS_PRICE FROM BIDS WHERE BIDS_IDX = #{bids_idx}),
+				                SYSDATE,
+				                SYSDATE,
+				                NULL,
+				                1,
+				                SYSDATE,
+				                (SELECT BIDS_PRICE FROM BIDS WHERE BIDS_IDX = #{bids_idx}),
+				                0,
+				                (SELECT BIDS_PRODUCT_ID FROM BIDS WHERE BIDS_IDX = #{bids_idx})
+				           		 )
+		</otherwise>
+	</choose>			
+</insert>
 
 </mapper>

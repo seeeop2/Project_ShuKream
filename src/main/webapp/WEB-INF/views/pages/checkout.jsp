@@ -55,40 +55,45 @@
       <form action="${contextPath}/order/orderDetail.do" method="post">
         <div class="row">
           <div class="col-lg-7 col-md-6">
+          <input type="hidden" name="product_id" value="${product.PRODUCT_ID}">
           <c:choose>
           	<c:when test="${type eq 'buy'}">
 	            <h4 class="coupon__code">
-					<input type="radio" id="bids" name="option" value="00" onchange="setDisplay()"  checked="checked" > 
+					<input type="radio" id="bids" name="option" value="00" onchange="setDisplay()"  required="required">
 					<label for="bids"><span style="font-size:24px;">구매입찰</span></label>
-					<input type="radio" id="check" name="option" value="10" onchange="setDisplay()" > 
+					<c:if test="${not empty buyAsks}">
+					<input type="radio" id="check" name="option" value="10" onchange="setDisplay()"  checked="checked"  > 
+					</c:if>
 					<label for="check"><span style="font-size:24px;">즉시구매</span></label>
 					<input type="hidden" name="type" value="buy">
 					<input type="hidden" name="asks_idx" value="${buyAsks.ASKS_IDX}">
 	            </h4>
 				<div class="checkout__input">
-					<div id="price">
+					<div id="price" style="display: none;">
 						<p style="font-size: 24px;">
 						   	구매희망가격<span>*</span>
 						 </p>
-						<input type="text" name="bids" placeholder="구매 희망가" style="color:black;"/>
+						<input type="text" class="ABprice" name="ABprice" placeholder="구매 희망가" style="color:black;"/>
 					</div>
 				</div>
 			</c:when>
 			<c:otherwise>
            		<h4 class="coupon__code">
-					<input type="radio" id="asks" name="option" value="00" onchange="setDisplay()"  checked="checked" > 
+					<input type="radio" id="asks" name="option" value="00" onchange="setDisplay()"  required="required" > 
 					<label for="asks"><span style="font-size:24px;">판매입찰</span></label>
-					<input type="radio" id="check" name="option" value="10" onchange="setDisplay()" > 
+					<c:if test="${not empty sellBids}">
+					<input type="radio" id="check" name="option" value="10" onchange="setDisplay()" checked="checked" > 
 					<label for="check"><span style="font-size:24px;">즉시판매</span></label>
+					</c:if>
 					<input type="hidden" name="type" value="sell">
-<%-- 			판매로 들어왔을시 IDX를 넘겨줌		<input type="hidden" name="bids_idx" value="${sellBids.BIDS_IDX}"> --%>
+					<input type="hidden" name="bids_idx" value="${sellBids.BIDS_IDX}">
 	            </h4>
 				<div class="checkout__input">
-					<div id="price">
+					<div id="price"  style="display:none;">
 						<p style="font-size: 24px;">
 						   	판매희망가격<span>*</span>
 						 </p>
-						<input type="text" name="asks" placeholder="판매 희망가" style="color:black;"/>
+						<input type="text" class="ABprice" name="ABprice" placeholder="판매 희망가" style="color:black;"/>
 					</div>
 				</div>
 			</c:otherwise>
@@ -202,16 +207,44 @@
               <ul class="checkout__total__products">
                 <li>${product.PRODUCT_NAME_EN}<br>
                 	${product.PRODUCT_NAME_KOR}
-                 </li> <%-- <span>$ 300.0</span></li>--%>
-                <li>SIZE 뿌려주기 </li>
+                 </li>
+               	<c:choose>
+               		<c:when test="${buyAsks eq null && sellBids eq null}"> 
+		                <li>SIZE : ${size}</li>
+		                <input type="hidden" name="size" value="${size}">
+		            </c:when>
+		            <c:otherwise>  
+        		        <c:if test="${sellBids eq null}">
+		                	<li>SIZE : ${buyAsks.ASKS_SIZE_IDX}</li>
+		                	<input type="hidden" name="size" value="${buyAsks.ASKS_SIZE_IDX}">
+		                </c:if>  
+		                <c:if test="${buyAsks eq null}">
+		                	<li>SIZE : ${sellBids.BIDS_SIZE_IDX}</li>
+		                	<input type="hidden" name="size" value="${sellBids.BIDS_SIZE_IDX}">
+		                </c:if>
+	                </c:otherwise>
+                </c:choose>
 <%--                 <li>02. German chocolate <span>$ 170.0</span></li>
                 <li>03. Sweet autumn <span>$ 170.0</span></li>
                 <li>04. Cluten free mini dozen <span>$ 110.0</span></li>--%>
-                <input type="hidden" value="">
               </ul>
               <ul class="checkout__total__all">
-              <fmt:formatNumber var="asks_price" value="${buyAsks.ASKS_PRICE}"/>
-                <li>Total <span>${asks_price}원</span></li>
+              <c:choose>
+              	<c:when test="${buyAsks eq null && sellBids eq null}">
+              		<fmt:formatNumber var="formatNumPrice" value="${product.PRODUCT_PRICE}"/>
+					<li >Total <span id="totalPrice">default Price : ${formatNumPrice}원</span></li>
+                </c:when>
+               <c:otherwise>
+               		<c:if test="${sellBids eq null}">
+					<fmt:formatNumber var="formatNumPrice" value="${buyAsks.ASKS_PRICE}"/>
+                	<li >Total <span id="totalPrice">${formatNumPrice}원</span></li>
+                	</c:if>
+                	<c:if test="${buyAsks eq null}">
+	                	<fmt:formatNumber var="formatNumPrice" value="${sellBids.BIDS_PRICE}"/>
+	                	<li >Total <span id="totalPrice">${formatNumPrice}원</span></li>
+                	</c:if>
+               </c:otherwise>
+               </c:choose>
               </ul>
               <!-- <div class="checkout__input__checkbox">
                 <label for="acc-or"> Create an account? <input
@@ -302,16 +335,27 @@
             }
         }).open();
     }
-    
+</script>
+
+<script>   
     
     //구매입찰가 온오프
-    function setDisplay(){
+function setDisplay(){
         if($('input:radio[id=check]').is(':checked')){
             $('#price').hide();
         }else{
             $('#price').show();
         }
     }
+	$(".ABprice").focusout(function() {
+		$("#totalPrice").text(addComma($(".ABprice").val())+'원');	
+	});
+    
+	
+	//천단위 ,
+ function addComma(value){
+      value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      return value; 
+  }
      
-     
-</script>
+ </script>
