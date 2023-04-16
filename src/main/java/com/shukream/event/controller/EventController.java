@@ -437,11 +437,46 @@ public class EventController {
 	  response.setContentType("text/html; charset=utf-8");
 
 	  System.out.println("coupon.do 호출!"); 
-
 	  
-	// ModelANdView 객체 생성
-    ModelAndView mav = new ModelAndView();
-    
+	  //PrintWirter 객체 out 생성 및 초기화
+		PrintWriter out = response.getWriter();
+		
+	    String contextPath = request.getContextPath();
+
+	  // 세션값 가져오기
+	  HttpSession session = request.getSession();
+	  
+	  // id로 세션값 저장
+	  String id = (String)session.getAttribute("email");
+	  
+	  System.out.println(id);
+	  
+	  // 쿠폰을 조회해 온다.
+	  List<EventVO> checkcoupon = eventservice.checkcoupon(id);
+	  
+	  // ModelANdView 객체 생성
+	  ModelAndView mav = new ModelAndView();
+	    
+	  
+	  // 쿠폰이 없다면?
+	  if(checkcoupon.isEmpty()) {
+		 
+		  
+		  
+		out.println("<script>alert('보유하신 쿠폰이 없습니다!, 마이페이지로 이동합니다');");
+		out.println("window.location.href='"+contextPath+"/member/mypage.do?id="+id+"';</script>");
+		out.flush();
+		out.close();
+		  
+	  // 쿠폰이 있다면?
+	  }else{
+		  
+		 
+		  // 가져온 값들을 전달한다.
+		  mav.addObject("checkcoupon", checkcoupon);
+		  
+	  }
+	  
     // Viewname 가져오기
     String viewName = (String) request.getAttribute("viewName");
     
