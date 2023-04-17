@@ -188,7 +188,7 @@
 			    <c:when test= "${coupon.d_ticket eq '무료배송권'}">
 			    	<input style="color: blue; font-weight:bold;" class="coupon_content" id="coupon_name" type="text" value="${coupon.d_ticket}" readonly="readonly" />
 			    </c:when>
-   			    <c:when test= "${coupon.d_ticket eq '한달무료입고권'}">
+   			    <c:when test= "${coupon.d_ticket eq '무료1회입고권'}">
 			    	<input style="color: #20c997; font-weight:bold;" class="coupon_content" id="coupon_name" type="text" value="${coupon.d_ticket}" readonly="readonly" />
 			    </c:when>
     			<c:when test= "${coupon.d_ticket eq '수수료1회무료권'}">
