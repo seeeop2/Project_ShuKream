@@ -52,7 +52,7 @@ public class OrderController {
 		int orderIdx = 0;
 		
 		if(type.equals("buy")) {
-			if(asks_idx == null || bids_idx == null) { //판매입찰테이플에 아이템이 없는 경우
+			if(asks_idx == null && bids_idx == null) { //판매입찰테이플에 아이템이 없는 경우
 				product = orderService.selectProduct(Integer.parseInt(product_id));
 				if(abPrice != null && !abPrice.equals("")) {
 					product.replace("PRODUCT_PRICE", abPrice);
@@ -86,7 +86,7 @@ public class OrderController {
 			
 		//판매로 들어온 경우
 		} else { 
-			if(bids_idx == null || asks_idx == null) {
+			if(bids_idx == null && asks_idx == null) {
 				product = orderService.selectProduct(Integer.parseInt(product_id));
 				if(abPrice != null && !abPrice.equals("")) {
 					product.put("PRODUCT_PRICE", abPrice);
