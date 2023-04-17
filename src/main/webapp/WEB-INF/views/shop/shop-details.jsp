@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -5,6 +7,32 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <c:set var="sneakers" value="sneakers" />
 <c:set var="slipper" value="slipper" />
+<%-- <c:forEach var="theHighestBids" items="${theHighestBids}" varStatus="status"> --%>
+<%--   <c:set var="i" value="${status.index}" /> --%>
+<%--   <c:set var="clickForMoney_i" value="${theHighestBids.value}" /> --%>
+<%--   <c:out value="" /> --%>
+<%--   <c:out value="clickForMoney_${status.index}"></c:out> --%>
+<%--       <p id="clickForMoney_${status.index}" style="display: none;">${theHighestBids.value}</p> --%>
+<%-- </c:forEach> --%>
+
+<%
+Map map = (Map) request.getAttribute("theHighestBids");
+for(int i =220; i<= 300;i=i+5){
+%>
+<c:set var=" " value=" "/>
+<% 
+}
+%>
+
+<c:forEach var="theHighestBids" items="${theHighestBids}" varStatus="status">
+  <p style="display: none;" id="clickForMoney_${status.index}">${theHighestBids.value}</p>
+</c:forEach>
+
+
+
+
+
+
 
 <style>
 /* //모달에 적용한 css속성값.  */
@@ -196,7 +224,7 @@
           </div>
           <div class="product__details__cart__option">
             <div style="margin-bottom: 5px;">
-              <button type="button" class="btn btn-danger"
+              <button type="button" class="btn btn-danger" onclick="buyClick()"
                 style="width: 49%; background-color: #ef6253">
                 <span
                   style="float: left; font-size: 2rem; border-right: 1px solid white; padding-right: 10px;">구매</span>
@@ -495,17 +523,37 @@
   </div>
 </section>
 
+
 <!-- Related Section End -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript"
   src="https://www.gstatic.com/charts/loader.js"></script>
 
 <script>
+
+var innerText0 = document.getElementById("clickForMoney_0").innerText;
+var innerText1 = document.getElementById("clickForMoney_1").innerText;
+var innerText2 = document.getElementById("clickForMoney_2").innerText;
+var innerText3 = document.getElementById("clickForMoney_3").innerText;
+var innerText4 = document.getElementById("clickForMoney_4").innerText;
+var innerText5 = document.getElementById("clickForMoney_5").innerText;
+var innerText6 = document.getElementById("clickForMoney_6").innerText;
+var innerText7 = document.getElementById("clickForMoney_7").innerText;
+var innerText8 = document.getElementById("clickForMoney_8").innerText;
+var innerText9 = document.getElementById("clickForMoney_9").innerText;
+var innerText10 = document.getElementById("clickForMoney_10").innerText;
+var innerText11 = document.getElementById("clickForMoney_11").innerText;
+var innerText12 = document.getElementById("clickForMoney_12").innerText;
+var innerText13 = document.getElementById("clickForMoney_13").innerText;
+var innerText14 = document.getElementById("clickForMoney_14").innerText;
+var innerText15 = document.getElementById("clickForMoney_15").innerText;
+var innerText16 = document.getElementById("clickForMoney_16").innerText;
+
     /*팔로우 버튼 클릭*/
     $('.follower').click(function(){
         $('#followModal').modal('show');   //id가 "followModal"인 모달창을 열어준다. 
         $('.modal-title').text("사이즈");    //modal 의 header 부분에 "팔로우"라는 값을 넣어준다. 
-        
+
         
         $('#clickForsizeAll').click(function(){ //전체
           $("#forSize").html($('#forAllSize').clone());
@@ -513,95 +561,133 @@
           $('#followModal').modal('hide');
          })
         
-        $('#clickForSizeBtn0').click(function(){
+        $('#clickForSizeBtn0').click(function(){       //220사이즈
           $("#forSize").html($('#clickForSize0').clone());
           $("#thisSizeLow").html($('#clickForMoney0').clone());
-          $("#thisSizeHigh").text('${theHighestBids}');
+          $("#thisSizeHigh").text(innerText0);
           $('#followModal').modal('hide');   //id가 "followModal"인 모달창을 닫아준다.
          })
          $('#clickForSizeBtn1').click(function(){
            $("#forSize").html($('#clickForSize1').clone());
            $("#thisSizeLow").html($('#clickForMoney1').clone());
+           $("#thisSizeHigh").text(innerText1);
            $('#followModal').modal('hide');
           })
           $('#clickForSizeBtn2').click(function(){
             $("#forSize").html($('#clickForSize2').clone());
             $("#thisSizeLow").html($('#clickForMoney2').clone());
+            $("#thisSizeHigh").text(innerText2);
             $('#followModal').modal('hide');
            })
            $('#clickForSizeBtn3').click(function(){
              $("#forSize").html($('#clickForSize3').clone());
              $("#thisSizeLow").html($('#clickForMoney3').clone());
+             $("#thisSizeHigh").text(innerText3);
              $('#followModal').modal('hide');
             })
             $('#clickForSizeBtn4').click(function(){
               $("#forSize").html($('#clickForSize4').clone());
               $("#thisSizeLow").html($('#clickForMoney4').clone());
+              $("#thisSizeHigh").text(innerText4);
               $('#followModal').modal('hide');
              })
              $('#clickForSizeBtn5').click(function(){
                $("#forSize").html($('#clickForSize5').clone());
                $("#thisSizeLow").html($('#clickForMoney5').clone());
+               $("#thisSizeHigh").text(innerText5);
                $('#followModal').modal('hide');
               })
               $('#clickForSizeBtn6').click(function(){
                 $("#forSize").html($('#clickForSize6').clone());
                 $("#thisSizeLow").html($('#clickForMoney6').clone());
+                $("#thisSizeHigh").text(innerText6);
                 $('#followModal').modal('hide');
                })
                $('#clickForSizeBtn7').click(function(){
                  $("#forSize").html($('#clickForSize7').clone());
                  $("#thisSizeLow").html($('#clickForMoney7').clone());
+                 $("#thisSizeHigh").text(innerText7);
                  $('#followModal').modal('hide');
                 })
                 $('#clickForSizeBtn8').click(function(){
                   $("#forSize").html($('#clickForSize8').clone());
                   $("#thisSizeLow").html($('#clickForMoney8').clone());
+                  $("#thisSizeHigh").text(innerText8);
                   $('#followModal').modal('hide');
                  })
                  $('#clickForSizeBtn9').click(function(){
                    $("#forSize").html($('#clickForSize9').clone());
                    $("#thisSizeLow").html($('#clickForMoney9').clone());
+                   $("#thisSizeHigh").text(innerText9);
                    $('#followModal').modal('hide');
                   })
                   $('#clickForSizeBtn10').click(function(){
                     $("#forSize").html($('#clickForSize10').clone());
                     $("#thisSizeLow").html($('#clickForMoney10').clone());
+                    $("#thisSizeHigh").text(innerText10);
                     $('#followModal').modal('hide');
                    })
                    $('#clickForSizeBtn11').click(function(){
                      $("#forSize").html($('#clickForSize11').clone());
                      $("#thisSizeLow").html($('#clickForMoney11').clone());
+                     $("#thisSizeHigh").text(innerText11);
                      $('#followModal').modal('hide');
                     })
                     $('#clickForSizeBtn12').click(function(){
                       $("#forSize").html($('#clickForSize12').clone());
                       $("#thisSizeLow").html($('#clickForMoney12').clone());
+                      $("#thisSizeHigh").text(innerText12);
                       $('#followModal').modal('hide');
                      })
                      $('#clickForSizeBtn13').click(function(){
                        $("#forSize").html($('#clickForSize13').clone());
                        $("#thisSizeLow").html($('#clickForMoney13').clone());
+                       $("#thisSizeHigh").text(innerText13);
                        $('#followModal').modal('hide');
                       })
                       $('#clickForSizeBtn14').click(function(){
                         $("#forSize").html($('#clickForSize14').clone());
                         $("#thisSizeLow").html($('#clickForMoney14').clone());
+                        $("#thisSizeHigh").text(innerText14);
                         $('#followModal').modal('hide');
                        })
                        $('#clickForSizeBtn15').click(function(){
                          $("#forSize").html($('#clickForSize15').clone());
                          $("#thisSizeLow").html($('#clickForMoney15').clone());
+                         $("#thisSizeHigh").text(innerText15);
                          $('#followModal').modal('hide');
                         })
                         $('#clickForSizeBtn16').click(function(){
                           $("#forSize").html($('#clickForSize16').clone());
                           $("#thisSizeLow").html($('#clickForMoney16').clone());
+                          $("#thisSizeHigh").text(innerText16);
                           $('#followModal').modal('hide');
                          })
           
-          
     });
+    
+    function buyClick(){
+      var sendMoney = $("#thisSizeLow").text();
+      var form = document.createElement("form");
+          form.setAttribute("charset", "UTF-8");
+          form.setAttribute("method", "Post");  //Post 방식
+          form.setAttribute("action", "/user/signup"); //요청 보낼 주소
+      
+      var hiddenField1 = document.createElement("input");
+        hiddenField1.setAttribute("type", "hidden");
+        hiddenField1.setAttribute("name", "money");
+        hiddenField1.setAttribute("value", sendMoney);
+        
+      var hiddenField2 = document.createElement("input");
+        hiddenField2.setAttribute("type", "hidden");
+        hiddenField2.setAttribute("name", "ask_idx");
+        hiddenField2.setAttribute("value", sendMoney);
+        
+      form.appendChild(hiddenField);
+      document.body.appendChild(form);
+      form.submit();
+    }
+    
 
     
     // 시세 스크립트 부분
