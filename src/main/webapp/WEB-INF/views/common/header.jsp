@@ -121,7 +121,13 @@
 	<div class="search-model" style="opacity: 0.9">
 	  <div class="h-100 d-flex align-items-top justify-content-center">
 	    <div class="search-close-switch">+</div>
-	    <form class="search-model-form">
+	    <form class="search-model-form" onsubmit="return false;">
+	    	<div style="position: relative; top:200px; left:-100px;">
+<!-- 	    	<select id="search-option">
+	    		<option value="product_name">상품명</option>
+	    		<option value="brand">브랜드</option>
+	    	</select> -->
+	    	</div>
 	      <input type="text" id="search-input"
 	        placeholder="Search here....." style="position: relative; top:150px;">
 	    </form>
@@ -138,5 +144,20 @@
 	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<%-- 검색어 완성기능용 js파일 --%>
 	<script  src="${contextPath}/resources/js/home.js"></script>
-	
+	<script>
+// 	window.onload = function () {
+// 		$("#search-input").keydown(function(){
+// 			if(window.event.keyCode == 13){
+//  			let searchForm = document.querySelector(".search-model-form");
+// 			let searchValue = document.getElementById("search-input").value;
+// 			let searchOption = document.getElementById("search-option").value;
+//  			console.log(searchForm.action);
+//  			console.log(searchValue);
+// 			location.href = "${contextPath}/shop/list.do?opt="+searchOption+"&division="+searchValue;
+//  			console.log(searchForm.action);
+//  			searchForm.submit();
+// 			}
+// 		});
+// 		}
+	</script>
 	

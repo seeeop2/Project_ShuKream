@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="likeList" value="${likeList}" />
 
 
 <!-- Breadcrumb Section Begin -->
@@ -219,9 +221,11 @@
         </div>
         <div class="row">
 		<c:forEach var="product" items="${products}" varStatus="">
+        <c:set var="product_name_en" value="${product.PRODUCT_NAME_EN}"/>
         <%-- 여기서부터 --%>
           <div class="col-lg-4 col-md-6 col-sm-6">
-            <div class="product__item" style="cursor: pointer;"onclick="location.href='shopDetails.do?product_id=${product.PRODUCT_ID}'">
+            <div class="product__item">
+<%--             <div class="product__item" style="cursor: pointer;"onclick="location.href='shopDetails.do?product_id=${product.PRODUCT_ID}'"> --%>
             <c:choose>
             	<c:when test="${product.CATEGORY eq 0}">
             	 <div class="product__item__pic set-bg"
@@ -233,13 +237,32 @@
                 </c:otherwise>
 			</c:choose>
                 <ul class="product__hover">
-                  <li><a href="#"><img
-                      src="${contextPath}/resources/img/icon/heart.png"
-                      alt=""></a></li>
+                 
+                  <li>               		
+              			<a id="heartBtn" onclick="javascript:heartBtn('${product.PRODUCT_ID}',
+              														  '${product.IMG_FILE}',
+																	  '${product.PRODUCT_NAME_EN}',              														  
+																	  '${product.PRODUCT_NAME_KOR}',              														  	
+																	  '${product.PRODUCT_PRICE}',              														  	
+																	  '${email}'             														  	
+																		);">
+             <c:choose>
+            	<c:when test="${fn:contains(likeList,product_name_en)}">
+         			<img id="heartImg${product.PRODUCT_ID}" src="${contextPath}/resources/img/icon/heart1.png" alt=""> 
+                </c:when>
+                <c:otherwise>
+         			<img id="heartImg${product.PRODUCT_ID}" src="${contextPath}/resources/img/icon/heart.png" alt=""> 
+                </c:otherwise>
+				
+			 </c:choose>  			
+               
+               			</a>                  
+           		  </li>
+                 
                   <li><a href="#"><img
                       src="${contextPath}/resources/img/icon/compare.png"
                       alt=""> <span>Compare</span></a></li>
-                  <li><a href="#"><img
+                  <li><a href="shopDetails.do?product_id=${product.PRODUCT_ID}"><img
                       src="${contextPath}/resources/img/icon/search.png"
                       alt=""></a></li>
                 </ul>
@@ -734,3 +757,45 @@
 </section>
 <!-- Shop Section End -->
 
+	<script type="text/javascript">
+	
+	    function heartBtn(PRODUCT_ID,IMG_FILE,PRODUCT_NAME_EN,PRODUCT_NAME_KOR,PRODUCT_PRICE,email){
+ 	        if(email == ""){
+	          alert("로그인을 하여주세요");
+ 	        } else{
+	          $.ajax({
+	                  url:  "/shuKream/favorites/favoritesLike.do",
+	                  async : true,
+	                  type : 'POST',
+	                  data : {
+ 	                	  		PRODUCT_ID : PRODUCT_ID,	                	  		
+ 	                	  		IMG_FILE : IMG_FILE,
+	                	  		PRODUCT_NAME_EN : PRODUCT_NAME_EN,
+ 	                	  		PRODUCT_NAME_KOR : PRODUCT_NAME_KOR,
+	                	  		PRODUCT_PRICE : PRODUCT_PRICE,
+								email : email
+	                  		},
+	                  success : function(data) {
+	                 	
+	                 	if ( data == 0 ) {
+                        	
+	                 		$("#heartImg"+PRODUCT_ID).attr("src","${contextPath}/resources/img/icon/heart.png");
+                        
+	                 	} else if (data == 1) {
+	                        
+	                 		$("#heartImg"+PRODUCT_ID).attr("src","${contextPath}/resources/img/icon/heart1.png"); 
+                        }
+	                  
+	                  }
+	            });
+	        }
+	      }
+	    
+	    function getContextPath() {
+	    	var hostIndex = location.href.indexOf(location.host) + location.host.length;
+	    	
+	    	return location.href.substring(hostIndex, location.href.indexOf('/',hostIndex + 1));
+	    };
+	
+	</script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>

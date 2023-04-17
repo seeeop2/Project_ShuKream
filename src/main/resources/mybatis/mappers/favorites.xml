@@ -57,7 +57,7 @@
 			FROM (
 			  SELECT PRODUCT_LIKE.*, ROWNUM AS rnum
 			  FROM PRODUCT_LIKE
-			  WHERE PRODUCT_LIKE.LIKE_MEM_ID = #{like_mem_id}
+			  WHERE PRODUCT_LIKE.LIKE_MEM_ID = #{email}
 			  ORDER BY PRODUCT_LIKE.LIKE_IDX DESC
 			) 
 			WHERE rnum BETWEEN #{start} AND #{end}
@@ -71,33 +71,22 @@
 		]]>
 	</select>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-<!-- 
-	<select id="selectFavoritesList" parameterType="java.util.Map" resultMap="favoritesResult" >
-  		<![CDATA[
-		    
-	        SELECT P.product_name_en, P.product_name_kor, P.product_price,
-   	  		I.img_file
-		    FROM PRODUCTS P,IMAGES I
-		    WHERE P.PRODUCT_ID = I.IMG_ID 
-            AND P.PRODUCT_ID IN
-				
+	<select id="LikeCheck" resultType="int" parameterType="likeVO">
+		<![CDATA[
+			SELECT COUNT(*) FROM PRODUCT_LIKE
+			WHERE LIKE_MEM_ID = #{like_mem_id} 
+			AND LIKE_PRODUCT = #{like_product}  
 		]]>
-		
-		<foreach item="item" collection="list" open="("  separator=","  close=")">
-			#{item.like_idx}
-		</foreach>    
- 
-	
 	</select>
- -->
+	
+	<delete id="deleteLike" parameterType="likeVO">
+	    <![CDATA[
+	      delete from PRODUCT_LIKE
+	      where LIKE_PRODUCT=#{like_product} and
+	      		LIKE_MEM_ID=#{like_mem_id}
+    	]]>
+	</delete>
+	
 	
 	<delete id="deleteLikeList" parameterType="likeVO">
 	    <![CDATA[
@@ -106,6 +95,34 @@
 	      		LIKE_MEM_ID=#{like_mem_id}
     	]]>
 	</delete>
+	
+	<insert id="insertLike"  parameterType="likeVO" >
+	  
+	  <![CDATA[
+	    INSERT INTO PRODUCT_LIKE
+	    (
+	    LIKE_IDX,
+		LIKE_PRODUCT,
+		LIKE_MEM_ID,
+		LIKE_PRODUCT_NAME_EN,
+		LIKE_PRODUCT_NAME_KOR,
+		LIKE_PRODUCT_PRICE,
+		LIKE_IMG_FILE
+	    )
+	    VALUES
+	    (
+	    PRODUCT_LIKE_SEQ.NEXTVAL,
+	    #{like_product},
+	    #{like_mem_id},
+	    #{like_product_name_en},
+	    #{like_product_name_kor},
+	    #{like_product_price},
+	    #{like_img_file}
+	    )
+	  ]]>
+
+  	</insert>
+	
 	
 
 </mapper>

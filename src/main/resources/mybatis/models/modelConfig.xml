@@ -4,7 +4,7 @@
 
 <configuration>
   <typeAliases>
-	 <typeAlias type="com.shukream.event.vo.EventVO" alias="eventVO" />
+     <typeAlias type="com.shukream.event.vo.EventVO" alias="EventVO" />
      <typeAlias type="com.shukream.products.vo.ProductsVO" alias="ProductsVO" />
      <typeAlias type="com.shukream.favorites.vo.LikeVO" alias="LikeVO" />
      <typeAlias type="com.shukream.favorites.vo.FavoritesVO" alias="FavoritesVO" />
@@ -13,6 +13,7 @@
      <typeAlias type="com.shukream.asks.vo.AsksVO" alias="AsksVO" />
      <typeAlias type="com.shukream.bids.vo.BidsVO" alias="BidsVO" />
      <typeAlias type="com.shukream.products.vo.ProductsVOWithIMG" alias="ProductsVOWithIMG" />
+     <typeAlias type="com.shukream.order.vo.OrderVO" alias="orderVO"/>
   </typeAliases>
 </configuration>
 

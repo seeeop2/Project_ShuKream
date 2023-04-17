@@ -35,18 +35,16 @@ public class shopDetailsController {
                                 HttpServletResponse response, 
                                 Model model,
                                 @RequestParam(value = "product_id", required = false) int product_id) {
-
     //model로 변경
     String viewName = (String) request.getAttribute("viewName");
     logger.info(viewName);
+
     String imgNameMain = shopDetailsService.SelectProduct(product_id);
     String imgNameDetail = shopDetailsService.selectProductDetail(product_id);
-//    Map map =shopDetailsService.selectLowAsksAll(product_id);
     Map map =shopDetailsService.selectLowBidsAll(product_id);
     ProductsVOWithIMG productvo = shopDetailsService.selectProductOne(product_id);
-    System.out.println(map);
     
-    int latestMoney = shopDetailsService.SelectLatestOrder(product_id);
+    int latestMoney = shopDetailsService.SelectLatestMoney(product_id);
     System.out.println(latestMoney);
     
     model.addAttribute("lowAsks", shopDetailsService.SelectLowAsks());
@@ -61,7 +59,5 @@ public class shopDetailsController {
     return viewName;
     
   }
-  
-  
 
 }

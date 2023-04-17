@@ -43,17 +43,17 @@ public class DAOTest2 {
   
 
 //=======================product 목록 다 가져오기=================================
-  @Test 
-  public void testemailCheck() throws Exception{
-    
-	 Map email = new HashMap();
-	 email.put("user_email1", "sdsf@naver.com");
-	 email.put("user_email2", "sdsf@naver.com");
-	 Map email2 = memberdao.emailCheck(email);
-	 
-	 logger.info("\n\n----Products List---- " + email2);
-
-  }
+//  @Test 
+//  public void testemailCheck() throws Exception{
+//    
+//	 Map email = new HashMap();
+//	 email.put("user_email1", "sdsf@naver.com");
+//	 email.put("user_email2", "sdsf@naver.com");
+//	 Map email2 = memberdao.emailCheck(email);
+//	 
+//	 logger.info("\n\n----Products List---- " + email2);
+//
+//  }
 
 
 }

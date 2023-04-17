@@ -208,7 +208,6 @@ public class MemberController {
 	              out.println(1);
 	            }
 
-	    	  
 	    	  return;
 	      }
 		

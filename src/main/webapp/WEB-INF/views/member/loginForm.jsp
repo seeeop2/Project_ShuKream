@@ -11,9 +11,8 @@
 
 <script src="${contextPath}/js/member.js"></script>
 
-
-
 <style>
+
 #footer{
     top: 380px;
     position: relative;
