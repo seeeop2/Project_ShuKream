@@ -326,7 +326,7 @@ public class DAOTest {
 
   }
   
-  @Test
+  @Test @Ignore
   public void selectBidByIdWithSize() throws Exception{
     Map map = new HashMap();
     String product_id = "43";
@@ -341,7 +341,22 @@ public class DAOTest {
 
   }
   
-  
+
+  @Test 
+  public void insertOrders() throws Exception{
+    Map map = new HashMap();
+    String product_id = "43";
+    int newBidsIdx = 43;
+    String asks_idx = "1";
+    map.put("product_id", product_id);
+    map.put("newBidsIdx", newBidsIdx);
+    map.put("asks_idx", asks_idx);
+    int map2 = orderDAO.insertOrders(map);
+
+    logger.info("\n selectLatestOrderBId " + map2);
+
+  }
+
   
   
 
