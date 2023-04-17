@@ -64,9 +64,9 @@
 					<c:if test="${not empty buyAsks}">
 					<input type="radio" id="check" name="option" value="10" onchange="setDisplay()"  checked="checked"  > 
 					<label for="check"><span style="font-size:24px;">즉시구매</span></label>
+					<input type="hidden" name="asks_idx" value="${buyAsks.ASKS_IDX}">
 					</c:if>
 					<input type="hidden" name="type" value="buy">
-					<input type="hidden" name="asks_idx" value="${buyAsks.ASKS_IDX}">
 	            </h4>
 				<div class="checkout__input">
 					<div id="price" style="display: none;">
@@ -84,9 +84,9 @@
 					<c:if test="${not empty sellBids}">
 					<input type="radio" id="check" name="option" value="10" onchange="setDisplay()" checked="checked" > 
 					<label for="check"><span style="font-size:24px;">즉시판매</span></label>
+					<input type="hidden" name="bids_idx" value="${sellBids.BIDS_IDX}">
 					</c:if>
 					<input type="hidden" name="type" value="sell">
-					<input type="hidden" name="bids_idx" value="${sellBids.BIDS_IDX}">
 	            </h4>
 				<div class="checkout__input">
 					<div id="price"  style="display:none;">
