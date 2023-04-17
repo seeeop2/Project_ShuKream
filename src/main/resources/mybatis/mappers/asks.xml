@@ -59,7 +59,7 @@ WHERE ROWNUM =1
   <![CDATA[
 
 
-SELECT NVL(ASKS_PRICE,0)
+SELECT NVL(ASKS_PRICE,0) ASKS_PRICE
 from(
 select * from 
 (SELECT * FROM ASKS WHERE ASKS_PRODUCT_ID = #{product_id} and asks_size_idx = #{size1} order by asks_price )

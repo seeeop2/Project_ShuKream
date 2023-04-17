@@ -35,6 +35,31 @@
 	SELECT ORDERS_SEQ.CURRVAL FROM DUAL
 </select>
 
+<select id="selectAskByIdWithSize" parameterType="map" resultType="Map">
+select * from
+(select hi.*,nvl(asks_idx,0) asks_idx_ 
+from
+    (SELECT * 
+     FROM ASKS WHERE ASKS_PRODUCT_ID = #{product_id} AND ASKS_SIZE_IDX = #{product_size_idx} ORDER BY ASKS_PRICE, ASKS_REGDATE
+     ) hi
+right outer join dual
+on asks_product_id = #{product_id2})
+where rownum =1
+</select>
+
+<select id="selectBidByIdWithSize" parameterType="map" resultType="Map">
+select * from
+(select hi.*,nvl(bids_idx,0) bids_idx_ 
+from
+    (SELECT * 
+     FROM BIDS WHERE BIDS_PRODUCT_ID = #{product_id} AND BIDS_SIZE_IDX = #{product_size_idx} ORDER BY BIDS_PRICE, BIDS_REGDATE
+     ) hi
+right outer join dual
+on bids_product_id = #{product_id2})
+where rownum =1
+</select>
+
+
 <update id="updateAsks" parameterType="Map">
 		<choose>
 			<when test="asks_idx != null">
