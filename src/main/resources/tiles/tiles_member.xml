@@ -34,5 +34,10 @@
         <put-attribute name="title" value="배송 현황" />
         <put-attribute name="body" value="/WEB-INF/views/member/shipping.jsp" />
   </definition>
+  
+  <definition name="/member/info" extends="baseLayout">
+        <put-attribute name="title" value="내 정보" />
+        <put-attribute name="body" value="/WEB-INF/views/member/info.jsp" />
+  </definition>
 
 </tiles-definitions>

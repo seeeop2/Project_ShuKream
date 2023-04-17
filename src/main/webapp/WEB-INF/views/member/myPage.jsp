@@ -160,7 +160,7 @@
   <div id="mypage_box" class="container">
 	
 	<div class="myinfo">
-		<a class="mybtn" type="button" href="#">내 정보</a>
+		<a class="mybtn" type="button" href="${contextPath}/member/info.do">내 정보</a>
 	</div>
 	
 	<div class="tradeinfo">

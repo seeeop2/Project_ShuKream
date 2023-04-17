@@ -255,6 +255,23 @@ public class MemberController {
 	    	  return;
 	      }
 		
+	      @RequestMapping(value="/info.do", method = RequestMethod.GET)
+		  public ModelAndView info(HttpServletRequest request, HttpServletResponse response) throws Exception{
+				
+				  System.out.println("info.do 호출!"); 
+				  
+					ModelAndView mav = new ModelAndView();
+				    
+				    String viewName = (String) request.getAttribute("viewName");
+				    
+				    logger.info(viewName);
+				    
+				    mav.setViewName(viewName);
+		         
+				    return mav;
+		      
+		      
+		   }
 
      
       
