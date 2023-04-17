@@ -128,8 +128,6 @@ public class OrderController {
 	
 	@RequestMapping(value="/checkout.do")
 	public ModelAndView buy (
-							@RequestParam(value = "asks_idx",required = false) String asks_idx,
-							@RequestParam(value = "bids_idx",required = false) String bids_idx,
 							@RequestParam(value = "product_id",required = false) String product_idx,
 							@RequestParam(value = "type",required = false) String type,
 							@RequestParam(value = "size", required = false) String size,
@@ -141,11 +139,12 @@ public class OrderController {
 		Map<String, Object> sellBids = null;
 		Map<String, Object> product = null;
 		System.out.println(viewName);
-		
+		String asks_idx = orderService.selectAskByIdWithSize(product_idx,size);
+		String bids_idx = orderService.selectBidByIdWithSize(product_idx,size);
 //		type = "sell"; //지금은 임의로 buy를 줬지만, 이전페이지에서 type=? 으로 넘어올예정
 		
 		if(type.equals("buy")) {
-			if(asks_idx == null) {
+			if(asks_idx == "0") {
 				//asks_idx 즉 입찰로 구매해야 하는 상품의 경우 product만 조회 해서 다음페이지로 넘어갈것
 				product = orderService.selectProduct(Integer.parseInt(product_idx));
 			} else {
@@ -155,8 +154,9 @@ public class OrderController {
 			product = orderService.selectProduct(product_id);
 			}
 			
-		} else { //판매의 경우
-			if(bids_idx == null) {
+		} 
+		  else { //판매의 경우
+			if(bids_idx == "0") {
 				//asks_idx 즉 입찰로 구매해야 하는 상품의 경우 product만 조회 해서 다음페이지로 넘어갈것
 				product = orderService.selectProduct(Integer.parseInt(product_idx));
 			} else { //구매 입찰에 걸려있는 상품으로 판매버튼을 눌러 넘어온경우

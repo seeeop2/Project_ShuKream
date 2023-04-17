@@ -65,4 +65,12 @@ public class OrderDAO {
 		return sqlSession.selectOne("mapper.order.selectBids",bids_idx);
 	}
 
+  public Map selectAskByIdWithSize(Map map) {
+    return sqlSession.selectOne("mapper.order.selectAskByIdWithSize",map);
+  }
+  public Map selectBidByIdWithSize(Map map) {
+    return sqlSession.selectOne("mapper.order.selectBidByIdWithSize",map);
+  }
+  
+
 }

@@ -15,14 +15,6 @@
 <%--       <p id="clickForMoney_${status.index}" style="display: none;">${theHighestBids.value}</p> --%>
 <%-- </c:forEach> --%>
 
-<%
-Map map = (Map) request.getAttribute("theHighestBids");
-for(int i =220; i<= 300;i=i+5){
-%>
-<c:set var=" " value=" "/>
-<% 
-}
-%>
 
 <c:forEach var="theHighestBids" items="${theHighestBids}" varStatus="status">
   <p style="display: none;" id="clickForMoney_${status.index}">${theHighestBids.value}</p>
@@ -224,14 +216,14 @@ for(int i =220; i<= 300;i=i+5){
           </div>
           <div class="product__details__cart__option">
             <div style="margin-bottom: 5px;">
-              <button type="button" class="btn btn-danger" onclick="buyClick()"
+              <button type="button" class="btn btn-danger" onclick="buyClick();return false;"
                 style="width: 49%; background-color: #ef6253">
                 <span
                   style="float: left; font-size: 2rem; border-right: 1px solid white; padding-right: 10px;">구매</span>
                 <span style="vertical-align: middle;"><b><span id="thisSizeLow">${lowBids}</span></b>원</span><br>
                 <span style="vertical-align: middle; font-size: 0.8rem;">즉시 구매가</span>
               </button>
-              <button type="button" class="btn btn-success"
+              <button type="button" class="btn btn-success" onclick="SellClick();return false;"
                 style="width: 49%; background-color: #41b979">
                 <span
                   style="float: left; font-size: 2rem; border-right: 1px solid white; padding-right: 10px;">판매</span>
@@ -667,26 +659,75 @@ var innerText16 = document.getElementById("clickForMoney_16").innerText;
     });
     
     function buyClick(){
-      var sendMoney = $("#thisSizeLow").text();
+      var sendme = $("#forSize").children('span').text();
+      if(sendme ==""){
+        alert("사이즈를 체크해주세요.");
+        return;
+      } 
+      
       var form = document.createElement("form");
           form.setAttribute("charset", "UTF-8");
           form.setAttribute("method", "Post");  //Post 방식
-          form.setAttribute("action", "/user/signup"); //요청 보낼 주소
+          form.setAttribute("action", "${contextPath}/order/checkout.do"); //요청 보낼 주소
       
       var hiddenField1 = document.createElement("input");
         hiddenField1.setAttribute("type", "hidden");
-        hiddenField1.setAttribute("name", "money");
-        hiddenField1.setAttribute("value", sendMoney);
+        hiddenField1.setAttribute("name", "product_id");
+        hiddenField1.setAttribute("value", ${product_id});
         
       var hiddenField2 = document.createElement("input");
         hiddenField2.setAttribute("type", "hidden");
-        hiddenField2.setAttribute("name", "ask_idx");
-        hiddenField2.setAttribute("value", sendMoney);
+        hiddenField2.setAttribute("name", "type");
+        hiddenField2.setAttribute("value", "buy");
         
-      form.appendChild(hiddenField);
+      var hiddenField3 = document.createElement("input");
+        hiddenField3.setAttribute("type", "hidden");
+        hiddenField3.setAttribute("name", "size");
+        hiddenField3.setAttribute("value", sendme);
+        
+        form.appendChild(hiddenField1);
+        form.appendChild(hiddenField2);
+        form.appendChild(hiddenField3);
+        
       document.body.appendChild(form);
       form.submit();
     }
+    
+    function SellClick(){
+      var sendme = $("#forSize").children('span').text();
+      if(sendme ==""){
+        alert("사이즈를 체크해주세요.");
+        return;
+      } 
+      
+      var form2 = document.createElement("form");
+          form2.setAttribute("charset", "UTF-8");
+          form2.setAttribute("method", "Post");  //Post 방식
+          form2.setAttribute("action", "${contextPath}/order/checkout.do"); //요청 보낼 주소
+      
+      var hiddenField4 = document.createElement("input");
+        hiddenField4.setAttribute("type", "hidden");
+        hiddenField4.setAttribute("name", "product_id");
+        hiddenField4.setAttribute("value", ${product_id});
+        
+      var hiddenField5 = document.createElement("input");
+        hiddenField5.setAttribute("type", "hidden");
+        hiddenField5.setAttribute("name", "type");
+        hiddenField5.setAttribute("value", "sell");
+        
+      var hiddenField6 = document.createElement("input");
+        hiddenField6.setAttribute("type", "hidden");
+        hiddenField6.setAttribute("name", "size");
+        hiddenField6.setAttribute("value", sendme);
+        
+        form2.appendChild(hiddenField4);
+        form2.appendChild(hiddenField5);
+        form2.appendChild(hiddenField6);
+        
+      document.body.appendChild(form2);
+      form2.submit();
+    }
+
     
 
     

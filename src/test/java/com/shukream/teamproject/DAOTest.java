@@ -21,6 +21,7 @@ import com.shukream.asks.dao.AsksDAO;
 import com.shukream.asks.vo.AsksVO;
 import com.shukream.bids.dao.BidsDAO;
 import com.shukream.bids.vo.BidsVO;
+import com.shukream.order.dao.OrderDAO;
 import com.shukream.orders.dao.OrdersDAO;
 import com.shukream.products.dao.ProductsDAO;
 import com.shukream.products.vo.ProductsVO;
@@ -48,6 +49,10 @@ public class DAOTest {
   
   @Autowired
   private OrdersDAO ordersDAO;
+
+  @Autowired
+  private OrderDAO orderDAO;
+  
   
   int random1to5 = (int) (Math.random()*4) + 1;
   
@@ -175,7 +180,7 @@ public class DAOTest {
     logger.info("\n Select Result :" + result1);
   }
 //=======================Bids 목록에서 가장 높은 가격 구하기 =================================
-  @Test 
+  @Test @Ignore
   public void selectLowBidsAll() throws Exception{
     
     int product_id= 43;
@@ -306,8 +311,35 @@ public class DAOTest {
     logger.info("\n selectLatestOrderBId " + result);
   }
   
+  @Test @Ignore
+  public void selectAskByIdWithSize() throws Exception{
+    Map map = new HashMap();
+    String product_id = "43";
+    String product_size_idx = "220";
+    String product_id2 = "43";
+    map.put("product_id", product_id);
+    map.put("product_size_idx", product_size_idx);
+    map.put("product_id2", product_id);
+    Map map2 = orderDAO.selectAskByIdWithSize(map);
+
+    logger.info("\n selectLatestOrderBId " + map2);
+
+  }
   
-  
+  @Test
+  public void selectBidByIdWithSize() throws Exception{
+    Map map = new HashMap();
+    String product_id = "43";
+    String product_size_idx = "220";
+    String product_id2 = "43";
+    map.put("product_id", product_id);
+    map.put("product_size_idx", product_size_idx);
+    map.put("product_id2", product_id);
+    Map map2 = orderDAO.selectBidByIdWithSize(map);
+
+    logger.info("\n selectLatestOrderBId " + map2);
+
+  }
   
   
   
