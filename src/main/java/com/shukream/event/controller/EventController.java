@@ -232,6 +232,7 @@ public class EventController {
 	    	// 응모당첨 내역을 저장한다.
 	    	// 임시로 넣어놓고, 나중에는 주문번호를 따와서 추가 시킨다.<작성중>
 	        String contents = "(주문번호2)의 주문완료에 대한 응모권 발생";
+	        String confirm = "아니오";
 	        
 	        //EventVO로 전달한 값들을 저장시킨다.
 	        coupon.setMember_id(id);
@@ -240,6 +241,7 @@ public class EventController {
 	    	coupon.setD_cnt(Integer.toString(d_cnt));
 	    	coupon.setD_ticket(ticket);
 	    	coupon.setD_contents(contents);
+	    	coupon.setD_confirm(confirm);
 	    	
 // check!) d_contents = order_status를 조회해와서 주문완료 complete로 추가가 될 때,
 //      상품 거래가 끝난것으로 보고, 응모권을 추가 시키도록 한다. (order_status에 member_id를 엮어줘야 할듯)
@@ -260,6 +262,7 @@ public class EventController {
 	    	// 응모당첨 내역을 저장한다.
 	    	// 임시로 넣어놓고, 나중에는 주문번호를 따와서 추가 시킨다.<작성중>
 	        String contents = "(주문번호2)의 주문완료에 대한 응모권 발생";
+	        String confirm = "아니오";
 	    	
     	
 	        //EventVO로 전달한 값들을 저장시킨다.
@@ -269,6 +272,7 @@ public class EventController {
 	    	coupon.setD_cnt(Integer.toString(d_cnt));
 	    	coupon.setD_ticket(ticket);
 	    	coupon.setD_contents(contents);
+	    	coupon.setD_confirm(confirm);
 	    	
 // check!) d_contents = order_status를 조회해와서 주문완료 complete로 추가가 될 때,
 //      상품 거래가 끝난것으로 보고, 응모권을 추가 시키도록 한다. (order_status에 member_id를 엮어줘야 할듯)
@@ -292,6 +296,7 @@ public class EventController {
 	    	// 응모당첨 내역을 저장한다.
 	    	// 임시로 넣어놓고, 나중에는 주문번호를 따와서 추가 시킨다.<작성중>
 	        String contents = "(주문번호2)의 주문완료에 대한 응모권 발생";
+	        String confirm = "아니오";
 	    	
     	
 	        //EventVO로 전달한 값들을 저장시킨다.
@@ -301,6 +306,7 @@ public class EventController {
 	    	coupon.setD_cnt(Integer.toString(d_cnt));
 	    	coupon.setD_ticket(ticket);
 	    	coupon.setD_contents(contents);
+	    	coupon.setD_confirm(confirm);
 
 // check!) d_contents = order_status를 조회해와서 주문완료 complete로 추가가 될 때,
 //      상품 거래가 끝난것으로 보고, 응모권을 추가 시키도록 한다. (order_status에 member_id를 엮어줘야 할듯)
@@ -329,6 +335,7 @@ public class EventController {
 	    	// 응모당첨 내역을 저장한다.
 	    	// 임시로 넣어놓고, 나중에는 주문번호를 따와서 추가 시킨다.<작성중>
 	        String contents = "(주문번호2)의 주문완료에 대한 응모권 발생";
+	        String confirm = "예";
 	    	
 	        // 이미 사용 된 응모권으로 처리하고
 	        // 보유중인 응모권에서 -1 한다.
@@ -343,6 +350,7 @@ public class EventController {
 	    	coupon.setD_cnt(Integer.toString(d_cnt));
 	    	coupon.setD_ticket(ticket);
 	    	coupon.setD_contents(contents);
+	    	coupon.setD_confirm(confirm);
 	    	
 // check!) d_contents = order_status를 조회해와서 주문완료 complete로 추가가 될 때,
 //      상품 거래가 끝난것으로 보고, 응모권을 추가 시키도록 한다. (order_status에 member_id를 엮어줘야 할듯)
@@ -411,6 +419,69 @@ public class EventController {
     mav.addObject("a_cnt", a_cnt);
     mav.addObject("u_cnt", u_cnt);
     mav.addObject("d_cnt", d_cnt);
+    
+    // ModelAndView 객체에 viewName을 셋팅
+    mav.setViewName(viewName);
+
+    // ModelAndView 반환
+    return mav;
+  }
+  
+  // #1 ) 2차 주소 : http://localhost:8090/shukream/event/coupon.do
+  // 가져오는 방식 : GET 방식으로 적용 
+  @RequestMapping(value = "/coupon.do", method = RequestMethod.GET)
+  public ModelAndView coupon(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	  
+	  request.setCharacterEncoding("utf-8");
+	  response.setCharacterEncoding("utf-8");
+	  response.setContentType("text/html; charset=utf-8");
+
+	  System.out.println("coupon.do 호출!"); 
+	  
+	  //PrintWirter 객체 out 생성 및 초기화
+		PrintWriter out = response.getWriter();
+		
+	    String contextPath = request.getContextPath();
+
+	  // 세션값 가져오기
+	  HttpSession session = request.getSession();
+	  
+	  // id로 세션값 저장
+	  String id = (String)session.getAttribute("email");
+	  
+	  System.out.println(id);
+	  
+	  // 쿠폰을 조회해 온다.
+	  List<EventVO> checkcoupon = eventservice.checkcoupon(id);
+	  
+	  // ModelANdView 객체 생성
+	  ModelAndView mav = new ModelAndView();
+	    
+	  
+	  // 쿠폰이 없다면?
+	  if(checkcoupon.isEmpty()) {
+		 
+		  
+		  
+		out.println("<script>alert('보유하신 쿠폰이 없습니다!, 마이페이지로 이동합니다');");
+		out.println("window.location.href='"+contextPath+"/member/mypage.do?id="+id+"';</script>");
+		out.flush();
+		out.close();
+		  
+	  // 쿠폰이 있다면?
+	  }else{
+		  
+		 
+		  // 가져온 값들을 전달한다.
+		  mav.addObject("checkcoupon", checkcoupon);
+		  
+	  }
+	  
+    // Viewname 가져오기
+    String viewName = (String) request.getAttribute("viewName");
+    
+    // Viewname에 대한 info 생성
+    logger.info(viewName);
     
     // ModelAndView 객체에 viewName을 셋팅
     mav.setViewName(viewName);

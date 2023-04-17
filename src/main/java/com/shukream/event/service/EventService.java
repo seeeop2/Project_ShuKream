@@ -1,6 +1,7 @@
 package com.shukream.event.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,12 @@ public class EventService {
 	public EventVO addcoupon(EventVO coupon, String id) {
 		
 		return eventDAO.addcoupon(coupon, id);
+	}
+	
+	// 이메일로 현재 보유하고 있는 쿠폰을 조회 합니다.
+	public List<EventVO> checkcoupon(String id) {
+
+		return eventDAO.checkcoupon(id);
 	}
 
 
