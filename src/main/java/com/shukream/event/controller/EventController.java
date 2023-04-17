@@ -258,7 +258,7 @@ public class EventController {
     	System.out.println(ticket);
 
 	    	// 티켓명을 저장한다.
-	    	ticket = "한달무료입고권";
+	    	ticket = "무료1회입고권";
 	    	// 응모당첨 내역을 저장한다.
 	    	// 임시로 넣어놓고, 나중에는 주문번호를 따와서 추가 시킨다.<작성중>
 	        String contents = "(주문번호2)의 주문완료에 대한 응모권 발생";

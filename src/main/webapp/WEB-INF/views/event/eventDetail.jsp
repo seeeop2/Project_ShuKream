@@ -183,7 +183,7 @@
 	   		<input id="detail_title_box" type="text" value="참여 방법" />
 	   		<input class="detail_title" type="text" value="          1) 구매 또는 판매가 성사 될 때 마다, 1회의 기회를 얻습니다." readonly="readonly" />
 	   		<input class="detail_title" type="text" value="          2) 10개의 금색 응모권 중 하나를 선택해주세요" readonly="readonly" />
-	   		<input class="detail_title" type="text" value="          3) 상품 : 무료배송권, 한달무료입고권, 수수료1회무료권 등등 작성중  [확률 10%미만] " readonly="readonly" />
+	   		<input class="detail_title" type="text" value="          3) 상품 : 무료배송권, 무료 1회입고권, 수수료1회무료권 등등 작성중 " readonly="readonly" />
 	   	</div>
 	   	<div id="event_detail_contents">
 <!--  1번 : 무료배송권 , 3번 : 한달무료입고권 , 5번 : 수수료1회 무료권 등등 작성중...-->
@@ -222,7 +222,7 @@ function reply_click(clicked_value){
 		
 	}else if(clicked_value == 3.0){
 		
-		alert("한달 무료입고권 당첨!! 당첨내역으로 이동합니다!");
+		alert("무료 1회 입고권 당첨!! 당첨내역으로 이동합니다!");
 		
 		location.replace("${contextPath}/event/redirect.do?id="+id+"&ticket=freestore");
 		
