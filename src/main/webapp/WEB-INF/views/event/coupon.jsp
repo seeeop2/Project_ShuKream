@@ -184,9 +184,22 @@
     	<c:forEach var="coupon" items="${checkcoupon}">
 	    	<div id="content_row">
 		    	<input class="coupon_content" id="coupon_num" type="text" value="${coupon.d_idx}" readonly="readonly" />
-		    	<input class="coupon_content" id="coupon_name" type="text" value="${coupon.d_ticket}" readonly="readonly" />
+		    <c:choose>
+			    <c:when test= "${coupon.d_ticket eq '무료배송권'}">
+			    	<input style="color: blue; font-weight:bold;" class="coupon_content" id="coupon_name" type="text" value="${coupon.d_ticket}" readonly="readonly" />
+			    </c:when>
+   			    <c:when test= "${coupon.d_ticket eq '한달무료입고권'}">
+			    	<input style="color: #20c997; font-weight:bold;" class="coupon_content" id="coupon_name" type="text" value="${coupon.d_ticket}" readonly="readonly" />
+			    </c:when>
+    			<c:when test= "${coupon.d_ticket eq '수수료1회무료권'}">
+			    	<input style="color: orange; font-weight:bold;" class="coupon_content" id="coupon_name" type="text" value="${coupon.d_ticket}" readonly="readonly" />
+			    </c:when>
+			    <c:otherwise>
+			    	<input style="color: black; font-weight:bold;" class="coupon_content" id="coupon_name" type="text" value="${coupon.d_ticket}" readonly="readonly" />
+			    </c:otherwise>
+		    </c:choose>
 		    	<input class="coupon_content" id="coupon_date" type="text" value="<fmt:formatDate value="${coupon.d_date}" dateStyle="long" /> 발급" readonly="readonly" />
-		    	<input style="color : red; text-decoration: underline;"class="coupon_content" id="coupon_expiry_date" type="text" value="<fmt:formatDate value="${coupon.expiry_date}" dateStyle="long" /> 폐기 됨" readonly="readonly" />
+		    	<input style="font-weight :bold; color: red; text-decoration: underline;"class="coupon_content" id="coupon_expiry_date" type="text" value="<fmt:formatDate value="${coupon.expiry_date}" dateStyle="long" /> 폐기 됨" readonly="readonly" />
 	    	</div>
     	</c:forEach>
     </div>
