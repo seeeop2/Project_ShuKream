@@ -65,7 +65,7 @@ public class ShopDetailsService {
     return result;
   }
   
-  public Map selectLowBidsAll(int product_id) {
+  public Map selectHighBidsAll(int product_id) {
     
     Map result = new LinkedHashMap();
     for(int i = 220; i<=300;i=i+5) {
@@ -73,7 +73,7 @@ public class ShopDetailsService {
       map.put("product_id",product_id );
       map.put("size1", i);
       map.put("size2", i);
-      result.put(i,bidsdao.selectLowBidsAll(map));
+      result.put(i,bidsdao.selectHighBidsAll(map));
     }
     return result;
   }
