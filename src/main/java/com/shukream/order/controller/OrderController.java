@@ -55,7 +55,7 @@ public class OrderController {
 			if(asks_idx == null && bids_idx == null) { //판매입찰테이플에 아이템이 없는 경우
 				product = orderService.selectProduct(Integer.parseInt(product_id));
 				if(abPrice != null && !abPrice.equals("")) {
-					product.replace("PRODUCT_PRICE", abPrice);
+					product.put("PRODUCT_PRICE", abPrice);
 				}
 				paramMap.put("product_id", product.get("PRODUCT_ID"));
 				paramMap.put("product_price", product.get("PRODUCT_PRICE"));
@@ -64,6 +64,9 @@ public class OrderController {
 				
 			} else {
 			paramMap.put("asks_idx", asks_idx);
+			if(abPrice != null && !abPrice.equals("")) {
+				paramMap.put("product_price", abPrice);
+			}
 			//select하고 마지막에 insert된 행의 idx구하기
 			int newBidsIdx = orderService.insertNewBids(paramMap); //새로운 구매 입찰 생성(즉시구매, 구매입찰 둘다 입찰이 생겨야함)
 			paramMap.put("newBidsIdx", newBidsIdx);
@@ -99,6 +102,9 @@ public class OrderController {
 			} else { 
 			System.out.println("bids_idx???"+bids_idx);
 			paramMap.put("bids_idx", bids_idx);
+				if(abPrice != null && !abPrice.equals("")) {
+					paramMap.put("product_price", abPrice);
+				}
 			int newAsksIdx = orderService.insertNewAsks(paramMap); //새로운 판매 입찰 생성(즉시구매, 판매입찰 둘다 입찰이 생겨야함)
 			paramMap.put("newAsksIdx", newAsksIdx);
 			System.out.println("newAsksIdx???" + newAsksIdx);
@@ -129,6 +135,7 @@ public class OrderController {
 	@RequestMapping(value="/checkout.do")
 	public ModelAndView buy (
 							@RequestParam(value = "asks_idx",required = false) String asks_idx,
+//							@RequestParam(value = "asks_price",required = false) String asks_price,
 							@RequestParam(value = "bids_idx",required = false) String bids_idx,
 							@RequestParam(value = "product_id",required = false) String product_idx,
 							@RequestParam(value = "type",required = false) String type,
@@ -141,6 +148,8 @@ public class OrderController {
 		Map<String, Object> sellBids = null;
 		Map<String, Object> product = null;
 		System.out.println(viewName);
+		
+//		String asks_idx =  orderService(asks_price);
 		
 //		type = "sell"; //지금은 임의로 buy를 줬지만, 이전페이지에서 type=? 으로 넘어올예정
 		

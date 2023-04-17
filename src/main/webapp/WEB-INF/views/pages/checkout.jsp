@@ -63,8 +63,8 @@
 					<label for="bids"><span style="font-size:24px;">구매입찰</span></label>
 					<c:if test="${not empty buyAsks}">
 					<input type="radio" id="check" name="option" value="10" onchange="setDisplay()"  checked="checked"  > 
-					</c:if>
 					<label for="check"><span style="font-size:24px;">즉시구매</span></label>
+					</c:if>
 					<input type="hidden" name="type" value="buy">
 					<input type="hidden" name="asks_idx" value="${buyAsks.ASKS_IDX}">
 	            </h4>
