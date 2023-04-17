@@ -26,4 +26,9 @@ public class HomeDAO {
 		paramMap.put("option", option);
 		return sqlSession.selectList("mapper.home.selectMainProductsList",paramMap);
 	}
+
+	public String likeList(String email) {
+		
+		return sqlSession.selectOne("mapper.home.likeList",email);
+	}
 }

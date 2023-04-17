@@ -60,6 +60,12 @@
 	      </choose>
 </select>
 
+<select id="likeList" resultType="String" parameterType="String">
+	<![CDATA[
+		SELECT LISTAGG(LIKE_PRODUCT_NAME_EN, ',') WITHIN GROUP(ORDER BY LIKE_PRODUCT) AS result
+		FROM PRODUCT_LIKE WHERE LIKE_MEM_ID =#{email}
+	]]>
+</select>
 	
 
 </mapper>

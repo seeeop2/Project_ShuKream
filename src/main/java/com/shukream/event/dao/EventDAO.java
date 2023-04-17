@@ -1,7 +1,8 @@
 package com.shukream.event.dao;
 
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,31 @@ public class EventDAO {
 		
 		return coupon;
 		
+	}
+	
+	public List<EventVO> checkcoupon(String id)throws DataAccessException{
+		
+		System.out.println("EventDAO -> checkcoupon 메소드 호출!");
+		
+		Map<String, String> map = new HashMap<String, String>();
+		
+		String d_ticket = "꽝";
+		String d_confirm = "아니오";
+		
+		map.put("id", id);
+		map.put("d_ticket", d_ticket);
+		map.put("d_confirm", d_confirm);
+		
+		// sqlsession을 이용해서 id를 매개변수로 넘겨주고, db에 접근해서 d_cnt의 값을 반환받는다.
+		List<EventVO>checkcoupon = sqlSession.selectList("mapper.event.checkcoupon", map);
+		
+		
+		
+		System.out.println(checkcoupon);
+		
+		// 조회 해온 d_cnt를 반환 시킨다.
+		
+		return checkcoupon;
 	}
 
 

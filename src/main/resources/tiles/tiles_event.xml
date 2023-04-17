@@ -33,4 +33,9 @@
     <put-attribute name="title" value="이벤트 당첨내역 페이지" />
     <put-attribute name="body" value="/WEB-INF/views/event/eventDetailResult.jsp" />
   </definition>
+  
+  <definition name="/event/coupon" extends="baseLayout">
+    <put-attribute name="title" value="보유쿠폰내역 페이지" />
+    <put-attribute name="body" value="/WEB-INF/views/event/coupon.jsp" />
+  </definition>
 </tiles-definitions>

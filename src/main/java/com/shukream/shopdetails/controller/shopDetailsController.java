@@ -41,11 +41,12 @@ public class shopDetailsController {
 
     String imgNameMain = shopDetailsService.SelectProduct(product_id);
     String imgNameDetail = shopDetailsService.selectProductDetail(product_id);
-    Map map =shopDetailsService.selectLowBidsAll(product_id);
+    Map map =shopDetailsService.selectHighBidsAll(product_id);
+    Map map2 = shopDetailsService.selectLowAsksAll(product_id);
+    System.out.println("map = " + map);
     ProductsVOWithIMG productvo = shopDetailsService.selectProductOne(product_id);
     
     int latestMoney = shopDetailsService.SelectLatestMoney(product_id);
-    System.out.println(latestMoney);
     
     model.addAttribute("lowAsks", shopDetailsService.SelectLowAsks());
     model.addAttribute("lowBids", shopDetailsService.SelectLowBids());
@@ -53,10 +54,16 @@ public class shopDetailsController {
     model.addAttribute("productvo", productvo);
     model.addAttribute("imgNameMain", imgNameMain);
     model.addAttribute("imgNameDetail", imgNameDetail);
-//  model.addAttribute("theLowestAsks",map);
-    model.addAttribute("theLowestBids",map);
+    model.addAttribute("theLowestAsks",map2);
+    model.addAttribute("theHighestBids",map);
     model.addAttribute("latestMoney",latestMoney);
     return viewName;
+  }
+  
+  @RequestMapping(value = "/getMoneyForModal.do", method = RequestMethod.GET)
+  public void getMoneyForModal() {
+    
+    
     
   }
 

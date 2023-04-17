@@ -189,6 +189,50 @@ public class MemberController {
 	          out.close();
 
 	      }
+	      
+	  	@RequestMapping(value="/mypage.do", method = RequestMethod.GET)
+		public ModelAndView mypage(HttpServletRequest request, HttpServletResponse response) throws Exception{
+			
+			  System.out.println("mypage.do 호출!"); 
+			  
+				// ModelANdView 객체 생성
+			    ModelAndView mav = new ModelAndView();
+			    
+			    // Viewname 가져오기
+			    String viewName = (String) request.getAttribute("viewName");
+			    
+			    // Viewname에 대한 info 생성
+			    logger.info(viewName);
+			    
+			    // ModelAndView 객체에 viewName을 셋팅
+			    mav.setViewName(viewName);
+	          // ModelAndView 반환
+	          return mav;
+	      
+	      
+	   }
+	  	
+	  	@RequestMapping(value="/shipping.do", method = RequestMethod.GET)
+		public ModelAndView shipping(HttpServletRequest request, HttpServletResponse response) throws Exception{
+			
+			  System.out.println("shipping.do 호출!"); 
+			  
+				// ModelANdView 객체 생성
+			    ModelAndView mav = new ModelAndView();
+			    
+			    // Viewname 가져오기
+			    String viewName = (String) request.getAttribute("viewName");
+			    
+			    // Viewname에 대한 info 생성
+			    logger.info(viewName);
+			    
+			    // ModelAndView 객체에 viewName을 셋팅
+			    mav.setViewName(viewName);
+	          // ModelAndView 반환
+	          return mav;
+	      
+	      
+	   }
 		
 	      @RequestMapping(value = "/emailCheck.do", method = RequestMethod.POST)
 	      @ResponseBody	

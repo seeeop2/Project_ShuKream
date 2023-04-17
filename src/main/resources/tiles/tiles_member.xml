@@ -24,5 +24,15 @@
         <put-attribute name="title" value="회원가입 페이지" />
         <put-attribute name="body" value="/WEB-INF/views/member/addMember.jsp" />
   </definition>
+  
+   <definition name="/member/mypage" extends="baseLayout">
+        <put-attribute name="title" value="마이 페이지" />
+        <put-attribute name="body" value="/WEB-INF/views/member/myPage.jsp" />
+  </definition>
+  
+  <definition name="/member/shipping" extends="baseLayout">
+        <put-attribute name="title" value="배송 현황" />
+        <put-attribute name="body" value="/WEB-INF/views/member/shipping.jsp" />
+  </definition>
 
 </tiles-definitions>

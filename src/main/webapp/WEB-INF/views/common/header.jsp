@@ -23,6 +23,7 @@
             }else{
              %>	
             	<a href="${contextPath}/member/logout.do">로그아웃</a>
+            	<a href="${contextPath}/member/mypage.do">마이페이지</a>
                 <a href="#">문의</a> 
              <%
              }
@@ -66,6 +67,7 @@
 					            }else{
 					             %>	
 					            	<a href="${contextPath}/member/logout.do">로그아웃</a>
+					            	<a href="${contextPath}/member/mypage.do">마이페이지</a>
 					                <a href="#">문의</a> 
 					             <%
 					             }

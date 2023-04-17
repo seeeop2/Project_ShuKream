@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <c:set var="bestSeller" value="${mainProductMap.bestSeller}"/>
 <c:set var="newArrivals" value="${mainProductMap.newArrivals}"/>
 <c:set var="popularItems" value="${mainProductMap.popularItems}"/>
+<c:set var="likeList" value="${likeList}" />
 
 <!-- Hero Section Begin -->
 <section class="hero">
@@ -127,6 +129,7 @@
     
     <%-- 여기부터 --%>
     <c:forEach var="newArrivals" items="${mainProductMap.newArrivals}" begin="0" end="3" varStatus="i">
+    <c:set var="product_name_en" value="${newArrivals.productVO.product_name_en}"/>
     <div
         class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
         <div class="product__item">
@@ -141,9 +144,26 @@
          </c:if>
          
             <ul class="product__hover">
-              <li><a href=""><img
-                  src="${contextPath}/resources/img/icon/heart.png"
-                  alt=""></a></li>
+              <li>
+          		<a id="heartBtn" onclick="javascript:heartBtn('${newArrivals.productVO.product_id}',
+      														  '${newArrivals.img_file}',
+													  		  '${newArrivals.productVO.product_name_en}',              														  
+															  '${newArrivals.productVO.product_name_kor}',              														  	
+														      '${newArrivals.productVO.product_price}',              														  	
+															  '${email}'             														  	
+																	);">
+	             	<c:choose>
+		            	<c:when test="${fn:contains(likeList,product_name_en)}">
+		         			<img id="heartImg${newArrivals.productVO.product_id}" src="${contextPath}/resources/img/icon/heart1.png" alt=""> 
+		                </c:when>
+		                <c:otherwise>
+		         			<img id="heartImg${newArrivals.productVO.product_id}" src="${contextPath}/resources/img/icon/heart.png" alt=""> 
+		                </c:otherwise>
+			 		</c:choose>
+      			</a>
+		      </li>
+              
+              
               <li><a href="#"><img
                   src="${contextPath}/resources/img/icon/compare.png"
                   alt=""> <span>Compare</span></a></li>
@@ -180,9 +200,26 @@
             	data-setbg="${contextPath}/resources/img/product/slipper/${mainProductMap.popularItems[i.index].img_file}">
          </c:if>
             <ul class="product__hover">
-              <li><a href="#"><img
-                  src="${contextPath}/resources/img/icon/heart.png"
-                  alt=""></a></li>
+              <li>
+           			
+           			<a id="heartBtn" onclick="javascript:heartBtn('${mainProductMap.popularItems[i.index].productVO.product_id}',
+	      														  '${mainProductMap.popularItems[i.index].img_file}',
+														  		  '${mainProductMap.popularItems[i.index].productVO.product_name_en}',              														  
+																  '${mainProductMap.popularItems[i.index].productVO.product_name_kor}',              														  	
+															      '${mainProductMap.popularItems[i.index].productVO.product_price}',              														  	
+																  '${email}'             														  	
+																	);">
+	             	<c:choose>
+		            	<c:when test="${fn:contains(likeList,product_name_en)}">
+		         			<img id="heartImg${mainProductMap.popularItems[i.index].productVO.product_id}" src="${contextPath}/resources/img/icon/heart1.png" alt=""> 
+		                </c:when>
+		                <c:otherwise>
+		         			<img id="heartImg${mainProductMap.popularItems[i.index].productVO.product_id}" src="${contextPath}/resources/img/icon/heart.png" alt=""> 
+		                </c:otherwise>
+			 		</c:choose>
+      			
+      			</a>
+              </li>
               <li><a href="#"><img
                   src="${contextPath}/resources/img/icon/compare.png"
                   alt=""> <span>Compare</span></a></li>
@@ -667,3 +704,46 @@
   </div>
 </section>
 <!-- Latest Blog Section End -->
+
+	<script type="text/javascript">
+	
+	    function heartBtn(PRODUCT_ID,IMG_FILE,PRODUCT_NAME_EN,PRODUCT_NAME_KOR,PRODUCT_PRICE,email){
+ 	        if(email == ""){
+	          alert("로그인을 하여주세요");
+ 	        } else{
+	          $.ajax({
+	                  url:  "/shuKream/favorites/favoritesLike.do",
+	                  async : true,
+	                  type : 'POST',
+	                  data : {
+ 	                	  		PRODUCT_ID : PRODUCT_ID,	                	  		
+ 	                	  		IMG_FILE : IMG_FILE,
+	                	  		PRODUCT_NAME_EN : PRODUCT_NAME_EN,
+ 	                	  		PRODUCT_NAME_KOR : PRODUCT_NAME_KOR,
+	                	  		PRODUCT_PRICE : PRODUCT_PRICE,
+								email : email
+	                  		},
+	                  success : function(data) {
+	                 	
+	                 	if ( data == 0 ) {
+                        	
+	                 		$("#heartImg"+PRODUCT_ID).attr("src","${contextPath}/resources/img/icon/heart.png");
+                        
+	                 	} else if (data == 1) {
+	                        
+	                 		$("#heartImg"+PRODUCT_ID).attr("src","${contextPath}/resources/img/icon/heart1.png"); 
+                        }
+	                  
+	                  }
+	            });
+	        }
+	      }
+	    
+	    function getContextPath() {
+	    	var hostIndex = location.href.indexOf(location.host) + location.host.length;
+	    	
+	    	return location.href.substring(hostIndex, location.href.indexOf('/',hostIndex + 1));
+	    };
+	
+	</script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
