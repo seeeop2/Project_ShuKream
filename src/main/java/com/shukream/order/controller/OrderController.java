@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.shukream.member.vo.MemberVO;
 import com.shukream.order.service.OrderService;
 import com.shukream.order.vo.OrderVO;
 import com.shukream.products.vo.ProductsVO;
@@ -145,6 +146,14 @@ public class OrderController {
 							@RequestParam(value = "size", required = false) String size,
 							HttpServletRequest request) {
 		
+		MemberVO memberVO = null;
+		
+		HttpSession session=request.getSession();
+		session=request.getSession();
+		Boolean isLogOn=(Boolean)session.getAttribute("isLogOn");
+		if(isLogOn) {
+			memberVO=(MemberVO)session.getAttribute("memberInfo");
+		}
 	  
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
@@ -188,6 +197,8 @@ public class OrderController {
 		mav.addObject("product",product);
 		mav.addObject("type",type);
 		mav.addObject("size",size);
+		
+		mav.addObject("memberVO",memberVO);
 		
 		return mav;
 		

@@ -106,7 +106,7 @@
                   <p>
                     Name<span>*</span>
                   </p>
-                  <input type="text" name="ship_name" value="김길동" required>
+                  <input type="text" name="ship_name" value="${memberVO.user_name}" required>
                 </div>
               </div>
                <div class="col-lg-6">
@@ -114,7 +114,7 @@
                   <p>
                     Phone<span>*</span>
                   </p>
-                  <input type="text" name="phone_number" value="01012341234" required>
+                  <input type="text" name="phone_number" placeholder="-없이 숫자 11자리를 입력해주세요" required>
                 </div>
               </div>
               <div class="col-lg-6">
@@ -122,7 +122,7 @@
                   <p>
                     Email<span>*</span>
                   </p>
-                  <input type="text" name="user_id" value="test@test.com" required>
+                  <input type="text" name="user_id" value="${memberVO.user_email} " required>
                 </div>
               </div>
 <%--              <div class="col-lg-6">
