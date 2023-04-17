@@ -133,6 +133,7 @@ public class OrderController {
 							@RequestParam(value = "size", required = false) String size,
 							HttpServletRequest request) {
 		
+	  
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		Map<String, Object> buyAsks = null;
@@ -144,7 +145,7 @@ public class OrderController {
 //		type = "sell"; //지금은 임의로 buy를 줬지만, 이전페이지에서 type=? 으로 넘어올예정
 		
 		if(type.equals("buy")) {
-			if(asks_idx == "0") {
+			if(asks_idx.equals("0") ) {
 				//asks_idx 즉 입찰로 구매해야 하는 상품의 경우 product만 조회 해서 다음페이지로 넘어갈것
 				product = orderService.selectProduct(Integer.parseInt(product_idx));
 			} else {
@@ -156,7 +157,7 @@ public class OrderController {
 			
 		} 
 		  else { //판매의 경우
-			if(bids_idx == "0") {
+			if(bids_idx.equals("0")) {
 				//asks_idx 즉 입찰로 구매해야 하는 상품의 경우 product만 조회 해서 다음페이지로 넘어갈것
 				product = orderService.selectProduct(Integer.parseInt(product_idx));
 			} else { //구매 입찰에 걸려있는 상품으로 판매버튼을 눌러 넘어온경우
@@ -166,6 +167,7 @@ public class OrderController {
 			product = orderService.selectProduct(product_id);
 			}
 		}
+		
 		
 		//가격정보를 위해 담는것
 		mav.addObject("buyAsks",buyAsks);
