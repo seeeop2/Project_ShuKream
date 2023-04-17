@@ -93,7 +93,14 @@
 </insert>	
 
 <insert id="insertOrders" parameterType="Map">
+	<choose>
+	<when test="newBidsIdx != null">
 	INSERT INTO ORDERS(ORDERS_BID_IDX, ORDERS_ASK_IDX) VALUES (#{newBidsIdx},#{asks_idx})
+	</when>
+	<otherwise>
+	INSERT INTO ORDERS(ORDERS_BID_IDX, ORDERS_ASK_IDX) VALUES (#{bids_idx},#{newBidsIdx})
+	</otherwise>
+	</choose>
 </insert>
 
 <select id="selectAsks" parameterType="String" resultType="Map">
