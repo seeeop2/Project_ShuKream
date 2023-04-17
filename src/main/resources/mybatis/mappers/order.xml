@@ -172,22 +172,21 @@
 				                <choose>
 				                	<when test="product_price != null">
 				                		#{product_price},
+						               	SYSDATE,
+						                SYSDATE,
+						                NULL, 	
+						                0,	
+						                SYSDATE,
+						                #{product_price},
 				                	</when>
 				                	<otherwise>
 				                		(SELECT ASKS_PRICE FROM ASKS WHERE ASKS_IDX = #{asks_idx}),
-				                	</otherwise>
-				                </choose>
-				                SYSDATE,
-				                SYSDATE,
-				                NULL,
-				                1,
-				                SYSDATE,
-				                <choose>
-				                	<when test="product_price != null">
-				                		#{product_price},
-				                	</when>
-				                	<otherwise>
-				                		(SELECT ASKS_PRICE FROM ASKS WHERE ASKS_IDX = #{asks_idx}),
+				                		SYSDATE,
+						                SYSDATE,
+						                NULL,
+						                1,
+						                SYSDATE,
+						                (SELECT ASKS_PRICE FROM ASKS WHERE ASKS_IDX = #{asks_idx}),
 				                	</otherwise>
 				                </choose>
 				                0,
@@ -247,22 +246,21 @@
 				                <choose>
 				                	<when test="product_price != null">
 				                		#{product_price},
+				                		SYSDATE,
+						                SYSDATE,
+						                NULL,
+						                0,
+						                SYSDATE,
+						                #{product_price},
 				                	</when>
 				                	<otherwise>
 				                		(SELECT BIDS_PRICE FROM BIDS WHERE BIDS_IDX = #{bids_idx}),
-				                	</otherwise>
-				                </choose>
-				                SYSDATE,
-				                SYSDATE,
-				                NULL,
-				                1,
-				                SYSDATE,
-				                <choose>
-				                	<when test="product_price != null">
-				                		#{product_price},
-				                	</when>
-				                	<otherwise>
-				                		(SELECT BIDS_PRICE FROM BIDS WHERE BIDS_IDX = #{bids_idx}),
+				                		SYSDATE,
+						                SYSDATE,
+						                NULL,
+						                1,
+						                SYSDATE,
+						                (SELECT BIDS_PRICE FROM BIDS WHERE BIDS_IDX = #{bids_idx}),
 				                	</otherwise>
 				                </choose>
 				                0,
