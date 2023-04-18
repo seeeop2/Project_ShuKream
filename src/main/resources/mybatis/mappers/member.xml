@@ -53,5 +53,5 @@
 			on user_email = #{user_email2}
 		]]>
 	</select>
-
+	
 </mapper>

@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+.addMem{
+	position: relative;
+	top: 120px;
+}
+#checkBtn{
+	color: white;
+    background: black;
+    position: relative;
+    //left: -80px;
+}
+#joinBtn{
+	position: relative;
+    top: 100px;
+    left: 150px;
+    background: black;
+    border-color: black;
+    border-radius: 0;
+    color: white;
+}
+#checkBtn:hover, #joinBtn:hover{
+	color: black;
+	background: white;
+	border-color: black;
+}
+#app
+{
+	position: relative;
+    left: -34px;
+}
+#mail
+{
+	position: relative;
+    left: -18px;
+}
+.card-body{
+	padding: 0;
+	height: 100px;
+    position: relative;
+    top: 7px;
+}
+#appCheck, #smsCheck, #mailCheck, #agree{
+	accent-color: black;
+}
+#accordionExample{
+	width: 850px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.join{
+	position: relative;
+	top: -5px;
+}
