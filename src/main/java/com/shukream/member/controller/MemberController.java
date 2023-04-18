@@ -1,26 +1,26 @@
 package com.shukream.member.controller;
 
-import java.io.PrintWriter;
+
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.shukream.event.controller.EventController;
 import com.shukream.member.service.MemberService;
 import com.shukream.member.vo.MemberVO;
+import java.io.PrintWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.shukream.event.controller.EventController;
 
 @Controller("memberController")
 @RequestMapping(value="/member")
@@ -234,22 +234,45 @@ public class MemberController {
 	      
 	   }
 		
+	      @RequestMapping(value = "/emailCheck.do", method = RequestMethod.POST)
+	      @ResponseBody	
+	      public void emailCheck(@RequestParam("user_email")String user_email,HttpServletResponse response) throws Exception{
+	    	 
+	    	  System.out.println("heelloo");
+	    	  System.out.println(user_email);
+	    	  
+	    	  int memberEmailCheck = memberService.emailCheck(user_email);
+	    	  System.out.println("컨트롤러 memberEmailCheck : " + memberEmailCheck);
+	    	  
+	    	  PrintWriter out = response.getWriter();
+	    	  
+	    	  if(memberEmailCheck == 0) {
+	              out.println(0);
+	            } else {
+	              out.println(1);
+	            }
+
+	    	  return;
+	      }
 		
+	      @RequestMapping(value="/info.do", method = RequestMethod.GET)
+		  public ModelAndView info(HttpServletRequest request, HttpServletResponse response) throws Exception{
+				
+				  System.out.println("info.do 호출!"); 
+				  
+					ModelAndView mav = new ModelAndView();
+				    
+				    String viewName = (String) request.getAttribute("viewName");
+				    
+				    logger.info(viewName);
+				    
+				    mav.setViewName(viewName);
+		         
+				    return mav;
+		      
+		      
+		   }
 
-//      @RequestMapping(value="/overlapped.do", method = RequestMethod.POST)
-//      public ResponseEntity overlapped(@RequestParam("email") String email,
-//                               HttpServletRequest request, 
-//                               HttpServletResponse response) throws Exception{
-//         
-//         ResponseEntity resEntity = null;
-//         
-//         String result = memberService.overlapped(email);
-//         
-//         resEntity =new ResponseEntity(result, HttpStatus.OK);
-//         
-//         return resEntity;
-//      }
+     
       
-      
-
 }

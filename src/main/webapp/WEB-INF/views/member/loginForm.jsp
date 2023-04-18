@@ -8,55 +8,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<script src="${contextPath}/js/member.js"></script>
+
 <style>
+
 #footer{
     top: 380px;
     position: relative;
 }
 #detail_table{
-<<<<<<< HEAD
-   text-align: center;
-   position: relative;
-   top: 120px;
-}
-#logOn{
-   position: relative;
-    left: 5px;
-}
-#sub{
-   position: relative;
-    left: -10px;
-    top: 30px;
-    background: black;
-    color: white;
-}
-#re{
-   position: relative;
-    left: 10px;
-    top: 30px;
-    background: black;
-    color: white;
-}
-#sub:hover, #re:hover{
-   background: white;
-   color: black;
-}
-.find>a{
-   color: black;
-   font-weight: 100;
-}
-.find>a:hover{
-   color: black;
-   font-weight: bolder;
-}
-.find{
-   position: relative;
-    top: 100px;
-}
-.signTable{
-   position: relative;
-   top: 15px;
-=======
 	text-align: center;
 	position: relative;
 	top: 120px;
@@ -67,7 +28,7 @@
 }
 #sub{
 	position: relative;
-    left: -10px;
+    left: -20px;
     top: 30px;
     background: black;
     color: white;

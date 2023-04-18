@@ -12,8 +12,7 @@ import com.shukream.member.vo.MemberVO;
 @Repository("memberDAO")
 public class MemberDAO {
 
-   
-   @Autowired
+	@Autowired
    private SqlSession sqlSession;
    
    public MemberVO login(Map<String, String> loginMap) throws DataAccessException{
@@ -28,9 +27,10 @@ public class MemberDAO {
 		
 	}
 
-	public String selectOverlappedID(String email) throws DataAccessException {
-		String result =  sqlSession.selectOne("mapper.member.selectOverlappedID",email);
+	public Map emailCheck(Map map){
+		Map result = sqlSession.selectOne("mapper.member.emailCheck", map);
 		return result;
 	}
+	
 
 }

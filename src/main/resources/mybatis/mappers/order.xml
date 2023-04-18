@@ -194,13 +194,26 @@ where rownum =1
 						 VALUES (
 				                BIDS_SEQ.NEXTVAL,
 				                (SELECT ASKS_SIZE_IDX FROM ASKS WHERE ASKS_IDX = #{asks_idx}),
-				                (SELECT ASKS_PRICE FROM ASKS WHERE ASKS_IDX = #{asks_idx}),
-				                SYSDATE,
-				                SYSDATE,
-				                NULL,
-				                1,
-				                SYSDATE,
-				                (SELECT ASKS_PRICE FROM ASKS WHERE ASKS_IDX = #{asks_idx}),
+				                <choose>
+				                	<when test="product_price != null">
+				                		#{product_price},
+						               	SYSDATE,
+						                SYSDATE,
+						                NULL, 	
+						                0,	
+						                SYSDATE,
+						                #{product_price},
+				                	</when>
+				                	<otherwise>
+				                		(SELECT ASKS_PRICE FROM ASKS WHERE ASKS_IDX = #{asks_idx}),
+				                		SYSDATE,
+						                SYSDATE,
+						                NULL,
+						                1,
+						                SYSDATE,
+						                (SELECT ASKS_PRICE FROM ASKS WHERE ASKS_IDX = #{asks_idx}),
+				                	</otherwise>
+				                </choose>
 				                0,
 				                0,
 				                (SELECT ASKS_PRODUCT_ID FROM ASKS WHERE ASKS_IDX = #{asks_idx})
@@ -255,13 +268,26 @@ where rownum =1
 						 VALUES (
 				                ASKS_SEQ.NEXTVAL,
 				                (SELECT BIDS_SIZE_IDX FROM BIDS WHERE BIDS_IDX = #{bids_idx}),
-				                (SELECT BIDS_PRICE FROM BIDS WHERE BIDS_IDX = #{bids_idx}),
-				                SYSDATE,
-				                SYSDATE,
-				                NULL,
-				                1,
-				                SYSDATE,
-				                (SELECT BIDS_PRICE FROM BIDS WHERE BIDS_IDX = #{bids_idx}),
+				                <choose>
+				                	<when test="product_price != null">
+				                		#{product_price},
+				                		SYSDATE,
+						                SYSDATE,
+						                NULL,
+						                0,
+						                SYSDATE,
+						                #{product_price},
+				                	</when>
+				                	<otherwise>
+				                		(SELECT BIDS_PRICE FROM BIDS WHERE BIDS_IDX = #{bids_idx}),
+				                		SYSDATE,
+						                SYSDATE,
+						                NULL,
+						                1,
+						                SYSDATE,
+						                (SELECT BIDS_PRICE FROM BIDS WHERE BIDS_IDX = #{bids_idx}),
+				                	</otherwise>
+				                </choose>
 				                0,
 				                (SELECT BIDS_PRODUCT_ID FROM BIDS WHERE BIDS_IDX = #{bids_idx})
 				           		 )

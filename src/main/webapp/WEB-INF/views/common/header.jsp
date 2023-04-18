@@ -58,8 +58,8 @@
                     <div class="col-lg-6 col-md-5">
                         <div class="header__top__right">
                             <div class="header__top__links">
+					      
 					        <%--    
-					           
 					           <%
 					            if(session.getAttribute("isLogOn") == null) {
 					            %>
@@ -101,6 +101,7 @@
 					          
 					           </div>
                           </div>
+
                     </div>
                 </div>
             </div>

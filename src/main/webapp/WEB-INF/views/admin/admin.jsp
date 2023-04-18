@@ -91,30 +91,6 @@
 
 			</table>	
 
-<%-- 		
-		<div class="row">
-          <div class="col-lg-12">
-            <div class="product__pagination">
-            	<c:if test="${pagination.hasPrevBlock()}">
-              		<a class="" href="?page=${pagination.startPage-1}">&laquo;</a> 
-            	</c:if>
-            	<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="pageNumber">
-            		<c:choose>
-            			<c:when test="${pageNumber eq pagination.currentPage}">
-            				<a class="active" href="?page=${pageNumber}">${pageNumber}</a>
-            			</c:when>
-            			<c:otherwise>
-            				<a href="?page=${pageNumber}">${pageNumber}</a>
-            			</c:otherwise>
-            		</c:choose>
-            	</c:forEach>
-            	<c:if test="${pagination.hasNextBlock()}">
-            		<a href="?page=${pagination.endPage+1}">&raquo;</a>
-            	</c:if>
-            </div>
-          </div>
-        </div>
-		 --%>
 		
 		</div>
  

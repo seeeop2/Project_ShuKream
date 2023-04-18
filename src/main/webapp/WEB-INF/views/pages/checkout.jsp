@@ -63,10 +63,10 @@
 					<label for="bids"><span style="font-size:24px;">구매입찰</span></label>
 					<c:if test="${not empty buyAsks}">
 					<input type="radio" id="check" name="option" value="10" onchange="setDisplay()"  checked="checked"  > 
-					</c:if>
 					<label for="check"><span style="font-size:24px;">즉시구매</span></label>
-					<input type="hidden" name="type" value="buy">
 					<input type="hidden" name="asks_idx" value="${buyAsks.ASKS_IDX}">
+					</c:if>
+					<input type="hidden" name="type" value="buy">
 	            </h4>
 				<div class="checkout__input">
 					<div id="price" style="display: none;">
@@ -84,9 +84,9 @@
 					<c:if test="${not empty sellBids}">
 					<input type="radio" id="check" name="option" value="10" onchange="setDisplay()" checked="checked" > 
 					<label for="check"><span style="font-size:24px;">즉시판매</span></label>
+					<input type="hidden" name="bids_idx" value="${sellBids.BIDS_IDX}">
 					</c:if>
 					<input type="hidden" name="type" value="sell">
-					<input type="hidden" name="bids_idx" value="${sellBids.BIDS_IDX}">
 	            </h4>
 				<div class="checkout__input">
 					<div id="price"  style="display:none;">
@@ -106,7 +106,7 @@
                   <p>
                     Name<span>*</span>
                   </p>
-                  <input type="text" name="ship_name" value="김길동" required>
+                  <input type="text" name="ship_name" value="${memberVO.user_name}" required>
                 </div>
               </div>
                <div class="col-lg-6">
@@ -114,7 +114,7 @@
                   <p>
                     Phone<span>*</span>
                   </p>
-                  <input type="text" name="phone_number" value="01012341234" required>
+                  <input type="text" name="phone_number" placeholder="-없이 숫자 11자리를 입력해주세요" required>
                 </div>
               </div>
               <div class="col-lg-6">
@@ -122,7 +122,7 @@
                   <p>
                     Email<span>*</span>
                   </p>
-                  <input type="text" name="user_id" value="test@test.com" required>
+                  <input type="text" name="user_id" value="${memberVO.user_email} " required>
                 </div>
               </div>
 <%--              <div class="col-lg-6">

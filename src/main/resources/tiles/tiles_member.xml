@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
@@ -32,6 +33,11 @@
   <definition name="/member/shipping" extends="baseLayout">
         <put-attribute name="title" value="배송 현황" />
         <put-attribute name="body" value="/WEB-INF/views/member/shipping.jsp" />
+  </definition>
+  
+  <definition name="/member/info" extends="baseLayout">
+        <put-attribute name="title" value="내 정보" />
+        <put-attribute name="body" value="/WEB-INF/views/member/info.jsp" />
   </definition>
 
 </tiles-definitions>
