@@ -45,9 +45,10 @@ public class shopDetailsController {
     Map map2 = shopDetailsService.selectLowAsksAll(product_id);
     System.out.println("map = " + map);
     ProductsVOWithIMG productvo = shopDetailsService.selectProductOne(product_id);
-    
+    List list = shopDetailsService.selectForChart(product_id);
     int latestMoney = shopDetailsService.SelectLatestMoney(product_id);
-    
+
+    model.addAttribute("forChart", list);
     model.addAttribute("lowAsks", shopDetailsService.SelectLowAsks());
     model.addAttribute("lowBids", shopDetailsService.SelectLowBids());
     model.addAttribute("product_id", product_id);
