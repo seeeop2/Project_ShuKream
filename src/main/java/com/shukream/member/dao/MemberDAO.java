@@ -1,5 +1,6 @@
 package com.shukream.member.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,20 +36,39 @@ public class MemberDAO {
 		return result;
 	}
 
-	public List<BidsVO> checkbids(String id) {
+	public List<String> checkbids(String id) {
 		
-		List<BidsVO> checkbids = sqlSession.selectList("mapper.member.checkbids", id);
+		
+		String img_repthumb = "1";
+		
+		Map<String, String> map = new HashMap<String, String>();
+		
+		map.put("img_repthumb", img_repthumb);
+		map.put("id", id);
+		
+		List<String> checkbids = sqlSession.selectList("mapper.member.checkbids", map);
 		
 		System.out.println("memberDAO -> checkbids 호출!");
+		
+		System.out.println(checkbids);
 		
 		return checkbids;
 	}
 	
-	public List<AsksVO> checkasks(String id) {
+	public List<String> checkasks(String id) {
 		
-		List<AsksVO> checkasks = sqlSession.selectList("mapper.member.checkasks", id);
+		Map<String,String> map = new HashMap<String,String>();
+		
+		String img_repthumb = "1";
+		
+		map.put("img_repthumb", img_repthumb);
+		map.put("id", id);
+		
+		List<String> checkasks = sqlSession.selectList("mapper.member.checkasks", map);
 		
 		System.out.println("memberDAO -> checkasks 호출!");
+		
+		System.out.println(checkasks);
 		
 		return checkasks;
 	}
