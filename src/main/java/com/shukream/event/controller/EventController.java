@@ -352,6 +352,12 @@ public class EventController {
 	        String contents = "(주문번호2)의 주문완료에 대한 응모권 발생";
 	        String confirm = "예";
 	    	
+	        // 이미 사용 된 응모권으로 처리하고
+	        // 보유중인 응모권에서 -1 한다.
+	        int u = Integer.parseInt(u_cnt);
+	        u += 1;
+	        d_cnt -= 1;
+    	
 	        //EventVO로 전달한 값들을 저장시킨다.
 	        coupon.setMember_id(id);
 	    	coupon.setA_cnt(Integer.toString(a_cnt));
