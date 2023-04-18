@@ -1,5 +1,6 @@
 package com.shukream.orders.dao;
 
+import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +19,10 @@ public class OrdersDAO {
   public Map SelectLatestOrderBid(Map map) {
     return sqlSession.selectOne("mapper.orders.selectLatestOrderBid",map);
   }
+  
+  public List selectForChart(Map map) {
+    return sqlSession.selectList("mapper.orders.selectForChart",map);
+  }
+  
   
 }
