@@ -30,10 +30,6 @@
 		<a class="mybtn" type="button" href="${contextPath}/member/info.do">내 정보</a>
 	</div>
 	
-	<div class="tradeinfo">
-		<a class="mybtn" type="button" href="#">주문 정보</a>
-	</div>
-	
 	<div class="shippinginfo">
 		<a class="mybtn" type="button" href="${contextPath}/member/shipping.do">배송 정보</a>
 	</div>
