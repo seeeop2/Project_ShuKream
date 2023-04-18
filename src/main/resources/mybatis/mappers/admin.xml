@@ -29,8 +29,12 @@
 	<select id="asksList"  resultType="java.util.Map"   >
 	    <![CDATA[
 
-			SELECT ASKS_IDX,ASKS_SIZE_IDX,ASKS_ORDER_STATE_IDX,ASKS_ORDER_NUMBER,ASKS_ADDRESS
-			FROM ASKS 
+			 SELECT ASKS_ORDER_NUMBER,
+					ASKS_USER_EMAIL,
+					ASKS_ADDRESS,
+					ASKS_MATCHED_DATE,
+					ASKS_ORDER_STATE_IDX
+					FROM ASKS WHERE ASKS_ORDER_STATE_IDX != 0
 			
 		]]>
 	</select>
@@ -39,9 +43,12 @@
 	<select id="bidsList" resultType="java.util.Map"   >
 	    <![CDATA[
 
- 			SELECT BIDS_IDX,BIDS_SIZE_IDX,BIDS_ORDER_STATE_IDX,BIDS_ORDER_NUMBER
- 			FROM BIDS  
-			
+ 			 SELECT BIDS_ORDER_NUMBER,
+		 			BIDS_USER_EMAIL,
+		 			BIDS_MATCHED_DATE,
+		 			BIDS_ORDER_STATE_IDX
+		 			FROM BIDS WHERE BIDS_ORDER_STATE_IDX != 0
+			 
 		]]> 
 	</select>
 	

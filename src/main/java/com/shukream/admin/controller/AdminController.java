@@ -44,7 +44,7 @@ public class AdminController {
 		String viewName = (String) request.getAttribute("viewName");
 		logger.info(viewName);
 		
-		
+	
 		List<AsksVO> asksVO = adminService.asksList();
 		List<BidsVO> bidsVO = adminService.bidsList();
 
@@ -58,8 +58,6 @@ public class AdminController {
 	
 		}
 	
-
-
 	
 	}
 	
