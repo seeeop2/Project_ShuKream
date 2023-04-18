@@ -866,15 +866,17 @@
   				<input type="text" id="bids_content_title_name7" value="확정" />
   		</div>
   		<div id="bids_content">
+  			<c:forEach var="b" items="${bids}">
   			<div class="bids_input">
-  				<input type="text" id="bids_content_name1" value="1" />
-  				<input type="image" id="bids_content_name2" value="2" />
-  				<input type="text" id="bids_content_name3" value="3" />
-  				<input type="text" id="bids_content_name4" value="4" />
-  				<input type="text" id="bids_content_name5" value="5" />
-  				<input type="text" id="bids_content_name6" value="6" />
-  				<input type="button" id="bids_content_name7" value="구매 확정" />
+  				<input type="text" id="bids_content_name1" value="${b.bids_order_state_idx}" />
+  				<input type="image" id="bids_content_name2" value="${b.img_file}" />
+  				<input type="text" id="bids_content_name3" value="${b.img_realfile}" />
+  				<input type="text" id="bids_content_name4" value="${b.bids_size_idx}" />
+  				<input type="text" id="bids_content_name5" value="1" />
+  				<input type="text" id="bids_content_name6" value="${b.bids_price}" />
+  				<input type="hidden" id="bids_content_name7" value="구매 확정" />
   			</div>
+  			</c:forEach>
   		</div>
   	</div>
   	
@@ -900,6 +902,7 @@
   				<input type="text" id="asks_content_title_name6" value="판매 가격" />
   		</div>
   		<div id="asks_content">
+  			<c:forEach var="a" items="${asks}">
   			<div class="asks_input">
   				<input type="text" id="asks_content_name1" value="1" />
   				<input type="image" id="asks_content_name2" value="2" />
@@ -908,6 +911,7 @@
   				<input type="text" id="asks_content_name5" value="5" />
   				<input type="text" id="asks_content_name6" value="6" />
   			</div>
+  			</c:forEach>
   		</div>
   	</div>
 	

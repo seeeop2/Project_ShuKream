@@ -13,39 +13,9 @@
 	   <result property="user_regdate" column="user_regdate" />
 	   <result property="user_update" column="user_update" />
 	   <result property="seller_level_id" column="seller_level_id" />
-	   
 	</resultMap>
-	
-  	<resultMap id="AsksResult" type="AsksVO">
-	   <result property="asks_idx" column="asks_idx" />
-	   <result property="asks_size_idx" column="asks_size_idx" />
-     <result property="asks_price" column="asks_price" />
-	   <result property="asks_regdate" column="asks_regdate" />
-	   <result property="asks_update" column="asks_update" />
-	   <result property="asks_expiration" column="asks_expiration" />
-	   <result property="asks_order_state_idx" column="asks_order_state_idx" />
-     <result property="asks_matched_date" column="asks_matched_date" />
-     <result property="asks_total_price" column="asks_total_price" />
-     <result property="asks_order_number" column="asks_order_number" />
-     <result property="asks_address" column="asks_address" />
-	</resultMap>	
-	
-  <resultMap id="BidsResult" type="BidsVO">
-    <result property="bids_idx" column="bids_idx" />
-    <result property="bids_size_idx" column="bids_size_idx" />
-    <result property="bids_price" column="bids_price" />
-    <result property="bids_regdate" column="bids_regdate" />
-    <result property="bids_update" column="bids_update" />
-    <result property="bids_expiration" column="bids_expiration" />
-    <result property="bids_order_state_idx"
-      column="bids_order_state_idx" />
-    <result property="bids_matched_date"
-      column="bids_matched_date" />
-    <result property="bids_total_price" column="bids_total_price" />
-    <result property="bids_order_number"
-      column="bids_order_number" />
-    <result property="bids_ship_idx" column="bids_ship_idx" />
-  </resultMap>
+
+
 
 <!-- 로그인시 입력한 아이디와 비밀번호 값에 해당하는 정보를 테이블에서 조회  -->
 <!-- (남은 응모횟수)d_cnt의 값을 조회한다. -->
@@ -85,18 +55,26 @@
 		]]>
 	</select>
 	
-	<select id="checkbids" resultType="BidsVO"  parameterType="java.util.List"  >
+	<select id="checkbids" parameterType="java.util.Map"  resultType="list" >
 	    <![CDATA[
-			select * from bids 
-			 where bids_user_email=#{id}	
+			select b.bids_order_state_idx, i.img_file, i.img_realfile, b.bids_size_idx, b.bids_price
+			from bids b, images i
+			where b.bids_user_email = #{id}
+			AND b.bids_product_id = i.img_product_idx
+			AND i.img_repthumb =#{img_repthumb}
+			order by b.bids_idx desc
 			 
 		]]>
 	</select>
 	
-	<select id="checkasks" resultType="AsksVO"  parameterType="java.util.List"  >
+	<select id="checkasks" parameterType="java.util.Map" resultType="list" >
 	    <![CDATA[
-			select * from asks 
-			 where asks_user_email=#{id}	
+			select a.asks_order_state_idx, i.img_file, i.img_realfile, a.asks_size_idx, a.asks_price
+			from asks a, images i
+			where a.asks_user_email = #{id}
+			AND a.asks_product_id = i.img_product_idx
+			AND i.img_repthumb =#{img_repthumb}
+			order by a.asks_idx desc
 			 
 		]]>
 	</select>
