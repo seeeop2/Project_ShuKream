@@ -49,14 +49,14 @@ public class MemberService {
 		
 	}
 
-	public List<String> checkbids(String id) {
+	public List<Map<String, Object>> checkbids(String id) {
 		
 		System.out.println("MemberService -> checkbids 호출!");
 		
 		return memberDAO.checkbids(id);
 	}
 	
-	public List<String> checkasks(String id) {
+	public List<Map<String, Object>> checkasks(String id) {
 		
 		System.out.println("MemberService -> checkasks 호출!");
 		

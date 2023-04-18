@@ -36,6 +36,11 @@ public class MemberController {
    @Autowired
    private MemberVO memberVO;
    
+   @Autowired
+   private AsksVO asksVO;
+   
+   @Autowired
+   private BidsVO bidsVO;
    
    
    // log4j 객체 생성
@@ -225,13 +230,10 @@ public class MemberController {
 				// @ 1) 로그인 된 아이디 값을 가져와서 매개변수로 전달한다.
 			    String id = (String)session.getAttribute("email");
 			  
-			   List<String> checkbids = memberService.checkbids(id);
+			    List<Map<String, Object>> checkbids = memberService.checkbids(id);
 			    
-			   List<String> checkasks = memberService.checkasks(id);
+			    List<Map<String, Object>> checkasks = memberService.checkasks(id);
 			    
-			    System.out.println(checkbids);
-			    System.out.println(checkasks);
-			  
 				// ModelANdView 객체 생성
 			    ModelAndView mav = new ModelAndView();
 			    

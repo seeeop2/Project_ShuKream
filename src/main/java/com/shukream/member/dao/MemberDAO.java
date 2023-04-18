@@ -36,39 +36,36 @@ public class MemberDAO {
 		return result;
 	}
 
-	public List<String> checkbids(String id) {
+	public List<Map<String, Object>> checkbids(String id) {
 		
-		
+		System.out.println("memberDAO -> checkbids 호출!");
+
 		String img_repthumb = "1";
 		
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("img_repthumb", img_repthumb);
 		map.put("id", id);
 		
-		List<String> checkbids = sqlSession.selectList("mapper.member.checkbids", map);
-		
-		System.out.println("memberDAO -> checkbids 호출!");
-		
-		System.out.println(checkbids);
+		// List안에 Map을 넣어서 가져온다.
+		List<Map<String, Object>> checkbids = sqlSession.selectList("mapper.member.checkbids", map);
 		
 		return checkbids;
 	}
 	
-	public List<String> checkasks(String id) {
+	public List<Map<String, Object>> checkasks(String id) {
 		
-		Map<String,String> map = new HashMap<String,String>();
+		System.out.println("memberDAO -> checkasks 호출!");
 		
 		String img_repthumb = "1";
+		
+		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("img_repthumb", img_repthumb);
 		map.put("id", id);
 		
-		List<String> checkasks = sqlSession.selectList("mapper.member.checkasks", map);
-		
-		System.out.println("memberDAO -> checkasks 호출!");
-		
-		System.out.println(checkasks);
+		// List안에 Map을 넣어서 가져온다.
+		List<Map<String, Object>> checkasks = sqlSession.selectList("mapper.member.checkasks", map);
 		
 		return checkasks;
 	}
