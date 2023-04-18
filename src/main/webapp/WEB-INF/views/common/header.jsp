@@ -19,7 +19,8 @@
             %>
             	<a href="${contextPath}/member/loginForm.do">로그인</a>
                 <a href="#">문의</a>
-             <%
+            <%
+
             }else{
              %>	
             	<a href="${contextPath}/member/logout.do">로그아웃</a>
@@ -57,20 +58,47 @@
                     <div class="col-lg-6 col-md-5">
                         <div class="header__top__right">
                             <div class="header__top__links">
+					        <%--    
+					           
 					           <%
 					            if(session.getAttribute("isLogOn") == null) {
 					            %>
 					            	<a href="${contextPath}/member/loginForm.do">로그인</a>
 					                <a href="#">문의</a>
-					             <%
+					            <%
+					             else if(session.getAttribute("isLogOn") == "admin"){ 
+					          	
+					            %>
+			                     	<a href="${contextPath}/member/logout.do">로그아웃</a>
+			                	    <a href="${contextPath}/admin/admin.do">관리자페이지</a>
+					            <%
 					            }else{
-					             %>	
+					            %>	
 					            	<a href="${contextPath}/member/logout.do">로그아웃</a>
 					            	<a href="${contextPath}/member/mypage.do">마이페이지</a>
 					                <a href="#">문의</a> 
-					             <%
+					             	
+					            <%
 					             }
-					             %>   
+					            %>   
+					          
+					           --%>
+		   							<c:choose>
+										<c:when test="${email eq null}">
+											<a href="${contextPath}/member/loginForm.do">로그인</a>
+					                		<a href="#">문의</a>
+										</c:when>
+										<c:when test="${email eq 'admin'}">
+											<a href="${contextPath}/member/logout.do">로그아웃</a>
+			                	    		<a href="${contextPath}/admin/admin.do">배송관리</a>
+										</c:when>
+										<c:otherwise> 
+											<a href="${contextPath}/member/logout.do">로그아웃</a>
+					            			<a href="${contextPath}/member/mypage.do">마이페이지</a>
+				                		<a href="#">문의</a>
+										</c:otherwise>
+									</c:choose>
+					          
 					           </div>
                           </div>
                     </div>
