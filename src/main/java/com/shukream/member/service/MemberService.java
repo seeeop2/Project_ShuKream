@@ -63,4 +63,12 @@ public class MemberService {
 		return memberDAO.checkasks(id);
 	}
 
+	public void updateBidsOrder(Map<String, Object> map) {
+		
+		System.out.println("MemberService -> updateBidsOrderNumber 호출!");
+		
+		memberDAO.updateBidsOrder(map);
+		
+	}
+
 }

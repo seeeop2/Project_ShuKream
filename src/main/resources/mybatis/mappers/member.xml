@@ -57,7 +57,7 @@
 	
 	<select id="checkbids" parameterType="map"  resultType="map" >
 	    <![CDATA[
-			select b.bids_order_state_idx, i.img_file, i.img_realfile, b.bids_size_idx, b.bids_price
+			select b.bids_order_number, b.bids_order_state_idx, i.img_file, i.img_realfile, b.bids_size_idx, b.bids_price
 			from 
 			bids b 
 			join
@@ -85,5 +85,19 @@
 			 
 		]]>
 	</select>
+	
+<!-- 	일단 업데이트 문으로 사용하지만, 추가 구현해야하는 부분은 -->
+<!-- 	내가 구매하는 입장에서 배송완료로 바꿀 때, 주문IDX를 조회해서 상대방의 판매하는 order_state_idx도 바꿔줘야한다. -->
+	<update id="updateBidsOrder" parameterType="map">
+
+	UPDATE bids
+	
+	SET bids_order_state_idx = #{bosi}
+	
+	WHERE BIDS_USER_EMAIL = #{id}
+	
+	AND bids_order_number = #{bon}
+	
+	</update>
 
 </mapper>

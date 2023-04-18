@@ -885,7 +885,9 @@
   			<c:forEach var="b" items="${bids}">
   			
   			<div class="bids_input">
-  				
+  				<c:if test="${empty b}">
+  				<h2><STRONG>현재 진행중인 거래가 없습니다!</STRONG></h2>
+  				</c:if>
   				<input class="b_idx" type="text" id="bids_content_name1" value="${b.BIDS_ORDER_STATE_IDX}" readonly="readonly" />
   				<input type="image" src="${contextPath}/resources/img/product/sneakers/${b.IMG_FILE}" id="bids_content_name2" readonly="readonly" />
   				<input type="text" id="bids_content_name3" value="${b.IMG_REALFILE}" readonly="readonly" />
@@ -893,7 +895,8 @@
   				<input type="text" id="bids_content_name5" value="1" readonly="readonly" />
   				<input type="text" id="bids_content_name6" value="${b.BIDS_PRICE}" readonly="readonly" />
   			<c:if test="${b.BIDS_ORDER_STATE_IDX eq '3'}">
-  				<input type="button" id="bids_content_name7" value="구매 확정" readonly="readonly" />
+  				<input type="hidden" class="bids_order_number" value="${b.BIDS_ORDER_NUMBER}" />
+  				<input type="button" onclick="confirm();" id="bids_content_name7" value="구매 확정" readonly="readonly" />
   			</c:if>
   			</div>
   			</c:forEach>
@@ -924,6 +927,9 @@
   		<div id="asks_content">
   			<c:forEach var="a" items="${asks}">
   			<div class="asks_input">
+ 			  	<c:if test="${empty a}">
+  				<h2><STRONG>현재 진행중인 거래가 없습니다!</STRONG></h2>
+  				</c:if>
   				<input class="a_idx" type="text" id="asks_content_name1" value="${a.ASKS_ORDER_STATE_IDX}" readonly="readonly" />
   				<input type="image" src="${contextPath}/resources/img/product/sneakers/${a.IMG_FILE}" id="asks_content_name2" readonly="readonly" />
   				<input type="text" id="asks_content_name3" value="${a.IMG_REALFILE}" readonly="readonly" />
@@ -1048,5 +1054,18 @@
 		
 	})
 
-
+	function confirm(){
+		
+		var id = "${id}";
+		
+		var bids_order_number = document.getElementsByClassName("bids_order_number")[0].value;
+		
+		console.log(bids_order_number);
+		
+		alert("감사합니다.거래가 완료되었습니다");
+		alert("이벤트 응모권이 1개 추가되었습니다");
+		location.replace("${contextPath}/member/confirm.do?bon="+bids_order_number+"&id="+id);
+		
+	}
+	
 </script>

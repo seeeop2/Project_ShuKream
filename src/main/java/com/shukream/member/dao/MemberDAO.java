@@ -69,6 +69,14 @@ public class MemberDAO {
 		
 		return checkasks;
 	}
+
+	public void updateBidsOrder(Map<String, Object> map) {
+		
+		System.out.println("memberDAO -> updateBidsOrder 호출!");
+		
+		sqlSession.update("mapper.member.updateBidsOrder", map);
+		
+	}
 	
 
 }
