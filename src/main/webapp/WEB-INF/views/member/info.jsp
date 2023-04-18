@@ -53,6 +53,7 @@
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<a id="changeBtn" href="#<%-- <%=contextPath%>/member/changeInfo.do --%>" class="roundBtn blueBtn">수정하기</a>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						
 						<button  id="delBtn" class="roundBtn blueBtn">회원탈퇴</button>
 	</div>
 
