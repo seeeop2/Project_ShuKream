@@ -1,12 +1,14 @@
 package com.shukream.member.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import com.shukream.asks.vo.AsksVO;
+import com.shukream.bids.vo.BidsVO;
 import com.shukream.member.dao.MemberDAO;
 import com.shukream.member.vo.MemberVO;
 
@@ -45,6 +47,20 @@ public class MemberService {
 		
 		return result;
 		
+	}
+
+	public List<BidsVO> checkbids(String id) {
+		
+		System.out.println("MemberService -> checkbids 호출!");
+		
+		return memberDAO.checkbids(id);
+	}
+	
+	public List<AsksVO> checkasks(String id) {
+		
+		System.out.println("MemberService -> checkasks 호출!");
+		
+		return memberDAO.checkasks(id);
 	}
 
 }

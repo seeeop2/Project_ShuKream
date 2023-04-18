@@ -16,7 +16,7 @@ public class AsksVO {
   private String asks_order_number;
   private int asks_address;
   private int asks_product_id;;
-  
+  private String asks_user_email;
   
   public int getAsks_idx() {
     return asks_idx;
@@ -90,6 +90,12 @@ public class AsksVO {
   public void setAsks_product_id(int asks_product_id) {
     this.asks_product_id = asks_product_id;
   }
-  
+ 
+  public String getAsks_user_email() {
+	    return asks_user_email;
+	  }
+  public void setAsks_user_email(String asks_user_email) {
+    this.asks_user_email = asks_user_email;
+	  }
   
 }

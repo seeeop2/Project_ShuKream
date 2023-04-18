@@ -126,30 +126,44 @@ public class EventController {
 		// #1. service -> dao로 id 값을 보내서 dao에서 조회 시킨다.
 		
 		checkuser = eventservice.checkuser(id);
-		 
-		int i = checkuser.size()-1;
-		// checkuser에 저장된 d_cnt만 꺼낸다.
-
-		String d_cnt = checkuser.get(i).getD_cnt();
-
-		System.out.println(d_cnt);
-
 		
-			 // 만약에 응모권이 한개도 없다면
-			if(d_cnt.equals("0")) {
-				
-				// msg 변수에 로그인 해야한다는 문구 저장
-				//	String msg = "보유하신 응모권이 없습니다!, 상세페이지로 이동합니다!";
-				
-				
-				// PrinterWriter 클래스를 이용하여 JAVASCRIPT 구문으로 alert를 발생시키고, location.replace 메소드를 통해서 바로 상세페이지로 이동 시킬 때,
-				// ticket 값을 0으로 입력하여 eventdetailresult.jsp에 ticket값이 0일 경우 jstl을 이용하여 소지하고있는 응모권이 없습니다를 생성시킨다!
-				out.println("<script>alert('보유하신 응모권이 없습니다!, 상세페이지로 이동합니다');");
-//					out.println("window.location.replace('http://localhost:8090/shuKream/event/detailresult.do?ticket=0');</script>");
-				out.println("window.location.href='"+contextPath+"/event/detailresult.do?ticket=0&id="+id+"';</script>");
-				out.flush();
-				out.close();
-			}
+		//DB가 비어있다면?
+		if(checkuser.isEmpty()) {
+			
+			out.println("<script>alert('응모내역이 없습니다!, 거래 후 이용해주세요!');");
+		out.println("window.location.href='"+contextPath+"/event/main.do';</script>");
+		out.flush();
+		out.close();
+			
+		}else {
+			
+			int i = checkuser.size()-1;
+			// checkuser에 저장된 d_cnt만 꺼낸다.
+
+			String d_cnt = checkuser.get(i).getD_cnt();
+
+			System.out.println(d_cnt);
+
+			
+				 // 만약에 응모권이 한개도 없다면
+				if(d_cnt.equals("0")) {
+					
+					// msg 변수에 로그인 해야한다는 문구 저장
+					//	String msg = "보유하신 응모권이 없습니다!, 상세페이지로 이동합니다!";
+					
+					
+					// PrinterWriter 클래스를 이용하여 JAVASCRIPT 구문으로 alert를 발생시키고, location.replace 메소드를 통해서 바로 상세페이지로 이동 시킬 때,
+					// ticket 값을 0으로 입력하여 eventdetailresult.jsp에 ticket값이 0일 경우 jstl을 이용하여 소지하고있는 응모권이 없습니다를 생성시킨다!
+					out.println("<script>alert('보유하신 응모권이 없습니다!, 상세페이지로 이동합니다');");
+//						out.println("window.location.replace('http://localhost:8090/shuKream/event/detailresult.do?ticket=0');</script>");
+					out.println("window.location.href='"+contextPath+"/event/detailresult.do?ticket=0&id="+id+"';</script>");
+					out.flush();
+					out.close();
+				}
+			
+			
+			
+		}
 
    
     // Viewname 가져오기
