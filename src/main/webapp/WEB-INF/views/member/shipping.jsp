@@ -824,7 +824,7 @@
 </style>
 
 <!-- Css Styles 적용 -->
-<link rel="stylesheet" href="${contextPath}/resources/css/member/shipping.css" type="text/css">
+<link rel="stylesheet" href="${contextPath}/resources/css/member/shipping.css" />
 
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-blog set-bg"

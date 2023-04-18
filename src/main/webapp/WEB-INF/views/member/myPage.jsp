@@ -7,7 +7,7 @@
 </style>
 
 <!-- Css Styles 적용 -->
-<link rel="stylesheet" href="${contextPath}/resources/css/member/mypage.css" type="text/css">
+<link rel="stylesheet" href="${contextPath}/resources/css/member/mypage.css" />
 
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-blog set-bg"
