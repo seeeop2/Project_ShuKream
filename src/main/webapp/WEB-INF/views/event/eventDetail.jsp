@@ -8,7 +8,7 @@
 </style>
 
 <!-- Css Styles 적용 -->
-<link rel="stylesheet" href="${contextPath}/resources/css/event/eventDetail.css" type="text/css">
+<link rel="stylesheet" href="${contextPath}/resources/css/event/eventDetail.css" />
 
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-blog set-bg"
