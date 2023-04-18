@@ -160,7 +160,8 @@ where rownum =1
 						 BIDS_TOTAL_PRICE,
 						 BIDS_ORDER_NUMBER,
 						 BIDS_SHIP_IDX,
-						 BIDS_PRODUCT_ID)
+						 BIDS_PRODUCT_ID,
+						 BIDS_USER_EMAIL)
 						VALUES
 						(
 						BIDS_SEQ.NEXTVAL,
@@ -174,7 +175,8 @@ where rownum =1
 						#{product_price},
 						0,
 						0,
-						#{product_id}
+						#{product_id},
+						#{memberVO.user_id}
 						)
 		</when>
 		<otherwise>
@@ -189,7 +191,8 @@ where rownum =1
 							 BIDS_TOTAL_PRICE,
 							 BIDS_ORDER_NUMBER,
 							 BIDS_SHIP_IDX,
-							 BIDS_PRODUCT_ID)
+							 BIDS_PRODUCT_ID,
+							 BIDS_USER_EMAIL)
 						 
 						 VALUES (
 				                BIDS_SEQ.NEXTVAL,
@@ -201,7 +204,7 @@ where rownum =1
 						                SYSDATE,
 						                NULL, 	
 						                0,	
-						                SYSDATE,
+						                NULL,
 						                #{product_price},
 				                	</when>
 				                	<otherwise>
@@ -216,7 +219,8 @@ where rownum =1
 				                </choose>
 				                0,
 				                0,
-				                (SELECT ASKS_PRODUCT_ID FROM ASKS WHERE ASKS_IDX = #{asks_idx})
+				                (SELECT ASKS_PRODUCT_ID FROM ASKS WHERE ASKS_IDX = #{asks_idx}),
+				                #{memberVO.user_id}
 				           		 )
 		</otherwise>
 	</choose>			
@@ -236,7 +240,8 @@ where rownum =1
 						 ASKS_MATCHED_DATE,
 						 ASKS_TOTAL_PRICE,
 						 ASKS_ORDER_NUMBER,
-						 ASKS_PRODUCT_ID)
+						 ASKS_PRODUCT_ID,
+						 ASKS_USER_EMAIL)
 						VALUES
 						(
 						ASKS_SEQ.NEXTVAL,
@@ -249,7 +254,8 @@ where rownum =1
 						NULL,
 						#{product_price},
 						0,
-						#{product_id}
+						#{product_id},
+						#{memberVO.user_id}
 						)
 		</when>
 		<otherwise>
@@ -263,7 +269,8 @@ where rownum =1
 							 ASKS_MATCHED_DATE,
 							 ASKS_TOTAL_PRICE,
 							 ASKS_ORDER_NUMBER,
-							 ASKS_PRODUCT_ID)
+							 ASKS_PRODUCT_ID,
+							 ASKS_USER_EMAIL)
 						 
 						 VALUES (
 				                ASKS_SEQ.NEXTVAL,
@@ -275,7 +282,7 @@ where rownum =1
 						                SYSDATE,
 						                NULL,
 						                0,
-						                SYSDATE,
+						                NULL,
 						                #{product_price},
 				                	</when>
 				                	<otherwise>
@@ -289,7 +296,8 @@ where rownum =1
 				                	</otherwise>
 				                </choose>
 				                0,
-				                (SELECT BIDS_PRODUCT_ID FROM BIDS WHERE BIDS_IDX = #{bids_idx})
+				                (SELECT BIDS_PRODUCT_ID FROM BIDS WHERE BIDS_IDX = #{bids_idx}),
+				                #{memberVO.user_id}
 				           		 )
 		</otherwise>
 	</choose>			

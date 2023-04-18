@@ -52,6 +52,8 @@ public class OrderController {
 		int shipIdx = 0;
 		int orderIdx = 0;
 		
+		paramMap.put("memberVO", vo);
+		
 		if(type.equals("buy")) {
 			if(asks_idx == null && bids_idx == null) { //판매입찰테이플에 아이템이 없는 경우
 				product = orderService.selectProduct(Integer.parseInt(product_id));
