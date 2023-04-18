@@ -135,6 +135,11 @@ on BIDs_product_id = #{product_id2}
   ]]>
 </select> 
 
+<select id="" resultType="map"> 
+  <![CDATA[  
+  
+  ]]>
+</select> 
 
 	
 

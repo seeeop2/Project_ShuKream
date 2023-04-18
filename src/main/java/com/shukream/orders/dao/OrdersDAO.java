@@ -19,5 +19,4 @@ public class OrdersDAO {
     return sqlSession.selectOne("mapper.orders.selectLatestOrderBid",map);
   }
   
-  
 }

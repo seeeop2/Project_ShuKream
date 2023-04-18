@@ -737,12 +737,11 @@ var innerText16 = document.getElementById("clickForMoney_16").innerText;
 
     function drawBackgroundColor() {
           var data = new google.visualization.DataTable();
-          data.addColumn('number', '날짜');
+          data.addColumn('date', '날짜');
           data.addColumn('number', '체결');
 
           data.addRows([
-            [0, 100000],   [1, 125000],  [2, 80000],  [3, 90000],  [4, 18],  [5, 9],
-            [6, 11],  [7, 27],  [8, 33],  [9, 40],  [10, 32], [11, 35]
+            [new Date(2015,2,16), 100000],   [new Date(2015,2,17), 130000],[new Date(2015,2,18), 140000]
           ]);
 
           var options = {
