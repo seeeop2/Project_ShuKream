@@ -1,6 +1,7 @@
 package com.shukream.member.controller;
 
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +21,10 @@ import java.io.PrintWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.shukream.asks.vo.AsksVO;
+import com.shukream.bids.vo.BidsVO;
 import com.shukream.event.controller.EventController;
+import com.shukream.event.service.EventService;
 
 @Controller("memberController")
 @RequestMapping(value="/member")
@@ -31,6 +35,12 @@ public class MemberController {
    
    @Autowired
    private MemberVO memberVO;
+   
+   @Autowired
+   private BidsVO bidsVO;
+   
+   @Autowired
+   private AsksVO asksVO;
    
    
    // log4j 객체 생성
@@ -213,9 +223,17 @@ public class MemberController {
 	   }
 	  	
 	  	@RequestMapping(value="/shipping.do", method = RequestMethod.GET)
-		public ModelAndView shipping(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		public ModelAndView shipping(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
 			
 			  System.out.println("shipping.do 호출!"); 
+			  
+				// @ 1) 로그인 된 아이디 값을 가져와서 매개변수로 전달한다.
+			    String id = (String)session.getAttribute("email");
+			  
+			    List<BidsVO> checkbids = memberService.checkbids(id);
+			    
+			    List<AsksVO> checkasks = memberService.checkasks(id);
+			  
 			  
 				// ModelANdView 객체 생성
 			    ModelAndView mav = new ModelAndView();
@@ -228,11 +246,14 @@ public class MemberController {
 			    
 			    // ModelAndView 객체에 viewName을 셋팅
 			    mav.setViewName(viewName);
+			    mav.addObject("bids", checkbids);
+			    mav.addObject("asks", checkasks);
 	          // ModelAndView 반환
 	          return mav;
 	      
 	      
 	   }
+	  	
 		
 	      @RequestMapping(value = "/emailCheck.do", method = RequestMethod.POST)
 	      @ResponseBody	

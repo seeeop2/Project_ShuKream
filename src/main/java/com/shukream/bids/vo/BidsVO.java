@@ -17,6 +17,7 @@ public class BidsVO {
   private String bids_order_number;
   private int bids_ship_idx;
   private int bids_product_id;
+  private String bids_user_email;
   
   public int getBids_idx() {
     return bids_idx;
@@ -89,6 +90,12 @@ public class BidsVO {
   }
   public void setBids_product_id(int bids_product_id) {
     this.bids_product_id = bids_product_id;
+  }
+  public String getBids_user_email() {
+	    return bids_user_email;
+  }
+  public void setBids_user_email(String bids_user_email) {
+    this.bids_user_email = bids_user_email;
   }
   
   

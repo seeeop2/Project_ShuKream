@@ -862,7 +862,7 @@
   				<input type="text" id="bids_content_title_name3" value="제품명" />
   				<input type="text" id="bids_content_title_name4" value="사이즈" />
   				<input type="text" id="bids_content_title_name5" value="수량" />
-  				<input type="text" id="bids_content_title_name6" value="입찰 가격" />
+  				<input type="text" id="bids_content_title_name6" value="구매 가격" />
   				<input type="text" id="bids_content_title_name7" value="확정" />
   		</div>
   		<div id="bids_content">
@@ -897,7 +897,7 @@
   				<input type="text" id="asks_content_title_name3" value="제품명" />
   				<input type="text" id="asks_content_title_name4" value="사이즈" />
   				<input type="text" id="asks_content_title_name5" value="수량" />
-  				<input type="text" id="asks_content_title_name6" value="입찰 가격" />
+  				<input type="text" id="asks_content_title_name6" value="판매 가격" />
   		</div>
   		<div id="asks_content">
   			<div class="asks_input">
