@@ -50,7 +50,8 @@
 									<p id="name_en">${L.LIKE_PRODUCT_NAME_EN}</p>
 								</div>
 								<div id="favorites_buy">
-									<a href="${contextPath}/shop/list.do">
+<%-- 									<a href="${contextPath}/shop/list.do"> --%>
+									<a href="${contextPath}/shop/shopDetails.do?product_id=${L.LIKE_PRODUCT}">	
 										<div id="buyBtn">
 											<div id="buyBtn2">
 												<strong>구매</strong>
@@ -58,7 +59,7 @@
 												
 											<div id="buyPrice">
 												<p id="price">${L.LIKE_PRODUCT_PRICE}</p>
-												<p id="price2">즉시 구매가</p>
+												<p id="price2">입찰 가격</p>
 											</div>								
 										</div>
 									</a>
