@@ -179,8 +179,12 @@
                </c:otherwise>
                </c:choose>
               </ul>
+              <div id="orderDetail">	
               <div onclick="kakaoPay()" class="site-btn" style="cursor: pointer;">PLACE
                 ORDER</div>
+                </div>
+               <button type="submit" class="site-btn" >PLACE
+                ORDER</button>>
             </div>
           </div>
         </div>
