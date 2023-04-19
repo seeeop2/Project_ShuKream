@@ -442,13 +442,13 @@
     position: relative;
     display: flex;
     height: 100%;
-    width: 80px;
+    width: 65px;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
     text-align: center;
     border-radius: 10px;
-    font-size: 15px;
+    font-size: 14px;
     margin: auto 2px;
     background: #ff0707;
     transition: 1s;

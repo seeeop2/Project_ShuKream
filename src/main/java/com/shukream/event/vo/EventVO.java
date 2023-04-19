@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class EventVO {
 	
 	// String TYPE으로 처리 된 DB의 name 값 동일하게 추가
-	private String member_id, a_cnt, u_cnt, d_cnt, d_ticket, d_contents, d_confirm;
+	private String member_id, a_cnt, u_cnt, d_cnt, d_ticket, d_contents, d_confirm, d_coupon;
 	
 	// Number TYPE으로 처리 된 DB의 name 값 동일하게 추가
 	private int d_idx;
@@ -17,6 +17,16 @@ public class EventVO {
 	private Date d_date, expiry_date;
 
 	// Getter & Setter 추가
+	
+	public String getD_coupon() {
+		return d_coupon;
+	}
+
+	public void setD_coupon(String d_coupon) {
+		this.d_coupon = d_coupon;
+	}
+	
+	
 	public String getMember_id() {
 		return member_id;
 	}
@@ -95,38 +105,6 @@ public class EventVO {
 
 	public Date getExpiry_date() {
 		return expiry_date;
-	}
-
-	// Date 2종 및 idx 빼고 호출하는 생성자
-	public EventVO(String member_id, String a_cnt, String u_cnt, String d_cnt, String d_ticket, String d_contents,
-			String d_confirm) {
-		super();
-		this.member_id = member_id;
-		this.a_cnt = a_cnt;
-		this.u_cnt = u_cnt;
-		this.d_cnt = d_cnt;
-		this.d_ticket = d_ticket;
-		this.d_contents = d_contents;
-		this.d_confirm = d_confirm;
-	}
-	
-	
-	
-	
-	// 다 가져오는 생성자
-	public EventVO(String member_id, String a_cnt, String u_cnt, String d_cnt, String d_ticket, String d_contents,
-			String d_confirm, Date d_date, Date expiry_date, int d_idx) {
-		super();
-		this.member_id = member_id;
-		this.a_cnt = a_cnt;
-		this.u_cnt = u_cnt;
-		this.d_cnt = d_cnt;
-		this.d_ticket = d_ticket;
-		this.d_contents = d_contents;
-		this.d_confirm = d_confirm;
-		this.d_date = d_date;
-		this.expiry_date = expiry_date;
-		this.d_idx = d_idx;
 	}
 
 	// 기본 생성자
