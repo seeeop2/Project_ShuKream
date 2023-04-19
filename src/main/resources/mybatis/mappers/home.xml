@@ -16,6 +16,16 @@
 	   <result property="product_color" column="product_color" />
 	   <result property="category" column="category" />
 	</resultMap>
+	
+	<resultMap type="productLikeVO" id="productLikeResult">
+		<result property="like_idx" column="like_idx" />
+		<result property="like_product" column="like_product" />
+		<result property="like_mem_id" column="like_mem_id" />
+		<result property="like_product_name_en" column="like_product_name_kor" />
+		<result property="like_product_price" column="like_product_price" />
+		<result property="like_img_file" column="like_img_file" />
+	</resultMap>
+	
 	<resultMap type="imageFileVO" id="imageFileResult">
 		<result property="img_id" column="img_id"/>
 		<result property="img_product_idx" column="img_product_idx"/>
@@ -43,7 +53,7 @@
 </select>	
 <!-- bestseller 판매량 기준은 어느부분 참고?, new Arrivals는 release date 기준, popular items는 관심등록수기준? -->
 <select id="selectMainProductsList" parameterType="Map" resultMap="imageFileResult">
-			SELECT PRODUCTS.*, IMAGES.IMG_FILE FROM PRODUCTS, IMAGES
+			SELECT PRODUCTS.*, IMAGES.IMG_FILE, PRODUCT_LIKE.LIKE_PRODUCT FROM PRODUCTS, IMAGES, PRODUCT_LIKE
                 where product_id = img_product_idx
                 and img_file like '%main%'
 				ORDER BY 
