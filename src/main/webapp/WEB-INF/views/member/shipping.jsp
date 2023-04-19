@@ -931,7 +931,12 @@
   				<h2><STRONG>현재 진행중인 거래가 없습니다!</STRONG></h2>
   				</c:if>
   				<input class="a_idx" type="text" id="asks_content_name1" value="${a.ASKS_ORDER_STATE_IDX}" readonly="readonly" />
+  				<c:if test="${a.IMG_PRODUCT_IDX <= 30}">
   				<input type="image" src="${contextPath}/resources/img/product/sneakers/${a.IMG_FILE}" id="asks_content_name2" readonly="readonly" />
+  				</c:if>
+  				<c:if test="${a.IMG_PRODUCT_IDX >= 31}">
+  				<input type="image" src="${contextPath}/resources/img/product/slipper/${a.IMG_FILE}" id="asks_content_name2" readonly="readonly" />
+  				</c:if>
   				<input type="text" id="asks_content_name3" value="${a.IMG_REALFILE}" readonly="readonly" />
   				<input type="text" id="asks_content_name4" value="${a.ASKS_SIZE_IDX}" readonly="readonly" />
   				<input type="text" id="asks_content_name5" value="1" readonly="readonly" />
