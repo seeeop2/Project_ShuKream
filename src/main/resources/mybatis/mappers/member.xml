@@ -5,6 +5,7 @@
 
 <mapper namespace="mapper.member">
 
+
 <!-- 리절트 맵 정의 -->
 	<resultMap id="memberResult" type="memberVO">
 	   <result property="user_name" column="user_name" />
@@ -13,8 +14,9 @@
 	   <result property="user_regdate" column="user_regdate" />
 	   <result property="user_update" column="user_update" />
 	   <result property="seller_level_id" column="seller_level_id" />
-	   
 	</resultMap>
+	
+
 
 <!-- 로그인시 입력한 아이디와 비밀번호 값에 해당하는 정보를 테이블에서 조회  -->
 <!-- (남은 응모횟수)d_cnt의 값을 조회한다. -->
@@ -53,5 +55,50 @@
 			on user_email = #{user_email2}
 		]]>
 	</select>
+	
+	<select id="checkbids" parameterType="map"  resultType="map" >
+	    <![CDATA[
+			select b.bids_order_number, b.bids_order_state_idx, i.img_file, i.img_realfile, b.bids_size_idx, b.bids_price
+			from 
+			bids b 
+			join
+			images i
+            ON
+            b.bids_product_id = i.img_product_idx
+			where b.bids_user_email = #{id}
+			AND i.img_repthumb = #{img_repthumb}
+			order by b.bids_idx desc
+			 
+		]]>
+	</select>
+	
+	<select id="checkasks" parameterType="map" resultType="map" >
+	    <![CDATA[
+			select a.asks_order_state_idx, i.img_file, i.img_realfile, a.asks_size_idx, a.asks_price
+			from asks a
+			join
+			images i
+			ON
+			a.asks_product_id = i.img_product_idx
+			where a.asks_user_email = #{id}
+			AND i.img_repthumb =#{img_repthumb}
+			order by a.asks_idx desc
+			 
+		]]>
+	</select>
+	
+<!-- 	일단 업데이트 문으로 사용하지만, 추가 구현해야하는 부분은 -->
+<!-- 	내가 구매하는 입장에서 배송완료로 바꿀 때, 주문IDX를 조회해서 상대방의 판매하는 order_state_idx도 바꿔줘야한다. -->
+	<update id="updateBidsOrder" parameterType="map">
+
+	UPDATE bids
+	
+	SET bids_order_state_idx = #{bosi}
+	
+	WHERE BIDS_USER_EMAIL = #{id}
+	
+	AND bids_order_number = #{bon}
+	
+	</update>
 
 </mapper>

@@ -764,7 +764,7 @@
 	          alert("로그인을 하여주세요");
  	        } else{
 	          $.ajax({
-	                  url:  "/shuKream/favorites/favoritesLike.do",
+	                  url: getContextPath()+"/favorites/favoritesLike.do",
 	                  async : true,
 	                  type : 'POST',
 	                  data : {

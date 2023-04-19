@@ -3,6 +3,8 @@ package com.shukream.bids.vo;
 import java.util.Date;
 import org.springframework.stereotype.Component;
 
+import com.shukream.products.vo.ImageFileVO;
+
 @Component
 public class BidsVO {
   private int bids_idx;
@@ -17,6 +19,17 @@ public class BidsVO {
   private String bids_order_number;
   private int bids_ship_idx;
   private int bids_product_id;
+  private String bids_user_email;
+  
+  // 쿼리로 join 시킬 vo
+  private ImageFileVO imagefileVO;
+  
+  public ImageFileVO getImagefileVO() {
+		return imagefileVO;
+  }
+	public void setImagefileVO(ImageFileVO imagefileVO) {
+		this.imagefileVO = imagefileVO;
+  }
   
   public int getBids_idx() {
     return bids_idx;
@@ -90,6 +103,13 @@ public class BidsVO {
   public void setBids_product_id(int bids_product_id) {
     this.bids_product_id = bids_product_id;
   }
+  public String getBids_user_email() {
+	    return bids_user_email;
+  }
+  public void setBids_user_email(String bids_user_email) {
+    this.bids_user_email = bids_user_email;
+  }
+
   
   
 }

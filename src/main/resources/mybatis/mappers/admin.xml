@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.admin">
+	
+	<resultMap id="asksResult" type="AsksVO">
+		<result property="asks_idx" column="asks_idx" />
+		<result property="asks_size_idx" column="asks_size_idx" />
+		<result property="asks_address" column="asks_address" />
+		<result property="asks_order_state_idx" column="asks_order_state_idx" />
+		<result property="asks_update" column="asks_update" />
+		<result property="asks_order_number" column="asks_order_number" />
+		
+	</resultMap>
+	
+	<resultMap id="bidsResult" type="BidsVO">
+		<result property="bids_idx" column="bids_idx" />
+		<result property="bids_size_idx" column="bids_size_idx" />
+		<result property="bids_address" column="bids_address" />
+		<result property="bids_order_state_idx" column="bids_order_state_idx" />
+		<result property="bids_update" column="bids_update" />
+		<result property="bids_order_number" column="bids_order_number" />
+	</resultMap>
+	
+	
+	
+	<select id="asksList"  resultType="java.util.Map"   >
+	    <![CDATA[
+
+			 SELECT ASKS_ORDER_NUMBER,
+					ASKS_USER_EMAIL,
+					ASKS_ADDRESS,
+					ASKS_MATCHED_DATE,
+					ASKS_ORDER_STATE_IDX
+					FROM ASKS WHERE ASKS_ORDER_STATE_IDX != 0
+			
+		]]>
+	</select>
+	
+
+	<select id="bidsList" resultType="java.util.Map"   >
+	    <![CDATA[
+
+ 			 SELECT BIDS_ORDER_NUMBER,
+		 			BIDS_USER_EMAIL,
+		 			BIDS_MATCHED_DATE,
+		 			BIDS_ORDER_STATE_IDX
+		 			FROM BIDS WHERE BIDS_ORDER_STATE_IDX != 0
+			 
+		]]> 
+	</select>
+	
+	<update id="asksOrderChange" parameterType="asksVO" >
+	   		update ASKS SET ASKS_ORDER_STATE_IDX = #{asks_order_state_idx}
+	  		where ASKS_ORDER_NUMBER= #{asks_order_number}
+	</update>	
+	
+	<update id="bidsOrderChange" parameterType="bidsVO" >
+	   		update BIDS SET BIDS_ORDER_STATE_IDX = #{bids_order_state_idx}
+	  		where BIDS_ORDER_NUMBER= #{bids_order_number}
+	</update>	
+	
+	
+
+</mapper>

@@ -6,9 +6,8 @@
  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <style>
 </style>
-
 <!-- Css Styles 적용 -->
-<link rel="stylesheet" href="${contextPath}/resources/css/event/eventDetail.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/event/eventDetail.css" type="text/css" />
 
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-blog set-bg"

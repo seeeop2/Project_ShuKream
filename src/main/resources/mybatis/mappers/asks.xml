@@ -28,9 +28,13 @@
 <!-- 모든 사이즈 클릭시 버튼 하단에 나타낼 값 -->
 <select id="selectLowAsks" resultType="_int">
   <![CDATA[
-    SELECT ASKS_PRICE
+    select nvl(asks_price,0) ASKS_PRICE
+    from
+    (SELECT ASKS_PRICE
     FROM ( SELECT * FROM ASKS ORDER BY ASKS_PRICE)
-    WHERE ROWNUM = 1
+    WHERE ROWNUM = 1) a
+    right outer join dual
+    on a.asks_price = 0
   ]]>
 </select> 
 

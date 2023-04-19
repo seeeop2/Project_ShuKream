@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<% request.setCharacterEncoding("utf-8");
+   String contextPath = request.getContextPath();%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,64 +15,18 @@
 
 <title>Insert title here</title>
 
+<link rel="stylesheet" href="<%=contextPath%>/resources/css/member/addMember.css">
+
 <style>
 #footer{
     top: 380px;
     position: relative;
 }
-.addMem{
-	position: relative;
-	top: 120px;
-}
-#checkBtn{
+a:hover{
 	color: white;
-    background: black;
-    position: relative;
-    //left: -80px;
+	background-color: black;
+	text-decoration: none;
 }
-#joinBtn{
-	position: relative;
-    top: 100px;
-    left: 150px;
-    background: black;
-    border-color: black;
-    border-radius: 0;
-    color: white;
-}
-#checkBtn:hover, #joinBtn:hover{
-	color: black;
-	background: white;
-	border-color: black;
-}
-#app
-{
-	position: relative;
-    left: -34px;
-}
-#mail
-{
-	position: relative;
-    left: -18px;
-}
-.card-body{
-	padding: 0;
-	height: 100px;
-    position: relative;
-    top: 7px;
-}
-#appCheck, #smsCheck, #mailCheck, #agree{
-	accent-color: black;
-}
-#accordionExample{
-	width: 850px;
-	margin-left: auto;
-	margin-right: auto;
-}
-.join{
-	position: relative;
-	top: -5px;
-}
-
 </style>
 
 </head>
@@ -79,7 +34,7 @@
 
 <div class="addMem" style="text-align: center">
 
-	<form action="${contextPath}/member/addMember.do" method= "post" style="display: inline-block;">
+	<form action="<%=contextPath%>/member/addMember.do" method= "post" style="display: inline-block;">
 		
 		<div class="accordion" id="accordionExample">
 			
@@ -178,6 +133,6 @@
 	</form>
 </div>
 
-<script src="${contextPath}/resources/js/member.js"></script>
+<script src="<%=contextPath%>/resources/js/member.js"></script>
 </body>
 </html>
