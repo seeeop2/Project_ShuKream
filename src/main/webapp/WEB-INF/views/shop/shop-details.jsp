@@ -20,7 +20,37 @@
   <p style="display: none;" id="clickForMoney_${status.index}">${theHighestBids.value}</p>
 </c:forEach>
 
+<script type="text/javascript">
+ var arr = [];
+  $(document).ready(function(){
+//    var arr = [];
+    <c:forEach items="${forChart}" var="forChart">
+//     var date = [];
+//     var price = [];
+			var tryme = []
+      var from = "${forChart.MATCHED_DATE}";
+      
+      console.log(from);
+      var from2 = new Date(from);
+      var from3 = "${forChart.PRICE}";
+      var from4 = Number(from3);
+      
+      tryme.push(from2,from4);
+      console.log(tryme);
 
+//       date.push(from2);
+//       price.push(from4);
+      console.log("===");
+      arr.push(tryme);
+      console.log(arr);
+//       arr.push(['${forChart.MATCHED_DATE}','${forChart.PRICE}']);
+     </c:forEach>
+//     console.log(tryme);
+//      arr.push(date,price);
+
+  
+  });
+</script>
 
 
 
@@ -740,9 +770,7 @@ var innerText16 = document.getElementById("clickForMoney_16").innerText;
           data.addColumn('date', '날짜');
           data.addColumn('number', '체결');
 
-          data.addRows([
-            [new Date(2015,2,16), 100000],   [new Date(2015,2,17), 130000],[new Date(2015,2,18), 140000]
-          ]);
+          data.addRows(arr);
 
           var options = {
             hAxis: {
