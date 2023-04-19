@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component("memberVO")
 public class MemberVO {
+
 	
 	private String user_name, user_email, user_pw;
 	
@@ -98,7 +99,8 @@ public class MemberVO {
 				+ ", user_regdate=" + user_regdate + ", user_update=" + user_update + ", seller_level_id="
 				+ seller_level_id + "]";
 	}
-	
+
+
 	
 	
 	

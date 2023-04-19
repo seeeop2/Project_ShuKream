@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.shukream.member.vo.MemberVO;
 import com.shukream.order.service.OrderService;
 import com.shukream.order.vo.OrderVO;
 import com.shukream.products.vo.ProductsVO;
@@ -55,7 +56,7 @@ public class OrderController {
 			if(asks_idx == null && bids_idx == null) { //판매입찰테이플에 아이템이 없는 경우
 				product = orderService.selectProduct(Integer.parseInt(product_id));
 				if(abPrice != null && !abPrice.equals("")) {
-					product.replace("PRODUCT_PRICE", abPrice);
+					product.put("PRODUCT_PRICE", abPrice);
 				}
 				paramMap.put("product_id", product.get("PRODUCT_ID"));
 				paramMap.put("product_price", product.get("PRODUCT_PRICE"));
@@ -64,6 +65,9 @@ public class OrderController {
 				
 			} else {
 			paramMap.put("asks_idx", asks_idx);
+			if(abPrice != null && !abPrice.equals("")) {
+				paramMap.put("product_price", abPrice);
+			}
 			//select하고 마지막에 insert된 행의 idx구하기
 			int newBidsIdx = orderService.insertNewBids(paramMap); //새로운 구매 입찰 생성(즉시구매, 구매입찰 둘다 입찰이 생겨야함)
 			paramMap.put("newBidsIdx", newBidsIdx);
@@ -71,11 +75,17 @@ public class OrderController {
 			//option 00 -> 구매입찰 
 		    //option 10 -> 즉시구매
 			if(option.equals("10")) {
+				System.out.println("10 들어오나?");
 				//배송정보를 만들고
 				shipIdx = orderService.insertShipInfo(vo);
+				System.out.println("vo를받는지"+vo.toString());
+				System.out.println("shipIdx를받는지"+shipIdx);
+				System.out.println("newBidsIdx는 받는지"+newBidsIdx);
+				System.out.println("asks_idx???" + asks_idx);
 				//orders테이블에 추가해야함
 				//bids,asks_idx들을 받아서 넘겨줘야함.
 				orderIdx = orderService.insertOrders(paramMap);
+				System.out.println(orderIdx);
 				//주문이 체결되면 asks_order_state_idx랑 asks_order_number를 업데이트 해줘야한다. 근데 order_number 업데이트??
 				paramMap.put("shipIdx", shipIdx);
 				paramMap.put("orderIdx",String.valueOf(orderIdx));
@@ -99,6 +109,9 @@ public class OrderController {
 			} else { 
 			System.out.println("bids_idx???"+bids_idx);
 			paramMap.put("bids_idx", bids_idx);
+				if(abPrice != null && !abPrice.equals("")) {
+					paramMap.put("product_price", abPrice);
+				}
 			int newAsksIdx = orderService.insertNewAsks(paramMap); //새로운 판매 입찰 생성(즉시구매, 판매입찰 둘다 입찰이 생겨야함)
 			paramMap.put("newAsksIdx", newAsksIdx);
 			System.out.println("newAsksIdx???" + newAsksIdx);
@@ -133,6 +146,14 @@ public class OrderController {
 							@RequestParam(value = "size", required = false) String size,
 							HttpServletRequest request) {
 		
+		MemberVO memberVO = null;
+		
+		HttpSession session=request.getSession();
+		session=request.getSession();
+		Boolean isLogOn=(Boolean)session.getAttribute("isLogOn");
+		if(isLogOn) {
+			memberVO=(MemberVO)session.getAttribute("memberInfo");
+		}
 	  
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
@@ -176,6 +197,8 @@ public class OrderController {
 		mav.addObject("product",product);
 		mav.addObject("type",type);
 		mav.addObject("size",size);
+		
+		mav.addObject("memberVO",memberVO);
 		
 		return mav;
 		

@@ -1,26 +1,33 @@
 package com.shukream.member.controller;
 
-import java.io.PrintWriter;
+
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.shukream.event.controller.EventController;
+import com.shukream.member.dao.MemberDAO;
 import com.shukream.member.service.MemberService;
 import com.shukream.member.vo.MemberVO;
+import java.io.PrintWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.shukream.asks.vo.AsksVO;
+import com.shukream.bids.vo.BidsVO;
+import com.shukream.event.controller.EventController;
+import com.shukream.event.service.EventService;
 
 @Controller("memberController")
 @RequestMapping(value="/member")
@@ -31,6 +38,14 @@ public class MemberController {
    
    @Autowired
    private MemberVO memberVO;
+   
+   @Autowired
+   private MemberDAO memberDAO;
+
+   private BidsVO bidsVO;
+
+   private AsksVO asksVO;
+
    
    
    // log4j 객체 생성
@@ -211,23 +226,134 @@ public class MemberController {
 	      
 	      
 	   }
-		
-		
+	  	
+	  	@RequestMapping(value="/shipping.do", method = RequestMethod.GET)
+		public ModelAndView shipping(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
+			
+			  System.out.println("shipping.do 호출!"); 
+			  
+				// @ 1) 로그인 된 아이디 값을 가져와서 매개변수로 전달한다.
+			    String id = (String)session.getAttribute("email");
+			  
+			    List<Map<String, Object>> checkbids = memberService.checkbids(id);
+			    
+			    List<Map<String, Object>> checkasks = memberService.checkasks(id);
+			    
+			    if(checkbids.isEmpty() && checkasks.isEmpty()) {
+			    	
+			          //PrintWirter 객체 out 생성 및 초기화
+			          PrintWriter out = response.getWriter();
+			      
+			         
+			          out.println("<script>alert('진행 중인 거래가 없습니다!, 마이 페이지로 돌아갑니다');");
+			          out.println("location.href='"+request.getContextPath()+"/member/mypage.do';</script>");
+			          out.flush();
+			          out.close();
+			    	
+			    }
+			    
+			    
+				// ModelANdView 객체 생성
+			    ModelAndView mav = new ModelAndView();
+			    
+			    // Viewname 가져오기
+			    String viewName = (String) request.getAttribute("viewName");
+			    
+			    // Viewname에 대한 info 생성
+			    logger.info(viewName);
+			    
+			    // ModelAndView 객체에 viewName을 셋팅
+			    mav.setViewName(viewName);
+			    mav.addObject("bids", checkbids);
+			    mav.addObject("asks", checkasks);
+			    mav.addObject("id", id);
+	          // ModelAndView 반환
+	          return mav;
+	      
+	      
+	   }
+	  	
+	  	@RequestMapping(value="/confirm.do", method = RequestMethod.GET)
+		public void confirm(@RequestParam("id")String id,@RequestParam("bon")String bon, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
+			
+			  System.out.println("confirm.do 호출!"); 
+			  
+			  System.out.println("id 값 : "+id);
+			  System.out.println("bids_order_number 값: "+bon);
+			  
+			  int bosi = 4;
+			  
 
-//      @RequestMapping(value="/overlapped.do", method = RequestMethod.POST)
-//      public ResponseEntity overlapped(@RequestParam("email") String email,
-//                               HttpServletRequest request, 
-//                               HttpServletResponse response) throws Exception{
-//         
-//         ResponseEntity resEntity = null;
-//         
-//         String result = memberService.overlapped(email);
-//         
-//         resEntity =new ResponseEntity(result, HttpStatus.OK);
-//         
-//         return resEntity;
-//      }
-      
-      
+			  Map<String,Object> map = new HashMap<String,Object>();
+			  
+			  map.put("id", id);
+			  map.put("bon", bon);
+			  map.put("bosi", bosi);
+			 
+			  // 1) 가져온 Bids_order_state_idx 값을 업데이트 시킨다.
+			  memberService.updateBidsOrder(map);
+			  
+			  // 2) 이벤트 쿠폰을 한개 생성한다.
+			  
+			  
+			  
+			  ////////// 4월 19일 ////////// ToDo
+			  // 쿠폰 생성 메소드 만들기
+			  // 응모권과 쿠폰 구분하기
+			  // 이벤트 쿠폰 생성과 응모권 사용에 대한 구분
+			  
+	          //PrintWirter 객체 out 생성 및 초기화
+	          PrintWriter out = response.getWriter();
+	      
+	         
+	          out.println("<script>alert('메인 페이지로 이동합니다.');");
+	          out.println("location.href='"+request.getContextPath()+"/main.do';</script>");
+	          out.flush();
+	          out.close();
+			  
+	      
+	      
+	   }
+	  	
+		
+	      @RequestMapping(value = "/emailCheck.do", method = RequestMethod.POST)
+	      @ResponseBody	
+	      public void emailCheck(@RequestParam("user_email")String user_email,HttpServletResponse response) throws Exception{
+	    	 
+	    	  System.out.println(user_email);
+	    	  
+	    	  int memberEmailCheck = memberService.emailCheck(user_email);
+	    	  System.out.println("컨트롤러 memberEmailCheck : " + memberEmailCheck);
+	    	  
+	    	  PrintWriter out = response.getWriter();
+	    	  
+	    	  if(memberEmailCheck == 0) {
+	              out.println(0);
+	            } else {
+	              out.println(1);
+	            }
 
+	    	  return;
+	      }
+		
+	      @RequestMapping(value="/info.do", method = RequestMethod.GET)
+		  public ModelAndView info(HttpServletRequest request, HttpServletResponse response) throws Exception{
+				
+				  System.out.println("info.do 호출!"); 
+				  
+					ModelAndView mav = new ModelAndView();
+				    
+				    String viewName = (String) request.getAttribute("viewName");
+				    
+				    logger.info(viewName);
+				    
+				    mav.setViewName(viewName);
+		         
+				    return mav;
+		    }
+	      
+	     
+	      
+	       
+      
 }

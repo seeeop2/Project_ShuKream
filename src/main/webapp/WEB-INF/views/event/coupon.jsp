@@ -6,156 +6,10 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <style>
-
-#coupon_wrapper{
-
-/*     border : 1px solid black; */
-	
-	position : relative;
-	display : flex;
-	max-width : 1920px;
-	width : 100%;
-	height: 700px;
-	margin : 0 auto;
-
-
-}
-
-#coupon_box{
-
-    border: 1px dotted white;
-    
-    position: relative;
-    display: flex;
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;
-    text-align: center;
-    border-radius: 30px;
-    box-shadow: 0 0 30px 10px;
-}
-
-#title_box{
-
-/* 	border : 1px dotted white; */
-
-    position: relative;
-    display: flex;
-    margin: 5px;
-    width: 97%;
-    height: 100px;
-    top: 0;
-    left: 0;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    border-radius: 20px;
-    color: white;
-    background: white;
-
-}
-
-.coupon_title {
-
-    border: 1px dotted white;
-    
-    position: relative;
-    display: flex;
-    margin: 10px;
-    width: 100%;
-    height: 80%;
-    top: 0;
-    left: 0;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    font-size: 25px;
-    padding: 20px;
-    font-weight: bold;
-    border-radius: 20px;
-    background: black;
-
-
-}
-
-
-#content_box{
-
-/* 	border : 1px dotted black; */
-
-	position: relative;
-    display: flex;
-    margin: 0px;
-    width: 100%;
-    height: 70%;
-    top: 0;
-    left: 0;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    border-radius: 10px;
-    padding: 0;
-    overflow-y: auto;
-    
-
-}
-
-#content_row{
-
-/* 	border : 1px solid blue; */
-
-    position: relative;
-    display: flex;
-    margin: 3px;
-    width: 97%;
-    height: 50px;
-    top: 0;
-    left: 2px;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-	
-
-
-}
-
-#content_row > input{
-
-	float : left;
-	margin : 0px 15px;
-	top : 0;
-	left : 0;
-	padding : 0;
-	
-
-
-}
-
-.coupon_content{
-
-	border: 1px dashed black;
-	
-    position: relative;
-    display: flex;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 20px;
-}
-
 </style>
 
 <!-- Css Styles 적용 -->
-<link rel="stylesheet" href="${contextPath}/resources/css/event/coupon.css" type="text/css">
+<link rel="stylesheet" href="${contextPath}/resources/css/event/coupon.css" />
 
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-blog set-bg"
@@ -188,7 +42,7 @@
 			    <c:when test= "${coupon.d_ticket eq '무료배송권'}">
 			    	<input style="color: blue; font-weight:bold;" class="coupon_content" id="coupon_name" type="text" value="${coupon.d_ticket}" readonly="readonly" />
 			    </c:when>
-   			    <c:when test= "${coupon.d_ticket eq '한달무료입고권'}">
+   			    <c:when test= "${coupon.d_ticket eq '무료1회입고권'}">
 			    	<input style="color: #20c997; font-weight:bold;" class="coupon_content" id="coupon_name" type="text" value="${coupon.d_ticket}" readonly="readonly" />
 			    </c:when>
     			<c:when test= "${coupon.d_ticket eq '수수료1회무료권'}">

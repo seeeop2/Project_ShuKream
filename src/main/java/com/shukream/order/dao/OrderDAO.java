@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.shukream.order.vo.OrderVO;
 import com.shukream.products.vo.ProductsVO;
@@ -16,6 +17,7 @@ public class OrderDAO {
 	SqlSession sqlSession;
 	
 	//주문시 SHIPPING_INFORMATION에 데이터를 넣음
+	@Transactional
 	public int insertShipInfo(OrderVO vo) {
 		sqlSession.insert("mapper.order.insertShipInfo", vo);
 		int shipInfoIdx = sqlSession.selectOne("mapper.order.selectShipInfoIdxFromDual");
@@ -23,6 +25,7 @@ public class OrderDAO {
 	}
 	
 	//즉시구매 또는 즉시판매의 경우 바로 orders 테이블에 asks, bids idx를 연결해서 데이터를 넣어줘야함
+	@Transactional
 	public int insertOrders(Map<String, Object> paramMap) {
 		sqlSession.insert("mapper.order.insertOrders",paramMap);
 		int orderIdx = sqlSession.selectOne("mapper.order.selectOrderIdxFromDual");
@@ -40,6 +43,7 @@ public class OrderDAO {
 	}
 
 	//주문이 들어가면 새로운 구매입찰을 생성해야 함
+	@Transactional
 	public int insertNewBids(Map<String, Object> paramMap) {
 		sqlSession.insert("mapper.order.insertNewBids",paramMap);
 		int bidsIdx = sqlSession.selectOne("mapper.order.selectBidsIdxFromDual");
@@ -55,6 +59,7 @@ public class OrderDAO {
 		
 	}
 
+	@Transactional
 	public int insertNewAsks(Map<String, Object> paramMap) {
 		sqlSession.insert("mapper.order.insertNewAsks",paramMap);
 		int asksIdx = sqlSession.selectOne("mapper.order.selectAsksIdxFromDual");

@@ -6,356 +6,10 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <style>
-
-#event_detail_result_wrapper {
-
-    position: relative;
-    margin: 0 auto;
-    top: 0;
-    left: 0;
-    max-width: 1200px;
-    width: 100%;
-    height: 900px;
-}
-
-#event_detail_result_container {
-	
-    position: relative;
-    height: 100%;
-    width: 100%;
-    left: 0;
-    top: 0;
-    text-align : center;
-    margin : 0 auto;
-}
-
-#event_detail_result_row {
-
-	
-    margin: 0 auto;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    flex-direction: column;
-    box-shadow: 0 0 10px 10px #b7b7b7;
-    border-radius: 5px;
-}
-
-#event_detail_result_table {
-	
-	border : 1px solid orangered;
-
-	position : relative;
-	margin : 0 auto;
-	top : 0;
-	left : 0;
-	width: 100%;
-	height : 500px;
-	border-radius : 5px;
-	
-
-
-}
-
-#event_detail_result_title{
-
-	border : 1px solid orangered;
-
-	position : relative;
-	margin : 0 auto;
-	top : 0;
-	left : 0;
-	width: 100%;
-	height : 100px;
-	background : orangered;
-
-}
-
-#event_detail_result_a {
-
-	border : 1px solid orangered;
-
-	position : relative;
-	margin : 0 auto;
-	top : 0;
-	left : 0;
-	width: 100%;
-	height : 40%;
-
-}
-
-#event_detail_result_a > a {
-
-    border: 1px solid orangered;
-
-    display: flex;
-    position: relative;
-    margin: 0 auto;
-    top: 0;
-    left: 0px;
-    width: calc(100%/4);
-    height: 100%;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    float: left;
-    background: orangered;
-    border-radius: 5px;
-    color: aliceblue;
-    font-weight: bold;
-    text-align: center;
-}
-
-#event_detail_result_input {
-
-	border : 1px solid orangered;
-
-	position : relative;
-	margin : 0 auto;
-	top : 0;
-	left : 0;
-	width: 100%;
-	height : 60%;
-	padding : 10px 0;
-
-}
-
-#event_detail_result_input > input {
-
-    border: 1px solid orangered;
-    
-    display: flex;
-    position: relative;
-    margin: 0 auto;
-    top: 0;
-    left: 0px;
-    width: calc(100%/4);
-    height: 100%;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    float: left;
-    background: white;
-    border-radius: 5px;
-    color: black;
-    font-weight: bold;
-    text-align: center;
-}
-
-#event_detail_result_contents_title{
-
-    border: 1px solid dodgerblue;
-
-    width: 100%;
-    height: 40px;
-    border-radius: 5px;
-    background: dodgerblue;
-    position: relative;
-    top: 0;
-    left: 0;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-}
-
-
-#event_detail_result_contents{
-
-	border : 1px solid dodgeblue;
-
-	position : relative;
-	margin : 0 auto;
-	top : 0;
-	left : 0;
-	width: 100%;
-	height : 360px;
-	border-radius: 5px;
-	overflow-y: auto;
-
-
-}
-
-#event_detail_contents_a {
-
-	border : 1px solid dodgerblue;
-
-	position : relative;
-	margin : 0 auto;
-	top : 0;
-	left : 0;
-	width: 100%;
-	height : 40px;
-	background : dodgerblue;
-
-}
-
-#event_detail_contents_a > a {
-
-    border: 1px solid dodgerblue;
-    
-    display: flex;
-    position: relative;
-    margin: 0 auto;
-    top: 0;
-    left: 0px;
-    width: calc(99%/6);
-    height: 100%;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    float: left;
-    background: dodgerblue;
-    color: #fff;
-    font-weight: bold;
-    text-align: center;
-}
-
-#event_detail_contents_input {
-
-	border : 1px solid dodgerblue;
-
-	position : relative;
-	margin : 0 auto;
-	top : 0;
-	left : 0;
-	width: 100%;
-	height : 60px;
-	background : dodgerblue;
-	padding : 5px 0;
-
-}
-
-#event_detail_contents_input > input {
-
-    border: 1px solid dodgerblue;
-    
-    display: flex;
-    position: relative;
-    margin: 0 auto;
-    top: 0;
-    left: 0px;
-    width: calc(100%/6);
-    height: 100%;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    float: left;
-    background: white;
-    border-radius: 5px;
-    color: black;
-    font-weight: bold;
-    text-align: center;
-	font-size : 11px;
-	
-}
-
-
-#event_detail_contents_row{
-	
-	border : 1px solid black;
-
-	position : relative;
-	margin : 0 auto;
-	top : 0;
-	left : 0;
-	width: 100%;
-	height : 200px;
-	border-radius : 5px;
-
-}
-
-#event_detail_contents_row_a{
-
-	border : 1px solid black;
-
-	position : relative;
-	margin : 0 auto;
-	top : 0;
-	left : 0;
-	width: 100%;
-	height : 40px;
-	background : black;
-
-
-}
-
-#event_detail_contents_row_a > a {
-
-    border: 1px solid black;
-    
-    display: flex;
-    position: relative;
-    margin: 0 auto;
-    top: 0;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    float: left;
-    background: black;
-    color: red;
-    font-weight: bold;
-    text-align: center;
-    
-}
-
-#event_detail_contents_row_input {
-    border: 1px solid black;
-    position: relative;
-    margin: 0 auto;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 160px;
-    background: black;
-    padding: 5px 10px;
-    
-}
-
-#event_detail_contents_row_input > input{
-
-    border: 1px solid black;
-    
-    display: flex;
-    position: relative;
-    margin: 0 auto;
-    top: 0;
-    left: 0px;
-    width: 100%;
-    height: calc(100%/6);
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    float: left;
-    background: white;
-    border-radius: 5px;
-    color: black;
-    font-weight: bold;
-    text-align: left;
-	font-size : 11px;
-
-
-}
-
 </style>
 
 <!-- Css Styles 적용 -->
-<link rel="stylesheet" href="${contextPath}/resources/css/event/eventDetailResult.css" type="text/css">
+<link rel="stylesheet" href="${contextPath}/resources/css/event/eventDetailResult.css" />
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-blog set-bg"
   data-setbg="${contextPath}/resources/img/event/event_bg.jpg">
@@ -404,7 +58,20 @@
 		<c:forEach var="vo" items="${checkuser}">	
 	   		<div id="event_detail_contents_input">
 		   		<input type="text" placeholder="번호" value="${vo.d_idx}" readonly="readonly" />
-		   		<input id="ticket" class="ticket" type="text" placeholder="당첨된 응모권" value="${vo.d_ticket}" readonly="readonly" />
+		   		<c:choose>
+			   		<c:when test= "${vo.d_ticket eq '무료1회입고권'}">
+			   			<input style="font-weight : bold; color: #20c997; font-size: 20px;" id="ticket" class="ticket" type="text" placeholder="당첨된 응모권" value="${vo.d_ticket}" readonly="readonly" />
+			   		</c:when>
+				   	<c:when test= "${vo.d_ticket eq '무료배송권'}">
+			   			<input style="font-weight : bold; color: blue; font-size: 20px;" id="ticket" class="ticket" type="text" placeholder="당첨된 응모권" value="${vo.d_ticket}" readonly="readonly" />
+			   		</c:when>
+			   		<c:when test= "${vo.d_ticket eq '수수료1회무료권'}">
+			   			<input style="font-weight : bold; color: orange; font-size: 20px;" id="ticket" class="ticket" type="text" placeholder="당첨된 응모권" value="${vo.d_ticket}" readonly="readonly" />
+			   		</c:when>
+				   		<c:otherwise>
+				   			<input id="ticket" class="ticket" type="text" placeholder="당첨된 응모권" value="${vo.d_ticket}" readonly="readonly" />
+				   		</c:otherwise>
+		   		</c:choose>
 		   		<input class="d_date" type="text" placeholder="당첨 날짜" value="<fmt:formatDate type="date" dateStyle="full" value="${vo.d_date}"/>" readonly="readonly" />
 		   		<input type="text" placeholder="신청번호:xxxx 물품명: 조단 판매 완료에 대한 당첨권 1회 발급" value="${vo.d_contents}" readonly="readonly" />
 	   			<input class="expiry_date" style="text-decoration: underline; color:red;" id="expiry_date" type="text" placeholder="" value="<fmt:formatDate type="date" dateStyle="full" value="${vo.expiry_date}"/> 까지" readonly="readonly" />
@@ -451,6 +118,8 @@ $(document).ready(function(){
 			
 			// 해당 하는 티켓 내용의 색상을 빨갛게 바꾼다.
 			document.getElementsByClassName("ticket")[i].style.color = "red";
+			document.getElementsByClassName("ticket")[i].style.fontSize = "19px";
+			document.getElementsByClassName("ticket")[i].style.fontWeight = "bold";
 			document.getElementsByClassName("d_confirm")[i].style.color = "red";
 			document.getElementsByClassName("d_confirm")[i].value = "X";
 		}

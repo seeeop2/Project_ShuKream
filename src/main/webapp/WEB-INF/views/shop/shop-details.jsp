@@ -262,8 +262,15 @@
               </button>
             </div>
             <div style="background-color: yellow">
-              <a href="#" class="primary-btn"
-                style="margin: auto; display: block; text-align: center;">
+              <a  class="primary-btn"    style="margin: auto; display: block; text-align: center; "
+										 onclick="javascript:heartBtn('${productvo.product_id}',
+              														  '${imgNameMain}',
+																	  '${productvo.product_name_en}',              														  
+																	  '${productvo.product_name_kor}',              														  	
+																	  '${productvo.product_price}',              														  	
+																	  '${email}' 
+																	  );">
+
                 <i class="fa fa-heart"></i> add to wishlist
               </a>
             </div>
@@ -786,6 +793,42 @@ var innerText16 = document.getElementById("clickForMoney_16").innerText;
           chart.draw(data, options);
         }
     
-    
-</script>
-
+	    function heartBtn(PRODUCT_ID,IMG_FILE,PRODUCT_NAME_EN,PRODUCT_NAME_KOR,PRODUCT_PRICE,email){
+ 	        if(email == ""){
+	          alert("로그인을 하여주세요");
+ 	        } else{
+	          $.ajax({
+	                  url:  "/shuKream/favorites/favoritesLike.do",
+	                  async : true,
+	                  type : 'POST',
+	                  data : {
+		               	  		PRODUCT_ID : PRODUCT_ID,	                	  		
+		             	  		IMG_FILE : IMG_FILE,
+		            	  		PRODUCT_NAME_EN : PRODUCT_NAME_EN,
+		             	  		PRODUCT_NAME_KOR : PRODUCT_NAME_KOR,
+		            	  		PRODUCT_PRICE : PRODUCT_PRICE,
+								email : email
+	                  		},
+	                  success : function(data) {
+	                 	
+	                 	if ( data == 0 ) {
+                        	
+	                 		alert("관심상품 등록해제 되었습니다..");
+                        
+	                 	} else if (data == 1) {
+	                        
+	                 		alert("관심상품 등록되었습니다.");
+                        }
+	                  
+	                  }
+	            });
+	        }
+	      }
+	    
+	    function getContextPath() {
+	    	var hostIndex = location.href.indexOf(location.host) + location.host.length;
+	    	
+	    	return location.href.substring(hostIndex, location.href.indexOf('/',hostIndex + 1));
+	    };
+	
+	</script>

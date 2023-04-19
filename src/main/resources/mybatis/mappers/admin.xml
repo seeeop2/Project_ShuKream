@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.admin">
+	
+	<resultMap id="asksResult" type="AsksVO">
+		<result property="asks_idx" column="asks_idx" />
+		<result property="asks_size_idx" column="asks_size_idx" />
+		<result property="asks_address" column="asks_address" />
+		<result property="asks_order_state_idx" column="asks_order_state_idx" />
+		<result property="asks_update" column="asks_update" />
+		<result property="asks_order_number" column="asks_order_number" />
+		
+	</resultMap>
+	
+	<resultMap id="bidsResult" type="BidsVO">
+		<result property="bids_idx" column="bids_idx" />
+		<result property="bids_size_idx" column="bids_size_idx" />
+		<result property="bids_address" column="bids_address" />
+		<result property="bids_order_state_idx" column="bids_order_state_idx" />
+		<result property="bids_update" column="bids_update" />
+		<result property="asks_order_number" column="bids_order_number" />
+	</resultMap>
+	
+	
+	
+	<select id="asksList"  resultType="java.util.Map"   >
+	    <![CDATA[
+
+			SELECT ASKS_IDX,ASKS_SIZE_IDX,ASKS_ORDER_STATE_IDX,ASKS_ORDER_NUMBER,ASKS_ADDRESS
+			FROM ASKS 
+			
+		]]>
+	</select>
+	
+
+	<select id="bidsList" resultType="java.util.Map"   >
+	    <![CDATA[
+
+ 			SELECT BIDS_IDX,BIDS_SIZE_IDX,BIDS_ORDER_STATE_IDX,BIDS_ORDER_NUMBER
+ 			FROM BIDS  
+			
+		]]> 
+	</select>
+	
+	
+	
+
+</mapper>

@@ -126,30 +126,44 @@ public class EventController {
 		// #1. service -> dao로 id 값을 보내서 dao에서 조회 시킨다.
 		
 		checkuser = eventservice.checkuser(id);
-		 
-		int i = checkuser.size()-1;
-		// checkuser에 저장된 d_cnt만 꺼낸다.
-
-		String d_cnt = checkuser.get(i).getD_cnt();
-
-		System.out.println(d_cnt);
-
 		
-			 // 만약에 응모권이 한개도 없다면
-			if(d_cnt.equals("0")) {
-				
-				// msg 변수에 로그인 해야한다는 문구 저장
-				//	String msg = "보유하신 응모권이 없습니다!, 상세페이지로 이동합니다!";
-				
-				
-				// PrinterWriter 클래스를 이용하여 JAVASCRIPT 구문으로 alert를 발생시키고, location.replace 메소드를 통해서 바로 상세페이지로 이동 시킬 때,
-				// ticket 값을 0으로 입력하여 eventdetailresult.jsp에 ticket값이 0일 경우 jstl을 이용하여 소지하고있는 응모권이 없습니다를 생성시킨다!
-				out.println("<script>alert('보유하신 응모권이 없습니다!, 상세페이지로 이동합니다');");
-//					out.println("window.location.replace('http://localhost:8090/shuKream/event/detailresult.do?ticket=0');</script>");
-				out.println("window.location.href='"+contextPath+"/event/detailresult.do?ticket=0&id="+id+"';</script>");
-				out.flush();
-				out.close();
-			}
+		//DB가 비어있다면?
+		if(checkuser.isEmpty()) {
+			
+			out.println("<script>alert('응모내역이 없습니다!, 거래 후 이용해주세요!');");
+		out.println("window.location.href='"+contextPath+"/event/main.do';</script>");
+		out.flush();
+		out.close();
+			
+		}else {
+			
+			int i = checkuser.size()-1;
+			// checkuser에 저장된 d_cnt만 꺼낸다.
+
+			String d_cnt = checkuser.get(i).getD_cnt();
+
+			System.out.println(d_cnt);
+
+			
+				 // 만약에 응모권이 한개도 없다면
+				if(d_cnt.equals("0")) {
+					
+					// msg 변수에 로그인 해야한다는 문구 저장
+					//	String msg = "보유하신 응모권이 없습니다!, 상세페이지로 이동합니다!";
+					
+					
+					// PrinterWriter 클래스를 이용하여 JAVASCRIPT 구문으로 alert를 발생시키고, location.replace 메소드를 통해서 바로 상세페이지로 이동 시킬 때,
+					// ticket 값을 0으로 입력하여 eventdetailresult.jsp에 ticket값이 0일 경우 jstl을 이용하여 소지하고있는 응모권이 없습니다를 생성시킨다!
+					out.println("<script>alert('보유하신 응모권이 없습니다!, 상세페이지로 이동합니다');");
+//						out.println("window.location.replace('http://localhost:8090/shuKream/event/detailresult.do?ticket=0');</script>");
+					out.println("window.location.href='"+contextPath+"/event/detailresult.do?ticket=0&id="+id+"';</script>");
+					out.flush();
+					out.close();
+				}
+			
+			
+			
+		}
 
    
     // Viewname 가져오기
@@ -216,9 +230,10 @@ public class EventController {
     	// uc_cnt는 그냥 가져온다( null 방지 )
     	String u_cnt = checkuser.get(i).getU_cnt();
 
-	    	//ac_cnt와 dc_cnt의 값을 1 증가 시킨다.
+	    	//a_cnt와 u_cnt의 값을 1 증가 시키고, d_cnt의 값은 1 감소시킨다.
 	    	a_cnt += 1;
-	    	d_cnt += 1;
+	    	u_cnt += 1;
+	    	d_cnt -= 1;
     
     // #1) 무료배송권에 당첨 되었을 때,
     if(ticket.equals("freeshipping")){
@@ -258,7 +273,7 @@ public class EventController {
     	System.out.println(ticket);
 
 	    	// 티켓명을 저장한다.
-	    	ticket = "한달무료입고권";
+	    	ticket = "무료1회입고권";
 	    	// 응모당첨 내역을 저장한다.
 	    	// 임시로 넣어놓고, 나중에는 주문번호를 따와서 추가 시킨다.<작성중>
 	        String contents = "(주문번호2)의 주문완료에 대한 응모권 발생";
