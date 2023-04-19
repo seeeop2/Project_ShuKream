@@ -3,6 +3,30 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
+<%--
+	BIDS_IDX // 주문인덱스
+	BIDS_SIZE_IDX //사이즈 인덱스
+	BIDS_PRICE // 가격
+	BIDS_REGDATE //등록일
+	BIDS_UPDATE // 수정일
+	BIDS_EXPIRATION //만료일
+	BIDS_ORDER_STATE_IDX //사이즈 인덱스
+	BIDS_MATCHED_DATE //매칭일
+			BIDS_TOTAL_PRICE //토탈가격 <- 이건 왜있는건지 잘모르겠음(여러개 동시 주문 불가로알고있음)
+			BIDS_ORDER_NUMBER // <- 이것도?
+	BIDS_SHIP_IDX <- 배송정보인덱스
+	BIDS_PRODUCT_ID <- 상품인덱스
+	
+	이 페이지에서 전제조건 : 
+	구매입찰로 checkout까지 넘어온 경우 BIDS를 기준으로 상품 정보를 조회 해 와야함
+	같이 가져와야 하는 정보 
+	PRODUCT_ID(상품 인덱스와 맞는 상품 정보, ORDER_SIZE_IDX(사이즈인덱스와 맞는 사이즈 정보), 
+	
+	
+
+ --%>
+
+
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <link rel="stylesheet" href="${contextPath}/resources/css/checkout.css">
 
@@ -35,10 +59,10 @@
           <c:choose>
           	<c:when test="${type eq 'buy'}">
 	            <h4 class="coupon__code">
-					<input type="radio" id="bids" name="option" value="00" onchange="setDisplay()"  required="required" checked="checked"  >
+					<input type="radio" id="bids" name="option" value="00" onchange="setDisplay()"  required="required">
 					<label for="bids"><span style="font-size:24px;">구매입찰</span></label>
 					<c:if test="${not empty buyAsks}">
-					<input type="radio" id="check" name="option" value="10" onchange="setDisplay()"    > 
+					<input type="radio" id="check" name="option" value="10" onchange="setDisplay()"  checked="checked"  > 
 					<label for="check"><span style="font-size:24px;">즉시구매</span></label>
 					<input type="hidden" name="asks_idx" value="${buyAsks.ASKS_IDX}">
 					</c:if>
@@ -49,16 +73,16 @@
 						<p style="font-size: 24px;">
 						   	구매희망가격<span>*</span>
 						 </p>
-						<input type="text" class="ABprice" name="ABprice" placeholder="구매 희망가" style="color:black;" required="required"/>
+						<input type="text" class="ABprice" name="ABprice" placeholder="구매 희망가" style="color:black;"/>
 					</div>
 				</div>
 			</c:when>
 			<c:otherwise>
            		<h4 class="coupon__code">
-					<input type="radio" id="asks" name="option" value="00" onchange="setDisplay()"  required="required"  checked="checked" > 
+					<input type="radio" id="asks" name="option" value="00" onchange="setDisplay()"  required="required" > 
 					<label for="asks"><span style="font-size:24px;">판매입찰</span></label>
 					<c:if test="${not empty sellBids}">
-					<input type="radio" id="check" name="option" value="10" onchange="setDisplay()" > 
+					<input type="radio" id="check" name="option" value="10" onchange="setDisplay()" checked="checked" > 
 					<label for="check"><span style="font-size:24px;">즉시판매</span></label>
 					<input type="hidden" name="bids_idx" value="${sellBids.BIDS_IDX}">
 					</c:if>
@@ -69,13 +93,12 @@
 						<p style="font-size: 24px;">
 						   	판매희망가격<span>*</span>
 						 </p>
-						<input type="text" class="ABprice" name="ABprice" placeholder="판매 희망가" style="color:black;" required="required"/>
+						<input type="text" class="ABprice" name="ABprice" placeholder="판매 희망가" style="color:black;"/>
 					</div>
 				</div>
 			</c:otherwise>
 			
 			</c:choose>
-<div id="orderDetail">			
             <h4 class="checkout__title">주문 상세</h4>
             <div class="row">
               <div class="col-lg-8">
@@ -83,7 +106,7 @@
                   <p>
                     Name<span>*</span>
                   </p>
-                  <input id="name" type="text" name="ship_name" value="${memberVO.user_name}" required>
+                  <input type="text" name="ship_name" value="${memberVO.user_name}" required>
                 </div>
               </div>
                <div class="col-lg-6">
@@ -91,7 +114,7 @@
                   <p>
                     Phone<span>*</span>
                   </p>
-                  <input id="phone" type="text" name="phone_number" placeholder="-없이 숫자 11자리를 입력해주세요" >
+                  <input type="text" name="phone_number" placeholder="-없이 숫자 11자리를 입력해주세요" required id="phone_number">
                 </div>
               </div>
               <div class="col-lg-6">
@@ -99,10 +122,24 @@
                   <p>
                     Email<span>*</span>
                   </p>
-                  <input id="email" type="text" name="user_id" value="${memberVO.user_email} " required>
+                  <input type="text" name="user_id" value="${memberVO.user_email} " required>
                 </div>
               </div>
+<%--              <div class="col-lg-6">
+                <div class="checkout__input">
+                  <p>
+                    Last Name<span>*</span>
+                  </p>
+                  <input type="text" name="last_name">
+                </div>
+              </div> --%>
             </div>
+  <%--          <div class="checkout__input">
+              <p>
+                Country<span>*</span>
+              </p>
+              <input type="text">
+            </div>  --%>
            
              <div class="checkout__input">
 				<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>            
@@ -132,8 +169,35 @@
               <input type="text" id="sample4_extraAddress" name="sample4_extraAddress" placeholder="참고항목" value=" (백현동)">
             <span id="guide" style="color:#999;display:none"></span>
             </div>
+<!--             <div class="checkout__input__checkbox">
+              <label for="acc"> Create an account? <input
+                type="checkbox" id="acc"> <span
+                class="checkmark"></span>
+              </label>
+              <p>Create an account by entering the information
+                below. If you are a returning customer please login at
+                the top of the page</p>
+            </div>
+            <div class="checkout__input">
+              <p>
+                Account Password<span>*</span>
+              </p>
+              <input type="text">
+            </div>
+            <div class="checkout__input__checkbox">
+              <label for="diff-acc"> Note about your order, e.g,
+                special noe for delivery <input type="checkbox"
+                id="diff-acc"> <span class="checkmark"></span>
+              </label>
+            </div>
+            <div class="checkout__input">
+              <p>
+                Order notes<span>*</span>
+              </p>
+              <input type="text"
+                placeholder="Notes about your order, e.g. special notes for delivery.">
+            </div> -->
           </div>
-</div>          
           <div class="col-lg-5 col-md-6">
             <div class="checkout__order">
               <h4 class="order__title">Your order</h4>
@@ -160,6 +224,9 @@
 		                </c:if>
 	                </c:otherwise>
                 </c:choose>
+<%--                 <li>02. German chocolate <span>$ 170.0</span></li>
+                <li>03. Sweet autumn <span>$ 170.0</span></li>
+                <li>04. Cluten free mini dozen <span>$ 110.0</span></li>--%>
               </ul>
               <ul class="checkout__total__all">
               <c:choose>
@@ -179,14 +246,29 @@
                </c:otherwise>
                </c:choose>
               </ul>
-              <div id="kakaoPayBtn">	
-              <button onclick="kakaoPay()" type="button" class="site-btn">PLACE
+              <!-- <div class="checkout__input__checkbox">
+                <label for="acc-or"> Create an account? <input
+                  type="checkbox" id="acc-or"> <span
+                  class="checkmark"></span>
+                </label>
+              </div>
+              <p>Lorem ipsum dolor sit amet, consectetur adip elit,
+                sed do eiusmod tempor incididunt ut labore et dolore
+                magna aliqua.</p>
+              <div class="checkout__input__checkbox">
+                <label for="payment"> Check Payment <input
+                  type="checkbox" id="payment"> <span
+                  class="checkmark"></span>
+                </label>
+              </div>
+              <div class="checkout__input__checkbox">
+                <label for="paypal"> Paypal <input
+                  type="checkbox" id="paypal"> <span
+                  class="checkmark"></span>
+                </label>
+              </div> -->
+              <button onclick="kakaoPay()" class="site-btn">PLACE
                 ORDER</button>
-                </div>
-                <div id="placeOrderButton">
-               <button type="submit" class="site-btn" >PLACE
-                ORDER</button>
-                </div>
             </div>
           </div>
         </div>
@@ -195,10 +277,6 @@
   </div>
 </section>
 <!-- Checkout Section End -->
-
-
-
-
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -260,86 +338,49 @@
 </script>
 
 <script>   
-    	
-$(function() {    
-	setDisplay();
-}); 
+    
     //구매입찰가 온오프
 function setDisplay(){
-        if($("#bids").is(':checked') || $('#asks').is(':checked')){
-            $('#price').show();
-//             $('#orderDetail').hide();
-            $('#kakaoPayBtn').hide();
-//             $('#phone_number').css('display','none');
-            $('#placeOrderButton').show();
-        }else{
+        if($('input:radio[id=check]').is(':checked')){
             $('#price').hide();
-//             $('#orderDetail').show();
-            $('#kakaoPayBtn').show();
-//             $('#phone_number').css('display','block');
-            $('#placeOrderButton').hide();
+        }else{
+            $('#price').show();
         }
     }
 	$(".ABprice").focusout(function() {
 		$("#totalPrice").text(addComma($(".ABprice").val())+'원');	
 	});
     
-
 	
 	//천단위 ,
  function addComma(value){
       value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       return value; 
   }
-	
-    
+     
  </script>
-  <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-  <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
  <script>
- 
- function checkInput(a,b,c,d) {
-	 var phone = $("#phone").val();
-	 var regPhone= /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
-	 var phoneReg = regPhone.test(phone)
-	 
-		if(a && b && c && d && phoneReg) {
-			return false;
-		}
-		return true;
-	} 
- 
 function kakaoPay(){
 	
-	var name = $("#name").val();
-	var phone = $("#phone").val();
-	var addr = $("#sample4_postcode").val() 
-				+$("#sample4_roadAddress").val() 
-				+ $("#sample4_extraAddress").val() 
-				+ $("#sample4_extraAddress").val() 
-				+ $("#sample4_extraAddress").val(); 
-	var email = $("#email").val();
-	
-	var checkData = checkInput(name,phone,addr,email);
-	if(checkData){
-		alert("-를 제외한 11자리 휴대폰번호를 입력해주세요");
-		return false;
-	} else{
 	alert("카카오페이로 간편 결제됩니다!! 본인 휴대폰을 준비해주세요!");
 	
 	var IMT = window.IMP;
-	  IMP.init('imp12860401'); //가맹점 식별코드
+		
+	
+	  IMP.init("imp12860401"); //iamport 대신 자신의 "가맹점 식별코드"를 사용
 	  IMP.request_pay({
-	    pg: "kakaopay",
+	    pg: "TC0ONETIME",
 	    pay_method: "card",
 	    merchant_uid : 'merchant_'+new Date().getTime(),
-	    name :'결제테스트',
+	    name :${memberVO.user_name}+"님의 결제페이지 입니다.",
 	    amount : 100,
-	    buyer_email : '${memberVO.user_email}',
-	    buyer_name : '${memberVO.user_name}',
-	    buyer_tel : phone,
-	    buyer_addr : "주소",
-	    buyer_postcode : '000-000'
+	    buyer_email : ${memberVO.user_email},
+	    buyer_name : ${memberVO.user_name},
+	    buyer_tel : $("#phone_number").val(),
+// 	    buyer_addr : "",
+// 	    buyer_postcode : '000-000'
 	  }, function (rsp) { // callback
 	      if (rsp.success) {
 	    	  
@@ -353,13 +394,12 @@ function kakaoPay(){
 	          var msg = '결제에 실패하였습니다.';
 	          msg += '에러내용 : ' + rsp.error_msg;
 	          alert(msg);
+	        
+	        
 	      }
 	  });
+	  
+
 }
-}
-
-
-
 
 </script>
-
