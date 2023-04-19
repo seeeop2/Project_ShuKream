@@ -235,6 +235,10 @@ public class MemberController {
 			
 			  System.out.println("shipping.do 호출!"); 
 			  
+			  request.setCharacterEncoding("utf-8");
+			  response.setCharacterEncoding("utf-8");
+			  response.setContentType("text/html; charset=utf-8");
+			  
 				// @ 1) 로그인 된 아이디 값을 가져와서 매개변수로 전달한다.
 			    String id = (String)session.getAttribute("email");
 			  
