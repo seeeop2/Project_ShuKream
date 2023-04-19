@@ -34,10 +34,10 @@ public class MemberService {
 		 email.put("user_email2", user_email);
 		 Map email2 = memberDAO.emailCheck(email); //0
 		 
-		 //String email3 = (String) email2.get("USER_EMAIL");
+		 String email3 = (String) email2.get("USER_EMAIL");
 		 
 		 int result = 0;
-		 if( email2.equals("0")) {
+		 if( email3.equals("0")) {
 			 System.out.println("이메일 없다");
 			  result = 0;
 		 } else {

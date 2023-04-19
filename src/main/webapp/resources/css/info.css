@@ -1,0 +1,190 @@
+	#mega_wrapper > ul {
+	    border: 1px solid white;
+	    text-align: center;
+	    color: black;
+	    font-size: 16px;
+	    float: left;
+	}	
+
+	#login_box > li > a:hover {
+		background: #fff5f3;
+	  text-decoration: none;
+	  border-radius: 20px;
+	  transition : 0.3s;
+	}
+	#login_box > li > a {
+	font-family: 'Nanum Gothic', sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 0 auto;
+    letter-spacing: .75px;
+    border: transparent;
+    position: relative;
+    display: inline-block;
+    background: #fff;
+    color: black;
+    transition: 0.3s;
+    height: 70%;
+    width: 66%;
+    top: 0;
+    left: 0;
+    line-height: 40px;
+    
+	}
+	
+	#login_box > li {
+	float: left;
+    position: relative;
+    text-align: center;
+    margin: 0 auto;
+    height: 50px;
+    width: 100px;
+    left: 0px;
+    padding: 0;
+    
+	}
+	
+	.total {
+		max-width: 1240px;
+		margin: 0 auto;
+		text-align: center;
+		padding: 0px 20px 0px;
+		box-sizing: border-box;
+		position: relative;
+	}
+	.userInfo {
+		padding: 30px;
+	}
+	
+	.userImg {
+ 		border-radius: 50%; 
+		height: 158px;
+	    border: 1px solid #231815;
+	    width: 150px;
+	}
+	
+	.userName, .userId {
+		font-size: 15px;
+		color: #555;
+		margin-bottom: 6px;
+		margin-right: 37px;
+	}
+	.user {
+		display: inline-block;
+		width: 100%;
+		padding-bottom: 20px;
+		padding-left: 20px;
+	}
+	.myInfo, .petInfo {
+		font-size: 13px;
+		color: #555;
+		float: left;
+		width: 40%;
+		margin-right: 2%;
+		height: 30px;
+		line-height: 28px;
+		background: #eaeaea;
+		border-radius: 50px;
+	}
+	.title{
+		font-size: 21px;
+	}
+	.table {
+		width: 100%;
+		border-top: 1px solid #d5d5d5;
+		border-bottom: 1px solid #e9e9e9;
+	}
+	.dt{
+		padding-top: 20px;
+		border-top: 1px solid #e9e9e9;
+	    display: table-cell;
+	    position: relative;
+	    float: left;
+	    width: 204px;
+	    text-align: center;
+	    vertical-align: middle;
+	    font-weight: bold;
+	    color: #555;
+	    font-family: 'NGB';
+	    font-size: 15px;
+	    line-height: 100%;
+	}	
+	.dd{
+	    position: relative;
+	    float: left;
+	    width: 513px;
+	    padding: 12px 0 12px 28px;
+	    border-top: 1px solid #e9e9e9;
+		border-left: 1px solid #e9e9e9;
+		margin-left: auto;
+	}
+	
+	.btn_dd{
+		position: relative;
+	    float: left;
+	    width: 750px;
+	    padding: 12px 0 12px 28px;
+	}
+	.saveBtn{
+		position: relative;
+    	top: 280px;
+    	right: 300px;
+	} 
+	a:hover {
+ 	 	text-decoration: none;
+	}
+	#backBtn{
+	text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    transition: all 0.3s ease 0s;
+    height: 35px;
+    line-height: 41px;
+    cursor: pointer;
+    width: 82px;
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+    top: 4px;
+    position: relative;
+}
+#backBtn:hover{
+	color: black;
+	background: white;
+	border: 1px solid black;
+}
+#changeBtn{
+	text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    transition: all 0.3s ease 0s;
+    height: 35px;
+    line-height: 41px;
+    cursor: pointer;
+    width: 82px;
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+    top: 4px;
+    position: relative;
+}
+#changeBtn:hover{
+	color: black;
+	background-color: white;
+	border: 1px solid black;
+}
+#delBtn{
+	color: white;
+	background-color: black;
+	position: relative;
+	height: 35px;
+}
+#delBtn:hover{
+	color: black;
+	background-color: white;
+}
+.teble{
+	position: relative;
+    left: 300px;
+}

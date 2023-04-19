@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.shukream.member.dao.MemberDAO;
 import com.shukream.member.service.MemberService;
 import com.shukream.member.vo.MemberVO;
 import java.io.PrintWriter;
@@ -38,10 +40,12 @@ public class MemberController {
    private MemberVO memberVO;
    
    @Autowired
-   private AsksVO asksVO;
-   
-   @Autowired
+   private MemberDAO memberDAO;
+
    private BidsVO bidsVO;
+
+   private AsksVO asksVO;
+
    
    
    // log4j 객체 생성
@@ -316,7 +320,6 @@ public class MemberController {
 	      @ResponseBody	
 	      public void emailCheck(@RequestParam("user_email")String user_email,HttpServletResponse response) throws Exception{
 	    	 
-	    	  System.out.println("heelloo");
 	    	  System.out.println(user_email);
 	    	  
 	    	  int memberEmailCheck = memberService.emailCheck(user_email);
@@ -347,10 +350,10 @@ public class MemberController {
 				    mav.setViewName(viewName);
 		         
 				    return mav;
-		      
-		      
-		   }
-
-     
+		    }
+	      
+	     
+	      
+	       
       
 }

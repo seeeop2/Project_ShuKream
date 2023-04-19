@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+#detail_table{
+	text-align: center;
+	position: relative;
+	top: 120px;
+}
+#logOn{
+	position: relative;
+    left: 5px;
+}
+#sub{
+	position: relative;
+    left: 15px;
+    top: 20px;
+    background: black;
+    color: white;
+}
+#re{
+	position: relative;
+    left: 25px;
+    top: 20px;
+    background: black;
+    color: white;
+}
+#sub:hover, #re:hover{
+	background: white;
+	color: black;
+}
+.find>a{
+	color: black;
+	font-weight: 100;
+}
+.find>a:hover{
+	color: black;
+	font-weight: bolder;
+}
+.find{
+	position: relative;
+    top: 80px;
+    left: 15px;
+}
+.signTable{
+	position: relative;
+	top: 15px;
+	right: 20px;
+}
