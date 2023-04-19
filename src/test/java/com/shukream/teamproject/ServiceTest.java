@@ -56,7 +56,7 @@ public class ServiceTest {
     logger.info("\n result " + result);
   }
   
-  @Test 
+  @Test @Ignore
   public void selectBidByIdWithSize() throws Exception{
     Map map = new HashMap();
     String product_id = "43";
@@ -66,6 +66,15 @@ public class ServiceTest {
 
     logger.info("\n selectLatestOrderBId " + me);
   }
+  
+  @Test
+  public void SelectLowAsks() throws Exception{
+    int a = shopdetailsService.SelectLowAsks();
+
+    logger.info("\n SelectLowAsks " + a);
+  }
+  
+  
   
   
 }

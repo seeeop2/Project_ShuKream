@@ -196,7 +196,7 @@
           <div class="rating">
             <span> ${productvo.product_name_kor}</span>
           </div>
-          <h3><span id="biglow">${latestMoney}</span>원</h3>
+          <h3><span>최근 거래가 : </span><span id="biglow">${latestMoney}</span>원</h3>
           <div class="product__details__option">
             <div class="product__details__option__size"
               style="width: 100%; display: flex; justify-content: space-between;">
