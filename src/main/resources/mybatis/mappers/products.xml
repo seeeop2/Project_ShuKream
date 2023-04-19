@@ -68,6 +68,21 @@
   ]]>
 </select> 
 
+<select id="selectRankFour" parameterType="int" resultType="ProductsVO">
+  <![CDATA[
+SELECT PRODUCTS.*
+FROM (
+    SELECT DISTINCT LIKE_PRODUCT 
+    FROM
+      (SELECT like_product, DENSE_RANK() OVER (ORDER BY LIKE_PRODUCT DESC) AS RANK
+      FROM PRODUCT_LIKE
+      WHERE LIKE_PRODUCT <> #{product_id}
+      )
+     ) AD
+JOIN PRODUCTS
+ON ad.like_product = products.product_id
+  ]]>
+</select> 
 
 <insert id="addProduct" parameterType="ProductsVO">
 

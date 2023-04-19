@@ -15,7 +15,6 @@
 <%--       <p id="clickForMoney_${status.index}" style="display: none;">${theHighestBids.value}</p> --%>
 <%-- </c:forEach> --%>
 
-
 <c:forEach var="theHighestBids" items="${theHighestBids}" varStatus="status">
   <p style="display: none;" id="clickForMoney_${status.index}">${theHighestBids.value}</p>
 </c:forEach>
@@ -23,6 +22,7 @@
 <script type="text/javascript">
  var arr = [];
   $(document).ready(function(){
+    
 //    var arr = [];
     <c:forEach items="${forChart}" var="forChart">
 //     var date = [];
@@ -51,8 +51,6 @@
   
   });
 </script>
-
-
 
 
 
@@ -394,7 +392,7 @@
       <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
         <div class="product__item">
           <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/product-1.jpg">
+            data-setbg="${contextPath}/resources/img/product/sneakers/${RankFour[1].product_id}_main.jpg">
             <span class="label">New</span>
             <ul class="product__hover">
               <li><a href="#"><img src="${contextPath}/resources/img/icon/heart.png"
@@ -428,7 +426,7 @@
       <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
         <div class="product__item">
           <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/product-2.jpg">
+            data-setbg="${contextPath}/resources/img/product/sneakers/product_${ran2}_main.jpg">
             <ul class="product__hover">
               <li><a href="#"><img src="${contextPath}/resources/img/icon/heart.png"
                   alt=""></a></li>
@@ -461,7 +459,7 @@
       <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
         <div class="product__item sale">
           <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/product-3.jpg">
+            data-setbg="${contextPath}/resources/img/product/slipper/product_${ran3}_main.jpg">
             <span class="label">Sale</span>
             <ul class="product__hover">
               <li><a href="#"><img src="${contextPath}/resources/img/icon/heart.png"
@@ -495,7 +493,7 @@
       <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
         <div class="product__item">
           <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/product-4.jpg">
+            data-setbg="${contextPath}/resources/img/product/slipper/product_${ran4}_main.jpg">
             <ul class="product__hover">
               <li><a href="#"><img src="${contextPath}/resources/img/icon/heart.png"
                   alt=""></a></li>

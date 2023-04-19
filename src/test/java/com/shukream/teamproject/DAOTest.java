@@ -371,7 +371,14 @@ public class DAOTest {
 
   }
 
+  @Test 
+  public void selectRankFour() throws Exception{
+    int product_id = 43;
+    
+    List list = productsDAO.selectRankFour(product_id);
+    logger.info("\n selectRankFour " + list);
 
+  }
   
   
 

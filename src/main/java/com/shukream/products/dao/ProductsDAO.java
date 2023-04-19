@@ -32,4 +32,9 @@ public class ProductsDAO {
   public ProductsVOWithIMG selectProductOne(int product_id) {
     return sqlSession.selectOne("mapper.products.selectProductOne", product_id);
   }
+
+  public List<ProductsVO> selectRankFour(int product_id) {
+    return sqlSession.selectList("mapper.products.selectRankFour", product_id);
+  }
+  
 }

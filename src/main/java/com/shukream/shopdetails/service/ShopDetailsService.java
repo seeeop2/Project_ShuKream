@@ -193,6 +193,15 @@ public class ShopDetailsService {
   List list = orderdao.selectForChart(map);
     return list;
   }
+  
+  public List selectRankFour(int product_id) {
+    
+    List list = productsdao.selectRankFour(product_id);
+    
+    
+    
+    return list;
+  }
 
   
 }
