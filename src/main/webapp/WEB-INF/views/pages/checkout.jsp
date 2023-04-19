@@ -49,7 +49,7 @@
 						<p style="font-size: 24px;">
 						   	구매희망가격<span>*</span>
 						 </p>
-						<input type="text" class="ABprice" name="ABprice" placeholder="구매 희망가" style="color:black;"/>
+						<input type="text" class="ABprice" name="ABprice" placeholder="구매 희망가" style="color:black;" required="required"/>
 					</div>
 				</div>
 			</c:when>
@@ -69,7 +69,7 @@
 						<p style="font-size: 24px;">
 						   	판매희망가격<span>*</span>
 						 </p>
-						<input type="text" class="ABprice" name="ABprice" placeholder="판매 희망가" style="color:black;"/>
+						<input type="text" class="ABprice" name="ABprice" placeholder="판매 희망가" style="color:black;" required="required"/>
 					</div>
 				</div>
 			</c:otherwise>
@@ -83,7 +83,7 @@
                   <p>
                     Name<span>*</span>
                   </p>
-                  <input type="text" name="ship_name" value="${memberVO.user_name}" required>
+                  <input id="name" type="text" name="ship_name" value="${memberVO.user_name}" required>
                 </div>
               </div>
                <div class="col-lg-6">
@@ -91,7 +91,7 @@
                   <p>
                     Phone<span>*</span>
                   </p>
-                  <input id="phone_number" type="text" name="phone_number" placeholder="-없이 숫자 11자리를 입력해주세요" required>
+                  <input id="phone" type="text" name="phone_number" placeholder="-없이 숫자 11자리를 입력해주세요" >
                 </div>
               </div>
               <div class="col-lg-6">
@@ -99,7 +99,7 @@
                   <p>
                     Email<span>*</span>
                   </p>
-                  <input type="text" name="user_id" value="${memberVO.user_email} " required>
+                  <input id="email" type="text" name="user_id" value="${memberVO.user_email} " required>
                 </div>
               </div>
             </div>
@@ -179,58 +179,20 @@
                </c:otherwise>
                </c:choose>
               </ul>
-              <div id="orderDetail">	
-              <div onclick="kakaoPay()" class="site-btn" style="cursor: pointer;">PLACE
-                ORDER</div>
+              <div id="kakaoPayBtn">	
+              <button onclick="kakaoPay()" type="button" class="site-btn">PLACE
+                ORDER</button>
                 </div>
+                <div id="placeOrderButton">
                <button type="submit" class="site-btn" >PLACE
-                ORDER</button>>
+                ORDER</button>
+                </div>
             </div>
           </div>
         </div>
       </form>
     </div>
   </div>
-  <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-  <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
- <script>
-function kakaoPay(){
-	
-	var hp = $("#phone_number").val();
-	
-	alert("카카오페이로 간편 결제됩니다!! 본인 휴대폰을 준비해주세요!");
-	
-	var IMT = window.IMP;
-	  IMP.init('imp12860401'); //가맹점 식별코드
-	  IMP.request_pay({
-	    pg: "kakaopay",
-	    pay_method: "card",
-	    merchant_uid : 'merchant_'+new Date().getTime(),
-	    name :'결제테스트',
-	    amount : 100,
-	    buyer_email : '${memberVO.user_email}',
-	    buyer_name : '${memberVO.user_name}',
-	    buyer_tel : hp,
-	    buyer_addr : "주소",
-	    buyer_postcode : '000-000'
-	  }, function (rsp) { // callback
-	      if (rsp.success) {
-	    	  
-	          var msg = '결제가 완료되었습니다.';
-	          alert(msg);
-	          
-	          document.orderConfirm.submit();
-
-	      } else {
-	    	  
-	          var msg = '결제에 실패하였습니다.';
-	          msg += '에러내용 : ' + rsp.error_msg;
-	          alert(msg);
-	      }
-	  });
-}
-
-</script>
 </section>
 <!-- Checkout Section End -->
 
@@ -307,9 +269,15 @@ function setDisplay(){
         if($("#bids").is(':checked') || $('#asks').is(':checked')){
             $('#price').show();
             $('#orderDetail').hide();
+            $('#kakaoPayBtn').hide();
+            $('#phone_number').css('display','none');
+            $('#placeOrderButton').show();
         }else{
             $('#price').hide();
             $('#orderDetail').show();
+            $('#kakaoPayBtn').show();
+            $('#phone_number').css('display','block');
+            $('#placeOrderButton').hide();
         }
     }
 	$(".ABprice").focusout(function() {
@@ -326,5 +294,72 @@ function setDisplay(){
 	
     
  </script>
+  <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+ <script>
+ 
+ function checkInput(a,b,c,d) {
+	 var phone = $("#phone").val();
+	 var regPhone= /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+	 var phoneReg = regPhone.test(phone)
+	 
+		if(a && b && c && d && phoneReg) {
+			return false;
+		}
+		return true;
+	} 
+ 
+function kakaoPay(){
+	
+	var name = $("#name").val();
+	var phone = $("#phone").val();
+	var addr = $("#sample4_postcode").val() 
+				+$("#sample4_roadAddress").val() 
+				+ $("#sample4_extraAddress").val() 
+				+ $("#sample4_extraAddress").val() 
+				+ $("#sample4_extraAddress").val(); 
+	var email = $("#email").val();
+	
+	var checkData = checkInput(name,phone,addr,email);
+	if(checkData){
+		alert("-를 제외한 11자리 휴대폰번호를 입력해주세요");
+		return false;
+	} else{
+	alert("카카오페이로 간편 결제됩니다!! 본인 휴대폰을 준비해주세요!");
+	
+	var IMT = window.IMP;
+	  IMP.init('imp12860401'); //가맹점 식별코드
+	  IMP.request_pay({
+	    pg: "kakaopay",
+	    pay_method: "card",
+	    merchant_uid : 'merchant_'+new Date().getTime(),
+	    name :'결제테스트',
+	    amount : 100,
+	    buyer_email : '${memberVO.user_email}',
+	    buyer_name : '${memberVO.user_name}',
+	    buyer_tel : phone,
+	    buyer_addr : "주소",
+	    buyer_postcode : '000-000'
+	  }, function (rsp) { // callback
+	      if (rsp.success) {
+	    	  
+	          var msg = '결제가 완료되었습니다.';
+	          alert(msg);
+	          
+	          document.orderConfirm.submit();
 
+	      } else {
+	    	  
+	          var msg = '결제에 실패하였습니다.';
+	          msg += '에러내용 : ' + rsp.error_msg;
+	          alert(msg);
+	      }
+	  });
+}
+}
+
+
+
+
+</script>
 
