@@ -35,6 +35,9 @@ public class MemberController {
    private MemberService memberService;
    
    @Autowired
+   private EventService eventService;
+   
+   @Autowired
    private MemberVO memberVO;
    
    @Autowired
@@ -289,21 +292,14 @@ public class MemberController {
 			  // 1) 가져온 Bids_order_state_idx 값을 업데이트 시킨다.
 			  memberService.updateBidsOrder(map);
 			  
-			  // 2) 이벤트 쿠폰을 한개 생성한다.
-			  
-			  
-			  
-			  ////////// 4월 19일 ////////// ToDo
-			  // 쿠폰 생성 메소드 만들기
-			  // 응모권과 쿠폰 구분하기
-			  // 이벤트 쿠폰 생성과 응모권 사용에 대한 구분
+			  // 2-1) 현재 응모권 내역을 불러와서 d_cnt 값을 1 추가 시킨뒤 마지막 DB에 업데이트 시킨다.
+			  eventService.checkdcnt(id);
 			  
 	          //PrintWirter 객체 out 생성 및 초기화
 	          PrintWriter out = response.getWriter();
 	      
 	         
-	          out.println("<script>alert('메인 페이지로 이동합니다.');");
-	          out.println("location.href='"+request.getContextPath()+"/main.do';</script>");
+	          out.println("<script>location.href='"+request.getContextPath()+"/main.do';</script>");
 	          out.flush();
 	          out.close();
 			  

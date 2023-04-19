@@ -225,10 +225,10 @@ public class EventController {
     	// 2) 해당 db에 값을 추가한다.
     	// 2-1) 총 응모권 횟수와 미사용 응모권 횟수의 값을 int로 변환시킨다.
 		int i = checkuser.size()-1;
-    	int a_cnt = Integer.parseInt(checkuser.get(i).getA_cnt());
-    	int d_cnt = Integer.parseInt(checkuser.get(i).getD_cnt());
-    	// uc_cnt는 그냥 가져온다( null 방지 )
-    	String u_cnt = checkuser.get(i).getU_cnt();
+		int a_cnt = Integer.parseInt(checkuser.get(i).getA_cnt());
+		int u_cnt = Integer.parseInt(checkuser.get(i).getU_cnt());
+		int d_cnt = Integer.parseInt(checkuser.get(i).getD_cnt());
+		int d_coupon = Integer.parseInt(checkuser.get(i).getD_coupon());
 
 	    	//a_cnt와 u_cnt의 값을 1 증가 시키고, d_cnt의 값은 1 감소시킨다.
 	    	a_cnt += 1;
@@ -248,12 +248,14 @@ public class EventController {
 	    	// 임시로 넣어놓고, 나중에는 주문번호를 따와서 추가 시킨다.<작성중>
 	        String contents = "(주문번호2)의 주문완료에 대한 응모권 발생";
 	        String confirm = "아니오";
+	        d_coupon += 1;
 	        
 	        //EventVO로 전달한 값들을 저장시킨다.
 	        coupon.setMember_id(id);
 	    	coupon.setA_cnt(Integer.toString(a_cnt));
-	    	coupon.setU_cnt(u_cnt);
+	    	coupon.setU_cnt(Integer.toString(u_cnt));
 	    	coupon.setD_cnt(Integer.toString(d_cnt));
+	    	coupon.setD_coupon(Integer.toString(d_coupon));
 	    	coupon.setD_ticket(ticket);
 	    	coupon.setD_contents(contents);
 	    	coupon.setD_confirm(confirm);
@@ -278,13 +280,14 @@ public class EventController {
 	    	// 임시로 넣어놓고, 나중에는 주문번호를 따와서 추가 시킨다.<작성중>
 	        String contents = "(주문번호2)의 주문완료에 대한 응모권 발생";
 	        String confirm = "아니오";
-	    	
-    	
+	        d_coupon += 1;
+	        
 	        //EventVO로 전달한 값들을 저장시킨다.
 	        coupon.setMember_id(id);
 	    	coupon.setA_cnt(Integer.toString(a_cnt));
-	    	coupon.setU_cnt(u_cnt);
+	    	coupon.setU_cnt(Integer.toString(u_cnt));
 	    	coupon.setD_cnt(Integer.toString(d_cnt));
+	    	coupon.setD_coupon(Integer.toString(d_coupon));
 	    	coupon.setD_ticket(ticket);
 	    	coupon.setD_contents(contents);
 	    	coupon.setD_confirm(confirm);
@@ -312,17 +315,18 @@ public class EventController {
 	    	// 임시로 넣어놓고, 나중에는 주문번호를 따와서 추가 시킨다.<작성중>
 	        String contents = "(주문번호2)의 주문완료에 대한 응모권 발생";
 	        String confirm = "아니오";
-	    	
-    	
+	        d_coupon += 1;
+	        
 	        //EventVO로 전달한 값들을 저장시킨다.
 	        coupon.setMember_id(id);
 	    	coupon.setA_cnt(Integer.toString(a_cnt));
-	    	coupon.setU_cnt(u_cnt);
+	    	coupon.setU_cnt(Integer.toString(u_cnt));
 	    	coupon.setD_cnt(Integer.toString(d_cnt));
+	    	coupon.setD_coupon(Integer.toString(d_coupon));
 	    	coupon.setD_ticket(ticket);
 	    	coupon.setD_contents(contents);
 	    	coupon.setD_confirm(confirm);
-
+	    	
 // check!) d_contents = order_status를 조회해와서 주문완료 complete로 추가가 될 때,
 //      상품 거래가 끝난것으로 보고, 응모권을 추가 시키도록 한다. (order_status에 member_id를 엮어줘야 할듯)
 // check!) d_confirm = 살때 혹은 팔때 무료배송권을 사용할 경우, count에 날짜를 표시하도록 한다.
@@ -351,18 +355,13 @@ public class EventController {
 	    	// 임시로 넣어놓고, 나중에는 주문번호를 따와서 추가 시킨다.<작성중>
 	        String contents = "(주문번호2)의 주문완료에 대한 응모권 발생";
 	        String confirm = "예";
-	    	
-	        // 이미 사용 된 응모권으로 처리하고
-	        // 보유중인 응모권에서 -1 한다.
-	        int u = Integer.parseInt(u_cnt);
-	        u += 1;
-	        d_cnt -= 1;
-    	
+	        
 	        //EventVO로 전달한 값들을 저장시킨다.
 	        coupon.setMember_id(id);
 	    	coupon.setA_cnt(Integer.toString(a_cnt));
-	    	coupon.setU_cnt(Integer.toString(u));
+	    	coupon.setU_cnt(Integer.toString(u_cnt));
 	    	coupon.setD_cnt(Integer.toString(d_cnt));
+	    	coupon.setD_coupon(Integer.toString(d_coupon));
 	    	coupon.setD_ticket(ticket);
 	    	coupon.setD_contents(contents);
 	    	coupon.setD_confirm(confirm);
@@ -392,6 +391,7 @@ public class EventController {
     mav.addObject("a_cnt", a_cnt);
     mav.addObject("u_cnt", u_cnt);
     mav.addObject("d_cnt", d_cnt);
+    mav.addObject("d_coupon", d_coupon);
     mav.addObject("checkuser", checkuser);
     mav.addObject("id", id);
     
@@ -419,6 +419,7 @@ public class EventController {
 	    String a_cnt = checkuser.get(idx).getA_cnt();
 	    String u_cnt = checkuser.get(idx).getU_cnt();
 	    String d_cnt = checkuser.get(idx).getD_cnt();
+	    String d_coupon = checkuser.get(idx).getD_coupon();
 	  
 	// ModelANdView 객체 생성
     ModelAndView mav = new ModelAndView();
@@ -434,6 +435,7 @@ public class EventController {
     mav.addObject("a_cnt", a_cnt);
     mav.addObject("u_cnt", u_cnt);
     mav.addObject("d_cnt", d_cnt);
+    mav.addObject("d_coupon", d_coupon);
     
     // ModelAndView 객체에 viewName을 셋팅
     mav.setViewName(viewName);

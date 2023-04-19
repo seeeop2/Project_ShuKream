@@ -16,6 +16,7 @@
 	   <result property="d_contents" column="d_contents" />
 	   <result property="expiry_date" column="expiry_date" />
 	   <result property="d_confirm" column="d_confirm" />
+	   <result property="d_coupon" column="d_coupon" />
 	   
 	</resultMap>
 <!-- eventdetail.jsp에서 저장 시킬 SQL 문 -->
@@ -28,13 +29,15 @@
 		   							   d_ticket,
 		   							   d_contents,
 		   							   d_confirm)
+		   							   d_coupon)
 		                                     values(#{member_id},
 		                                     		#{a_cnt},
 		                                     		#{u_cnt},
 		                                     		#{d_cnt},
 		                                     		#{d_ticket},
 		                                     		#{d_contents},
-		                                     		#{d_confirm} )
+		                                     		#{d_confirm},
+		                                     		#{d_coupon} )
 	]]>
 	
 </insert>
@@ -72,14 +75,16 @@
 		   							   d_cnt,
 		   							   d_ticket,
 		   							   d_contents,
-		   							   d_confirm)
+		   							   d_confirm,
+		   							   d_coupon)
 		                                     values(#{member_id},
 		                                     		#{a_cnt},
 		                                     		#{u_cnt},
 		                                     		#{d_cnt},
 		                                     		#{d_ticket},
 		                                     		#{d_contents},
-		                                     		#{d_confirm})
+		                                     		#{d_confirm},
+		                                     		#{d_coupon})
 	]]>
 	
 </insert>
@@ -96,5 +101,47 @@
 	    	order by d_idx desc
    	]]>
 </select>	
+<!-- 현재남아있는 응모권 개수를 가져온다. -->
+<select id="checkdcnt"  resultMap="eventResult" parameterType="map">
+    <![CDATA[
+	    	select d_cnt 
+	    	from shukream_event 
+	    	where 
+	    	member_id = #{id}
+            and rownum =#{num}
+	    	order by d_idx desc
+   	]]>
+</select>	
+
+	<update id="updatedcnt" parameterType="map">
+
+	UPDATE shukream_event 
+	SET d_cnt = #{d_cnt}
+    where d_date IN (select max(d_date) from shukream_event where member_id=#{id});
+	
+	</update>
+	
+	<!-- 초기 DB에 대해 저장 시킬 SQL 문 -->
+	<insert id="insertdata" parameterType="map">
+		<![CDATA[
+			   insert into shukream_event (member_id,
+			   							   a_cnt,
+			   							   u_cnt,
+			   							   d_cnt,
+			   							   d_ticket,
+			   							   d_contents,
+			   							   d_confirm,
+			   							   d_coupon)
+			                                     values(#{id},
+			                                     		#{a_cnt},
+			                                     		#{u_cnt},
+			                                     		#{d_cnt},
+			                                     		#{d_ticket},
+			                                     		#{d_contents},
+			                                     		#{d_confirm},
+			                                     		#{d_coupon})
+		]]>
+		
+	</insert>
 
 </mapper>

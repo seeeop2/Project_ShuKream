@@ -31,16 +31,18 @@
 	   <div id="event_detail_result_table">
 	   	<div id="event_detail_result_title">
 	   	   <div id="event_detail_result_a">
-		   		<a>당첨자</a>
-		   		<a>총 응모권 횟수</a>
-		   		<a>사용한 횟수</a>
-		   		<a>남은 횟수</a>
+		   		<a>당첨자 이메일</a>
+		   		<a>총 응모권 개수</a>
+		   		<a>사용한 개수</a>
+		   		<a>남은 개수</a>
+		   		<a>당첨 된 쿠폰 개수</a>
 	   		</div>
 	   		<div id="event_detail_result_input">
-		   		<input type="text" placeholder="당첨자명" readonly="readonly" value="${id}" />
-		   		<input type="text" placeholder="총 응모권 횟수" readonly="readonly" value="${a_cnt}" />
-		   		<input type="text" placeholder="사용한 횟수" readonly="readonly" value="${u_cnt}" />
-		   		<input type="text" placeholder="남은 횟수" readonly="readonly" value="${d_cnt}" />
+		   		<input type="text" placeholder="당첨자 이메일" readonly="readonly" value="${id}" />
+		   		<input type="text" placeholder="총 응모권 개수" readonly="readonly" value="${a_cnt}" />
+		   		<input type="text" placeholder="사용한 개수" readonly="readonly" value="${u_cnt}" />
+		   		<input type="text" placeholder="남은 개수" readonly="readonly" value="${d_cnt}" />
+		   		<input type="text" placeholder="당첨 된 쿠폰 개수" readonly="readonly" value="${d_coupon}" />
 	   		</div>
 	   	</div>
 	   	<div id="event_detail_result_contents_title">
@@ -55,10 +57,15 @@
 	   		</div>
 	   	</div>	
 	   	<div id="event_detail_result_contents">	
-		<c:forEach var="vo" items="${checkuser}">	
-	   		<div id="event_detail_contents_input">
+		<c:forEach var="vo" items="${checkuser}">
+	   		<div class="event_detail_contents_input" id="event_detail_contents_input">
 		   		<input type="text" placeholder="번호" value="${vo.d_idx}" readonly="readonly" />
 		   		<c:choose>
+			   		<c:when test= "${vo.d_ticket eq '초기설정'}">
+			   			<script>
+			   			$("#event_detail_contents_input").css("display", "none");
+			   			</script>
+			   		</c:when>
 			   		<c:when test= "${vo.d_ticket eq '무료1회입고권'}">
 			   			<input style="font-weight : bold; color: #20c997; font-size: 20px;" id="ticket" class="ticket" type="text" placeholder="당첨된 응모권" value="${vo.d_ticket}" readonly="readonly" />
 			   		</c:when>
@@ -122,10 +129,11 @@ $(document).ready(function(){
 			document.getElementsByClassName("ticket")[i].style.fontWeight = "bold";
 			document.getElementsByClassName("d_confirm")[i].style.color = "red";
 			document.getElementsByClassName("d_confirm")[i].value = "X";
+		
 		}
-	
 	}
 
 })
+
 
 </script>
