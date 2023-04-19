@@ -53,7 +53,7 @@
 </select>	
 <!-- bestseller 판매량 기준은 어느부분 참고?, new Arrivals는 release date 기준, popular items는 관심등록수기준? -->
 <select id="selectMainProductsList" parameterType="Map" resultMap="imageFileResult">
-			SELECT PRODUCTS.*, IMAGES.IMG_FILE, PRODUCT_LIKE.LIKE_PRODUCT FROM PRODUCTS, IMAGES, PRODUCT_LIKE
+			SELECT PRODUCTS.*, IMAGES.IMG_FILE FROM PRODUCTS, IMAGES
                 where product_id = img_product_idx
                 and img_file like '%main%'
 				ORDER BY 

@@ -268,15 +268,15 @@ $(function() {
 function setDisplay(){
         if($("#bids").is(':checked') || $('#asks').is(':checked')){
             $('#price').show();
-            $('#orderDetail').hide();
+//             $('#orderDetail').hide();
             $('#kakaoPayBtn').hide();
-            $('#phone_number').css('display','none');
+//             $('#phone_number').css('display','none');
             $('#placeOrderButton').show();
         }else{
             $('#price').hide();
-            $('#orderDetail').show();
+//             $('#orderDetail').show();
             $('#kakaoPayBtn').show();
-            $('#phone_number').css('display','block');
+//             $('#phone_number').css('display','block');
             $('#placeOrderButton').hide();
         }
     }

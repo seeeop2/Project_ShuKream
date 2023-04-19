@@ -74,10 +74,10 @@ where rownum =1
 <update id="updateBids" parameterType="Map">
 		<choose>
 			<when test="newBidsIdx != null">
-				UPDATE BIDS SET BIDS_ORDER_STATE_IDX = 1, BIDS_ORDER_NUMBER = #{orderIdx}, BIDS_SHIP_IDX = #{shipIdx}, BIDS_MATCHED_DATE = SYSDATE  WHERE BIDS_IDX = #{newBidsIdx}
+				UPDATE BIDS SET BIDS_ORDER_STATE_IDX = 1, BIDS_ORDER_NUMBER = #{orderIdx}, BIDS_MATCHED_DATE = SYSDATE  WHERE BIDS_IDX = #{newBidsIdx}
 			</when>
 			<otherwise>
-				UPDATE BIDS SET BIDS_ORDER_STATE_IDX = 1, BIDS_ORDER_NUMBER = #{orderIdx}, BIDS_SHIP_IDX = #{shipIdx}, BIDS_MATCHED_DATE = SYSDATE  WHERE BIDS_IDX = #{bids_idx}
+				UPDATE BIDS SET BIDS_ORDER_STATE_IDX = 1, BIDS_ORDER_NUMBER = #{orderIdx}, BIDS_MATCHED_DATE = SYSDATE  WHERE BIDS_IDX = #{bids_idx}
 			</otherwise>
 		</choose>
 </update>
@@ -174,7 +174,7 @@ where rownum =1
 						NULL,
 						#{product_price},
 						0,
-						0,
+						#{shipIdx},
 						#{product_id},
 						#{memberVO.user_id}
 						)
@@ -218,7 +218,7 @@ where rownum =1
 				                	</otherwise>
 				                </choose>
 				                0,
-				                0,
+				                #{shipIdx},
 				                (SELECT ASKS_PRODUCT_ID FROM ASKS WHERE ASKS_IDX = #{asks_idx}),
 				                #{memberVO.user_id}
 				           		 )
