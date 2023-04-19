@@ -185,5 +185,14 @@ public class ShopDetailsService {
     logger.info("\n latest " + latest);
     return latest;
   }
+  public List selectForChart(int product_id){
+    Map map = new HashMap();
+    map.put("product_id1", product_id);
+    map.put("product_id2", product_id);
+    
+  List list = orderdao.selectForChart(map);
+    return list;
+  }
+
   
 }
