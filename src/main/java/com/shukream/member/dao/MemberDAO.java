@@ -1,5 +1,6 @@
 package com.shukream.member.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,22 +36,46 @@ public class MemberDAO {
 		return result;
 	}
 
-	public List<BidsVO> checkbids(String id) {
-		
-		List<BidsVO> checkbids = sqlSession.selectList("mapper.member.checkbids", id);
+	public List<Map<String, Object>> checkbids(String id) {
 		
 		System.out.println("memberDAO -> checkbids 호출!");
+
+		String img_repthumb = "1";
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("img_repthumb", img_repthumb);
+		map.put("id", id);
+		
+		// List안에 Map을 넣어서 가져온다.
+		List<Map<String, Object>> checkbids = sqlSession.selectList("mapper.member.checkbids", map);
 		
 		return checkbids;
 	}
 	
-	public List<AsksVO> checkasks(String id) {
-		
-		List<AsksVO> checkasks = sqlSession.selectList("mapper.member.checkasks", id);
+	public List<Map<String, Object>> checkasks(String id) {
 		
 		System.out.println("memberDAO -> checkasks 호출!");
 		
+		String img_repthumb = "1";
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("img_repthumb", img_repthumb);
+		map.put("id", id);
+		
+		// List안에 Map을 넣어서 가져온다.
+		List<Map<String, Object>> checkasks = sqlSession.selectList("mapper.member.checkasks", map);
+		
 		return checkasks;
+	}
+
+	public void updateBidsOrder(Map<String, Object> map) {
+		
+		System.out.println("memberDAO -> updateBidsOrder 호출!");
+		
+		sqlSession.update("mapper.member.updateBidsOrder", map);
+		
 	}
 	
 

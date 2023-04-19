@@ -1,6 +1,7 @@
 package com.shukream.member.controller;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,9 +43,9 @@ public class MemberController {
    private MemberDAO memberDAO;
 
    private BidsVO bidsVO;
-   
-   @Autowired
+
    private AsksVO asksVO;
+
    
    
    // log4j 객체 생성
@@ -234,11 +235,24 @@ public class MemberController {
 				// @ 1) 로그인 된 아이디 값을 가져와서 매개변수로 전달한다.
 			    String id = (String)session.getAttribute("email");
 			  
-			    List<BidsVO> checkbids = memberService.checkbids(id);
+			    List<Map<String, Object>> checkbids = memberService.checkbids(id);
 			    
-			    List<AsksVO> checkasks = memberService.checkasks(id);
-			  
-			  
+			    List<Map<String, Object>> checkasks = memberService.checkasks(id);
+			    
+			    if(checkbids.isEmpty() && checkasks.isEmpty()) {
+			    	
+			          //PrintWirter 객체 out 생성 및 초기화
+			          PrintWriter out = response.getWriter();
+			      
+			         
+			          out.println("<script>alert('진행 중인 거래가 없습니다!, 마이 페이지로 돌아갑니다');");
+			          out.println("location.href='"+request.getContextPath()+"/member/mypage.do';</script>");
+			          out.flush();
+			          out.close();
+			    	
+			    }
+			    
+			    
 				// ModelANdView 객체 생성
 			    ModelAndView mav = new ModelAndView();
 			    
@@ -252,8 +266,51 @@ public class MemberController {
 			    mav.setViewName(viewName);
 			    mav.addObject("bids", checkbids);
 			    mav.addObject("asks", checkasks);
+			    mav.addObject("id", id);
 	          // ModelAndView 반환
 	          return mav;
+	      
+	      
+	   }
+	  	
+	  	@RequestMapping(value="/confirm.do", method = RequestMethod.GET)
+		public void confirm(@RequestParam("id")String id,@RequestParam("bon")String bon, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
+			
+			  System.out.println("confirm.do 호출!"); 
+			  
+			  System.out.println("id 값 : "+id);
+			  System.out.println("bids_order_number 값: "+bon);
+			  
+			  int bosi = 4;
+			  
+
+			  Map<String,Object> map = new HashMap<String,Object>();
+			  
+			  map.put("id", id);
+			  map.put("bon", bon);
+			  map.put("bosi", bosi);
+			 
+			  // 1) 가져온 Bids_order_state_idx 값을 업데이트 시킨다.
+			  memberService.updateBidsOrder(map);
+			  
+			  // 2) 이벤트 쿠폰을 한개 생성한다.
+			  
+			  
+			  
+			  ////////// 4월 19일 ////////// ToDo
+			  // 쿠폰 생성 메소드 만들기
+			  // 응모권과 쿠폰 구분하기
+			  // 이벤트 쿠폰 생성과 응모권 사용에 대한 구분
+			  
+	          //PrintWirter 객체 out 생성 및 초기화
+	          PrintWriter out = response.getWriter();
+	      
+	         
+	          out.println("<script>alert('메인 페이지로 이동합니다.');");
+	          out.println("location.href='"+request.getContextPath()+"/main.do';</script>");
+	          out.flush();
+	          out.close();
+			  
 	      
 	      
 	   }

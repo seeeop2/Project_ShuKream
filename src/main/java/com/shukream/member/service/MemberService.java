@@ -49,18 +49,26 @@ public class MemberService {
 		
 	}
 
-	public List<BidsVO> checkbids(String id) {
+	public List<Map<String, Object>> checkbids(String id) {
 		
 		System.out.println("MemberService -> checkbids 호출!");
 		
 		return memberDAO.checkbids(id);
 	}
 	
-	public List<AsksVO> checkasks(String id) {
+	public List<Map<String, Object>> checkasks(String id) {
 		
 		System.out.println("MemberService -> checkasks 호출!");
 		
 		return memberDAO.checkasks(id);
+	}
+
+	public void updateBidsOrder(Map<String, Object> map) {
+		
+		System.out.println("MemberService -> updateBidsOrderNumber 호출!");
+		
+		memberDAO.updateBidsOrder(map);
+		
 	}
 
 }

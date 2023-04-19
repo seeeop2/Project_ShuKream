@@ -230,9 +230,10 @@ public class EventController {
     	// uc_cnt는 그냥 가져온다( null 방지 )
     	String u_cnt = checkuser.get(i).getU_cnt();
 
-	    	//ac_cnt와 dc_cnt의 값을 1 증가 시킨다.
+	    	//a_cnt와 u_cnt의 값을 1 증가 시키고, d_cnt의 값은 1 감소시킨다.
 	    	a_cnt += 1;
-	    	d_cnt += 1;
+	    	u_cnt += 1;
+	    	d_cnt -= 1;
     
     // #1) 무료배송권에 당첨 되었을 때,
     if(ticket.equals("freeshipping")){

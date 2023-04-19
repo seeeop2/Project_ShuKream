@@ -2,6 +2,8 @@ package com.shukream.asks.vo;
 
 import org.springframework.stereotype.Component;
 
+import com.shukream.products.vo.ImageFileVO;
+
 @Component("AsksVO")
 public class AsksVO {
   private int asks_idx;
@@ -18,6 +20,19 @@ public class AsksVO {
   private int asks_product_id;;
   private String asks_user_email;
   
+  // 쿼리로 join 시킬 vo
+  private ImageFileVO imagefileVO;
+  
+  
+  
+  public ImageFileVO getImagefileVO() {
+		return imagefileVO;
+  }
+	  
+  public void setImagefileVO(ImageFileVO imagefileVO) {
+		this.imagefileVO = imagefileVO;
+  }
+
   public int getAsks_idx() {
     return asks_idx;
   }

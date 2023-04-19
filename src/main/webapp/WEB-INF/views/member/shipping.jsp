@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <style>
 
 #shipping_wrapper{
@@ -32,7 +33,7 @@
     flex-wrap: nowrap;
     justify-content: center;
     border-radius: 20px;
-    box-shadow: 0 0 30px 10px;
+    box-shadow: 0 0 20px 30px;
     padding : 0;
     
 }	
@@ -85,7 +86,7 @@
     flex-wrap: nowrap;
     justify-content: flex-start;
     color : white;
-    border-radius: 20px;
+    border-radius: 10px;
     
 }
 
@@ -105,7 +106,7 @@
     font-weight: bold;
     font-size: 30px;
     background: black;
-    border-radius: 15px;
+    border-radius: 5px;
     
 }
 
@@ -117,7 +118,7 @@
     display: flex;
     height: 100px;
     width: 100%;
-    margin: 5px auto;
+    margin: 1px auto;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
@@ -296,13 +297,14 @@
     height: 100%;
     width: 100%;
     margin: 0 auto;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: nowrap;
-    justify-content: center;
+    justify-content: flex-start;
     left: 0;
     top: 0;
     align-items: flex-start;
 	border-radius: 10px;
+	overflow-y : auto;
 }
 
 .bids_input{
@@ -311,12 +313,12 @@
 
     position: relative;
     display: flex;
-    height: 100%;
+    height: 50px;
     width: 100%;
-    margin: 0 auto;
+    margin: 1px auto;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: center;
+    justify-content: flex-start;
     left: 0;
     top: 0;
     align-items: flex-start;
@@ -330,15 +332,15 @@
 
 	position: relative;
     display: flex;
-    height: 30%;
+    height: 100%;
     width: 100px;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
     text-align: center;
     border-radius: 5px;
-    font-size: 20px;
-    margin: 2px auto 2px auto;
+    font-size: 15px;
+    margin: auto 2px;
 
 
 }
@@ -349,8 +351,8 @@
 
 	position: relative;
     display: flex;
-    height: 30%;
-    width: 150px;
+    height: 100%;
+    width: 145px;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
@@ -358,7 +360,7 @@
     align-items: center;
    	border-radius: 5px;
     font-size: 20px;
-    margin: 2px auto 2px auto;
+    margin: auto 2px;
 
 }
 
@@ -368,15 +370,15 @@
 
 	position: relative;
     display: flex;
-    height: 30%;
-    width: 410px;
+    height: 100%;
+    width: 420px;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
     text-align: center;
     border-radius: 5px;
     font-size: 20px;
-    margin: 2px auto 2px auto;
+    margin: auto 2px;
 
 }
 
@@ -386,7 +388,7 @@
 
 	position: relative;
     display: flex;
-    height: 30%;
+    height: 100%;
     width: 100px;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -394,7 +396,7 @@
     text-align: center;
     border-radius: 5px;
     font-size: 20px;
-    margin: 2px auto 2px auto;
+    margin: auto 2px;
 
 }
 
@@ -404,7 +406,7 @@
 
 	position: relative;
     display: flex;
-    height: 30%;
+    height: 100%;
     width: 70px;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -412,7 +414,7 @@
     text-align: center;
     border-radius: 5px;
     font-size: 20px;
-    margin: 2px auto 2px auto;
+    margin: auto 2px;
 
 }
 
@@ -422,33 +424,47 @@
 
 	position: relative;
     display: flex;
-    height: 30%;
-    width: 200px;
+    height: 100%;
+    width: 205px;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
     text-align: center;
     border-radius: 5px;
     font-size: 20px;
-    margin: 2px auto 2px auto;
+    margin: auto 2px;
 
 }
 
 #bids_content_name7{
 
-	border : 1px dotted black;
-
-	position: relative;
+    border: 0px;
+    position: relative;
     display: flex;
-    height: 30%;
-    width: 100px;
+    height: 100%;
+    width: 80px;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
     text-align: center;
-    border-radius: 5px;
-    font-size: 20px;
-    margin: 2px auto 2px auto;
+    border-radius: 10px;
+    font-size: 15px;
+    margin: auto 2px;
+    background: #ff0707;
+    transition: 1s;
+    color: white;
+    font-weight: bold;
+
+}
+
+#bids_content_name7:hover{
+	
+	border : 1px dashed red;
+	transition : 0.4s;
+	background : white;
+	border-radius: 18px;
+	color : red;
+	
 
 }
 
@@ -509,7 +525,7 @@
     display: flex;
     height: 100px;
     width: 100%;
-    margin: 5px auto;
+    margin: 1px auto;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
@@ -684,13 +700,14 @@
     height: 100%;
     width: 100%;
     margin: 0 auto;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: nowrap;
-    justify-content: center;
+    justify-content: flex-start;
     left: 0;
     top: 0;
     align-items: flex-start;
-    border-radius: 10px;
+	border-radius: 10px;
+	overflow-y : auto;
 
 }
 
@@ -700,15 +717,15 @@
 
     position: relative;
     display: flex;
-    height: 100%;
+    height: 50px;
     width: 100%;
-    margin: 0 auto;
+    margin: 1px auto;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: center;
+    justify-content: flex-start;
     left: 0;
     top: 0;
-    overflow-y: auto;
+    align-items: flex-start;
     border-radius: 10px;
 }
 
@@ -718,15 +735,15 @@
 
 	position: relative;
     display: flex;
-    height: 30%;
+    height: 100%;
     width: 100;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
     text-align: center;
     border-radius: 5px;
-    font-size: 20px;
-    margin: 2px auto 2px auto;
+    font-size: 15px;
+    margin: auto 2px;
 
 }
 
@@ -736,8 +753,8 @@
 
 	position: relative;
     display: flex;
-    height: 30%;
-    width: 150px;
+    height: 100%;
+    width: 147px;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
@@ -745,7 +762,7 @@
   	align-items: center;
     border-radius: 5px;
     font-size: 20px;
-    margin: 2px auto 2px auto;
+    margin: auto 2px;
 
 }
 
@@ -755,16 +772,15 @@
 
 	position: relative;
     display: flex;
-    height: 30%;
-    width: 530px;
-    margin: 0 auto;
+    height: 100%;
+    width: 532px;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
     text-align: center;
     border-radius: 5px;
     font-size: 20px;
-    margin: 2px auto 2px auto;
+    margin: auto 2px;
 
 }
 
@@ -774,7 +790,7 @@
 
 	position: relative;
     display: flex;
-    height: 30%;
+    height: 100%;
     width: 100px;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -782,7 +798,7 @@
     text-align: center;
     border-radius: 5px;
     font-size: 20px;
-    margin: 2px auto 2px auto;
+    margin: auto 2px;
 
 }
 
@@ -792,7 +808,7 @@
 
 	position: relative;
     display: flex;
-    height: 30%;
+    height: 100%;
     width: 70px;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -800,7 +816,7 @@
     text-align: center;
     border-radius: 5px;
     font-size: 20px;
-    margin: 2px auto 2px auto;
+    margin: auto 2px;
 
 }
 
@@ -810,15 +826,15 @@
 
 	position: relative;
     display: flex;
-    height: 30%;
-    width: 200px;
+    height: 100%;
+    width: 180px;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
     text-align: center;
     border-radius: 5px;
     font-size: 20px;
-    margin: 2px auto 2px auto;
+    margin: auto 2px;
 
 }
 </style>
@@ -850,9 +866,9 @@
   		<div id="bids_title">
   			<a style="color : red" class="bids_title_name">구매 입찰중</a>
   			<a class="bids_title_name">▶</a>
-  			<a style="color : orange" class="bids_title_name">입고&검수중</a>
+  			<a style="color : darkorange" class="bids_title_name">입고&검수중</a>
   			<a class="bids_title_name">▶</a>
-  			<a style="color : yellow" class="bids_title_name">배송중</a>
+  			<a style="color : #fdcb14" class="bids_title_name">배송중</a>
   			<a class="bids_title_name">▶</a>
   			<a style="color : green" class="bids_title_name">배송 완료</a>  			
   		</div>
@@ -866,15 +882,24 @@
   				<input type="text" id="bids_content_title_name7" value="확정" />
   		</div>
   		<div id="bids_content">
+  			<c:forEach var="b" items="${bids}">
+  			
   			<div class="bids_input">
-  				<input type="text" id="bids_content_name1" value="1" />
-  				<input type="image" id="bids_content_name2" value="2" />
-  				<input type="text" id="bids_content_name3" value="3" />
-  				<input type="text" id="bids_content_name4" value="4" />
-  				<input type="text" id="bids_content_name5" value="5" />
-  				<input type="text" id="bids_content_name6" value="6" />
-  				<input type="button" id="bids_content_name7" value="구매 확정" />
+  				<c:if test="${empty b}">
+  				<h2><STRONG>현재 진행중인 거래가 없습니다!</STRONG></h2>
+  				</c:if>
+  				<input class="b_idx" type="text" id="bids_content_name1" value="${b.BIDS_ORDER_STATE_IDX}" readonly="readonly" />
+  				<input type="image" src="${contextPath}/resources/img/product/sneakers/${b.IMG_FILE}" id="bids_content_name2" readonly="readonly" />
+  				<input type="text" id="bids_content_name3" value="${b.IMG_REALFILE}" readonly="readonly" />
+  				<input type="text" id="bids_content_name4" value="${b.BIDS_SIZE_IDX}" readonly="readonly" />
+  				<input type="text" id="bids_content_name5" value="1" readonly="readonly" />
+  				<input type="text" id="bids_content_name6" value="${b.BIDS_PRICE}" readonly="readonly" />
+  			<c:if test="${b.BIDS_ORDER_STATE_IDX eq '3'}">
+  				<input type="hidden" class="bids_order_number" value="${b.BIDS_ORDER_NUMBER}" />
+  				<input type="button" onclick="confirm();" id="bids_content_name7" value="구매 확정" readonly="readonly" />
+  			</c:if>
   			</div>
+  			</c:forEach>
   		</div>
   	</div>
   	
@@ -885,9 +910,9 @@
   		<div id="asks_title">
   			<a style="color : red" class="asks_title_name">판매 입찰중</a>
   			<a class="asks_title_name">▶</a>
-  			<a style="color : orange" class="asks_title_name">입고&검수중</a>
+  			<a style="color : darkorange" class="asks_title_name">입고&검수중</a>
   			<a class="asks_title_name">▶</a>
-  			<a style="color : yellow" class="asks_title_name">배송중</a>
+  			<a style="color : #fdcb14" class="asks_title_name">배송중</a>
   			<a class="asks_title_name">▶</a>
   			<a style="color : green" class="asks_title_name">배송 완료</a>  			
   		</div>
@@ -900,14 +925,19 @@
   				<input type="text" id="asks_content_title_name6" value="판매 가격" />
   		</div>
   		<div id="asks_content">
+  			<c:forEach var="a" items="${asks}">
   			<div class="asks_input">
-  				<input type="text" id="asks_content_name1" value="1" />
-  				<input type="image" id="asks_content_name2" value="2" />
-  				<input type="text" id="asks_content_name3" value="3" />
-  				<input type="text" id="asks_content_name4" value="4" />
-  				<input type="text" id="asks_content_name5" value="5" />
-  				<input type="text" id="asks_content_name6" value="6" />
+ 			  	<c:if test="${empty a}">
+  				<h2><STRONG>현재 진행중인 거래가 없습니다!</STRONG></h2>
+  				</c:if>
+  				<input class="a_idx" type="text" id="asks_content_name1" value="${a.ASKS_ORDER_STATE_IDX}" readonly="readonly" />
+  				<input type="image" src="${contextPath}/resources/img/product/sneakers/${a.IMG_FILE}" id="asks_content_name2" readonly="readonly" />
+  				<input type="text" id="asks_content_name3" value="${a.IMG_REALFILE}" readonly="readonly" />
+  				<input type="text" id="asks_content_name4" value="${a.ASKS_SIZE_IDX}" readonly="readonly" />
+  				<input type="text" id="asks_content_name5" value="1" readonly="readonly" />
+  				<input type="text" id="asks_content_name6" value="${a.ASKS_PRICE}" readonly="readonly" />
   			</div>
+  			</c:forEach>
   		</div>
   	</div>
 	
@@ -917,3 +947,125 @@
   </div>
 </section>
 <!-- Event Section End -->
+<script>
+	
+	$(document).ready(function(){
+		
+		// d 배열을 생성하고
+		var d = [];
+		
+		// bids에 저장된 사이즈 만큼 반복시킨다.
+		for(i=0; i < ${bids.size()}; i++){
+		
+		// d 배열에 bids에서 가져온 b_idx 값을 저장시키는데
+		d = document.getElementsByClassName("b_idx")[i].value;
+
+		// 만약에 티켓 내용이 "꽝" 이라면
+			if(d == "3"){
+				
+				// b_idx 해당 하는 상태의 색상과 값을 바꾼다.
+				document.getElementsByClassName("b_idx")[i].style.color = "green";
+				document.getElementsByClassName("b_idx")[i].style.fontWeight = "bold";
+				document.getElementsByClassName("b_idx")[i].value = "배송 완료";
+
+				
+			}else if(d == "2"){
+				
+				// b_idx 해당 하는 상태의 색상과 값을 바꾼다.
+				document.getElementsByClassName("b_idx")[i].style.color = "#fdcb14";
+				document.getElementsByClassName("b_idx")[i].style.fontWeight = "bold";
+				document.getElementsByClassName("b_idx")[i].value = "배송중";
+
+
+			}else if(d == "1"){
+				
+				// b_idx 해당 하는 상태의 색상과 값을 바꾼다.
+				document.getElementsByClassName("b_idx")[i].style.color = "darkorange";
+				document.getElementsByClassName("b_idx")[i].style.fontWeight = "bold";
+				document.getElementsByClassName("b_idx")[i].value = "검수중";
+
+			}else if(d == "0"){
+				
+				// b_idx 해당 하는 상태의 색상과 값을 바꾼다.
+				document.getElementsByClassName("b_idx")[i].style.color = "red";
+				document.getElementsByClassName("b_idx")[i].style.fontWeight = "bold";
+				document.getElementsByClassName("b_idx")[i].value = "입찰중";
+
+			}else {
+				
+				// b_idx 해당 하는 상태의 색상과 값을 바꾼다.
+				document.getElementsByClassName("b_idx")[i].style.color = "#6c757d57";
+				document.getElementsByClassName("b_idx")[i].style.fontWeight = "bold";
+				document.getElementsByClassName("b_idx")[i].value = "거래완료";
+
+			}
+		
+		}
+		
+		var c = [];
+		
+		// asks에 저장된 사이즈 만큼 반복시킨다.
+		for(i=0; i < ${asks.size()}; i++){
+		
+		// c 배열에 bids에서 가져온 b_idx 값을 저장시키는데
+		c = document.getElementsByClassName("a_idx")[i].value;
+
+		// 만약에 티켓 내용이 "꽝" 이라면
+			if(c == "3"){
+
+				// a_idx 해당 하는 상태의 색상과 값을 바꾼다.
+				document.getElementsByClassName("a_idx")[i].style.color = "green";
+				document.getElementsByClassName("a_idx")[i].style.fontWeight = "bold";
+				document.getElementsByClassName("a_idx")[i].value = "배송 완료";
+
+				
+			}else if(c == "2"){
+
+				// a_idx 해당 하는 상태의 색상과 값을 바꾼다.
+				document.getElementsByClassName("a_idx")[i].style.color = "#fdcb14";
+				document.getElementsByClassName("a_idx")[i].style.fontWeight = "bold";
+				document.getElementsByClassName("a_idx")[i].value = "배송중";
+
+			}else if(c == "1"){
+
+				// a_idx 해당 하는 상태의 색상과 값을 바꾼다.
+				document.getElementsByClassName("a_idx")[i].style.color = "darkorange";
+				document.getElementsByClassName("a_idx")[i].style.fontWeight = "bold";
+				document.getElementsByClassName("a_idx")[i].value = "검수중";
+
+				
+			}else if(c == "0"){
+				
+				// a_idx 해당 하는 상태의 색상과 값을 바꾼다.
+				document.getElementsByClassName("a_idx")[i].style.color = "red";
+				document.getElementsByClassName("a_idx")[i].style.fontWeight = "bold";
+				document.getElementsByClassName("a_idx")[i].value = "입찰중";
+				
+			}else {
+	
+				// a_idx 해당 하는 상태의 색상과 값을 바꾼다.
+				document.getElementsByClassName("a_idx")[i].style.color = "#6c757d57";
+				document.getElementsByClassName("a_idx")[i].style.fontWeight = "bold";
+				document.getElementsByClassName("a_idx")[i].value = "거래완료";
+				
+			}
+		
+		}
+		
+	})
+
+	function confirm(){
+		
+		var id = "${id}";
+		
+		var bids_order_number = document.getElementsByClassName("bids_order_number")[0].value;
+		
+		console.log(bids_order_number);
+		
+		alert("감사합니다.거래가 완료되었습니다");
+		alert("이벤트 응모권이 1개 추가되었습니다");
+		location.replace("${contextPath}/member/confirm.do?bon="+bids_order_number+"&id="+id);
+		
+	}
+	
+</script>
