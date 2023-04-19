@@ -890,10 +890,10 @@
   				</c:if>
   				
   				<input class="b_idx" type="text" id="bids_content_name1" value="${b.BIDS_ORDER_STATE_IDX}" readonly="readonly" />
-  				<c:if test="${a.IMG_PRODUCT_IDX <= 30}">
+  				<c:if test="${b.IMG_PRODUCT_IDX <= 30}">
   				<input type="image" src="${contextPath}/resources/img/product/sneakers/${b.IMG_FILE}" id="bids_content_name2" readonly="readonly" />
   				</c:if>
-  				<c:if test="${a.IMG_PRODUCT_IDX >= 31}">
+  				<c:if test="${b.IMG_PRODUCT_IDX >= 31}">
   				<input type="image" src="${contextPath}/resources/img/product/slipper/${b.IMG_FILE}" id="bids_content_name2" readonly="readonly" />
   				</c:if>
   				<input type="text" id="bids_content_name3" value="${b.IMG_REALFILE}" readonly="readonly" />
