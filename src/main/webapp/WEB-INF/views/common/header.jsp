@@ -5,67 +5,6 @@
 <link rel="stylesheet" href="${contextPath}/resources/css/home.css">    
 <script src="https://kit.fontawesome.com/4536cebc99.js" crossorigin="anonymous"></script>
 <style>
-#quickmenu_box{
-
-/*     border: 1px dotted red; */
-    
-    position: fixed;
-    margin: 0 auto;
-    right: 0;
-    top: 86%;
-    display: flex;
-    height: 100px;
-    width: 100px;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: nowrap;
-    flex-direction: column;
-    z-index: 6;
-    border-radius: 20px;
-
-}
-
-#quickmenu {
-
-    /* border: 1px dotted red; */
-    
-    position: relative;
-    margin: 0 auto;
-    left: 0;
-    top: 0;
-    display: flex;
-    height: 100%;
-    width: 100%;
-    border-radius: 10px;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    color: white;
-    background: black;
-
-
-}
-
-#button{
-
-	font-size: 80px;
-    color: white;
-    margin: 0 auto;
-    text-align: center;
-    position: relative;
-    height: 100%;
-    width: 100%;
-    left: 10px;
-    top: 0;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-
-}
 </style>    
   <!-- Page Preloder -->
 <!--     <div id="preloder"> -->
