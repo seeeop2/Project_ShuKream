@@ -32,5 +32,17 @@ public class AdminDAO {
 		return sqlSession.selectList("mapper.admin.bidsList");
 	}
 
+	public int asksOrderChange(AsksVO asksVO) {
+		
+		return sqlSession.update("mapper.admin.asksOrderChange",asksVO); 	
+		 
+	}
+
+	public int bidsOrderChange(BidsVO bidsVO) {
+		
+		return sqlSession.update("mapper.admin.bidsOrderChange",bidsVO); 
+		
+	}
+
 
 }
