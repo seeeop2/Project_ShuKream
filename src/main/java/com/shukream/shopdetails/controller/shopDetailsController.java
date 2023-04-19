@@ -43,20 +43,22 @@ public class shopDetailsController {
     String imgNameDetail = shopDetailsService.selectProductDetail(product_id);
     Map map =shopDetailsService.selectHighBidsAll(product_id);
     Map map2 = shopDetailsService.selectLowAsksAll(product_id);
-    System.out.println("map = " + map);
     ProductsVOWithIMG productvo = shopDetailsService.selectProductOne(product_id);
-    
+    List list = shopDetailsService.selectForChart(product_id);
     int latestMoney = shopDetailsService.SelectLatestMoney(product_id);
-    
+
+    model.addAttribute("forChart", list);
     model.addAttribute("lowAsks", shopDetailsService.SelectLowAsks());
+  System.out.println("ask 고치는 중 lowasks : " + shopDetailsService.SelectLowAsks());
     model.addAttribute("lowBids", shopDetailsService.SelectLowBids());
     model.addAttribute("product_id", product_id);
     model.addAttribute("productvo", productvo);
     model.addAttribute("imgNameMain", imgNameMain);
     model.addAttribute("imgNameDetail", imgNameDetail);
     model.addAttribute("theLowestAsks",map2);
+  System.out.println("ask 고치는 중 map : " + map2);
     model.addAttribute("theHighestBids",map);
-    model.addAttribute("latestMoney",latestMoney);
+    model.addAttribute("latestMoney",latestMoney); //이것도?
     return viewName;
   }
   

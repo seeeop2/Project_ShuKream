@@ -5,6 +5,7 @@
 
 <mapper namespace="mapper.member">
 
+
 <!-- 리절트 맵 정의 -->
 	<resultMap id="memberResult" type="memberVO">
 	   <result property="user_name" column="user_name" />
