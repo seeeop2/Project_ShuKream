@@ -19,6 +19,8 @@
      <typeAlias type="com.shukream.bids.vo.BidsVO" alias="BidsVO" />
      <typeAlias type="com.shukream.products.vo.ProductsVOWithIMG" alias="ProductsVOWithIMG" />
      <typeAlias type="com.shukream.order.vo.OrderVO" alias="orderVO"/>
+     <typeAlias type="com.shukream.products.vo.ProductLikeVO" alias="productLikeVO"/>
+     
   </typeAliases>
 </configuration>
 
