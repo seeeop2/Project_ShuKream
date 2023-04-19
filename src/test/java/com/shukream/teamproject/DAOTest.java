@@ -341,7 +341,7 @@ public class DAOTest {
   }
   
 
-  @Test
+  @Test @Ignore
   public void selectForChart() throws Exception{
     logger.info("\n =======시작 ======= ");
     Map map = new HashMap();

@@ -49,14 +49,12 @@ public class shopDetailsController {
 
     model.addAttribute("forChart", list);
     model.addAttribute("lowAsks", shopDetailsService.SelectLowAsks());
-  System.out.println("ask 고치는 중 lowasks : " + shopDetailsService.SelectLowAsks());
     model.addAttribute("lowBids", shopDetailsService.SelectLowBids());
     model.addAttribute("product_id", product_id);
     model.addAttribute("productvo", productvo);
     model.addAttribute("imgNameMain", imgNameMain);
     model.addAttribute("imgNameDetail", imgNameDetail);
     model.addAttribute("theLowestAsks",map2);
-  System.out.println("ask 고치는 중 map : " + map2);
     model.addAttribute("theHighestBids",map);
     model.addAttribute("latestMoney",latestMoney); //이것도?
     return viewName;

@@ -146,6 +146,10 @@ public class OrderController {
 							@RequestParam(value = "size", required = false) String size,
 							HttpServletRequest request) {
 		
+    System.out.println("product_idx : " + product_idx);
+    System.out.println("type : " + type);
+    System.out.println("size : " + size);
+	  
 		MemberVO memberVO = null;
 		
 		HttpSession session=request.getSession();

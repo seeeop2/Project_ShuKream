@@ -223,7 +223,7 @@
                         <div>
                           <ul>
                             <li>
-                              <button class="btn btn-outline-dark" id="clickForsizeAll"><span id="forAllSize">모든사이즈</span> <br><span id="forLowBids">${lowBids}</span></button>
+                              <button class="btn btn-outline-dark" id="clickForsizeAll"><span id="forAllSize">모든사이즈</span> <br><span id="forLowBids">${lowAsks}</span></button>
                             </li>
 
                             <c:forEach var="theLowestAsks" items="${theLowestAsks}" varStatus="status">
@@ -248,17 +248,17 @@
             <div style="margin-bottom: 5px;">
               <button type="button" class="btn btn-danger" onclick="buyClick();return false;"
                 style="width: 49%; background-color: #ef6253">
-                <span
-                  style="float: left; font-size: 2rem; border-right: 1px solid white; padding-right: 10px;">구매</span>
+                <span 
+                  style="float: left; font-size: 1.5rem; border-right: 1px solid white; padding-right: 8px; width:50%;">구매</span>
                 <span style="vertical-align: middle;"><b><span id="thisSizeLow">${lowBids}</span></b>원</span><br>
-                <span style="vertical-align: middle; font-size: 0.8rem;">즉시 구매가</span>
+                <span style="vertical-align: middle; font-size: 0.7rem;">즉시 구매가</span>
               </button>
               <button type="button" class="btn btn-success" onclick="SellClick();return false;"
                 style="width: 49%; background-color: #41b979">
                 <span
-                  style="float: left; font-size: 2rem; border-right: 1px solid white; padding-right: 10px;">판매</span>
+                  style="float: left; font-size: 1.5rem; border-right: 1px solid white; padding-right: 8px; width:50%;">판매</span>
                 <span style="vertical-align: middle;"><b><span id="thisSizeHigh">${lowBids}</span></b>원</span><br>
-                <span style="vertical-align: middle; font-size: 0.8rem;">즉시 판매가</span>
+                <span style="vertical-align: middle; font-size: 0.7rem;">즉시 판매가</span>
               </button>
             </div>
             <div style="background-color: yellow">
@@ -697,7 +697,7 @@ var innerText16 = document.getElementById("clickForMoney_16").innerText;
     
     function buyClick(){
       var sendme = $("#forSize").children('span').text();
-      if(sendme ==""){
+      if(sendme =="" || sendme =="모든사이즈"){
         alert("사이즈를 체크해주세요.");
         return;
       } 
@@ -732,7 +732,7 @@ var innerText16 = document.getElementById("clickForMoney_16").innerText;
     
     function SellClick(){
       var sendme = $("#forSize").children('span').text();
-      if(sendme ==""){
+      if(sendme =="" || sendme =="모든사이즈"){
         alert("사이즈를 체크해주세요.");
         return;
       } 
