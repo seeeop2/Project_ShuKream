@@ -341,7 +341,7 @@ public class DAOTest {
   }
   
 
-  @Test
+  @Test @Ignore
   public void selectForChart() throws Exception{
     logger.info("\n =======시작 ======= ");
     Map map = new HashMap();
@@ -371,7 +371,15 @@ public class DAOTest {
 
   }
 
+  @Test 
+  public void selectRankFourRe() throws Exception{
+    int product_id = 43;
+    
+    List list = productsDAO.selectRankFourRe(product_id);
+    logger.info("\n selectRankFourRe " + list);
+    
 
+  }
   
   
 

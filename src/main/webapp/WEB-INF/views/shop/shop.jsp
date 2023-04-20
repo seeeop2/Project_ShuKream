@@ -259,9 +259,6 @@
                			</a>                  
            		  </li>
                  
-                  <li><a href="#"><img
-                      src="${contextPath}/resources/img/icon/compare.png"
-                      alt=""> <span>Compare</span></a></li>
                   <li><a href="shopDetails.do?product_id=${product.PRODUCT_ID}"><img
                       src="${contextPath}/resources/img/icon/search.png"
                       alt=""></a></li>
