@@ -120,15 +120,15 @@
                         <ul>
                             <li><a href="${contextPath}/main.do">Home</a></li>
                             <li><a href="${contextPath}/shop/list.do">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="${contextPath}/pages/about.do">About Us</a></li>
-                                    <li><a href="${contextPath}/pages/shoppingCart.do">Shopping Cart</a></li>
-                                    <li><a href="${contextPath}/pages/checkOut.do">Check Out</a></li>
-                                    <li><a href="${contextPath}/pages/blogDetails.do">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="${contextPath}/blog/list.do">Blog</a></li>
+                            <li><a href="${contextPath}/pages/about.do">About Us</a></li>
+<!--                             <li><a href="#">Pages</a> -->
+<!--                                 <ul class="dropdown"> -->
+<%--                                     <li><a href="${contextPath}/pages/shoppingCart.do">Shopping Cart</a></li> --%>
+<%--                                     <li><a href="${contextPath}/pages/checkOut.do">Check Out</a></li> --%>
+<%--                                     <li><a href="${contextPath}/pages/blogDetails.do">Blog Details</a></li> --%>
+<!--                                 </ul> -->
+<!--                             </li> -->
+<%--                             <li><a href="${contextPath}/blog/list.do">Blog</a></li> --%>
                             <li><a href="${contextPath}/contacts/main.do"">Contacts</a></li>	
                             <!-- 이벤트 페이지 버튼 추가 -->
                             <li><a href="${contextPath}/event/main.do">Event</a></li>
