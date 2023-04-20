@@ -47,6 +47,7 @@ public class shopDetailsController {
     List list = shopDetailsService.selectForChart(product_id);
     int latestMoney = shopDetailsService.SelectLatestMoney(product_id);
     List list2 = shopDetailsService.selectRankFour(product_id);
+
     
 
     model.addAttribute("forChart", list);

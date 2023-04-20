@@ -182,7 +182,6 @@ public class ShopDetailsService {
     }
       
     }
-    logger.info("\n latest " + latest);
     return latest;
   }
   public List selectForChart(int product_id){
@@ -196,8 +195,9 @@ public class ShopDetailsService {
   
   public List selectRankFour(int product_id) {
     
-    List list = productsdao.selectRankFour(product_id);
+    List list = productsdao.selectRankFourRe(product_id);
     
+    logger.info("\n selectRankFour " + list);
     
     
     return list;

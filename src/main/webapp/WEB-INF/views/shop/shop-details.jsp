@@ -385,15 +385,25 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <h3 class="related-title">Related Product</h3>
+        <h3 class="related-title">Popular Product</h3>
       </div>
     </div>
     <div class="row">
+<!--     여기부터 -->
       <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
         <div class="product__item">
+        <c:choose>
+        
+          <c:when test="${RankFour[0].category ==1}">
           <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/sneakers/${RankFour[1].product_id}_main.jpg">
-            <span class="label">New</span>
+            data-setbg="${contextPath}/resources/img/product/slipper/product_${RankFour[0].product_id-30}_main.jpg">
+          </c:when>
+          
+          <c:otherwise>
+          <div class="product__item__pic set-bg"
+            data-setbg="${contextPath}/resources/img/product/sneakers/product_${RankFour[0].product_id}_main.jpg">
+          </c:otherwise>
+        </c:choose>
             <ul class="product__hover">
               <li><a href="#"><img src="${contextPath}/resources/img/icon/heart.png"
                   alt=""></a></li>
@@ -425,8 +435,18 @@
       </div>
       <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
         <div class="product__item">
+        <c:choose>
+        
+          <c:when test="${RankFour[1].category ==1}">
           <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/sneakers/product_${ran2}_main.jpg">
+            data-setbg="${contextPath}/resources/img/product/slipper/product_${RankFour[1].product_id-30}_main.jpg">
+          </c:when>
+          
+          <c:otherwise>
+          <div class="product__item__pic set-bg"
+            data-setbg="${contextPath}/resources/img/product/sneakers/product_${RankFour[1].product_id}_main.jpg">
+          </c:otherwise>
+        </c:choose>
             <ul class="product__hover">
               <li><a href="#"><img src="${contextPath}/resources/img/icon/heart.png"
                   alt=""></a></li>
@@ -458,9 +478,18 @@
       </div>
       <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
         <div class="product__item sale">
+        <c:choose>
+        
+          <c:when test="${RankFour[2].category ==1}">
           <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/slipper/product_${ran3}_main.jpg">
-            <span class="label">Sale</span>
+            data-setbg="${contextPath}/resources/img/product/slipper/product_${RankFour[2].product_id-30}_main.jpg">
+          </c:when>
+          
+          <c:otherwise>
+          <div class="product__item__pic set-bg"
+            data-setbg="${contextPath}/resources/img/product/sneakers/product_${RankFour[2].product_id}_main.jpg">
+          </c:otherwise>
+        </c:choose>
             <ul class="product__hover">
               <li><a href="#"><img src="${contextPath}/resources/img/icon/heart.png"
                   alt=""></a></li>
@@ -492,8 +521,18 @@
       </div>
       <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
         <div class="product__item">
+        <c:choose>
+        
+          <c:when test="${RankFour[3].category ==1}">
           <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/slipper/product_${ran4}_main.jpg">
+            data-setbg="${contextPath}/resources/img/product/slipper/product_${RankFour[3].product_id-30}_main.jpg">
+          </c:when>
+          
+          <c:otherwise>
+          <div class="product__item__pic set-bg"
+            data-setbg="${contextPath}/resources/img/product/sneakers/product_${RankFour[3].product_id}_main.jpg">
+          </c:otherwise>
+        </c:choose>
             <ul class="product__hover">
               <li><a href="#"><img src="${contextPath}/resources/img/icon/heart.png"
                   alt=""></a></li>

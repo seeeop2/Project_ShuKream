@@ -36,5 +36,9 @@ public class ProductsDAO {
   public List<ProductsVO> selectRankFour(int product_id) {
     return sqlSession.selectList("mapper.products.selectRankFour", product_id);
   }
-  
+
+  public List<Map<Object, Object>> selectRankFourRe(int product_id) {
+    return sqlSession.selectList("mapper.products.selectRankFourRe", product_id);
+  }
+
 }
