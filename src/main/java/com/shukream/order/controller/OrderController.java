@@ -160,7 +160,7 @@ public class OrderController {
 		MemberVO memberVO = null;
 		
 		HttpSession session=request.getSession();
-		session=request.getSession();
+//		session=request.getSession();
 		Boolean isLogOn=(Boolean)session.getAttribute("isLogOn");
 		if(isLogOn) {
 			memberVO=(MemberVO)session.getAttribute("memberInfo");

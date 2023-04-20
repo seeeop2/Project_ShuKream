@@ -120,15 +120,15 @@
                         <ul>
                             <li><a href="${contextPath}/main.do">Home</a></li>
                             <li><a href="${contextPath}/shop/list.do">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="${contextPath}/pages/about.do">About Us</a></li>
-                                    <li><a href="${contextPath}/pages/shoppingCart.do">Shopping Cart</a></li>
-                                    <li><a href="${contextPath}/pages/checkOut.do">Check Out</a></li>
-                                    <li><a href="${contextPath}/pages/blogDetails.do">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="${contextPath}/blog/list.do">Blog</a></li>
+                            <li><a href="${contextPath}/pages/about.do">About Us</a></li>
+<!--                             <li><a href="#">Pages</a> -->
+<!--                                 <ul class="dropdown"> -->
+<%--                                     <li><a href="${contextPath}/pages/shoppingCart.do">Shopping Cart</a></li> --%>
+<%--                                     <li><a href="${contextPath}/pages/checkOut.do">Check Out</a></li> --%>
+<%--                                     <li><a href="${contextPath}/pages/blogDetails.do">Blog Details</a></li> --%>
+<!--                                 </ul> -->
+<!--                             </li> -->
+<%--                             <li><a href="${contextPath}/blog/list.do">Blog</a></li> --%>
                             <li><a href="${contextPath}/contacts/main.do"">Contacts</a></li>	
                             <!-- 이벤트 페이지 버튼 추가 -->
                             <li><a href="${contextPath}/event/main.do">Event</a></li>
@@ -170,7 +170,7 @@
         </div>
 	  </div>
 	</div>
-	<div id="quickmenu_box">
+	<div id="quickmenu_box" onclick="addChannel();" style="cursor: pointer;">
 		<i id="button" class="fa-solid fa-comment-sms"></i>
 		<a id="quickmenu" href="#">1:1문의</a>
 	</div>
@@ -179,20 +179,18 @@
 	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<%-- 검색어 완성기능용 js파일 --%>
 	<script  src="${contextPath}/resources/js/home.js"></script>
+	
+	<%-- 카카오 챗봇 연동 --%>
+	 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"></script>
+<script>
+  Kakao.init(''); // 사용하려는 앱의 JavaScript 키 입력
+	function addChannel() {
+		Kakao.Channel.addChannel({
+			  channelPublicId: '_fvxfxkxj'
+			});
+		}
+</script>
 	<script>
-// 	window.onload = function () {
-// 		$("#search-input").keydown(function(){
-// 			if(window.event.keyCode == 13){
-//  			let searchForm = document.querySelector(".search-model-form");
-// 			let searchValue = document.getElementById("search-input").value;
-// 			let searchOption = document.getElementById("search-option").value;
-//  			console.log(searchForm.action);
-//  			console.log(searchValue);
-// 			location.href = "${contextPath}/shop/list.do?opt="+searchOption+"&division="+searchValue;
-//  			console.log(searchForm.action);
-//  			searchForm.submit();
-// 			}
-// 		});
-// 		}
+
 	</script>
 	
