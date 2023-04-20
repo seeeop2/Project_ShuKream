@@ -68,21 +68,34 @@
 			   		</c:when>
 			   		<c:when test= "${vo.d_ticket eq '무료1회입고권'}">
 			   			<input style="font-weight : bold; color: #20c997; font-size: 20px;" id="ticket" class="ticket" type="text" placeholder="당첨된 응모권" value="${vo.d_ticket}" readonly="readonly" />
+			   			<input class="d_date" type="text" placeholder="당첨 날짜" value="<fmt:formatDate type="date" dateStyle="full" value="${vo.d_date}"/>" readonly="readonly" />
+				   		<input type="text" placeholder="신청번호:xxxx 물품명: 조단 판매 완료에 대한 당첨권 1회 발급" value="${vo.d_contents}" readonly="readonly" />
+			   			<input class="expiry_date" style="text-decoration: underline; color:red;" id="expiry_date" type="text" placeholder="" value="<fmt:formatDate type="date" dateStyle="full" value="${vo.expiry_date}"/> 까지" readonly="readonly" />
+			   			<input class="d_confirm" type="text" value="${vo.d_confirm}" readonly="readonly" />
 			   		</c:when>
 				   	<c:when test= "${vo.d_ticket eq '무료배송권'}">
 			   			<input style="font-weight : bold; color: blue; font-size: 20px;" id="ticket" class="ticket" type="text" placeholder="당첨된 응모권" value="${vo.d_ticket}" readonly="readonly" />
+			   			<input class="d_date" type="text" placeholder="당첨 날짜" value="<fmt:formatDate type="date" dateStyle="full" value="${vo.d_date}"/>" readonly="readonly" />
+				   		<input type="text" placeholder="신청번호:xxxx 물품명: 조단 판매 완료에 대한 당첨권 1회 발급" value="${vo.d_contents}" readonly="readonly" />
+			   			<input class="expiry_date" style="text-decoration: underline; color:red;" id="expiry_date" type="text" placeholder="" value="<fmt:formatDate type="date" dateStyle="full" value="${vo.expiry_date}"/> 까지" readonly="readonly" />
+			   			<input class="d_confirm" type="text" value="${vo.d_confirm}" readonly="readonly" />
 			   		</c:when>
 			   		<c:when test= "${vo.d_ticket eq '수수료1회무료권'}">
 			   			<input style="font-weight : bold; color: orange; font-size: 20px;" id="ticket" class="ticket" type="text" placeholder="당첨된 응모권" value="${vo.d_ticket}" readonly="readonly" />
+			   			<input class="d_date" type="text" placeholder="당첨 날짜" value="<fmt:formatDate type="date" dateStyle="full" value="${vo.d_date}"/>" readonly="readonly" />
+				   		<input type="text" placeholder="신청번호:xxxx 물품명: 조단 판매 완료에 대한 당첨권 1회 발급" value="${vo.d_contents}" readonly="readonly" />
+			   			<input class="expiry_date" style="text-decoration: underline; color:red;" id="expiry_date" type="text" placeholder="" value="<fmt:formatDate type="date" dateStyle="full" value="${vo.expiry_date}"/> 까지" readonly="readonly" />
+			   			<input class="d_confirm" type="text" value="${vo.d_confirm}" readonly="readonly" />
 			   		</c:when>
 				   		<c:otherwise>
-				   			<input id="ticket" class="ticket" type="text" placeholder="당첨된 응모권" value="${vo.d_ticket}" readonly="readonly" />
-				   		</c:otherwise>
+				   			<input style="font-weight : bold; color: red; font-size: 19px;" id="ticket" class="ticket" type="text" placeholder="당첨된 응모권" value="${vo.d_ticket}" readonly="readonly" />
+					   		<input class="d_date" type="text" placeholder="당첨 날짜" value="<fmt:formatDate type="date" dateStyle="full" value="${vo.d_date}"/>" readonly="readonly" />
+					   		<input type="text" placeholder="신청번호:xxxx 물품명: 조단 판매 완료에 대한 당첨권 1회 발급" value="${vo.d_contents}" readonly="readonly" />
+				   			<input class="expiry_date" style="text-decoration: underline; color:red;" id="expiry_date" type="text" placeholder="" value="<fmt:formatDate type="date" dateStyle="full" value="${vo.expiry_date}"/> 까지" readonly="readonly" />
+				   			<input style="color : red; font-size:19px;" class="d_confirm" type="text" value="x" readonly="readonly" />
+					   	</c:otherwise>
 		   		</c:choose>
-		   		<input class="d_date" type="text" placeholder="당첨 날짜" value="<fmt:formatDate type="date" dateStyle="full" value="${vo.d_date}"/>" readonly="readonly" />
-		   		<input type="text" placeholder="신청번호:xxxx 물품명: 조단 판매 완료에 대한 당첨권 1회 발급" value="${vo.d_contents}" readonly="readonly" />
-	   			<input class="expiry_date" style="text-decoration: underline; color:red;" id="expiry_date" type="text" placeholder="" value="<fmt:formatDate type="date" dateStyle="full" value="${vo.expiry_date}"/> 까지" readonly="readonly" />
-	   			<input class="d_confirm" type="text" value="${vo.d_confirm}" readonly="readonly" />
+
 	   		</div>
 	 	</c:forEach>
 
@@ -110,30 +123,6 @@
 <script>
 
 $(document).ready(function(){
-	
-	// d 배열을 생성하고
-	var d = [];
-	
-	// checkuser에 저장된 사이즈 만큼 반복시킨다.
-	for(i=1; i < ${checkuser.size()}; i++){
-	
-	// d 배열에 checkuser에서 가져온 ticket 값을 저장시키는데
-	d = document.getElementsByClassName("ticket")[i].value;
-
-	// 만약에 티켓 내용이 "꽝" 이라면
-		if(d == "꽝"){
-			
-			// 해당 하는 티켓 내용의 색상을 빨갛게 바꾼다.
-			document.getElementsByClassName("ticket")[i].style.color = "red";
-			document.getElementsByClassName("ticket")[i].style.fontSize = "19px";
-			document.getElementsByClassName("ticket")[i].style.fontWeight = "bold";
-			document.getElementsByClassName("d_confirm")[i].style.color = "red";
-			document.getElementsByClassName("d_confirm")[i].value = "X";
-		
-		}
-	}
-
-})
 
 
 </script>

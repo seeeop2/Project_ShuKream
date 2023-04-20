@@ -262,7 +262,7 @@
               </button>
             </div>
             <div style="background-color: yellow">
-              <a  class="primary-btn"    style="margin: auto; display: block; text-align: center; "
+              <a  class="primary-btn"    style="margin: auto; display: block; text-align: center; color: white; cursor: pointer; "
 										 onclick="javascript:heartBtn('${productvo.product_id}',
               														  '${imgNameMain}',
 																	  '${productvo.product_name_en}',              														  
