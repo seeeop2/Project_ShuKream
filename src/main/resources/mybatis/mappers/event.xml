@@ -117,7 +117,7 @@
 
 	UPDATE shukream_event 
 	SET d_cnt = #{d_cnt}
-    where d_date IN (select max(d_date) from shukream_event where member_id=#{id});
+    where d_date IN (select max(d_date) from shukream_event where member_id=#{id})
 	
 	</update>
 	

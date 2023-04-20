@@ -246,7 +246,7 @@ public class EventController {
 	    	ticket = "무료배송권";
 	    	// 응모당첨 내역을 저장한다.
 	    	// 임시로 넣어놓고, 나중에는 주문번호를 따와서 추가 시킨다.<작성중>
-	        String contents = "(주문번호2)의 주문완료에 대한 응모권 발생";
+	        String contents = "주문완료 건에 대한 응모권 발생";
 	        String confirm = "아니오";
 	        d_coupon += 1;
 	        
@@ -278,7 +278,7 @@ public class EventController {
 	    	ticket = "무료1회입고권";
 	    	// 응모당첨 내역을 저장한다.
 	    	// 임시로 넣어놓고, 나중에는 주문번호를 따와서 추가 시킨다.<작성중>
-	        String contents = "(주문번호2)의 주문완료에 대한 응모권 발생";
+	        String contents = "주문완료 건에 대한 응모권 발생";
 	        String confirm = "아니오";
 	        d_coupon += 1;
 	        
@@ -313,7 +313,7 @@ public class EventController {
 	    	ticket = "수수료1회무료권";
 	    	// 응모당첨 내역을 저장한다.
 	    	// 임시로 넣어놓고, 나중에는 주문번호를 따와서 추가 시킨다.<작성중>
-	        String contents = "(주문번호2)의 주문완료에 대한 응모권 발생";
+	        String contents = "주문완료 건에 대한 응모권 발생";
 	        String confirm = "아니오";
 	        d_coupon += 1;
 	        
@@ -353,7 +353,7 @@ public class EventController {
 	    	ticket = "꽝";
 	    	// 응모당첨 내역을 저장한다.
 	    	// 임시로 넣어놓고, 나중에는 주문번호를 따와서 추가 시킨다.<작성중>
-	        String contents = "(주문번호2)의 주문완료에 대한 응모권 발생";
+	        String contents = "주문완료 건에 대한 응모권 발생";
 	        String confirm = "예";
 	        
 	        //EventVO로 전달한 값들을 저장시킨다.
