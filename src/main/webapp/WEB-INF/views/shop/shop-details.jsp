@@ -390,178 +390,41 @@
     </div>
     <div class="row">
 <!--     여기부터 -->
+      <c:forEach items="${RankFour}" var="RankFour">
       <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
         <div class="product__item">
         <c:choose>
         
-          <c:when test="${RankFour[0].category ==1}">
+          <c:when test="${RankFour.category ==1}">
           <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/slipper/product_${RankFour[0].product_id-30}_main.jpg">
+            data-setbg="${contextPath}/resources/img/product/slipper/product_${RankFour.product_id-30}_main.jpg">
           </c:when>
           
           <c:otherwise>
           <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/sneakers/product_${RankFour[0].product_id}_main.jpg">
+            data-setbg="${contextPath}/resources/img/product/sneakers/product_${RankFour.product_id}_main.jpg">
           </c:otherwise>
         </c:choose>
             <ul class="product__hover">
-              <li><a href="#"><img src="${contextPath}/resources/img/icon/heart.png"
-                  alt=""></a></li>
-              <li><a href="#"><img src="${contextPath}/resources/img/icon/compare.png"
-                  alt=""> <span>Compare</span></a></li>
-              <li><a href="#"><img src="${contextPath}/resources/img/icon/search.png"
+              <li><a href="shopDetails.do?product_id=${RankFour.product_id}"><img src="${contextPath}/resources/img/icon/search.png"
                   alt=""></a></li>
             </ul>
           </div>
           <div class="product__item__text">
-            <h6>Piqué Biker Jacket</h6>
+            <h6>${RankFour.product_name_en}</h6>
             <a href="#" class="add-cart">+ Add To Cart</a>
             <div class="rating">
-              <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
-              <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
-              <i class="fa fa-star-o"></i>
-            </div>
-            <h5>$67.24</h5>
-            <div class="product__color__select">
-              <label for="pc-1"> <input type="radio" id="pc-1">
-              </label> <label class="active black" for="pc-2"> <input
-                type="radio" id="pc-2">
-              </label> <label class="grey" for="pc-3"> <input
-                type="radio" id="pc-3">
-              </label>
+              <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
-        <div class="product__item">
-        <c:choose>
-        
-          <c:when test="${RankFour[1].category ==1}">
-          <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/slipper/product_${RankFour[1].product_id-30}_main.jpg">
-          </c:when>
-          
-          <c:otherwise>
-          <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/sneakers/product_${RankFour[1].product_id}_main.jpg">
-          </c:otherwise>
-        </c:choose>
-            <ul class="product__hover">
-              <li><a href="#"><img src="${contextPath}/resources/img/icon/heart.png"
-                  alt=""></a></li>
-              <li><a href="#"><img src="${contextPath}/resources/img/icon/compare.png"
-                  alt=""> <span>Compare</span></a></li>
-              <li><a href="#"><img src="${contextPath}/resources/img/icon/search.png"
-                  alt=""></a></li>
-            </ul>
-          </div>
-          <div class="product__item__text">
-            <h6>Piqué Biker Jacket</h6>
-            <a href="#" class="add-cart">+ Add To Cart</a>
-            <div class="rating">
-              <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
-              <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
-              <i class="fa fa-star-o"></i>
-            </div>
-            <h5>$67.24</h5>
-            <div class="product__color__select">
-              <label for="pc-4"> <input type="radio" id="pc-4">
-              </label> <label class="active black" for="pc-5"> <input
-                type="radio" id="pc-5">
-              </label> <label class="grey" for="pc-6"> <input
-                type="radio" id="pc-6">
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
-        <div class="product__item sale">
-        <c:choose>
-        
-          <c:when test="${RankFour[2].category ==1}">
-          <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/slipper/product_${RankFour[2].product_id-30}_main.jpg">
-          </c:when>
-          
-          <c:otherwise>
-          <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/sneakers/product_${RankFour[2].product_id}_main.jpg">
-          </c:otherwise>
-        </c:choose>
-            <ul class="product__hover">
-              <li><a href="#"><img src="${contextPath}/resources/img/icon/heart.png"
-                  alt=""></a></li>
-              <li><a href="#"><img src="${contextPath}/resources/img/icon/compare.png"
-                  alt=""> <span>Compare</span></a></li>
-              <li><a href="#"><img src="${contextPath}/resources/img/icon/search.png"
-                  alt=""></a></li>
-            </ul>
-          </div>
-          <div class="product__item__text">
-            <h6>Multi-pocket Chest Bag</h6>
-            <a href="#" class="add-cart">+ Add To Cart</a>
-            <div class="rating">
-              <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                class="fa fa-star-o"></i>
-            </div>
-            <h5>$43.48</h5>
-            <div class="product__color__select">
-              <label for="pc-7"> <input type="radio" id="pc-7">
-              </label> <label class="active black" for="pc-8"> <input
-                type="radio" id="pc-8">
-              </label> <label class="grey" for="pc-9"> <input
-                type="radio" id="pc-9">
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
-        <div class="product__item">
-        <c:choose>
-        
-          <c:when test="${RankFour[3].category ==1}">
-          <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/slipper/product_${RankFour[3].product_id-30}_main.jpg">
-          </c:when>
-          
-          <c:otherwise>
-          <div class="product__item__pic set-bg"
-            data-setbg="${contextPath}/resources/img/product/sneakers/product_${RankFour[3].product_id}_main.jpg">
-          </c:otherwise>
-        </c:choose>
-            <ul class="product__hover">
-              <li><a href="#"><img src="${contextPath}/resources/img/icon/heart.png"
-                  alt=""></a></li>
-              <li><a href="#"><img src="${contextPath}/resources/img/icon/compare.png"
-                  alt=""> <span>Compare</span></a></li>
-              <li><a href="#"><img src="${contextPath}/resources/img/icon/search.png"
-                  alt=""></a></li>
-            </ul>
-          </div>
-          <div class="product__item__text">
-            <h6>Diagonal Textured Cap</h6>
-            <a href="#" class="add-cart">+ Add To Cart</a>
-            <div class="rating">
-              <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
-              <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
-              <i class="fa fa-star-o"></i>
-            </div>
-            <h5>$60.9</h5>
-            <div class="product__color__select">
-              <label for="pc-10"> <input type="radio" id="pc-10">
-              </label> <label class="active black" for="pc-11"> <input
-                type="radio" id="pc-11">
-              </label> <label class="grey" for="pc-12"> <input
-                type="radio" id="pc-12">
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
+      
+      </c:forEach>
+      
+
     </div>
   </div>
 </section>

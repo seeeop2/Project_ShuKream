@@ -70,17 +70,20 @@
 
 <select id="selectRankFour" parameterType="int" resultType="ProductsVO">
   <![CDATA[
-SELECT PRODUCTS.*
-FROM (
-    SELECT DISTINCT LIKE_PRODUCT 
-    FROM
-      (SELECT like_product, DENSE_RANK() OVER (ORDER BY LIKE_PRODUCT DESC) AS RANK
-      FROM PRODUCT_LIKE
-      WHERE LIKE_PRODUCT <> #{product_id}
-      )
-     ) AD
-JOIN PRODUCTS
-ON ad.like_product = products.product_id
+SELECT *
+FROM(
+SELECT *
+FROM 
+(
+SELECT like_product,count(*) like_count
+FROM product_like pro
+WHERE LIKE_PRODUCT <> #{product_id}
+GROUP BY like_product
+order by like_count desc)A
+LEFT JOIN PRODUCTS B
+ON a.like_product = b.product_id
+ORDER BY a.like_count DESC)
+WHERE ROWNUM <5;
   ]]>
 </select> 
 
