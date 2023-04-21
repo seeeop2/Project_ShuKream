@@ -160,18 +160,25 @@ public class OrderController {
 							@RequestParam(value = "size", required = false) String size,
 							HttpServletRequest request,
 							HttpServletResponse response) throws IOException{
-		
 		MemberVO memberVO = null;
 		
 		HttpSession session=request.getSession();
-//		session=request.getSession();
-		Boolean isLogOn=(Boolean)session.getAttribute("isLogOn");
-		if(isLogOn) {
-			memberVO=(MemberVO)session.getAttribute("memberInfo");
-		} else {
+		Boolean isLogOn = (Boolean)session.getAttribute("isLogOn");
+		
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");		
+		
+		if(isLogOn == null || !isLogOn) {
+			System.out.println("email isEmpty 타는지");
 			PrintWriter out = response.getWriter();
+
+			out.println("<script>alert('로그인 해주세요.'); location.href='/shuKream/main.do';</script>");
+			out.flush();
+			out.close();
 			
-			out.print("<script>alert('로그인해주세요'); history.back();</script>");
+		} else {
+			System.out.println("else 구문을타는지");
+			memberVO=(MemberVO)session.getAttribute("memberInfo");
 		}
 	  
 		String viewName = (String) request.getAttribute("viewName");
