@@ -20,14 +20,12 @@
             if(session.getAttribute("isLogOn") == null) {
             %>
             	<a href="${contextPath}/member/loginForm.do">로그인</a>
-                <a href="#">문의</a>
             <%
 
             }else{
              %>	
             	<a href="${contextPath}/member/logout.do">로그아웃</a>
             	<a href="${contextPath}/member/mypage.do">마이페이지</a>
-                <a href="#">문의</a> 
              <%
              }
              %>   
@@ -88,7 +86,6 @@
 		   							<c:choose>
 										<c:when test="${email eq null}">
 											<a href="${contextPath}/member/loginForm.do">로그인</a>
-					                		<a href="#">문의</a>
 										</c:when>
 										<c:when test="${email eq 'admin'}">
 											<a href="${contextPath}/member/logout.do">로그아웃</a>
@@ -97,7 +94,6 @@
 										<c:otherwise> 
 											<a href="${contextPath}/member/logout.do">로그아웃</a>
 					            			<a href="${contextPath}/member/mypage.do">마이페이지</a>
-				                		<a href="#">문의</a>
 										</c:otherwise>
 									</c:choose>
 					          
