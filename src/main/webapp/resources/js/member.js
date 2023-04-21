@@ -138,6 +138,7 @@
     	var mailValue = mail.val();
     	var mailReg = (/^\w{3,12}@[a-z]{2,10}[\.][a-z]{2,3}[\.]?[a-z]{0,2}$/);
     	var rsEmail = mailReg.test(mailValue);
+    	
     		
 	    if(!rsEmail){
     		$("#emailInput").text("이메일 형식이 올바르지 않습니다.").css("color","red");
