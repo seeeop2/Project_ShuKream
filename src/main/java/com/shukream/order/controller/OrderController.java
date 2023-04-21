@@ -158,8 +158,13 @@ public class OrderController {
 							@RequestParam(value = "product_id",required = false) String product_idx,
 							@RequestParam(value = "type",required = false) String type,
 							@RequestParam(value = "size", required = false) String size,
-							HttpServletRequest request,
-							HttpServletResponse response) throws IOException{
+							HttpServletResponse response,
+							HttpServletRequest request) throws IOException{
+		
+    System.out.println("product_idx : " + product_idx);
+    System.out.println("type : " + type);
+    System.out.println("size : " + size);
+	  
 		MemberVO memberVO = null;
 		
 		HttpSession session=request.getSession();
@@ -169,7 +174,6 @@ public class OrderController {
 		response.setContentType("text/html;charset=utf-8");		
 		
 		if(isLogOn == null || !isLogOn) {
-			System.out.println("email isEmpty 타는지");
 			PrintWriter out = response.getWriter();
 
 			out.println("<script>alert('로그인 해주세요.'); location.href='/shuKream/main.do';</script>");

@@ -32,7 +32,7 @@
 		]]>
 	</select>
 	
-  <insert id="insertNewMember" parameterType="memberVO">
+	<insert id="addMember" parameterType="memberVO">
         <![CDATA[
           insert into users(user_name,
                         user_email,
@@ -101,4 +101,37 @@
 	
 	</update>
 
+	<select id="readMember" parameterType="String" resultType="memberVO" >
+	    <![CDATA[
+			select * from users
+			where user_email = #{user_email}
+		]]>
+	</select>
+	
+	<select id="updateMember" parameterType="String" resultMap="memberResult" >
+	    <![CDATA[
+			select * from users
+			where user_email = #{user_email}
+		]]>
+	</select>
+	
+	<update id="updateMemberpro" parameterType="map">
+		update users
+		set user_name = #{name} ,
+        user_pw = #{pw},
+        user_update = sysdate
+        where user_email = #{id}
+	</update>
+	
+	<select id="delMember" parameterType="String" resultMap="memberResult" >
+	    <![CDATA[
+			select * from users
+			where user_email = #{user_email}
+		]]>
+	</select>
+	
+	<delete id="delMemberpro" parameterType="map">
+		delete from users where user_email = #{user_email}
+	</delete>
+	
 </mapper>

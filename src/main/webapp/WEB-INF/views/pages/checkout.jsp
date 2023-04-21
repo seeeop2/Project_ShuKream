@@ -131,7 +131,7 @@
               <p>
                	참고항목
               </p>
-              <input type="text" id="sample4_extraAddress" name="sample4_extraAddress" placeholder="참고항목" value=>
+              <input type="text" id="sample4_extraAddress" name="sample4_extraAddress" placeholder="참고항목">
             <span id="guide" style="color:#999;display:none"></span>
             </div>
           </c:if>
