@@ -39,5 +39,15 @@
         <put-attribute name="title" value="내 정보" />
         <put-attribute name="body" value="/WEB-INF/views/member/info.jsp" />
   </definition>
+  
+  <definition name="/member/updateMember" extends="baseLayout">
+        <put-attribute name="title" value="내 정보 수정" />
+        <put-attribute name="body" value="/WEB-INF/views/member/updateMember.jsp" />
+  </definition>
+
+  <definition name="/member/delMember" extends="baseLayout">
+        <put-attribute name="title" value="회원 탈퇴" />
+        <put-attribute name="body" value="/WEB-INF/views/member/delMember.jsp" />
+  </definition>
 
 </tiles-definitions>

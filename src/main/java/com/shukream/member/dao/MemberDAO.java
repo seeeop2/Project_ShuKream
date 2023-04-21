@@ -18,18 +18,25 @@ public class MemberDAO {
 
 	@Autowired
    private SqlSession sqlSession;
-   
-   public MemberVO login(Map<String, String> loginMap) throws DataAccessException{
+	
+   public int login(Map<String, String> loginMap) throws DataAccessException{
       
-      MemberVO member=(MemberVO)sqlSession.selectOne("mapper.member.login", loginMap);
+	   System.out.println("다오로그인"); 
+	   int result = 0;
+      MemberVO member=sqlSession.selectOne("mapper.member.login", loginMap);
+      if(member == null) {
+    	  
+    	result = 0;
+    	  
+      }else {
+    	  
+    	  result = 1;
+    	  
+      }
       
-      return member;
+      
+      return result;
    }
-
-	public void insertNewMember(MemberVO memberVO) throws DataAccessException {
-		sqlSession.insert("mapper.member.insertNewMember",memberVO);
-		
-	}
 
 	public Map emailCheck(Map map){
 		Map result = sqlSession.selectOne("mapper.member.emailCheck", map);
@@ -77,6 +84,96 @@ public class MemberDAO {
 		sqlSession.update("mapper.member.updateBidsOrder", map);
 		
 	}
+
+	public MemberVO readMember(String user_email) throws Exception{
+		
+		System.out.println("다오 readMember");
+		
+		MemberVO memberVO = sqlSession.selectOne("mapper.member.readMember", user_email);
+		
+		System.out.println("다오2readMember"+memberVO.getUser_email());
+		
+		return memberVO;
+	}
+
+	public List<MemberVO> updateMember(String id) {
+		
+		System.out.println("다오 updateMember");
+		
+		List<MemberVO> updateMember = sqlSession.selectList("mapper.member.updateMember", id);
+		
+		System.out.println(updateMember);
+		
+		
+		return updateMember;
+	}
 	
+	public void updateMemberpro(String name, String pw, String id) {
+
+		System.out.println("다오 updateMemberpro");
+		
+		Map<String, String> map = new HashMap<String, String>();
+		
+		map.put("name", name);
+		map.put("pw", pw);
+		map.put("id", id);
+		
+		int updateMemberpro = sqlSession.update("mapper.member.updateMemberpro", map);
+		
+		System.out.println(updateMemberpro);
+		
+	}
+
+	public List<MemberVO> delMember(String email) {
+		
+		System.out.println("다오 delMember");
+		
+		List<MemberVO> delMember = sqlSession.selectList("mapper.member.delMember", email);
+		
+		System.out.println(delMember);
+		
+		return delMember;
+	}
+
+	public void delMemberpro(String user_email) {
+		
+		System.out.println("다오 delMemberpro");
+		
+		Map<String, String> map = new HashMap<String, String>();
+		
+		map.put("user_email", user_email);
+		
+		int delMemberpro = sqlSession.delete("mapper.member.delMemberpro", map);
+		
+		System.out.println(delMemberpro);
+	  }
+
+	public void addMember(String email, String name, String pw) {
+		
+		
+		
+		Map<String, String> map = new HashMap<String, String>();
+		
+		int addMember = sqlSession.insert("mapper.member.addMember", map);
+		
+		System.out.println(addMember);
+		
+	}
+
+	public void addMember(MemberVO memberVO) {
+		
+		System.out.println("다오 addMember");
+		
+		int addMember = sqlSession.insert("mapper.member.addMember", memberVO);
+		
+	}
+
+		
+		 
+		
+
+	
+	
+
 
 }

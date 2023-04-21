@@ -7,7 +7,7 @@
 	}	
 
 	#login_box > li > a:hover {
-		background: #fff5f3;
+	  background: #fff5f3;
 	  text-decoration: none;
 	  border-radius: 20px;
 	  transition : 0.3s;
@@ -145,14 +145,14 @@
     width: 82px;
     background-color: black;
     color: white;
-    border: 1px solid black;
+    border: 2px solid black;
     top: 4px;
     position: relative;
+    right: 200px;
 }
 #backBtn:hover{
 	color: black;
 	background: white;
-	border: 1px solid black;
 }
 #changeBtn{
 	text-decoration: none;
@@ -165,26 +165,38 @@
     width: 82px;
     background-color: black;
     color: white;
-    border: 1px solid black;
+    border: 2px solid black;
     top: 4px;
     position: relative;
+    right: 200px;
 }
 #changeBtn:hover{
 	color: black;
 	background-color: white;
-	border: 1px solid black;
 }
 #delBtn{
-	color: white;
-	background-color: black;
-	position: relative;
-	height: 35px;
+	text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    transition: all 0.3s ease 0s;
+    height: 35px;
+    line-height: 41px;
+    cursor: pointer;
+    width: 82px;
+    background-color: black;
+    color: white;
+    border: 2px solid black;
+    top: -31px;
+    position: relative;
+    left: 170px;
 }
 #delBtn:hover{
 	color: black;
 	background-color: white;
-}
+}	
 .teble{
 	position: relative;
-    left: 300px;
+    left: 260px;
+    top: 20px;
 }
+	

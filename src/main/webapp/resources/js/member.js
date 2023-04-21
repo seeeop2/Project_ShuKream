@@ -1,23 +1,33 @@
 
 	$("#checkBtn").click(function(){
-		var email = $("#user_email");
-		var emailValue = email.val();
-		var emailReg = /^\w{3,12}@[a-z]{2,10}[\.][a-z]{2,3}[\.]?[a-z]{0,2}$/;
-		var rsEmail = emailReg.test(emailValue);
-	
-			$.ajax(
-        		{		
+		
+		var mail = $("#user_email");
+    	var mailValue = mail.val();
+    	var mailReg = (/^\w{3,12}@[a-z]{2,10}[\.][a-z]{2,3}[\.]?[a-z]{0,2}$/);
+    	var rsEmail = mailReg.test(mailValue);
+    		
+	    if(!rsEmail){
+    		
+    		$("#emailInput").text("이메일 형식이 올바르지 않습니다.").css("color","red");
+    		
+    		mail.focus();
+    		
+    		return false;
+	    	
+	    	}else {
+	    		$.ajax(
+        			{		
         				type:"post",
     					async:true, 
     					url:"http://localhost:8090/shuKream/member/emailCheck.do",
-    					data:{ user_email : emailValue },
+    					data:{ user_email : mailValue },
     					dataType:"text", 
     					success : function(data){
     						if(data==0){
     							$('#emailInput').text("이메일 사용가능합니다.").css("color","blue");
     							alert("이메일 사용가능합니다.");
     						} else{
-    							$('#emailInput').text("중복되는 이메일입니다.").css("color","red");
+    							$('#emailInput').text("이메일 사용불가능합니다.").css("color","red");
     							alert("이메일을 다시 입력해주세요.");
     						}
     					},
@@ -26,7 +36,8 @@
     					}
     				}
     				
-    		); 
+    		);
+    	}	 
 	});
 	
 	$("#user_pw").focusout(function(){
@@ -73,6 +84,8 @@
 		 
 		 
 		 function check(event) {
+			
+			
 				
 		//약관동의 <input>요소를 선택해서 가져와 
     	var checkbox = $("#agree");
@@ -121,24 +134,31 @@
 		}
 		
 	   
-			var mail = $("#user_email");
-    		var mailValue = mail.val();
-    		var mailReg = (/^\w{5,12}@[a-z]{2,10}[\.][a-z]{2,3}[\.]?[a-z]{0,2}$/);
-    		var rsEmail = mailReg.test(mailValue);
+		var mail = $("#user_email");
+    	var mailValue = mail.val();
+    	var mailReg = (/^\w{3,12}@[a-z]{2,10}[\.][a-z]{2,3}[\.]?[a-z]{0,2}$/);
+    	var rsEmail = mailReg.test(mailValue);
     		
-	    	if(!rsEmail){
-    			$("#emailInput").text("이메일 형식이 올바르지 않습니다.").css("color","red");
-    			mail.focus();
-    			return false;
+	    if(!rsEmail){
+    		$("#emailInput").text("이메일 형식이 올바르지 않습니다.").css("color","red");
+    		mail.focus();
+    		return false;
 	    	
-	    	}else{
-    			$("#emailInput").text("");
-    		}
+	    }else{
+    		$("#emailInput").text("");
+    	}
 	
-	    	
-	    	
-	    			alert("회원가입이 완료 되었습니다.");
-	    		
+		if($("#user_name").val() == "" || $("#user_name").val() == null){
+			
+			alert("관리자 승인을 받고 있습니다.");
+			
+		}else if($("#user_name").val() != "" || $("#user_name").val() != null){
+	    	alert("회원가입이 완료 되었습니다! 로그인 페이지로 이동합니다.");
+	    }		
    	    	
-   	    	$("form").submit();
+   	    	$("#form").submit();
+   	    	
+   	    	
+   	    	
+   	    	
 	}   

@@ -7,6 +7,14 @@
 <%request.setCharacterEncoding("UTF-8");
   String contextPath = request.getContextPath();%>    
 
+<%
+	MemberVO memberVO =  (MemberVO)request.getAttribute("MemberVO");
+   String email = memberVO.getUser_email();
+   System.out.print("email:" + email);
+   String name = memberVO.getUser_name();
+   System.out.print("name:" + name);
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,36 +39,45 @@
 		<div class="rightBlock">
 			<div>
 				<p class="title" 
-				style="margin-bottom: 15px;
-				font-weight: bold;"	
-				>회원 정보</p>
+					style="margin-bottom: 15px;
+					font-weight: bold;">회원 정보</p>
 			</div>
+			
 			<dl class="teble">
-
+			
 				<dt class="dt">
-					<span>이름</span>
+					<span>이메일</span>
 				</dt>
 				<dd class="dd">
 					<div>
-						<p> </p>
+						<p><%=email%></p>
+					</div>
+				</dd>
+				<br>
+				<dt class="dt" style="position: relative; left: -720px; top: 40px;">
+					<span>이름</span>
+				</dt>
+					<dd class="dd" style="position: relative; left: 203px; top: -10px;">
+						<div>
+							<p><%=name%></p>
 					</div>
 				</dd>			
-			</div>
+			</dl>	
+			
 				
-	
-	<div class="saveBtn">
+	<dd class="btn-dd">	
+		<div class="saveBtn">
 						<a id="backBtn" href="<%=request.getContextPath()%>/member/mypage.do?center=/nbMember/mypage.jsp" class="roundBtn whiteBtn">뒤로가기</a>				
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<a id="changeBtn" href="#<%-- <%=contextPath%>/member/changeInfo.do --%>" class="roundBtn blueBtn">수정하기</a>
+						<a id="changeBtn" href="<%=contextPath%>/member/updateMember.do?email=<%=email%>" class="roundBtn blueBtn">수정하기</a>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						
-						<button  id="delBtn" class="roundBtn blueBtn">회원탈퇴</button>
-	</div>
+						<a  id="delBtn" href="<%=contextPath%>/member/delMember.do?email=<%=email%>" class="roundBtn blueBtn">회원탈퇴</a>
+	  	</div>
+	  </dd>	
+</div>
+</div>
 
 	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-	
-	<!-- 회원정보 수정 유효성 체크  -->
-	<script src="<%=request.getContextPath()%>/js/change.js"></script>
 	
 </body>
 </html>

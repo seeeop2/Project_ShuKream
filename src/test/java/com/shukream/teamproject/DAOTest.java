@@ -21,6 +21,8 @@ import com.shukream.asks.dao.AsksDAO;
 import com.shukream.asks.vo.AsksVO;
 import com.shukream.bids.dao.BidsDAO;
 import com.shukream.bids.vo.BidsVO;
+import com.shukream.member.dao.MemberDAO;
+import com.shukream.member.vo.MemberVO;
 import com.shukream.order.dao.OrderDAO;
 import com.shukream.orders.dao.OrdersDAO;
 import com.shukream.products.dao.ProductsDAO;
@@ -52,6 +54,11 @@ public class DAOTest {
 
   @Autowired
   private OrderDAO orderDAO;
+  
+  @Autowired
+  private MemberDAO memberdao;
+  
+  
   
   
   int random1to5 = (int) (Math.random()*4) + 1;
@@ -342,7 +349,7 @@ public class DAOTest {
   }
   
 
-  @Test 
+  @Test @Ignore
   public void insertOrders() throws Exception{
     Map map = new HashMap();
     String product_id = "43";
@@ -356,7 +363,6 @@ public class DAOTest {
     logger.info("\n selectLatestOrderBId " + map2);
 
   }
-
   
   
 

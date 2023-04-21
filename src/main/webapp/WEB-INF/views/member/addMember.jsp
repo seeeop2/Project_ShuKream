@@ -34,7 +34,7 @@ a:hover{
 
 <div class="addMem" style="text-align: center">
 
-	<form action="<%=contextPath%>/member/addMember.do" method= "post" style="display: inline-block;">
+	<form action="<%=contextPath%>/member/addMember.do" method= "post" style="display: inline-block;" id="form">
 		
 		<div class="accordion" id="accordionExample">
 			
@@ -120,18 +120,22 @@ a:hover{
 			</tr>
 			
 			<tr class="add">
-				<td><a href="#"
-					   onclick="check(); return false;" 
-					   type="button" 
+				<td>
+					<button
+					   onclick="check(); return false;"
 					   style="text-decoration: none;"
-					   class="btn btn-outline-warning";
-					   id="joinBtn";
-					>회원가입</a></td>
+					   class="btn btn-outline-warning"
+					   id="joinBtn"
+					>회원가입</button>
+				</td>
 			</tr>
 		</table>
 		</div>
 	</form>
 </div>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
 
 <script src="<%=contextPath%>/resources/js/member.js"></script>
 </body>
