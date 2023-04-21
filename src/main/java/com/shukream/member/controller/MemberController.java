@@ -193,7 +193,7 @@ public class MemberController {
 		
 		//PrintWirter 객체 out 생성 및 초기화 
 		PrintWriter out = response.getWriter();
-		out.println("<script>alert('! 로그인 페이지로 이동합니다');");
+		out.println("<script>alert('회원가입이 완료됐습니다! 로그인 페이지로 이동합니다');");
 		out.println("location.href='"+request.getContextPath()+"/member/loginForm.do';</script>"); 
 		out.flush(); out.close();
 		}

@@ -153,7 +153,7 @@
 			alert("관리자 승인을 받고 있습니다.");
 			
 		}else if($("#user_name").val() != "" || $("#user_name").val() != null){
-	    	alert("회원가입이 완료 되었습니다! 로그인 페이지로 이동합니다.");
+	    	
 	    }		
    	    	
    	    	$("#form").submit();

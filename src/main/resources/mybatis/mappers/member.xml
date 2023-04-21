@@ -13,7 +13,6 @@
 	   <result property="user_pw" column="user_pw" />
 	   <result property="user_regdate" column="user_regdate" />
 	   <result property="user_update" column="user_update" />
-	   <result property="seller_level_id" column="seller_level_id" />
 	</resultMap>
 	
 
@@ -36,12 +35,10 @@
         <![CDATA[
           insert into users(user_name,
                         user_email,
-                        user_pw,
-                        seller_level_id)
+                        user_pw)
                       values(#{user_name},
                             #{user_email},
-                            #{user_pw},
-                            #{seller_level_id})
+                            #{user_pw})
       ]]>      
    </insert>
    

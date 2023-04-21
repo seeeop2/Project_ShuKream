@@ -12,10 +12,6 @@ public class MemberVO {
 	
 	private Date user_regdate, user_update;
 	
-	private int seller_level_id;
-
-	
-	
 	// Getter & Setter 생성
 	
 	public String getUser_name() {
@@ -58,22 +54,12 @@ public class MemberVO {
 		this.user_update = user_update;
 	}
 
-	public int getSeller_level_id() {
-		return seller_level_id;
-	}
-
-	public void setSeller_level_id(int seller_level_id) {
-		this.seller_level_id = seller_level_id;
-	}
-	
-	
 	// user_regdate(가입일)을 제외한 생성자 생성
-	public MemberVO(String user_name, String user_email, String user_pw, int seller_level_id) {
+	public MemberVO(String user_name, String user_email, String user_pw) {
 		super();
 		this.user_name = user_name;
 		this.user_email = user_email;
 		this.user_pw = user_pw;
-		this.seller_level_id = seller_level_id;
 	}
 
 	// 기본 생성자 생성
@@ -82,22 +68,20 @@ public class MemberVO {
 	}
 	
 	// 모두 가져오는 생성자 생성
-	public MemberVO(String user_name, String user_email, String user_pw, Date user_regdate, Date user_update,
-			int seller_level_id) {
+	public MemberVO(String user_name, String user_email, String user_pw, Date user_regdate, Date user_update) {
 		super();
 		this.user_name = user_name;
 		this.user_email = user_email;
 		this.user_pw = user_pw;
 		this.user_regdate = user_regdate;
 		this.user_update = user_update;
-		this.seller_level_id = seller_level_id;
 	}
 
 	@Override
 	public String toString() {
 		return "MemberVO [user_name=" + user_name + ", user_email=" + user_email + ", user_pw=" + user_pw
-				+ ", user_regdate=" + user_regdate + ", user_update=" + user_update + ", seller_level_id="
-				+ seller_level_id + "]";
+				+ ", user_regdate=" + user_regdate + ", user_update=" + user_update
+			    + "]";
 	}
 
 
