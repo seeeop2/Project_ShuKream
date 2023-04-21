@@ -2,9 +2,9 @@
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <link rel="stylesheet" href="${contextPath}/resources/css/checkout.css">
+<c:set var="checkType" value="${type}"/>
 
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-option">
@@ -103,35 +103,40 @@
                 </div>
               </div>
             </div>
-           
+            
+            <%-- 구매의 경우에만 우편번호 입력 받기 --%>
+           <c:if test="${type eq 'buy'}">
              <div class="checkout__input">
 				<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>            
               <p>
                 	우편번호<span>*</span>
               </p>
-              <input type="text" id="sample4_postcode" name="sample4_postcode" placeholder="우편번호" required value="13529">
+              <input type="text" id="sample4_postcode" name="sample4_postcode" placeholder="우편번호" required>
             </div>
            
             <div class="checkout__input">
               <p>
                 도로명/지번 주소<span>*</span>
               </p>
-              <input type="text" id="sample4_roadAddress" name="sample4_roadAddress" placeholder="도로명주소" required value="경기 성남시 분당구 판교역로 166"> 
-              <input type="text" id="sample4_jibunAddress" name="sample4_jibunAddress" placeholder="지번주소" required value="경기 성남시 분당구 백현동 532">
+              <input type="text" id="sample4_roadAddress" name="sample4_roadAddress" placeholder="도로명주소" required> 
+              <input type="text" id="sample4_jibunAddress" name="sample4_jibunAddress" placeholder="지번주소" required>
             </div>
             <div class="checkout__input">
               <p>
                 상세주소<span>*</span>
               </p>
-              <input type="text" id="sample4_detailAddress" name="sample4_detailAddress" placeholder="상세주소" required value="12층">
+              <input type="text" id="sample4_detailAddress" name="sample4_detailAddress" placeholder="상세주소" required>
             </div>
             <div class="checkout__input">
               <p>
                	참고항목
               </p>
-              <input type="text" id="sample4_extraAddress" name="sample4_extraAddress" placeholder="참고항목" value=" (백현동)">
+              <input type="text" id="sample4_extraAddress" name="sample4_extraAddress" placeholder="참고항목">
             <span id="guide" style="color:#999;display:none"></span>
             </div>
+          </c:if>
+          <%-- 구매의 경우에만 우편번호 입력 받기 --%>
+          
           </div>
 </div>          
           <div class="col-lg-5 col-md-6">
@@ -164,29 +169,21 @@
               <ul class="checkout__total__all">
               <c:choose>
               	<c:when test="${buyAsks eq null && sellBids eq null}">
-              		<fmt:formatNumber var="formatNumPrice" value="${product.PRODUCT_PRICE}"/>
-					<li >Total <span id="totalPrice">default Price : ${formatNumPrice}원</span></li>
+              		<c:set value="${product.PRODUCT_PRICE }" var="productPrice"/>
+                </c:when>
+                <c:when test="${sellBids eq null}">
+              		<c:set value="${buyAsks.ASKS_PRICE}" var="productPrice"/>
                 </c:when>
                <c:otherwise>
-               		<c:if test="${sellBids eq null}">
-					<fmt:formatNumber var="formatNumPrice" value="${buyAsks.ASKS_PRICE}"/>
-                	<li >Total <span id="totalPrice">${formatNumPrice}원</span></li>
-                	</c:if>
-                	<c:if test="${buyAsks eq null}">
-	                	<fmt:formatNumber var="formatNumPrice" value="${sellBids.BIDS_PRICE}"/>
-	                	<li >Total <span id="totalPrice">${formatNumPrice}원</span></li>
-                	</c:if>
+              		<c:set value="${sellBids.BIDS_PRICE}" var="productPrice"/>
                </c:otherwise>
                </c:choose>
+               			<fmt:formatNumber var="formatNumPrice" value="${productPrice}"/>
+	                	<li >Total <span id="totalPrice">${formatNumPrice}원</span></li>
               </ul>
-              <div id="kakaoPayBtn">	
-              <button onclick="kakaoPay()" type="button" class="site-btn">PLACE
+              <input type="hidden" id="kakaoPrice" value="${productPrice}"/>
+              <button onclick="submitOption()" type="button" class="site-btn">PLACE
                 ORDER</button>
-                </div>
-                <div id="placeOrderButton">
-               <button type="submit" class="site-btn" >PLACE
-                ORDER</button>
-                </div>
             </div>
           </div>
         </div>
@@ -195,10 +192,6 @@
   </div>
 </section>
 <!-- Checkout Section End -->
-
-
-
-
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -268,16 +261,10 @@ $(function() {
 function setDisplay(){
         if($("#bids").is(':checked') || $('#asks').is(':checked')){
             $('#price').show();
-//             $('#orderDetail').hide();
-            $('#kakaoPayBtn').hide();
-//             $('#phone_number').css('display','none');
-            $('#placeOrderButton').show();
         }else{
             $('#price').hide();
-//             $('#orderDetail').show();
-            $('#kakaoPayBtn').show();
-//             $('#phone_number').css('display','block');
-            $('#placeOrderButton').hide();
+            $("input[name=ABprice]").val('');
+            $("#totalPrice").text(addComma('${productPrice}')+'원');
         }
     }
 	$(".ABprice").focusout(function() {
@@ -302,29 +289,15 @@ function setDisplay(){
 	 var phone = $("#phone").val();
 	 var regPhone= /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
 	 var phoneReg = regPhone.test(phone)
-	 
-		if(a && b && c && d && phoneReg) {
+		if(!(a && b && c && d && phoneReg)) {
 			return false;
 		}
 		return true;
 	} 
  
-function kakaoPay(){
+function kakaoPay(name,phone,addr,email,price){
 	
-	var name = $("#name").val();
-	var phone = $("#phone").val();
-	var addr = $("#sample4_postcode").val() 
-				+$("#sample4_roadAddress").val() 
-				+ $("#sample4_extraAddress").val() 
-				+ $("#sample4_extraAddress").val() 
-				+ $("#sample4_extraAddress").val(); 
-	var email = $("#email").val();
-	
-	var checkData = checkInput(name,phone,addr,email);
-	if(checkData){
-		alert("-를 제외한 11자리 휴대폰번호를 입력해주세요");
-		return false;
-	} else{
+
 	alert("카카오페이로 간편 결제됩니다!! 본인 휴대폰을 준비해주세요!");
 	
 	var IMT = window.IMP;
@@ -334,12 +307,12 @@ function kakaoPay(){
 	    pay_method: "card",
 	    merchant_uid : 'merchant_'+new Date().getTime(),
 	    name :'결제테스트',
-	    amount : 100,
-	    buyer_email : '${memberVO.user_email}',
-	    buyer_name : '${memberVO.user_name}',
+	    amount : price,
+	    buyer_email : email,
+	    buyer_name : name,
 	    buyer_tel : phone,
-	    buyer_addr : "주소",
-	    buyer_postcode : '000-000'
+	    buyer_addr : addr,
+// 	    buyer_postcode : '000-000'
 	  }, function (rsp) { // callback
 	      if (rsp.success) {
 	    	  
@@ -356,9 +329,65 @@ function kakaoPay(){
 	      }
 	  });
 }
-}
 
 
+function submitOption () {
+	var name = $("#name").val();
+	var phone = $("#phone").val();
+	var addr = $("#sample4_postcode").val() 
+				+$("#sample4_roadAddress").val() 
+				+ $("#sample4_extraAddress").val() 
+				+ $("#sample4_extraAddress").val() 
+				+ $("#sample4_extraAddress").val(); 
+	var email = $("#email").val();
+	
+	var price = $("#kakaoPrice").val();
+	
+	var option = $("input[name=option]:checked").val();
+	var option2 = '${checkType}';
+	
+	
+	var checkData = checkInput(name,phone,addr,email);
+	
+	if(option == 10 && option2 == 'buy') {
+		if(checkData) {
+			kakaoPay(name, phone, addr, email, price);
+		} else{
+			alert("입력항목을 확인해주세요.");
+			return false;
+		}
+		
+	} else if (option == 00 && option2 == 'buy') {
+		if(checkData) {
+			document.orderConfirm.submit();
+		} else {
+			alert("입력항목을 확인해주세요.");
+			return false;
+		}
+		
+	} else if(option == 00 && option2 == 'sell') {
+		document.orderConfirm.submit();
+	} else if(option == 10 && option2 == 'sell'){
+		document.orderConfirm.submit();
+	}
+	
+	 }
+
+	
+	
+/* 		if(checkData){ //항목중 무엇하나라도 안들어가있다면
+			
+			alert("입력항목을 확인해주세요.");
+			return false;
+			
+		} else if(option == 10 && option2 == 'buy' ){ //즉시구매를 눌렀고, 옵션이 buy인경우 kakaoPay를 호출
+			kakaoPay(name, phone, addr, email, price);
+		} else if (option == 00 || option2 == 'sell'){ //입찰을 눌렀다면? 또는 옵션이 판매라면?
+			document.orderConfirm.submit();
+		}
+		}
+		 */
+		 
 
 
 </script>

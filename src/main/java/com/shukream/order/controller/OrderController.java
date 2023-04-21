@@ -1,10 +1,13 @@
 package com.shukream.order.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -155,7 +158,8 @@ public class OrderController {
 							@RequestParam(value = "product_id",required = false) String product_idx,
 							@RequestParam(value = "type",required = false) String type,
 							@RequestParam(value = "size", required = false) String size,
-							HttpServletRequest request) {
+							HttpServletResponse response,
+							HttpServletRequest request) throws IOException{
 		
     System.out.println("product_idx : " + product_idx);
     System.out.println("type : " + type);
@@ -164,9 +168,20 @@ public class OrderController {
 		MemberVO memberVO = null;
 		
 		HttpSession session=request.getSession();
-//		session=request.getSession();
-		Boolean isLogOn=(Boolean)session.getAttribute("isLogOn");
-		if(isLogOn) {
+		Boolean isLogOn = (Boolean)session.getAttribute("isLogOn");
+		
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");		
+		
+		if(isLogOn == null || !isLogOn) {
+			PrintWriter out = response.getWriter();
+
+			out.println("<script>alert('로그인 해주세요.'); location.href='/shuKream/main.do';</script>");
+			out.flush();
+			out.close();
+			
+		} else {
+			System.out.println("else 구문을타는지");
 			memberVO=(MemberVO)session.getAttribute("memberInfo");
 		}
 	  
