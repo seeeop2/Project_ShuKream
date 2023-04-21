@@ -1,10 +1,13 @@
 package com.shukream.order.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -155,7 +158,8 @@ public class OrderController {
 							@RequestParam(value = "product_id",required = false) String product_idx,
 							@RequestParam(value = "type",required = false) String type,
 							@RequestParam(value = "size", required = false) String size,
-							HttpServletRequest request) {
+							HttpServletRequest request,
+							HttpServletResponse response) throws IOException{
 		
 		MemberVO memberVO = null;
 		
@@ -164,6 +168,10 @@ public class OrderController {
 		Boolean isLogOn=(Boolean)session.getAttribute("isLogOn");
 		if(isLogOn) {
 			memberVO=(MemberVO)session.getAttribute("memberInfo");
+		} else {
+			PrintWriter out = response.getWriter();
+			
+			out.print("<script>alert('로그인해주세요'); history.back();</script>");
 		}
 	  
 		String viewName = (String) request.getAttribute("viewName");
