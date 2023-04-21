@@ -259,9 +259,6 @@
                			</a>                  
            		  </li>
                  
-                  <li><a href="#"><img
-                      src="${contextPath}/resources/img/icon/compare.png"
-                      alt=""> <span>Compare</span></a></li>
                   <li><a href="shopDetails.do?product_id=${product.PRODUCT_ID}"><img
                       src="${contextPath}/resources/img/icon/search.png"
                       alt=""></a></li>
@@ -764,7 +761,7 @@
 	          alert("로그인을 하여주세요");
  	        } else{
 	          $.ajax({
-	                  url:  "/shuKream/favorites/favoritesLike.do",
+	                  url: getContextPath()+"/favorites/favoritesLike.do",
 	                  async : true,
 	                  type : 'POST',
 	                  data : {

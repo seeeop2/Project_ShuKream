@@ -39,6 +39,12 @@ public class EventService {
 		return eventDAO.checkcoupon(id);
 	}
 
+	public void checkdcnt(String id) {
+		
+		eventDAO.checkdcnt(id);
+		
+	}
+
 
 	
 	

@@ -31,10 +31,15 @@
   
 <select id="selectLowBids" resultType="int">
   <![CDATA[
-
+  
+     select nvl(bids_price,0) BIDS_PRICE
+    from
+    (
     SELECT BIDS_PRICE
     FROM ( SELECT * FROM BIDS ORDER BY BIDS_PRICE)
-    WHERE ROWNUM = 1
+    WHERE ROWNUM = 1) b
+    right outer join dual
+    on b.bids_price = 0
   ]]>
 </select> 
   

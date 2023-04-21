@@ -38,6 +38,9 @@ public class MemberController {
    private MemberService memberService;
    
    @Autowired
+   private EventService eventService;
+   
+   @Autowired
    private MemberVO memberVO;
    
    @Autowired
@@ -221,8 +224,12 @@ public class MemberController {
 			
 			  System.out.println("shipping.do 호출!"); 
 			  
-				// 1) 로그인 된 아이디 값을 가져와서 매개변수로 전달한다.
-			    String id = (String)session.getAttribute("email");
+
+			  // 1) 로그인 된 아이디 값을 가져와서 매개변수로 전달한다.
+			  request.setCharacterEncoding("utf-8");
+			  response.setCharacterEncoding("utf-8");
+			  response.setContentType("text/html; charset=utf-8");
+			   String id = (String)session.getAttribute("email");
 			  
 			    List<Map<String, Object>> checkbids = memberService.checkbids(id);
 			    
@@ -282,21 +289,14 @@ public class MemberController {
 			  // 1) 가져온 Bids_order_state_idx 값을 업데이트 시킨다.
 			  memberService.updateBidsOrder(map);
 			  
-			  // 2) 이벤트 쿠폰을 한개 생성한다.
-			  
-			  
-			  
-			  ////////// 4월 19일 ////////// ToDo
-			  // 쿠폰 생성 메소드 만들기
-			  // 응모권과 쿠폰 구분하기
-			  // 이벤트 쿠폰 생성과 응모권 사용에 대한 구분
+			  // 2-1) 현재 응모권 내역을 불러와서 d_cnt 값을 1 추가 시킨뒤 마지막 DB에 업데이트 시킨다.
+			  eventService.checkdcnt(id);
 			  
 	          //PrintWirter 객체 out 생성 및 초기화
 	          PrintWriter out = response.getWriter();
 	      
 	         
-	          out.println("<script>alert('메인 페이지로 이동합니다.');");
-	          out.println("location.href='"+request.getContextPath()+"/main.do';</script>");
+	          out.println("<script>location.href='"+request.getContextPath()+"/main.do';</script>");
 	          out.flush();
 	          out.close();
 			  

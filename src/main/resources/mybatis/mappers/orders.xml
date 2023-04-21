@@ -135,6 +135,30 @@ on BIDs_product_id = #{product_id2}
   ]]>
 </select> 
 
+<select id="selectForChart" resultType="map"> 
+  <![CDATA[  
+SELECT z2.matched_date,z2.price
+FROM
+(
+SELECT z1.asks_price PRICE,z1.asks_matched_date MATCHED_DATE  FROM (
+select o1.orders_ask_idx,A1.ASKS_PRICE,A1.ASKS_MATCHED_DATE,A1.ASKS_PRODUCT_ID
+from orders O1
+left join asks A1
+on O1.orders_ask_idx = A1.asks_idx) Z1
+WHERE ASKS_PRODUCT_ID = #{product_id1}
+
+UNION
+
+SELECT z1.BIDS_price PRICE,z1.BIDS_matched_date MATCHED_DATE  FROM (
+select o1.orders_BID_idx,B1.BIDS_PRICE,B1.BIDS_MATCHED_DATE,B1.BIDS_PRODUCT_ID
+from orders O1
+left join BIDS B1
+on o1.orders_bid_idx = B1.BIDS_idx) Z1
+WHERE BIDS_PRODUCT_ID = #{product_id2}
+) z2
+ORDER BY MATCHED_DATE
+  ]]>
+</select> 
 
 	
 

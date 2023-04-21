@@ -345,7 +345,22 @@ public class DAOTest {
     Map map2 = orderDAO.selectBidByIdWithSize(map);
 
     logger.info("\n selectLatestOrderBId " + map2);
+  }
+  
 
+  @Test @Ignore
+
+  public void selectForChart() throws Exception{
+    logger.info("\n =======시작 ======= ");
+    Map map = new HashMap();
+    String product_id = "43";
+    map.put("product_id1", product_id);
+    map.put("product_id2", product_id);
+    List map2 = ordersDAO.selectForChart(map);
+
+    logger.info("\n selectLatestOrderBId " + map2);
+    
+    
   }
   
 
@@ -363,7 +378,18 @@ public class DAOTest {
     logger.info("\n selectLatestOrderBId " + map2);
 
   }
-  
+
+
+  @Test 
+  public void selectRankFourRe() throws Exception{
+    int product_id = 43;
+    
+    List list = productsDAO.selectRankFourRe(product_id);
+    logger.info("\n selectRankFourRe " + list);
+    
+
+  }
+
   
 
 //=====================For ASKS=================

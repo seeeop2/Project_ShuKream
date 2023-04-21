@@ -182,8 +182,26 @@ public class ShopDetailsService {
     }
       
     }
-    logger.info("\n latest " + latest);
     return latest;
   }
+  public List selectForChart(int product_id){
+    Map map = new HashMap();
+    map.put("product_id1", product_id);
+    map.put("product_id2", product_id);
+    
+  List list = orderdao.selectForChart(map);
+    return list;
+  }
+  
+  public List selectRankFour(int product_id) {
+    
+    List list = productsdao.selectRankFourRe(product_id);
+    
+    logger.info("\n selectRankFour " + list);
+    
+    
+    return list;
+  }
+
   
 }

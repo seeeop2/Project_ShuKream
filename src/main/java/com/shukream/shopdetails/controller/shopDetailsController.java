@@ -43,11 +43,14 @@ public class shopDetailsController {
     String imgNameDetail = shopDetailsService.selectProductDetail(product_id);
     Map map =shopDetailsService.selectHighBidsAll(product_id);
     Map map2 = shopDetailsService.selectLowAsksAll(product_id);
-    System.out.println("map = " + map);
     ProductsVOWithIMG productvo = shopDetailsService.selectProductOne(product_id);
-    
+    List list = shopDetailsService.selectForChart(product_id);
     int latestMoney = shopDetailsService.SelectLatestMoney(product_id);
+    List list2 = shopDetailsService.selectRankFour(product_id);
+
     
+
+    model.addAttribute("forChart", list);
     model.addAttribute("lowAsks", shopDetailsService.SelectLowAsks());
     model.addAttribute("lowBids", shopDetailsService.SelectLowBids());
     model.addAttribute("product_id", product_id);
@@ -56,7 +59,8 @@ public class shopDetailsController {
     model.addAttribute("imgNameDetail", imgNameDetail);
     model.addAttribute("theLowestAsks",map2);
     model.addAttribute("theHighestBids",map);
-    model.addAttribute("latestMoney",latestMoney);
+    model.addAttribute("latestMoney",latestMoney); //이것도?
+    model.addAttribute("RankFour", list2);
     return viewName;
   }
   

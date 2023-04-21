@@ -52,6 +52,8 @@ public class OrderController {
 		int shipIdx = 0;
 		int orderIdx = 0;
 		
+		paramMap.put("memberVO", vo);
+		
 		if(type.equals("buy")) {
 			if(asks_idx == null && bids_idx == null) { //판매입찰테이플에 아이템이 없는 경우
 				product = orderService.selectProduct(Integer.parseInt(product_id));
@@ -61,23 +63,32 @@ public class OrderController {
 				paramMap.put("product_id", product.get("PRODUCT_ID"));
 				paramMap.put("product_price", product.get("PRODUCT_PRICE"));
 				paramMap.put("size", Integer.parseInt(size));
+				//배송정보를 만들고
+				shipIdx = orderService.insertShipInfo(vo);
+				paramMap.put("shipIdx", shipIdx);
 				orderService.insertNewBids(paramMap);
+				
+
 				
 			} else {
 			paramMap.put("asks_idx", asks_idx);
 			if(abPrice != null && !abPrice.equals("")) {
 				paramMap.put("product_price", abPrice);
 			}
+			//배송정보를 만들고
+			shipIdx = orderService.insertShipInfo(vo);
+			paramMap.put("shipIdx", shipIdx);
 			//select하고 마지막에 insert된 행의 idx구하기
 			int newBidsIdx = orderService.insertNewBids(paramMap); //새로운 구매 입찰 생성(즉시구매, 구매입찰 둘다 입찰이 생겨야함)
 			paramMap.put("newBidsIdx", newBidsIdx);
+			
 			
 			//option 00 -> 구매입찰 
 		    //option 10 -> 즉시구매
 			if(option.equals("10")) {
 				System.out.println("10 들어오나?");
-				//배송정보를 만들고
-				shipIdx = orderService.insertShipInfo(vo);
+//				//배송정보를 만들고
+//				shipIdx = orderService.insertShipInfo(vo);
 				System.out.println("vo를받는지"+vo.toString());
 				System.out.println("shipIdx를받는지"+shipIdx);
 				System.out.println("newBidsIdx는 받는지"+newBidsIdx);
@@ -87,7 +98,7 @@ public class OrderController {
 				orderIdx = orderService.insertOrders(paramMap);
 				System.out.println(orderIdx);
 				//주문이 체결되면 asks_order_state_idx랑 asks_order_number를 업데이트 해줘야한다. 근데 order_number 업데이트??
-				paramMap.put("shipIdx", shipIdx);
+//				paramMap.put("shipIdx", shipIdx);
 				paramMap.put("orderIdx",String.valueOf(orderIdx));
 				orderService.updateAsks(paramMap);
 				orderService.updateBids(paramMap);
@@ -119,7 +130,7 @@ public class OrderController {
 		    //option 10 -> 즉시판매
 			if(option.equals("10")) {
 				//배송정보를 만들고
-				shipIdx = orderService.insertShipInfo(vo);
+//				shipIdx = orderService.insertShipInfo(vo);
 				//orders테이블에 추가해야함
 				//bids,asks_idx들을 받아서 넘겨줘야함.
 				orderIdx = orderService.insertOrders(paramMap);
@@ -146,10 +157,14 @@ public class OrderController {
 							@RequestParam(value = "size", required = false) String size,
 							HttpServletRequest request) {
 		
+    System.out.println("product_idx : " + product_idx);
+    System.out.println("type : " + type);
+    System.out.println("size : " + size);
+	  
 		MemberVO memberVO = null;
 		
 		HttpSession session=request.getSession();
-		session=request.getSession();
+//		session=request.getSession();
 		Boolean isLogOn=(Boolean)session.getAttribute("isLogOn");
 		if(isLogOn) {
 			memberVO=(MemberVO)session.getAttribute("memberInfo");

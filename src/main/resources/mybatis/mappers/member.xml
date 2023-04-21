@@ -58,7 +58,7 @@
 	
 	<select id="checkbids" parameterType="map"  resultType="map" >
 	    <![CDATA[
-			select b.bids_order_number, b.bids_order_state_idx, i.img_file, i.img_realfile, b.bids_size_idx, b.bids_price
+			select b.bids_order_number, b.bids_order_state_idx, i.img_product_idx, i.img_file, i.img_realfile, b.bids_size_idx, b.bids_price
 			from 
 			bids b 
 			join
@@ -74,7 +74,7 @@
 	
 	<select id="checkasks" parameterType="map" resultType="map" >
 	    <![CDATA[
-			select a.asks_order_state_idx, i.img_file, i.img_realfile, a.asks_size_idx, a.asks_price
+			select a.asks_order_state_idx, i.img_product_idx, i.img_file, i.img_realfile, a.asks_size_idx, a.asks_price
 			from asks a
 			join
 			images i

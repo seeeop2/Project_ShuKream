@@ -442,13 +442,13 @@
     position: relative;
     display: flex;
     height: 100%;
-    width: 80px;
+    width: 65px;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
     text-align: center;
     border-radius: 10px;
-    font-size: 15px;
+    font-size: 14px;
     margin: auto 2px;
     background: #ff0707;
     transition: 1s;
@@ -888,8 +888,14 @@
   				<c:if test="${empty b}">
   				<h2><STRONG>현재 진행중인 거래가 없습니다!</STRONG></h2>
   				</c:if>
+  				
   				<input class="b_idx" type="text" id="bids_content_name1" value="${b.BIDS_ORDER_STATE_IDX}" readonly="readonly" />
+  				<c:if test="${b.IMG_PRODUCT_IDX <= 30}">
   				<input type="image" src="${contextPath}/resources/img/product/sneakers/${b.IMG_FILE}" id="bids_content_name2" readonly="readonly" />
+  				</c:if>
+  				<c:if test="${b.IMG_PRODUCT_IDX >= 31}">
+  				<input type="image" src="${contextPath}/resources/img/product/slipper/${b.IMG_FILE}" id="bids_content_name2" readonly="readonly" />
+  				</c:if>
   				<input type="text" id="bids_content_name3" value="${b.IMG_REALFILE}" readonly="readonly" />
   				<input type="text" id="bids_content_name4" value="${b.BIDS_SIZE_IDX}" readonly="readonly" />
   				<input type="text" id="bids_content_name5" value="1" readonly="readonly" />
@@ -931,7 +937,12 @@
   				<h2><STRONG>현재 진행중인 거래가 없습니다!</STRONG></h2>
   				</c:if>
   				<input class="a_idx" type="text" id="asks_content_name1" value="${a.ASKS_ORDER_STATE_IDX}" readonly="readonly" />
+  				<c:if test="${a.IMG_PRODUCT_IDX <= 30}">
   				<input type="image" src="${contextPath}/resources/img/product/sneakers/${a.IMG_FILE}" id="asks_content_name2" readonly="readonly" />
+  				</c:if>
+  				<c:if test="${a.IMG_PRODUCT_IDX >= 31}">
+  				<input type="image" src="${contextPath}/resources/img/product/slipper/${a.IMG_FILE}" id="asks_content_name2" readonly="readonly" />
+  				</c:if>
   				<input type="text" id="asks_content_name3" value="${a.IMG_REALFILE}" readonly="readonly" />
   				<input type="text" id="asks_content_name4" value="${a.ASKS_SIZE_IDX}" readonly="readonly" />
   				<input type="text" id="asks_content_name5" value="1" readonly="readonly" />

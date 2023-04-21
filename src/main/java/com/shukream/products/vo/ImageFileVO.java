@@ -13,7 +13,14 @@ public class ImageFileVO {
 	private int img_repthumb; // 대표썸네일 여부
 	private int img_del; // 파일 삭제 여부
 	private ProductsVO productVO;
+	private ProductLikeVO productlikeVO;
 	
+	public ProductLikeVO getProductlikeVO() {
+		return productlikeVO;
+	}
+	public void setProductlikeVO(ProductLikeVO productlikeVO) {
+		this.productlikeVO = productlikeVO;
+	}
 	public ProductsVO getProductVO() {
 		return productVO;
 	}

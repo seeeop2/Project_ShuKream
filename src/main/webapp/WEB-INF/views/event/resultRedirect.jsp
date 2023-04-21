@@ -98,7 +98,7 @@
     margin: 0 auto;
     top: 0;
     left: 0px;
-    width: calc(100%/4);
+    width: calc(100%/5);
     height: 100%;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -135,7 +135,7 @@
     margin: 0 auto;
     top: 0;
     left: 0px;
-    width: calc(100%/4);
+    width: calc(100%/5);
     height: 100%;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -367,9 +367,6 @@
     </div>
   </div>
 </section>
-<!-- Breadcrumb Section End -->
-
-<!-- Event Section Begin -->
 <section id="event_detail_result_wrapper" class="event spad">
   <div id="event_detail_result_container" class="container">
     <div id="event_detail_result_row" class="row">
@@ -377,16 +374,18 @@
 	   <div id="event_detail_result_table">
 	   	<div id="event_detail_result_title">
 	   	   <div id="event_detail_result_a">
-		   		<a>당첨자</a>
-		   		<a>총 응모권 횟수</a>
-		   		<a>사용한 횟수</a>
-		   		<a>남은 횟수</a>
+		   		<a>당첨자 이메일</a>
+		   		<a>총 응모권 개수</a>
+		   		<a>사용한 개수</a>
+		   		<a>남은 개수</a>
+		   		<a>당첨 된 쿠폰 개수</a>
 	   		</div>
 	   		<div id="event_detail_result_input">
-		   		<input type="text" placeholder="당첨자명" readonly="readonly" value="${id}" />
-		   		<input type="text" placeholder="총 응모권 횟수" readonly="readonly" value="${a_cnt}" />
-		   		<input type="text" placeholder="사용한 횟수" readonly="readonly" value="${u_cnt}" />
-		   		<input type="text" placeholder="남은 횟수" readonly="readonly" value="${d_cnt}" />
+		   		<input type="text" placeholder="당첨자 이메일" readonly="readonly" value="${id}" />
+		   		<input type="text" placeholder="총 응모권 개수" readonly="readonly" value="${a_cnt}" />
+		   		<input type="text" placeholder="사용한 개수" readonly="readonly" value="${u_cnt}" />
+		   		<input type="text" placeholder="남은 개수" readonly="readonly" value="${d_cnt}" />
+		   		<input type="text" placeholder="당첨 된 쿠폰 개수" readonly="readonly" value="${d_coupon}" />
 	   		</div>
 	   	</div>
 	   	<div id="event_detail_result_contents_title">
@@ -404,7 +403,20 @@
 		<c:forEach var="vo" items="${checkuser}">	
 	   		<div id="event_detail_contents_input">
 		   		<input type="text" placeholder="번호" value="${vo.d_idx}" readonly="readonly" />
-		   		<input class="ticket" type="text" placeholder="당첨된 응모권" value="${vo.d_ticket}" readonly="readonly" />
+		   		<c:choose>
+			   		<c:when test= "${vo.d_ticket eq '무료1회입고권'}">
+			   			<input style="font-weight : bold; color: #20c997; font-size: 20px;" id="ticket" class="ticket" type="text" placeholder="당첨된 응모권" value="${vo.d_ticket}" readonly="readonly" />
+			   		</c:when>
+				   	<c:when test= "${vo.d_ticket eq '무료배송권'}">
+			   			<input style="font-weight : bold; color: blue; font-size: 20px;" id="ticket" class="ticket" type="text" placeholder="당첨된 응모권" value="${vo.d_ticket}" readonly="readonly" />
+			   		</c:when>
+			   		<c:when test= "${vo.d_ticket eq '수수료1회무료권'}">
+			   			<input style="font-weight : bold; color: orange; font-size: 20px;" id="ticket" class="ticket" type="text" placeholder="당첨된 응모권" value="${vo.d_ticket}" readonly="readonly" />
+			   		</c:when>
+				   		<c:otherwise>
+				   			<input id="ticket" class="ticket" type="text" placeholder="당첨된 응모권" value="${vo.d_ticket}" readonly="readonly" />
+				   		</c:otherwise>
+		   		</c:choose>
 		   		<input class="d_date" type="text" placeholder="당첨 날짜" value="<fmt:formatDate type="date" dateStyle="full" value="${vo.d_date}"/>" readonly="readonly" />
 		   		<input type="text" placeholder="신청번호:xxxx 물품명: 조단 판매 완료에 대한 당첨권 1회 발급" value="${vo.d_contents}" readonly="readonly" />
 	   			<input class="expiry_date" style="text-decoration: underline; color:red;" id="expiry_date" type="text" placeholder="" value="<fmt:formatDate type="date" dateStyle="full" value="${vo.expiry_date}"/> 까지" readonly="readonly" />
