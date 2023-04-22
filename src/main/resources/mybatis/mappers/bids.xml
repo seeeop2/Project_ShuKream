@@ -24,7 +24,8 @@
 
   <select id="getBidsList" resultMap="BidsResult">
 	<![CDATA[
-    SELECT * FROM Bids
+    SELECT * 
+    FROM Bids
 	]]>
   </select>
   
@@ -32,33 +33,36 @@
 <select id="selectLowBids" resultType="int">
   <![CDATA[
   
-     select nvl(bids_price,0) BIDS_PRICE
-    from
-    (
+  select nvl(bids_price,0) BIDS_PRICE
+  from (
     SELECT BIDS_PRICE
-    FROM ( SELECT * FROM BIDS ORDER BY BIDS_PRICE)
+    FROM ( 
+      SELECT * 
+      FROM BIDS 
+      ORDER BY BIDS_PRICE)
     WHERE ROWNUM = 1) b
-    right outer join dual
-    on b.bids_price = 0
+  right outer join dual
+  on b.bids_price = 0
   ]]>
 </select> 
   
 <select id="selectLowBidsAll" parameterType="hashmap"  resultType="int">
   <![CDATA[
 
-
   SELECT NVL(BIDS_PRICE,0)
   from(
-  select * from 
-  (SELECT * FROM BIDS WHERE BIDS_PRODUCT_ID = #{product_id} and BIDS_size_idx = #{size1} order by BIDS_price )
-  WHERE ROWNUM =1)
+    select * 
+    from (
+      SELECT * 
+      FROM BIDS 
+      WHERE BIDS_PRODUCT_ID = #{product_id} and BIDS_size_idx = #{size1} 
+      order by BIDS_price)
+    WHERE ROWNUM =1)
   RIGHT OUTER JOIN DUAL 
   ON BIDS_SIZE_IDX = #{size2}
   ]]>
 </select> 
-  
-  
-  
+
 
 
   <insert id="insertBids" parameterType="BidsVO">
@@ -88,8 +92,5 @@
   ]]>
 
   </insert>
-
-
-
 
 </mapper>
