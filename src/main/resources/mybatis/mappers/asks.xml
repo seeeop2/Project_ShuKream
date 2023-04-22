@@ -29,22 +29,24 @@
 <select id="selectLowAsks" resultType="_int">
   <![CDATA[
     select nvl(asks_price,0) ASKS_PRICE
-    from
-    (SELECT ASKS_PRICE
-    FROM ( SELECT * FROM ASKS ORDER BY ASKS_PRICE)
-    WHERE ROWNUM = 1) a
+    from (
+      SELECT ASKS_PRICE
+      FROM ( 
+        SELECT * FROM ASKS ORDER BY ASKS_PRICE)
+      WHERE ROWNUM = 1) a
     right outer join dual
     on a.asks_price = 0
   ]]>
 </select> 
 
-
-<!-- 모든 사이즈 클릭시 버튼 하단에 나타낼 값..수정중... -->
+<!-- 모든 사이즈 클릭시 버튼 하단에 나타낼 값 -->
 <select id="selectLowAsksRownum_" parameterType="int"  resultMap="AsksResult">
   <![CDATA[
 
-
-SELECT * FROM ASKS WHERE ASKS_SIZE_IDX = #{size} ORDER BY ASKS_PRICE
+  SELECT * 
+  FROM ASKS 
+  WHERE ASKS_SIZE_IDX = #{size} 
+  ORDER BY ASKS_PRICE
 
   ]]>
 </select> 
@@ -52,50 +54,57 @@ SELECT * FROM ASKS WHERE ASKS_SIZE_IDX = #{size} ORDER BY ASKS_PRICE
 <!-- 모든 사이즈 클릭시 버튼 하단에 나타낼 값..수정중... -->
 <select id="selectLowAsksRownum" parameterType="int"  resultMap="AsksResult">
   <![CDATA[
-
-SELECT * FROM(
-SELECT * FROM ASKS WHERE ASKS_SIZE_IDX = #{size} ORDER BY ASKS_PRICE)
-WHERE ROWNUM =1
+  SELECT * 
+  FROM(
+    SELECT * 
+    FROM ASKS 
+    WHERE ASKS_SIZE_IDX = #{size} 
+    ORDER BY ASKS_PRICE)
+  WHERE ROWNUM =1
   ]]>
 </select> 
 
 <select id="selectLowAsksAll" parameterType="hashmap"  resultType="int">
   <![CDATA[
 
-
-SELECT NVL(ASKS_PRICE,0) ASKS_PRICE
-from(
-select * from 
-(SELECT * FROM ASKS WHERE ASKS_PRODUCT_ID = #{product_id} and asks_size_idx = #{size1} order by asks_price )
-WHERE ROWNUM =1)
-RIGHT OUTER JOIN DUAL 
-ON ASKS_SIZE_IDX = #{size2}
+  SELECT NVL(ASKS_PRICE,0) ASKS_PRICE
+  from(
+    select * 
+    from (
+      SELECT * 
+      FROM ASKS 
+      WHERE ASKS_PRODUCT_ID = #{product_id} and asks_size_idx = #{size1} 
+      order by asks_price )
+    WHERE ROWNUM =1)
+  RIGHT OUTER JOIN DUAL 
+  ON ASKS_SIZE_IDX = #{size2}
   ]]>
 </select> 
 
 <select id="selectLatestOrder"  parameterType="map" resultType="map">
   <![CDATA[
 
-select nvl(asks_price,0)ASKS_PRICE
-from 
-(select * from
-(SELECT * FROM (SELECT A.*, B.*
-FROM ORDERS A, ASKS B
-WHERE A.ORDERS_ASK_IDX = B.ASKS_IDX
-order by asks_regdate desc) WHERE ASKS_PRODUCT_ID = #{product_id1})
-where rownum = 1)
-RIGHT OUTER JOIN DUAL
-on asks_product_id = #{product_id2}
-
-
+  select nvl(asks_price,0)ASKS_PRICE
+  from (
+    select * 
+    from(
+      SELECT * 
+      FROM (
+        SELECT A.*, B.*
+        FROM ORDERS A, ASKS B
+        WHERE A.ORDERS_ASK_IDX = B.ASKS_IDX
+        order by asks_regdate desc) 
+      WHERE ASKS_PRODUCT_ID = #{product_id1})
+    where rownum = 1)
+  RIGHT OUTER JOIN DUAL
+  on asks_product_id = #{product_id2}
 
   ]]>
 </select> 
 
-
 <!--////////////////////////////     SELECT     ////////////////////////////-->
-<insert id="insertAsks" parameterType="AsksVO">
 
+<insert id="insertAsks" parameterType="AsksVO">
 <!--   <selectKey resultType="Integer" keyProperty="asks_idx" order="BEFORE">
     select asks_seq.nextval from dual
   </selectKey>
@@ -120,8 +129,5 @@ on asks_product_id = #{product_id2}
   ]]>
   
 </insert>
-
-
-	
 
 </mapper>
