@@ -1,4 +1,12 @@
 
+var contextPath = getContextPath();
+
+function getContextPath() {
+  var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+  return location.href.substring( hostIndex, location.href.indexOf("/", hostIndex + 1) );
+};
+
+
 	$("#checkBtn").click(function(){
 		
 		var mail = $("#user_email");
@@ -19,7 +27,7 @@
         			{		
         				type:"post",
     					async:true, 
-    					url:"http://localhost:8090/shuKream/member/emailCheck.do",
+    					url:contextPath+"/member/emailCheck.do",
     					data:{ user_email : mailValue },
     					dataType:"text", 
     					success : function(data){
