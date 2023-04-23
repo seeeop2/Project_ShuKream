@@ -195,7 +195,7 @@ public class ShopDetailsService {
   
   public List selectRankFour(int product_id) {
     
-    List list = productsdao.selectRankFourRe(product_id);
+    List list = productsdao.selectRankFour(product_id);
     
     logger.info("\n selectRankFour " + list);
     
