@@ -83,7 +83,7 @@
     LEFT JOIN PRODUCTS B
     ON a.like_product = b.product_id
     ORDER BY a.like_count DESC)
-  WHERE ROWNUM <5;
+  WHERE ROWNUM <5
   ]]>
 </select> 
 
