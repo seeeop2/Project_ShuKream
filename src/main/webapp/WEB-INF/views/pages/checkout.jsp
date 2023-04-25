@@ -99,7 +99,7 @@
                   <p>
                     Email<span>*</span>
                   </p>
-                  <input id="email" type="text" name="user_id" value="${memberVO.user_email} " required>
+                  <input id="email" type="text" name="user_id" value="${memberVO.user_email}" required>
                 </div>
               </div>
             </div>
