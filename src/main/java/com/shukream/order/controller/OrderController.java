@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.shukream.member.service.MemberService;
 import com.shukream.member.vo.MemberVO;
 import com.shukream.order.service.OrderService;
 import com.shukream.order.vo.OrderVO;
@@ -31,6 +32,9 @@ public class OrderController {
 	
 	@Autowired
 	OrderService orderService;
+	
+	@Autowired
+	MemberService memberService;
 		
 	private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 
@@ -159,7 +163,7 @@ public class OrderController {
 							@RequestParam(value = "type",required = false) String type,
 							@RequestParam(value = "size", required = false) String size,
 							HttpServletResponse response,
-							HttpServletRequest request) throws IOException{
+							HttpServletRequest request) throws Exception{
 		
     System.out.println("product_idx : " + product_idx);
     System.out.println("type : " + type);
@@ -182,7 +186,8 @@ public class OrderController {
 			
 		} else {
 			System.out.println("else 구문을타는지");
-			memberVO=(MemberVO)session.getAttribute("memberInfo");
+			String user_email = (String)session.getAttribute("user_email");
+			memberVO = memberService.readMember(user_email);
 		}
 	  
 		String viewName = (String) request.getAttribute("viewName");
