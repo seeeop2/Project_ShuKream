@@ -94,10 +94,10 @@
 																	);">
 	             	<c:choose>
 		            	<c:when test="${fn:contains(likeList,product_name_en)}">
-		         			<img id="heartImg${newArrivals.productVO.product_id}" src="${contextPath}/resources/img/icon/heart1.png" alt=""> 
+		         			<img  style="cursor: pointer;" id="heartImg${newArrivals.productVO.product_id}" src="${contextPath}/resources/img/icon/heart1.png" alt=""> 
 		                </c:when>
 		                <c:otherwise>
-		         			<img id="heartImg${newArrivals.productVO.product_id}" src="${contextPath}/resources/img/icon/heart.png" alt=""> 
+		         			<img  style="cursor: pointer;" id="heartImg${newArrivals.productVO.product_id}" src="${contextPath}/resources/img/icon/heart.png" alt=""> 
 		                </c:otherwise>
 			 		</c:choose>
       			</a>
@@ -145,10 +145,10 @@
 																	);">
 	             	<c:choose>
 		            	<c:when test="${fn:contains(likeList,product_name_en)}">
-		         			<img id="heartImg${mainProductMap.popularItems[i.index].productVO.product_id}" src="${contextPath}/resources/img/icon/heart1.png" alt=""> 
+		         			<img  style="cursor: pointer;" id="heartImg${mainProductMap.popularItems[i.index].productVO.product_id}" src="${contextPath}/resources/img/icon/heart1.png" alt=""> 
 		                </c:when>
 		                <c:otherwise>
-		         			<img id="heartImg${mainProductMap.popularItems[i.index].productVO.product_id}" src="${contextPath}/resources/img/icon/heart.png" alt=""> 
+		         			<img  style="cursor: pointer;" id="heartImg${mainProductMap.popularItems[i.index].productVO.product_id}" src="${contextPath}/resources/img/icon/heart.png" alt=""> 
 		                </c:otherwise>
 			 		</c:choose>
       			

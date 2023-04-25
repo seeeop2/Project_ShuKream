@@ -248,10 +248,10 @@
 																		);">
              <c:choose>
             	<c:when test="${fn:contains(likeList,product_name_en)}">
-         			<img id="heartImg${product.PRODUCT_ID}" src="${contextPath}/resources/img/icon/heart1.png" alt=""> 
+         			<img style="cursor: pointer;" id="heartImg${product.PRODUCT_ID}" src="${contextPath}/resources/img/icon/heart1.png" alt=""> 
                 </c:when>
                 <c:otherwise>
-         			<img id="heartImg${product.PRODUCT_ID}" src="${contextPath}/resources/img/icon/heart.png" alt=""> 
+         			<img style="cursor: pointer;" id="heartImg${product.PRODUCT_ID}" src="${contextPath}/resources/img/icon/heart.png" alt=""> 
                 </c:otherwise>
 				
 			 </c:choose>  			
