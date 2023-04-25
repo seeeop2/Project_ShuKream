@@ -6,15 +6,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shukream.order.dao.OrderDAO;
 import com.shukream.order.vo.OrderVO;
-import com.shukream.products.vo.ProductsVO;
+import com.shukream.orders.dao.OrdersDAO;
 
 @Service
 public class OrderService {
 	
 	@Autowired
-	OrderDAO orderDAO;
+	OrdersDAO orderDAO;
 
 	public int insertShipInfo(OrderVO vo) {
 	vo.setPrimary_address(vo.getSample4_postcode()+vo.getSample4_roadAddress()+vo.getSample4_jibunAddress()+vo.getSample4_detailAddress()+vo.getSample4_extraAddress());	

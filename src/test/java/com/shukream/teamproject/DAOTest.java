@@ -22,8 +22,6 @@ import com.shukream.asks.vo.AsksVO;
 import com.shukream.bids.dao.BidsDAO;
 import com.shukream.bids.vo.BidsVO;
 import com.shukream.member.dao.MemberDAO;
-import com.shukream.member.vo.MemberVO;
-import com.shukream.order.dao.OrderDAO;
 import com.shukream.orders.dao.OrdersDAO;
 import com.shukream.products.dao.ProductsDAO;
 import com.shukream.products.vo.ProductsVO;
@@ -53,7 +51,7 @@ public class DAOTest {
   private OrdersDAO ordersDAO;
 
   @Autowired
-  private OrderDAO orderDAO;
+  private OrdersDAO orderDAO;
   
   @Autowired
   private MemberDAO memberdao;
